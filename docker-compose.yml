@@ -1,0 +1,28 @@
+version: '3.1'
+
+services:
+  db:
+    image: mysql:5.7.16
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    volumes:
+      - ./mysql:/var/lib/mysql
+  rails:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: tlcdirectory
+    restart: always
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    environment:
+      - SECRET_KEY_BASE=3eaa9178c5728347e93d431a61061bac6b4d62ffa62840d269168b1250e26364180d65dc91555a47d472f32542e4d7bbc9f4452cb2efbf45c5ac7038194cc02c
+      - TERM=xterm
+    volumes:
+      - .:/home/tlcdirectory
+    ports:
+      - "3000:3000"
+    links:
+      - db
