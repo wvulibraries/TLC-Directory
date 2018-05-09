@@ -13,12 +13,12 @@ class User < ApplicationRecord
   validates :status, presence: true
   validates :visible, :inclusion => { :in => [true, false] }
 
-  has_one :profile
-  has_many :email_address
-  has_many :phone
-  has_many :address
+  has_one :profile, :dependent => :destroy
+  has_many :email_address, :dependent => :destroy
+  has_many :phone, :dependent => :destroy
+  has_many :address, :dependent => :destroy
   has_many :universities
-  has_many :websites
+  has_many :websites, :dependent => :destroy
 
   after_initialize :set_default_status, :set_default_role, :set_default_visibility, :if => :new_record?
 

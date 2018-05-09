@@ -48,4 +48,26 @@ RSpec.describe User, type: :model do
     expect(user.visible).to eq(true)
   end
 
+  it 'When the user does not have a profile' do
+    user = FactoryBot.create(:user)
+    expect(user.profile).to eq(nil)
+  end
+
+  it 'When the user has a profile' do
+    user = FactoryBot.create(:user)
+    FactoryBot.create(:profile, user: user)
+    expect(user.profile.bio).to eq('MyString')
+  end
+
+  # it 'When the user does not have a address' do
+  #   user = FactoryBot.create(:user)
+  #   expect(user.address).to eq(nil)
+  # end
+  #
+  # it 'When the user has an address' do
+  #   user = FactoryBot.create(:user)
+  #   FactoryBot.create(:address, user: user)
+  #   expect(user.address.street_address_1).to eq('MyString')
+  # end
+
 end
