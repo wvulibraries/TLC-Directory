@@ -6,7 +6,7 @@ RSpec.describe Profile, type: :model do
 
   it "has a valid factory" do
     user = FactoryBot.create(:user)
-    profile = FactoryBot.create(:profile, user: user)
+    profile = FactoryBot.create(:profile, :bio_mid, user: user)
     expect(profile).to be_valid
     expect(profile).to be_persisted
   end
@@ -18,7 +18,13 @@ RSpec.describe Profile, type: :model do
 
   it 'When the user has a profile' do
     user = FactoryBot.create(:user)
-    FactoryBot.create(:profile, user: user)
-    expect(user.profile.bio).to eq('MyString')
+    profile = FactoryBot.create(:profile, :bio_mid, user: user)
+    expect(user.profile.bio).to eq(profile.bio)
+  end
+
+  it 'When the user has a long profile' do
+    user = FactoryBot.create(:user)
+    profile = FactoryBot.create(:profile, :bio_lg, user: user)
+    expect(user.profile.bio).to eq(profile.bio)
   end
 end

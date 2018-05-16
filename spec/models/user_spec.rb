@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   it { should validate_presence_of(:username) }
-  it { should validate_presence_of(:full_name) }
   it { should validate_presence_of(:last_name) }
   it { should validate_presence_of(:first_name) }
   it { should validate_inclusion_of(:visible).in_array([true, false]) }
+  it { should have_one(:picture) }
 
   it 'has a valid factory' do
     user = FactoryBot.create(:user)
@@ -48,26 +48,8 @@ RSpec.describe User, type: :model do
     expect(user.visible).to eq(true)
   end
 
-  it 'When the user does not have a profile' do
+  it 'user has no profile picture' do
     user = FactoryBot.create(:user)
-    expect(user.profile).to eq(nil)
+    expect(user.haspicture?).to eq(false)
   end
-
-  it 'When the user has a profile' do
-    user = FactoryBot.create(:user)
-    FactoryBot.create(:profile, user: user)
-    expect(user.profile.bio).to eq('MyString')
-  end
-
-  # it 'When the user does not have a address' do
-  #   user = FactoryBot.create(:user)
-  #   expect(user.address).to eq(nil)
-  # end
-  #
-  # it 'When the user has an address' do
-  #   user = FactoryBot.create(:user)
-  #   FactoryBot.create(:address, user: user)
-  #   expect(user.address.street_address_1).to eq('MyString')
-  # end
-
 end

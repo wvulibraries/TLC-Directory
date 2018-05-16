@@ -3,7 +3,8 @@ FROM ruby:2.4.4
 # Install capybara-webkit deps
 RUN apt-get update \
     && apt-get install -y xvfb git qt5-default libqt5webkit5-dev \
-                          gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
+                          gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x \
+                          imagemagick
 
 # Node.js
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \

@@ -1,0 +1,17 @@
+#flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: auto;
+    border: 1px black solid;
+    margin: 0 auto;
+}
+
+.flex-item {
+    width: auto;
+    border: none;
+}
+
+.box {
+   border: 1px grey solid;
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TLC-DIRECTORY<%= " | #{@page_title}" if @page_title %></title>
+    <%= stylesheet_link_tag('application', :media => 'all') %>
+  </head>
+  <body>
+
+    <div id="header">
+      <%= render(:partial => 'layouts/header') %>
+    </div>
+
+    <main id="main">
+
+      <div id="navigation">
+        <%= render(:partial => 'layouts/navigation') %>
+      </div>
+
+      <div id="content">
+        <%= yield %>
+      </div>
+      <div class="clear"></div>
+
+    </main>
+
+    <div id="footer">
+      <%= render(:partial => 'layouts/footer') %>
+    </div>
+
+  </body>
+</html>
