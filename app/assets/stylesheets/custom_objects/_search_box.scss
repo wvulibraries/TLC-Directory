@@ -3,11 +3,25 @@
 .search-box {
   color: white;
   margin: 0;
-  padding: 0;
+  padding: 40px;
   overflow: hidden;
   height: 100%;
   width: 100%;
   line-height: 1.1em;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+
+  h1 {
+      text-transform: uppercase;
+      line-height: 30px;
+      font-size: 30px;
+      padding: 20px;
+      margin: 20px;
+      display: inline;
+  }
+  h1 span {
+      position: relative;
+  }
 }
 
 .tinted-background {

@@ -1,26 +1,25 @@
   <div class="search-box tinted-background">
-    <h1>DIRECTORY FOR THE</h1>
-    <h1>SCHOLARSHIP OF TEACHING & LEARNING</h1>
+    <div class="wrap">
+      <h1><span>DIRECTORY FOR THE SCHOLARSHIP OF TEACHING & LEARNING</span></h1>
 
-    <div class="search-wrapper">
-        <!-- Directory Search -->
-        <form id="search-wrap" class="search-query-form" method="get" action="">
-            <input name='q' type='text' placeholder="Search TLC Directory" class="searchfield" size="21" maxlength="120" />
-            <button class="searchbutton"><span class="fa fa-search"></span></button>
-        </form>
+      <div class="search-wrapper">
+          <!-- Directory Search -->
+          <%= form_tag(directory_path, :method => "get", id: "search-form") do %>
+              <%= text_field_tag :search, params[:search], placeholder: "Search the Directory ..." %>
+              <button type="submit"><span class="fa fa-search"></span></button>
+          <% end %>
+      </div>
+
+      <p>
+        This search will link you to other collaborators by matching the search
+        phrase with research interests, publications, and background information.
+      </p>
     </div>
-
-    <p>
-      This search will link you to other collaborators by matching the search
-    </p>
-    <p>
-      phrase with research interests, publications, and background information.
-    </p>
   </div>
 
   <div id="content">
     <div class="wrap">
-      <div class="wvu-main-content">
+      <div class="wvu-main-content-left">
         <h3>
           Welcome to the 2017 directory for the scholarship of teaching and learning (SoTL)
           at West Virginia University! This inaugural SoTL directory began as a collaboration
@@ -44,12 +43,12 @@
           please  contact  the  Teaching and Learning Commons.
         </p>
         <p>
-           <a class="button" href="">Browse the Directory</a>
+           <a class="button" href="/directory">Browse the Directory</a>
            <a class="button" href="https://textbooks.lib.wvu.edu/sotl/index.html">Browse Textbooks</a>
         </p>
        </div>
 
-       <div id="sidecontent" class="wvu-side-content">
+       <div id="sidecontent" class="wvu-side-content-right">
        	<div class="info-boxes">
            <h2>Editorial Team</h2>
            <ul class="list">
@@ -69,9 +68,11 @@
 
          <div class="info-boxes">
            <h2>Partners</h2>
-           <p>Teaching and Learning Commons</p>
-           <p>Digital Publishing Institute</p>
-           <p>West Virginia University Libraries</p>
+           <ul class="list">
+             <li>Teaching and Learning Commons</li>
+             <li>Digital Publishing Institute</li>
+             <li>West Virginia University Libraries</li>
+           </ul>
          </div>
 
          <div class="info-boxes">

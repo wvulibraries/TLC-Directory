@@ -3,18 +3,16 @@ Rails.application.routes.draw do
   root 'public#index'
 
   # admin
-  get '/admin', to: 'admin#index'
-
-  get '/login', to: 'public#login'
-  get '/logout', to: 'public#logout'
+  get  '/admin', to: 'admin#index'
+  get '/admin/logout', to: 'admin#logout'
 
   # forces the controllers to use the admin name space
   # this is going to allow for the addition of a function to restrict access
   # resources generates all routes for crud of libraries, departments, users, etc.
 
   scope '/admin' do
-    resources :users, module: 'admin'
+    resources :users, :user_permissions, module: 'admin'
   end
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get '/directory', to: 'public/directory#index'
 end

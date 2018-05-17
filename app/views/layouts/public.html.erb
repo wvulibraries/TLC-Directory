@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TLC-DIRECTORY<%= " | #{@page_title}" if @page_title %></title>
+    <title>DIRECTORY FOR THE SCHOLARSHIP OF TEACHING & LEARNING<%= " | #{@page_title}" if @page_title %></title>
     <%= stylesheet_link_tag('application', :media => 'all') %>
   </head>
   <body>
@@ -16,7 +16,7 @@
         <%= render(:partial => 'layouts/navigation') %>
       </div>
 
-      <div id="content">
+      <div class="wvu-container">
         <%= yield %>
       </div>
       <div class="clear"></div>

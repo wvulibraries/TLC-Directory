@@ -1,0 +1,44 @@
+.search-wrapper {
+  padding: 30px;
+
+  * {
+    box-sizing: border-box;
+    margin: auto;
+    width: 50%
+  }
+
+  /* Style the search field */
+  form input[type=text] {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background-color: white;
+  }
+
+  /* Style the submit button */
+  form button {
+    float: left;
+    width: 15%;
+    padding: 10px;
+    background: $accent-blue2;
+    color: white;
+    font-size: 14px;
+    border: 1px solid grey;
+    border-left: none; /* Prevent double borders */
+    cursor: pointer;
+  }
+
+  form button:hover {
+    background: $accent-blue1;
+  }
+
+  /* Clear floats */
+  form::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+}

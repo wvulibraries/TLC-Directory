@@ -22,6 +22,7 @@ gem 'rubycas-client', :git => 'git://github.com/rubycas/rubycas-client.git'
 
 # frontend
 gem 'font-awesome-sass'
+gem 'select2-rails'
 
 group :development, :test do
   # RSpec & testing gems!

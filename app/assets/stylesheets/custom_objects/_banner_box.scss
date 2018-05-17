@@ -1,0 +1,17 @@
+@import 'variables';
+
+.banner-box {
+  color: white;
+  text-indent: 10px;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  padding: 25px;
+  line-height: 1.1em;
+  background-color: $primary-orange;
+  text-align: justify;
+  text-justify: inter-word;
+  font-size: 12px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}

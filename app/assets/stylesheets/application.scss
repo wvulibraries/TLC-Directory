@@ -10,15 +10,21 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
  *= require_self
+ *= require select2
  */
 
-//@import "base/base";
+ // WVU Brand Stuff
+ @import "variables";
+ @import "wvu";
 
-// import mixins so that all partials can use them.
-//@import "mixins/*";
-//@import "custom_objects/*";
+ // Font Awesome
+ @import "font-awesome-sprockets";
+ @import "font-awesome";
 
-// application wide
-@import "partials/*";
+ // import mixins so that all partials can use them.
+ @import "mixins/*";
+ @import "custom_objects/*";
+
+ // application wide
+ //@import "partials/*";
