@@ -1,0 +1,5 @@
+.wvu-side-content {
+  float: right;      /* This causes the content to move to the right */
+  width: 30%;      /* We need to set the width whenever we float an element */
+  background-color: white;  
+}

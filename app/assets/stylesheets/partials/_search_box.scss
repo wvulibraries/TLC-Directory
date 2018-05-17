@@ -1,0 +1,25 @@
+@import 'variables';
+
+.search-box {
+  color: white;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  line-height: 1.1em;
+}
+
+.tinted-background {
+  background:
+    /* top, transparent red, faked with gradient */
+    linear-gradient(
+      rgba(234, 170, 0, .85),
+      rgba(234, 170, 0, .85)
+    ),
+    /* bottom, image */
+    image-url('wvu.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
