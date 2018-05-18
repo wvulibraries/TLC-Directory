@@ -13,10 +13,9 @@
  *= require_self
  *= require select2
  */
-
- // WVU Brand Stuff
- @import "variables";
- @import "wvu";
+ // it is important that the order gets imported in a certain way so that variables are able to be used in other scss files
+ @import "partials/variables";
+ @import "partials/wvu";
 
  // Font Awesome
  @import "font-awesome-sprockets";

@@ -1,13 +1,13 @@
-@import 'variables';
 .nav-wrapper {
-  left: 0;
-	width: 100%;
-	overflow: hidden;
-	background-color: $neutral-black;
+  // left: 0;
+	// width: 100%;
+	// overflow: hidden;
+	// background-color: $neutral-black;
 
   .nav {
-    padding: 0px 0px 20px 0px;
-    width: 100%;
+    margin-right: 0;
+		float: left;
+		width: 100%;
 
     ul {
         list-style-type: none;
