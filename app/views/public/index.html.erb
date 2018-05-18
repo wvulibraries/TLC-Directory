@@ -1,23 +1,23 @@
-  <div class="search-box tinted-background">
-    <div class="wrap">
-      <h1><span>DIRECTORY FOR THE SCHOLARSHIP OF TEACHING & LEARNING</span></h1>
-
-      <div class="search-wrapper">
-          <!-- Directory Search -->
-          <%= form_tag(directory_path, :method => "get", id: "search-form") do %>
-              <%= text_field_tag :search, params[:search], placeholder: "Search the Directory ..." %>
-              <button type="submit"><span class="fa fa-search"></span></button>
-          <% end %>
-      </div>
-
-      <p>
-        This search will link you to other collaborators by matching the search
-        phrase with research interests, publications, and background information.
-      </p>
-    </div>
-  </div>
-
   <div id="content" class="wvu-main-content">
+    <div class="search-box tinted-background">
+      <div class="wrap">
+        <h1><span>DIRECTORY FOR THE SCHOLARSHIP OF TEACHING & LEARNING</span></h1>
+
+        <div class="search-wrapper">
+            <!-- Directory Search -->
+            <%= form_tag(directory_path, :method => "get", id: "search-form") do %>
+                <%= text_field_tag :search, params[:search], placeholder: "Search the Directory ..." %>
+                <button type="submit"><span class="fa fa-search"></span></button>
+            <% end %>
+        </div>
+
+        <p>
+          This search will link you to other collaborators by matching the search
+          phrase with research interests, publications, and background information.
+        </p>
+      </div>
+    </div>
+
     <div class="wrap content-wrapper">
       <div class="col-8 sol-s-12 wvu-main-content-left">
         <h3>
