@@ -1,4 +1,14 @@
 .info-boxes {
   border: 1px solid grey;
   margin: 10px;
+  text-align: center;
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    margin-bottom:15px;
+    padding: 0;
+  }
+
+  margin-bottom: 7px;
 }
