@@ -9,4 +9,9 @@ RSpec.describe Website, type: :model do
     expect(website).to be_valid
     expect(website).to be_persisted
   end
+
+  it 'When the user does not have any websites' do
+    user = FactoryBot.create(:user)
+    expect(user.websites.length).to eq(0)
+  end
 end

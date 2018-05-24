@@ -1,4 +1,7 @@
 class Admin::UsersController < ApplicationController
+  # tell rails which view layout to use with this controller
+  layout 'admin'
+    
   before_action :set_user, only: %i[show edit update destroy]
 
   # GET /users
@@ -67,6 +70,6 @@ class Admin::UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :last_name, :first_name, :middle_name)
+      params.require(:user).permit(:username, :last_name, :first_name, :middle_name, :status, :role, :visible)
     end
 end

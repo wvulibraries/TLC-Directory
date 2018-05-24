@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   # resources generates all routes for crud of libraries, departments, users, etc.
 
   scope '/admin' do
-    resources :users, :user_permissions, module: 'admin'
+    resources :users, :email_addresses, module: 'admin'
   end
 
-  get '/directory', to: 'public/directory#index'
+  get '/directory', to: 'directory#index'
 end

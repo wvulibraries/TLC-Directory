@@ -4,7 +4,7 @@ RSpec.describe Profile, type: :model do
   it { should belong_to(:user) }
   it { should validate_presence_of(:bio) }
 
-  it "has a valid factory" do
+  it 'has a valid factory' do
     user = FactoryBot.create(:user)
     profile = FactoryBot.create(:profile, :bio_mid, user: user)
     expect(profile).to be_valid

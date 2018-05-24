@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_10_174752) do
+ActiveRecord::Schema.define(version: 2018_05_21_170734) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "street_address_1"
     t.string "street_address_2"
     t.string "city"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2018_05_10_174752) do
   end
 
   create_table "awards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "starting_year"
     t.string "ending_year"
     t.string "description"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2018_05_10_174752) do
   end
 
   create_table "email_addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2018_05_10_174752) do
   end
 
   create_table "phones", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "phone_number"
     t.string "type"
     t.datetime "created_at", null: false
@@ -71,6 +71,14 @@ ActiveRecord::Schema.define(version: 2018_05_10_174752) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
+  create_table "researches", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_researches_on_user_id"
+  end
+
   create_table "sessions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "session_id", null: false
     t.string "cas_ticket"
@@ -83,7 +91,6 @@ ActiveRecord::Schema.define(version: 2018_05_10_174752) do
   end
 
   create_table "universities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "user_id"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -99,11 +106,10 @@ ActiveRecord::Schema.define(version: 2018_05_10_174752) do
     t.boolean "visible", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   create_table "websites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "website_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -1,0 +1,36 @@
+<div id="content" class="wvu-main-content">
+  <div class="directory-banner">
+    <div class="wrap directory-banner-text">
+      <h1>DIRECTORY FOR THE SCHOLARSHIP
+      OF TEACHING & LEARNING</h1>
+    </div>
+  </div>
+
+  <div class="wrap content-wrapper">
+
+    <div id="sidecontent" class="col-4 col-s-12 side-content-left">
+         <h3>Refine Your Search:</h3>
+    </div>
+
+    <div class="col-8 sol-s-12 wvu-main-content-right">
+      <tbody>
+        <% @profiles.each do |profile| %>
+          <div class="profile-wrapper">
+             <!-- Show Profile picture -->
+             <div id="profile_pic" class="profile-image">
+               <%= image_tag(profile.filename, size: "100x100", alt: "Profile Picture", title: "Profile Picture") %>
+               <figcaption><%= profile.first_name %>'s Profile</figcaption>
+             </div>
+
+
+             <div id="profile_info">
+               <h3><%= profile.name %></h3>
+
+               <h4>Research Interests:</h4>
+             </div>
+          </div>
+        <% end %>
+      </tbody>
+    </div>
+  </div>
+</div>

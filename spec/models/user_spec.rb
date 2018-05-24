@@ -52,4 +52,9 @@ RSpec.describe User, type: :model do
     user = FactoryBot.create(:user)
     expect(user.haspicture?).to eq(false)
   end
+
+  # it 'When the user does not have any universities' do
+  #   user = FactoryBot.create(:user)
+  #   expect(user.universities).to eq(nil)
+  # end
 end

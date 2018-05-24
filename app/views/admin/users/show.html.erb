@@ -1,44 +1,28 @@
-<p id="notice"><%= notice %></p>
+<div id="content" class="wvu-main-content">
 
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
+  <div class="wrap content-wrapper">
 
-<p>
-  <strong>Full Name:</strong>
-  <%= @user.name %>
-</p>
+    <div id="sidecontent" class="col-4 col-s-12 side-content-left">
+         <h3>Admin Navigation</h3>
+    </div>
 
-<p>
-  <strong>Last Name:</strong>
-  <%= @user.last_name %>
-</p>
-
-<p>
-  <strong>First Name:</strong>
-  <%= @user.first_name %>
-</p>
-
-<p>
-  <strong>Middle Name:</strong>
-  <%= @user.middle_name %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @user.status %>
-</p>
-
-<p>
-  <strong>Role:</strong>
-  <%= @user.role %>
-</p>
-
-<p>
-  <strong>Visible:</strong>
-  <%= @user.visible %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+    <div class="col-8 sol-s-12 wvu-main-content-right">
+      <tbody>
+        <h2>User Profile</h2>
+        <ul>
+           <li><strong>Username: </strong><%= @user.username %></li>
+           <li><strong>Full Name: </strong><%= @user.name %></li>
+           <li><strong>Last Name: </strong><%= @user.last_name %></li>
+           <li><strong>First Name: </strong><%= @user.first_name %></li>
+           <li><strong>Middle Name: </strong><%= @user.middle_name %></li>
+           <li><strong>Status: </strong><%= @user.status %></li>
+           <li><strong>Role: </strong><%= @user.role %></li>
+           <li><strong>Visible: </strong><%= @user.visible %></li>
+        </ul>
+        <%= link_to 'New Email Address', new_email_address_path(@user) %>
+        <%= link_to 'Edit', edit_user_path(@user) %> |
+        <%= link_to 'Back', users_path %>
+      </tbody>
+    </div>
+  </div>
+</div>

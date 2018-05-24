@@ -15,4 +15,9 @@ RSpec.describe Picture, type: :model do
     expect(picture).to be_valid
     expect(picture).to be_persisted
   end
+
+  it 'When the user does not have any websites' do
+    user = FactoryBot.create(:user)
+    expect(user.picture).to eq(nil)
+  end
 end

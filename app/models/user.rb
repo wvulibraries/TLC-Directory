@@ -3,7 +3,7 @@
 # AUTHORS : Tracy McCormick
 # Description:
 class User < ApplicationRecord
-  enum status: %i[disabled active]
+  enum status: %i[active disabled]
   enum role: %i[user editor admin]
   # all the basic validations for this new record to be inserted
   validates :username, presence: true,
@@ -24,6 +24,7 @@ class User < ApplicationRecord
   has_many :universities
   has_many :websites, dependent: :destroy
   has_many :awards, dependent: :destroy
+  has_many :researches, dependent: :destroy
 
   after_initialize do
     if self.new_record?
@@ -42,11 +43,16 @@ class User < ApplicationRecord
     picture != nil
   end
 
-  # def can_manage_profile(:profile)
-  #   isAdmin
-  # end
+  def filename
+    if picture == nil
+      "No_picture_available.png"
+    else
+      picture.image
+    end
+  end
 
   scope :sorted, lambda { order('last_name ASC', 'first_name ASC') }
+  scope :show, lambda { where(["visible = ? and status = ?", true, "active"]) }
 
   def name
     "#{first_name} #{last_name}"

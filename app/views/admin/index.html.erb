@@ -1,60 +1,15 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title> WVU Libraries :: TLC Directory :: Admin </title>
+<div id="content" class="wvu-main-content">
 
-    <%= csrf_meta_tags %>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <div class="wrap content-wrapper">
 
-  <body>
-  <!-- Skip to Navigation -->
-    <a class="wvu-skip-nav" href="#maincontent">Skip to main content</a>
-
-  <!-- Header -->
-    <header class="wvu-masthead">
-      <div class="wvu-masthead__container">
-        <a class="header-logo" href="/"> TLC Directory </a>
-        <div class="button-container">
-          <a href="javascript:void(0)" class="button button--pms-629-c sliding-panel-button js-menu-trigger">
-            <i class="fa fa-bars" aria-hidden="true"></i> Menu
-          </a>
-          <%= link_to "Logout", "/admin/logout", :class=>"button button--wvu-gold" %>
-        </div>
-      </div>
-    </header>
-
-
-    <!-- Flash Messages / Alerts -->
-    <% flash.each do |key, value| %>
-      <div class="alert <%= key %>">
-        <div class="content"> <%= value %> </div>
-        <span class="exit-alert"> <i class="fa fa-times-circle-o" aria-hidden="true"></i> </span>
-      </div>
-    <% end %>
-
-     <!-- Navigation / Menu -->
-    <nav class="js-menu sliding-panel-content">
-      <%= admin_links %>
-    </nav>
-    <div class="js-menu-screen sliding-panel-fade-screen"></div>
-
-    <!-- Main Content Yeiled by Views -->
-    <div class="wvu-container">
-      <%= yield %>
+    <div id="sidecontent" class="col-4 col-s-12 side-content-left">
+         <h3>Admin Navigation</h3>
     </div>
 
+    <div class="col-8 sol-s-12 wvu-main-content-right">
+      <tbody>
 
-
-    <!-- Footers -->
-    <footer>
-        <div class="builtBy">
-            <span class="built">Built</span>
-            <span class="by">By </span>
-            <span class="wvu">WVU</span>
-            <span class="libs">Libraries</span>
-        </div>
-    </footer>
-  </body>
-</html>
+      </tbody>
+    </div>
+  </div>
+</div>

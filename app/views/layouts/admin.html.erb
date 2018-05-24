@@ -1,41 +1,35 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title> TLC Directory :: WVU Libraries </title>
-    <%= csrf_meta_tags %>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <title> TLC Directory :: WVU Libraries <%= " | #{@page_title}" if @page_title %></title>
+    <%= stylesheet_link_tag('application', :media => 'all') %>
   </head>
+  <body>
 
-  <header>
-    <div class="title-block">
-      <h1> TLC Directory :: Admin Panel</h1>
+    <div id="header">
+      <%= render(:partial => 'shared/wvu_admin_header') %>
     </div>
 
-    <div class="user-panel">
-      <%= link_to "Public", "/", :class=>"button admin-button" %>
-      <%= link_to "Logout", "/logout", :class=>"button logout-button" %>
-    </div>
-  </header>
+    <main id="main">
 
-  <nav>
-    <ul>
-      <li>
-        <a href="/admin/users">
-        <i class="fa fa-users" aria-hidden="true"></i> Users </a>
-      </li>
-    </ul>
-  </nav>
-
-  <main>
-    <% flash.each do |key, value| %>
-      <div class="alert <%= key %>">
-        <div class="content"> <%= value %> </div>
-        <span class="exit-alert"> <i class="fa fa-times-circle-o" aria-hidden="true"></i> </span>
+      <div id="navigation">
+        <%= render(:partial => 'shared/admin_navigation') %>
       </div>
-    <% end %>
 
-    <%= yield %>
-  </main>
+      <div id="title-banner">
+        <%= render(:partial => 'shared/admin_banner') %>
+      </div>
 
+      <div class="wvu-container">
+        <%= yield %>
+      </div>
+      <div class="clear"></div>
+
+    </main>
+
+    <div id="footer">
+      <%= render(:partial => 'shared/admin_footer') %>
+    </div>
+
+  </body>
 </html>
