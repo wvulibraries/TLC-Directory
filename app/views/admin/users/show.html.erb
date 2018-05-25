@@ -19,6 +19,31 @@
            <li><strong>Role: </strong><%= @user.role %></li>
            <li><strong>Visible: </strong><%= @user.visible %></li>
         </ul>
+
+        <% if @email_addresses != nil && @email_addresses.count > 0 %>
+          <h3>Email Addresses</h3>
+          <table>
+            <% @email_addresses.each do |email_address| %>
+              <tr>
+                <td><%= email_address.email %></td>
+              </tr>
+          <% end %>
+          </table>
+        <% end %>
+
+        <% if @addresses != nil && @addresses.count > 0 %>
+          <h3>Addresses</h3>
+          <% @addresses.each do |address| %>
+            <ul>
+               <li><strong>Street Address 1: </strong><%= address.street_address_1 %></li>
+               <li><strong>Street Address 2: </strong><%= address.street_address_2 %></li>
+               <li><strong>City: </strong><%= address.city %></li>
+               <li><strong>State: </strong><%= address.state %></li>
+               <li><strong>Zip Code: </strong><%= address.zip_code %></li>
+            </ul>
+          <% end %>            
+        <% end %>
+
         <%= link_to 'New Email Address', new_email_address_path(user_id: @user.id) %>
         <%= link_to 'Edit', edit_user_path(@user) %> |
         <%= link_to 'Back', users_path %>

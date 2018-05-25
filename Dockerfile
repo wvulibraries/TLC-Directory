@@ -20,7 +20,6 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -\
 RUN \
     gem install bundler \
     && gem install rails \
-    && gem install faker \
     && mkdir -p /home/tlcdirectory
 
 ENV RAILS_ENV development
