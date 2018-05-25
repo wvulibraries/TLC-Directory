@@ -1,4 +1,4 @@
-class Research < ApplicationRecord
+class ResearchInterest < ApplicationRecord
   belongs_to :user
   validates :description, presence: true
 end

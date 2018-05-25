@@ -24,7 +24,7 @@ class User < ApplicationRecord
   has_many :universities
   has_many :websites, dependent: :destroy
   has_many :awards, dependent: :destroy
-  has_many :researches, dependent: :destroy
+  has_many :research_interests, dependent: :destroy
 
   after_initialize do
     if self.new_record?

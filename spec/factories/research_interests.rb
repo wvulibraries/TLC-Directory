@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :research do
+  factory :research_interest do
     trait :no_description do
       description nil
     end

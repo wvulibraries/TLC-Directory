@@ -1,6 +1,6 @@
-class CreateResearches < ActiveRecord::Migration[5.2]
+class CreateResearchInterests < ActiveRecord::Migration[5.2]
   def change
-    create_table :researches do |t|
+    create_table :research_interests do |t|
       t.belongs_to :user, index: true
       t.string :description
 

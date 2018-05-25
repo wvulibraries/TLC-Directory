@@ -71,12 +71,12 @@ ActiveRecord::Schema.define(version: 2018_05_21_170734) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
-  create_table "researches", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "research_interests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_researches_on_user_id"
+    t.index ["user_id"], name: "index_research_interests_on_user_id"
   end
 
   create_table "sessions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
