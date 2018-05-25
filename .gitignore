@@ -12,6 +12,7 @@
 /tmp/
 /mysql
 /public/system
+/log
 
 # Used by dotenv library to load environment variables.
 # .env
