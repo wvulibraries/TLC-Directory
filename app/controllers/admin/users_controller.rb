@@ -1,7 +1,7 @@
 class Admin::UsersController < ApplicationController
   # tell rails which view layout to use with this controller
   layout 'admin'
-    
+
   before_action :set_user, only: %i[show edit update destroy]
 
   # GET /users
@@ -57,7 +57,8 @@ class Admin::UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      success_str = 'User was successfully destroyed.'
+      format.html { redirect_to users_url, success: success_str }
       format.json { head :no_content }
     end
   end

@@ -1,4 +1,4 @@
 # spec/support/faker.rb
-require "faker"
+require 'faker'
 
 Faker::Config.locale = 'en-US'

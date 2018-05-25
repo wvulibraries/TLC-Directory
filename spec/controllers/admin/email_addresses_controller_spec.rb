@@ -59,7 +59,8 @@ RSpec.describe Admin::EmailAddressesController, type: :controller do
 
   describe "GET #new" do
     it "returns a success response" do
-      get :new, params: {}, session: valid_session
+      user = User.create! valid_attributes
+      get :new, params: {user_id: user.id}, session: valid_session
       expect(response).to be_success
     end
   end
