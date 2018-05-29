@@ -5,28 +5,28 @@ class Admin::ResearchInterestsController < ApplicationController
   before_action :find_user, only: [:new]
   before_action :set_research_interest, only: [:show, :edit, :update, :destroy]
 
-  # GET /profiles
-  # GET /profiles.json
+  # GET /research_interests
+  # GET /research_interests.json
   def index
     @researchinterests = ResearchInterest.all
   end
 
-  # GET /profiles/1
-  # GET /profiles/1.json
+  # GET /research_interests/1
+  # GET /research_interests/1.json
   def show
   end
 
-  # GET /profiles/new
+  # GET /research_interests/new
   def new
     @researchinterest = ResearchInterest.new(user: @user)
   end
 
-  # GET /profiles/1/edit
+  # GET /research_interests/1/edit
   def edit
   end
 
-  # POST /profiles
-  # POST /profiles.json
+  # POST /research_interests
+  # POST /research_interests.json
   def create
     user_object = User.find(researchinterest_params[:user_id])
     researchinterest_params[:user] = user_object
@@ -42,8 +42,8 @@ class Admin::ResearchInterestsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /profiles/1
-  # PATCH/PUT /profiles/1.json
+  # PATCH/PUT /research_interests/1
+  # PATCH/PUT /research_interests/1.json
   def update
     respond_to do |format|
       if @researchinterest.update(researchinterest_params)
@@ -56,18 +56,19 @@ class Admin::ResearchInterestsController < ApplicationController
     end
   end
 
-  # DELETE /profiles/1
-  # DELETE /profiles/1.json
+  # DELETE /research_interests/1
+  # DELETE /research_interests/1.json
   def destroy
     @researchinterest.destroy
     respond_to do |format|
       success_str = 'Research Interest was successfully destroyed.'
-      format.html { redirect_to profiles_url, success: success_str }
+      format.html { redirect_to research_interests_url, success: success_str }
       format.json { head :no_content }
     end
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def find_user
       @user = User.find(params[:user_id])
@@ -79,6 +80,6 @@ class Admin::ResearchInterestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def researchinterest_params
-      params.require(:profile).permit(:user_id, :description)
+      params.require(:researchinterest).permit(:user_id, :description)
     end
 end

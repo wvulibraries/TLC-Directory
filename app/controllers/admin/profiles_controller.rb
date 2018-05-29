@@ -70,6 +70,7 @@ class Admin::ProfilesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def find_user
+      
       @user = User.find(params[:user_id])
     end
 

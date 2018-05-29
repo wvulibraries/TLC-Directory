@@ -1,4 +1,4 @@
-<div id="content" class="wvu-main-content">
+<div class="wvu-main-content">
   <div class="directory-banner">
     <div class="wrap directory-banner-text">
       <h1>DIRECTORY FOR THE SCHOLARSHIP
@@ -8,7 +8,7 @@
 
   <div class="wrap content-wrapper">
 
-    <div id="sidecontent" class="col-4 col-s-12 side-content-left">
+    <div class="col-4 col-s-12 side-content-left">
          <h3>Refine Your Search:</h3>
     </div>
 
@@ -17,13 +17,13 @@
         <% @profiles.each do |profile| %>
           <div class="profile-wrapper">
              <!-- Show Profile picture -->
-             <div id="profile_pic" class="profile-image">
+             <div class="profile-image">
                <%= image_tag(profile.filename, size: "100x100", alt: "Profile Picture", title: "Profile Picture") %>
                <figcaption><%= profile.first_name %>'s Profile</figcaption>
              </div>
 
 
-             <div id="profile_info">
+             <div>
                <h3><%= profile.name %></h3>
 
                <h4>Research Interests:</h4>
