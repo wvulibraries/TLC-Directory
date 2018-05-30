@@ -36,6 +36,29 @@
     <%= f.check_box :visible %>
   </div>
 
+  <%= fields_for :profile, @profile do |profile_fields| %>
+    <div class="field">
+      <%= profile_fields.label :title %>
+      <%= profile_fields.text_field :title %>
+    </div>
+
+    <div class="field">
+      <%= profile_fields.label :department %>
+      <%= profile_fields.text_field :department %>
+    </div>
+
+    <div class="field">
+      <%= profile_fields.label :biography %>
+      <%= profile_fields.text_field :biography %>
+    </div>
+
+    <div class="field">
+      <%= profile_fields.label :research_interests %>
+      <%= profile_fields.text_field :research_interests %>
+    </div>
+
+  <% end %>
+
   <div class="actions">
     <div class="submit-button-wrapper">
       <% if user.id.present? %>

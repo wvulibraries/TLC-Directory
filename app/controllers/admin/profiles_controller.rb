@@ -5,28 +5,28 @@ class Admin::ProfilesController < ApplicationController
   before_action :find_user, only: [:new]
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
 
-  # GET /profiles
-  # GET /profiles.json
+  # GET /biographies
+  # GET /biographies.json
   def index
     @profiles = Profile.all
   end
 
-  # GET /profiles/1
-  # GET /profiles/1.json
+  # GET /biographies/1
+  # GET /biographies/1.json
   def show
   end
 
-  # GET /profiles/new
+  # GET /biographies/new
   def new
     @profile = Profile.new(user: @user)
   end
 
-  # GET /profiles/1/edit
+  # GET /biographies/1/edit
   def edit
   end
 
-  # POST /profiles
-  # POST /profiles.json
+  # POST /biographies
+  # POST /biographies.json
   def create
     user_object = User.find(profile_params[:user_id])
     profile_params[:user] = user_object
@@ -42,8 +42,8 @@ class Admin::ProfilesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /profiles/1
-  # PATCH/PUT /profiles/1.json
+  # PATCH/PUT /biographies/1
+  # PATCH/PUT /biographies/1.json
   def update
     respond_to do |format|
       if @profile.update(profile_params)
@@ -56,13 +56,13 @@ class Admin::ProfilesController < ApplicationController
     end
   end
 
-  # DELETE /profiles/1
-  # DELETE /profiles/1.json
+  # DELETE /biographies/1
+  # DELETE /biographies/1.json
   def destroy
     @profile.destroy
     respond_to do |format|
       success_str = 'Profile was successfully destroyed.'
-      format.html { redirect_to profiles_url, success: success_str }
+      format.html { redirect_to biographies_url, success: success_str }
       format.json { head :no_content }
     end
   end
@@ -70,7 +70,6 @@ class Admin::ProfilesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def find_user
-      
       @user = User.find(params[:user_id])
     end
 
@@ -80,6 +79,10 @@ class Admin::ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:user_id, :bio)
+      params.require(:profile).permit(:user_id,
+                                      :title,
+                                      :department,
+                                      :biography,
+                                      :research_interests)
     end
 end

@@ -18,16 +18,17 @@ class User < ApplicationRecord
 
   has_one :picture, as: :imageable, dependent: :destroy
   has_one :profile, dependent: :destroy
+
+  has_many :awards, dependent: :destroy
+  has_many :address, dependent: :destroy
   has_many :email_address, dependent: :destroy
   has_many :phone, dependent: :destroy
-  has_many :address, dependent: :destroy
+  has_many :publications, dependent: :destroy
   has_many :universities
   has_many :websites, dependent: :destroy
-  has_many :awards, dependent: :destroy
-  has_many :research_interests, dependent: :destroy
 
   after_initialize do
-    if self.new_record?
+    if new_record?
       # values will be available for new record forms.
       self.status ||= :disabled
       self.role ||= :user
@@ -36,7 +37,7 @@ class User < ApplicationRecord
   end
 
   def isadmin?
-    self.role == 'admin'
+    role == 'admin'
   end
 
   def haspicture?
@@ -44,7 +45,7 @@ class User < ApplicationRecord
   end
 
   def filename
-    if picture == nil
+    if picture.nil?
       "No_picture_available.png"
     else
       picture.image

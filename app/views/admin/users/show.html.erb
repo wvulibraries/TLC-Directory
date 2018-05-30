@@ -1,4 +1,4 @@
-<div id="content" class="wvu-main-content">
+<div class="wvu-main-content">
 
   <div class="wrap content-wrapper">
 
@@ -41,7 +41,7 @@
                <li><strong>State: </strong><%= address.state %></li>
                <li><strong>Zip Code: </strong><%= address.zip_code %></li>
             </ul>
-          <% end %>            
+          <% end %>
         <% end %>
 
         <%= link_to 'New Email Address', new_email_address_path(user_id: @user.id) %>

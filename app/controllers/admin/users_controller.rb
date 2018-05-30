@@ -23,16 +23,21 @@ class Admin::UsersController < ApplicationController
   end
 
   # GET /users/1/edit
-  def edit; end
+  def edit
+    @profile = Profile.where(user_id: @user.id).first
+  end
 
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
-
+    @user = User.new user_params
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        @user.build_profile profile_params
+        @user.save
+        # format.html { redirect_to @user, notice: 'User was successfully created.' }
+        # format.json { render :show, status: :created, location: @user }
+        format.html { redirect_to new_optional_item_path(user_id: @user.id), notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -45,7 +50,8 @@ class Admin::UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      @user.build_profile profile_params
+      if @user.update user_params
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -67,7 +73,7 @@ class Admin::UsersController < ApplicationController
   end
 
   private
-  
+
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
@@ -77,4 +83,9 @@ class Admin::UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:username, :last_name, :first_name, :middle_name, :status, :role, :visible)
     end
+
+    def profile_params
+      params.require(:profile).permit(:title, :department, :biography, :research_interests)
+    end
+
 end

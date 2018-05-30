@@ -1,0 +1,6 @@
+<h1>Editing Optional Items</h1>
+
+<%= render 'form', optional_item: @optional_item %>
+
+<%= link_to 'Show', @optional_item(:user_id @user.id) %> |
+<%= link_to 'Back', optional_items_path %>

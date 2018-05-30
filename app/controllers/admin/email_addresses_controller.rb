@@ -28,12 +28,12 @@ class Admin::EmailAddressesController < ApplicationController
   # POST /email_addresses
   # POST /email_addresses.json
   def create
-    user_object = User.find(email_address_params[:user_id])
-    email_address_params[:user] = user_object
+    @user = User.find(email_address_params[:user_id])
+    email_address_params[:user] = @user
     @email_address = EmailAddress.new(email_address_params)
     respond_to do |format|
       if @email_address.save
-        format.html { redirect_to @email_address, notice: 'Email address was successfully created.' }
+        format.html { redirect_to @user, notice: 'Email address was successfully created.' }
         format.json { render :show, status: :created, location: @email_address }
       else
         format.html { render :new }
@@ -68,7 +68,7 @@ class Admin::EmailAddressesController < ApplicationController
   end
 
   private
-  
+
     # Use callbacks to share common setup or constraints between actions.
     def find_user
       @user = User.find(params[:user_id])

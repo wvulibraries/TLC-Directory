@@ -13,5 +13,6 @@ module TLCDirectory
     config.time_zone = 'Eastern Time (US & Canada)'
     config.active_record.default_timezone = :local
     config.forced_ssl = true
+    config.autoload_paths += %W(#{config.root}/lib) # add this line
   end
 end

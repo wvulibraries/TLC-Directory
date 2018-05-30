@@ -1,0 +1,12 @@
+<p><%= notice %></p>
+
+<tbody>
+  <h2>User Email Address</h2>
+  <ul>
+     <li><strong>User ID: </strong><%= @email_address.user_id %></li>
+     <li><strong>Email: </strong><%= @email_address.email %></li>
+  </ul>
+  <%= link_to 'New Email Address', new_email_address_path(@email_address.user_id) %>
+  <%= link_to 'Edit', edit_email_address_path(@email_address) %> |
+  <%= link_to 'Back', email_addresses_path %>
+</tbody>
