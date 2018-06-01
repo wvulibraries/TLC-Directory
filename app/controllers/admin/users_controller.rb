@@ -1,6 +1,7 @@
 class Admin::UsersController < ApplicationController
   # tell rails which view layout to use with this controller
   layout 'admin'
+  include Forms
 
   before_action :set_user, only: %i[show edit update destroy]
 
@@ -20,30 +21,36 @@ class Admin::UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    @user.profile = @user.build_profile
   end
 
   # GET /users/1/edit
-  def edit
-    @profile = Profile.where(user_id: @user.id).first
-  end
+  def edit; end
 
   # POST /users
   # POST /users.json
   def create
-    @user = User.new user_params
-    respond_to do |format|
-      if @user.save
-        @user.build_profile profile_params
-        @user.save
-        # format.html { redirect_to @user, notice: 'User was successfully created.' }
-        # format.json { render :show, status: :created, location: @user }
-        format.html { redirect_to new_optional_item_path(user_id: @user.id), notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    @user = Forms::UserForm.new user_params
+    if @user.save
+      redirect_to users_url, notice: 'User was successfully created.'
+    else
+      render :new
     end
+
+    # @user = User.new user_params
+    # respond_to do |format|
+    #   if @user.save
+    #     @user.build_profile profile_params
+    #     @user.save
+    #     # format.html { redirect_to @user, notice: 'User was successfully created.' }
+    #     # format.json { render :show, status: :created, location: @user }
+    #     format.html { redirect_to new_optional_item_path(user_id: @user.id), notice: 'User was successfully created.' }
+    #     format.json { render :show, status: :created, location: @user }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @user.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /users/1
@@ -81,7 +88,7 @@ class Admin::UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :last_name, :first_name, :middle_name, :status, :role, :visible)
+      params.require(:user).permit(:username, :last_name, :first_name, :middle_name, :status, :role, :visible, profile: [:title, :department, :biography, :research_interests])
     end
 
     def profile_params

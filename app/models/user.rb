@@ -3,18 +3,19 @@
 # AUTHORS : Tracy McCormick
 # Description:
 class User < ApplicationRecord
+
   enum status: %i[active disabled]
   enum role: %i[user editor admin]
   # all the basic validations for this new record to be inserted
-  validates :username, presence: true,
-                       length: { within: 7..25 },
-                       uniqueness: true
-  validates :first_name, presence: true,
-                         length: { maximum: 25 }
-  validates :last_name, presence: true,
-                         length: { maximum: 50 }
-  validates :status, presence: true
-  validates :visible, inclusion: { in: [true, false] }
+  # validates :username, presence: true,
+  #                      length: { within: 7..25 },
+  #                      uniqueness: true
+  # validates :first_name, presence: true,
+  #                        length: { maximum: 25 }
+  # validates :last_name, presence: true,
+  #                        length: { maximum: 50 }
+  # validates :status, presence: true
+  # validates :visible, inclusion: { in: [true, false] }
 
   has_one :picture, as: :imageable, dependent: :destroy
   has_one :profile, dependent: :destroy
