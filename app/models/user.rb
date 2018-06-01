@@ -18,7 +18,10 @@ class User < ApplicationRecord
   # validates :visible, inclusion: { in: [true, false] }
 
   has_one :picture, as: :imageable, dependent: :destroy
+
+  # profile
   has_one :profile, dependent: :destroy
+  before_create :create_profile
 
   has_many :awards, dependent: :destroy
   has_many :address, dependent: :destroy
@@ -62,4 +65,12 @@ class User < ApplicationRecord
     # Or: [first_name, last_name.join(' ')]
   end
 
+  def assign_profile_params(params)
+    @profile_params = params
+  end
+
+  private
+  def create_profile
+    build_profile(@profile_params)
+  end
 end

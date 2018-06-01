@@ -30,7 +30,8 @@ class Admin::UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = Forms::UserForm.new user_params
+    @user = User.new user_params
+    @user.assign_profile_params profile_params 
     if @user.save
       redirect_to users_url, notice: 'User was successfully created.'
     else
