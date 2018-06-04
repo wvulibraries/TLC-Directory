@@ -16,9 +16,17 @@
     </div>
 
     <div class="col-9 sol-s-12 wvu-main-content-right">
-      <%= form_tag("/optional_items", id: "optionalItemsForm", method: "get") do %>
-        <%= submit_tag("Add Items") %>
+
+      <%= form_for(@user) do |f| %>
+          <!-- This is the plain old Rails nested form which will render all @user.hobbies -->
+          <%= f.fields_for(:email_addresses) do |email_address| %>
+            <%= email_address.label :email %>
+            <%= render partial: 'email', locals: {email_address: email_address} %>
+          <% end %>
+
+        <%= f.submit class: "btn btn-primary" %>
       <% end %>
+
     </div>
   </div>
 </div>

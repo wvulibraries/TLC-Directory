@@ -2,14 +2,12 @@ class Admin::OptionalItemsController < ApplicationController
   # tell rails which view layout to use with this controller
   layout 'admin'
 
-  # before_action :find_user, only: [:new]
+  before_action :find_user, only: [:new]
   # before_action :set_email_address, only: [:show, :edit, :update, :destroy]
 
   # GET /optional_items
   # GET /optional_items.json
-  def index
-    @email_addresses = EmailAddress.all
-  end
+  def index; end
 
   # GET /optional_items/1
   # GET /optional_items/1.json
@@ -18,6 +16,7 @@ class Admin::OptionalItemsController < ApplicationController
 
   # GET /optional_items/new
   def new
+    @email_address = EmailAddress.new(user: @user)
   end
 
   # GET /optional_items/1/edit
@@ -27,9 +26,10 @@ class Admin::OptionalItemsController < ApplicationController
   # POST /optional_items
   # POST /optional_items.json
   def create
-    @user = User.find(email_address_params[:user_id])
-    optional_items_params[:user] = @user
-    @optional_items = EmailAddress.new(optional_items_params)
+    # @user = User.find(email_address_params[:user_id])
+
+    # optional_items_params[:user] = @user
+    # @optional_items = EmailAddress.new(optional_items_params)
     # respond_to do |format|
     #   if @email_address.save
     #     format.html { redirect_to @user, notice: 'Email address was successfully created.' }

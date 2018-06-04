@@ -1,7 +1,6 @@
 class Admin::UsersController < ApplicationController
   # tell rails which view layout to use with this controller
   layout 'admin'
-  include Forms
 
   before_action :set_user, only: %i[show edit update destroy]
 
@@ -31,34 +30,25 @@ class Admin::UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new user_params
-    @user.assign_profile_params profile_params 
-    if @user.save
-      redirect_to users_url, notice: 'User was successfully created.'
-    else
-      render :new
+    @user.assign_profile_params profile_params
+    respond_to do |format|
+      if @user.save
+        # format.html { redirect_to @user, notice: 'User was successfully created.' }
+        # format.json { render :show, status: :created, location: @user }
+        format.html { redirect_to new_optional_item_path(user_id: @user.id), notice: 'User was successfully created.' }
+        format.json { render :show, status: :created, location: @user }
+      else
+        format.html { render :new }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
     end
-
-    # @user = User.new user_params
-    # respond_to do |format|
-    #   if @user.save
-    #     @user.build_profile profile_params
-    #     @user.save
-    #     # format.html { redirect_to @user, notice: 'User was successfully created.' }
-    #     # format.json { render :show, status: :created, location: @user }
-    #     format.html { redirect_to new_optional_item_path(user_id: @user.id), notice: 'User was successfully created.' }
-    #     format.json { render :show, status: :created, location: @user }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @user.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      @user.build_profile profile_params
+      @user.assign_profile_params profile_params
       if @user.update user_params
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
@@ -89,7 +79,8 @@ class Admin::UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :last_name, :first_name, :middle_name, :status, :role, :visible, profile: [:title, :department, :biography, :research_interests])
+      puts params
+      params.require(:user).permit(:username, :last_name, :first_name, :middle_name, :status, :role, :visible)
     end
 
     def profile_params
