@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   scope '/admin' do
     resources :users, :optional_items, :email_addresses, module: 'admin'
     get '/email_addresses/new/:user_id', to: 'admin/email_addresses#new',  as: 'new_email_address_2'
+    get '/optional_items/edit/:user_id', to: 'admin/optional_items#edit', as: 'edit_optional_items'
   end
 
   get '/directory', to: 'directory#index'

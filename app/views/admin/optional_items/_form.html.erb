@@ -1,32 +1,15 @@
 <div class="wrap content-wrapper">
-    <div class="col-3 col-s-12 side-content-left">
-      <h3>Form Fields</h3>
-      <a class="fa fa-address-card button" onclick="addressFunction()"> Address</a>
-      <a class="fa fa-trophy button" onclick="awardFunction()"> Award</a>
-      <a class="fa fa-user button" onclick="biographyFunction()"> Biography</a>
-      <a class="fa fa-sitemap button" onclick="departmentFunction()"> Department</a>
-      <a class="fa fa-envelope button" onclick="emailFunction()"> Email</a>
-      <a class="fa fa-phone button" onclick="phoneFunction()"> Phone</a>
-      <a class="fa fa-camera button" onclick="pictureFunction()"> Picture</a>
-      <a class="fa fa-book button" onclick="researchinterestFunction()"> Research Interest</a>
-      <a class="button" onclick="titleFunction()">Title</a>
-      <a class="fa fa-university button" onclick="universityFunction()"> University</a>
-      <a class="fa fa-link button" onclick="websiteFunction()"> Website</a>
-      <a class="fa fa-sync button" onclick="resetElements()"> Reset</a>
-    </div>
-
-    <div class="col-9 sol-s-12 wvu-main-content-right">
-
-      <%= form_for(@user) do |f| %>
-          <!-- This is the plain old Rails nested form which will render all @user.hobbies -->
-          <%= f.fields_for(:email_addresses) do |email_address| %>
-            <%= email_address.label :email %>
-            <%= render partial: 'email', locals: {email_address: email_address} %>
-          <% end %>
+      <%= form_for @user, :url => optional_items_path, :html => {:method => :post} do |f| %>
+        <%= f.hidden_field :user_id, value: @user.id %>
+        <div id="website-fields">
+           <%= f.label 'website(s)' %>
+           <%= f.fields_for :websites do |website| %>
+             <%= render partial: 'website', locals: {user_id: @user.id, count: website.options[:child_index], website: website} %>
+           <% end %>
+        </div>
 
         <%= f.submit class: "btn btn-primary" %>
       <% end %>
 
     </div>
-  </div>
 </div>

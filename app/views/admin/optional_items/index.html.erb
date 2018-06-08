@@ -8,26 +8,21 @@
 
     <div class="col-8 sol-s-12 wvu-main-content-right">
       <tbody>
-        <h1>Users Email Addresses</h1>
+        <h1>Users Website(s)</h1>
         <table>
           <thead>
             <tr>
               <th>User ID</th>
-              <th>Email</th>
+              <th>Website Url</th>
               <th colspan="3"></th>
             </tr>
           </thead>
 
           <tbody>
-            <% @email_addresses.each do |email_address| %>
+            <% @user.websites.each do |site| %>
               <tr>
-                <td><%= email_address.user_id %></td>
-                <td><%= email_address.email %></td>
-                <td><%= link_to 'Show', email_address %></td>
-                <td><%= link_to 'Edit', edit_email_address_path(email_address) %></td>
-                <td><%= link_to 'Destroy', email_address,
-                              method: :delete,
-                              data: { confirm: 'Are you sure?' } %></td>
+                <td><%= site.user_id %></td>
+                <td><%= site.website_url %></td>
               </tr>
             <% end %>
           </tbody>

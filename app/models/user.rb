@@ -28,8 +28,11 @@ class User < ApplicationRecord
   has_many :email_address, dependent: :destroy
   has_many :phone, dependent: :destroy
   has_many :publications, dependent: :destroy
+
   has_many :universities
+
   has_many :websites, dependent: :destroy
+  accepts_nested_attributes_for :publications, :websites
 
   after_initialize do
     if new_record?

@@ -1,102 +1,45 @@
-var i = 0; /* Set Global Variable i */
-function increment(){
-i += 1; /* Function for automatic increment of field's "Name" attribute. */
-}
-/*
----------------------------------------------
+var fieldId = 0;
 
-Function to Remove Form Elements Dynamically
----------------------------------------------
-
-*/
-function removeElement(parentDiv, childDiv){
-if (childDiv == parentDiv){
-alert("The parent div cannot be removed.");
-}
-else if (document.getElementById(childDiv)){
-var child = document.getElementById(childDiv);
-var parent = document.getElementById(parentDiv);
-parent.removeChild(child);
-}
-else{
-alert("Child div has already been removed or does not exist.");
-return false;
-}
-}
-/*
-----------------------------------------------------------------------------
-
-Functions that will be called upon, when user click on the Name text field.
-
-----------------------------------------------------------------------------
-*/
-function nameFunction(){
-var r = document.createElement('span');
-var y = document.createElement("INPUT");
-y.setAttribute("type", "text");
-y.setAttribute("placeholder", "Name");
-var g = document.createElement("IMG");
-g.setAttribute("src", "delete.png");
-increment();
-y.setAttribute("Name", "textelement_" + i);
-r.appendChild(y);
-g.setAttribute("onclick", "removeElement('optionalItemsForm','id_" + i + "')");
-r.appendChild(g);
-r.setAttribute("id", "id_" + i);
-document.getElementById("optionalItemsForm").appendChild(r);
-}
-/*
------------------------------------------------------------------------------
-
-Functions that will be called upon, when user click on the E-mail text field.
-
-------------------------------------------------------------------------------
-*/
-function emailFunction(){
-var r = document.createElement('span');
-var y = document.createElement("INPUT");
-y.setAttribute("type", "text");
-y.setAttribute("placeholder", "Email");
-var g = document.createElement("IMG");
-g.setAttribute("src", "delete.png");
-increment();
-y.setAttribute("Name", "textelement_" + i);
-r.appendChild(y);
-g.setAttribute("onclick", "removeElement('optionalItemsForm','id_" + i + "')");
-r.appendChild(g);
-r.setAttribute("id", "id_" + i);
-document.getElementById("optionalItemsForm").appendChild(r);
-}
-/*
------------------------------------------------------------------------------
-
-Functions that will be called upon, when user click on the Contact text field.
-
-------------------------------------------------------------------------------
-*/
-function contactFunction(){
-var r = document.createElement('span');
-var y = document.createElement("INPUT");
-y.setAttribute("type", "text");
-y.setAttribute("placeholder", "Contact");
-var g = document.createElement("IMG");
-g.setAttribute("src", "delete.png");
-increment();
-y.setAttribute("Name", "textelement_" + i);
-r.appendChild(y);
-g.setAttribute("onclick", "removeElement('optionalItemsForm','id_" + i + "')");
-r.appendChild(g);
-r.setAttribute("id", "id_" + i);
-document.getElementById("optionalItemsForm").appendChild(r);
+function onClickAdd(sectionName) {
+  var parentDiv = document.getElementById(sectionName);
+  var cloneDiv = parentDiv.cloneNode(true);
+  ++fieldId;
+  cloneDiv.id += fieldId;
+  cloneDiv.childNodes[1].name = cloneDiv.childNodes[1].name.replace("0", fieldId);
+  console.log(cloneDiv.childNodes[1]);
+  parentDiv.parentNode.insertBefore(cloneDiv, parentDiv.nextSibling);
 }
 
-/*
------------------------------------------------------------------------------
+function onClickRemove(sectionName, item) {
+  console.log(item.parentNode.childNodes[1])
+  var id = item.parentNode.id;
+  console.log(id);
+  if (sectionName == id){
+    alert("The parent div cannot be removed.");
+  }
+  else {
+    document.getElementById(id).remove();
+  }
+}
 
-Functions that will be called upon, when user click on the Reset Button.
+function addWebsiteField(currentItem) {
+  //create Date object
+  var date = new Date();
 
-------------------------------------------------------------------------------
-*/
-function resetElements(){
-document.getElementById('optionalItemsForm').innerHTML = '';
+  //get number of milliseconds since midnight Jan 1, 1970
+  //and use it for address key
+  var mSec = date.getTime();
+
+  var parentDiv = currentItem.parentNode;
+  var cloneDiv = parentDiv.cloneNode(true);
+  cloneDiv.id += mSec;
+
+  //Replace 0 with milliseconds
+  cloneDiv.childNodes[1].value = '';
+  cloneDiv.childNodes[1].name = cloneDiv.childNodes[1].name.replace("0", mSec);
+  cloneDiv.childNodes[3].value = '';
+  cloneDiv.childNodes[3].name = cloneDiv.childNodes[3].name.replace("0", mSec);
+  // cloneDiv.childNodes[5].value = '-';
+  // cloneDiv.childNodes[5].setAttribute('onclick', "onClickRemove('website', this)");
+  parentDiv.parentNode.insertBefore(cloneDiv, parentDiv.nextSibling);
 }
