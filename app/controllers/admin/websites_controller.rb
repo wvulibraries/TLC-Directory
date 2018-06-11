@@ -80,6 +80,6 @@ class Admin::WebsitesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def website_params
-      params.require(:website).permit(:user_id, :website_url)
+      params.require(:website).permit(:user_id, :website_url, :action)
     end
 end

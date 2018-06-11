@@ -6,23 +6,26 @@ function onClickAdd(sectionName) {
   ++fieldId;
   cloneDiv.id += fieldId;
   cloneDiv.childNodes[1].name = cloneDiv.childNodes[1].name.replace("0", fieldId);
-  console.log(cloneDiv.childNodes[1]);
+  //console.log(cloneDiv.childNodes[1]);
   parentDiv.parentNode.insertBefore(cloneDiv, parentDiv.nextSibling);
 }
 
-function onClickRemove(sectionName, item) {
-  console.log(item.parentNode.childNodes[1])
-  var id = item.parentNode.id;
-  console.log(id);
-  if (sectionName == id){
-    alert("The parent div cannot be removed.");
+function onClickRemove(currentItem) {
+  var recordId = currentItem.parentNode.childNodes[1].value;
+  var divId = currentItem.parentNode.id;
+  if (recordId == '') {
+    document.getElementById(divId).remove();
   }
   else {
-    document.getElementById(id).remove();
+    // clear field of values
+    currentItem.parentNode.childNodes[3].value = '';
+    currentItem.parentNode.style.display = "none";
   }
 }
 
 function addWebsiteField(currentItem) {
+  //console.log(document.getElementById('button'));
+
   //create Date object
   var date = new Date();
 
@@ -35,11 +38,24 @@ function addWebsiteField(currentItem) {
   cloneDiv.id += mSec;
 
   //Replace 0 with milliseconds
-  cloneDiv.childNodes[1].value = '';
   cloneDiv.childNodes[1].name = cloneDiv.childNodes[1].name.replace("0", mSec);
-  cloneDiv.childNodes[3].value = '';
+  cloneDiv.childNodes[1].value = '';
+
   cloneDiv.childNodes[3].name = cloneDiv.childNodes[3].name.replace("0", mSec);
-  // cloneDiv.childNodes[5].value = '-';
-  // cloneDiv.childNodes[5].setAttribute('onclick', "onClickRemove('website', this)");
-  parentDiv.parentNode.insertBefore(cloneDiv, parentDiv.nextSibling);
+  // cloneDiv.childNodes[5].value = '';
+  cloneDiv.childNodes[5].name = cloneDiv.childNodes[5].name.replace("0", mSec);
+
+  cloneDiv.childNodes[5].value = '-';
+  cloneDiv.childNodes[5].setAttribute('onclick', "onClickRemove(this)");
+
+  // cloneDiv.childNodes[5].value = '+';
+  // cloneDiv.childNodes[5].setAttribute('onclick', "addWebsiteField(this)");
+
+  //console.log(cloneDiv.childNodes);
+
+  // var button = document.getElementById('button');
+  // button.value = '-';
+  // button.setAttribute('onclick', "onClickRemove(this)");
+
+  parentDiv.parentNode.insertBefore(cloneDiv, parentDiv);
 }

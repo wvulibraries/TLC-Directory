@@ -4,7 +4,7 @@
         <div id="website-fields">
            <%= f.label 'website(s)' %>
            <%= f.fields_for :websites do |website| %>
-             <%= render partial: 'website', locals: {user_id: @user.id, count: website.options[:child_index], website: website} %>
+             <%= render partial: 'website', locals: {user_id: @user.id, count: website.options[:child_index], current_items: @user.websites.count, website: website} %>
            <% end %>
         </div>
 

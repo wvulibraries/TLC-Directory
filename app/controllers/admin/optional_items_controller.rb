@@ -27,7 +27,7 @@ class Admin::OptionalItemsController < ApplicationController
   # GET /optional_items/1/edit
   def edit
     # @user.websites.new if @user.websites.count == 0
-    # @user.websites.new
+    @user.websites.new
   end
 
   # POST /optional_items
@@ -35,12 +35,17 @@ class Admin::OptionalItemsController < ApplicationController
   def create
     @user = User.find(website_params[:user_id])
     website_params[:websites_attributes].each do |key, item|
-      if item['id'] == ''
+      if item['id'] == '' && item['website_url'] != ''
         website_object = Website.new(user_id: @user.id, website_url: item['website_url'])
         website_object.save
-      else
+      elsif item['id'] != '' && item['website_url'] != ''
         website_object = Website.find(item['id'])
-        website_object.update(website_url: item['website_url'])
+        if website_object.website_url != item['website_url']
+          website_object.update(website_url: item['website_url'])
+        end
+      elsif item['id'] != '' && item['website_url'] == ''
+        website_object = Website.find(item['id'])
+        website_object.destroy
       end
     end
     redirect_to @user, notice: 'Website(s) were successfully created.'
