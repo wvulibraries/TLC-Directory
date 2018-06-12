@@ -1,4 +1,4 @@
-<div id="website<%= count if count != 0 %>">
+<div id="website<%= count %>">
   <%= website.hidden_field :id, id: 'id' %>
   <%= website.text_field :website_url, id: 'website_url' %>
   <% if count < @user.websites.count %>

@@ -1,6 +1,14 @@
 <div class="wrap content-wrapper">
       <%= form_for @user, :url => optional_items_path, :html => {:method => :post} do |f| %>
         <%= f.hidden_field :user_id, value: @user.id %>
+
+        <div id="publication-fields">
+           <%= f.label 'publication(s)' %>
+           <%= f.fields_for(:publications) do |publication| %>
+             <%= render partial: 'publication', locals: {user_id: @user.id, count: publication.options[:child_index], current_items: @user.websites.count, publication: publication} %>
+           <% end %>
+        </div>
+
         <div id="website-fields">
            <%= f.label 'website(s)' %>
            <%= f.fields_for :websites do |website| %>

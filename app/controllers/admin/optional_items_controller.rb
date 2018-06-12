@@ -3,7 +3,7 @@ class Admin::OptionalItemsController < ApplicationController
   layout 'admin'
 
   before_action :find_user, only: [:index, :new, :edit]
-  before_action :website_params, only: [:show, :update, :destroy]
+  before_action :publication_params, :website_params, only: [:show, :update, :destroy]
 
   # GET /optional_items
   # GET /optional_items.json
@@ -16,7 +16,10 @@ class Admin::OptionalItemsController < ApplicationController
 
   # GET /optional_items/new
   def new
+    @user.phone.new
+    @user.publication.new
     @user.websites.new
+
     # @email_address = EmailAddress.new(user: @user)
     # @address = Address.new(user: @user)
     # @website = Website.new(user: @user)
@@ -26,7 +29,8 @@ class Admin::OptionalItemsController < ApplicationController
 
   # GET /optional_items/1/edit
   def edit
-    # @user.websites.new if @user.websites.count == 0
+    @user.phones.new
+    @user.publications.new
     @user.websites.new
   end
 
@@ -34,10 +38,26 @@ class Admin::OptionalItemsController < ApplicationController
   # POST /optional_items.json
   def create
     @user = User.find(website_params[:user_id])
+
+    publication_params[:publications_attributes].each do |key, item|
+      if item['id'] == '' && item['description'] != ''
+        @user.publications.build(description: item['description'])
+        @user.save
+      elsif item['id'] != '' && item['description'] != ''
+        publication_object = Publication.find(item['id'])
+        if publication_object.description != item['description']
+          publication_object.update(description: item['description'])
+        end
+      elsif item['id'] != '' && item['description'] == ''
+        publication_object = Publication.find(item['id'])
+        publication_object.destroy
+      end
+    end
+
     website_params[:websites_attributes].each do |key, item|
       if item['id'] == '' && item['website_url'] != ''
-        website_object = Website.new(user_id: @user.id, website_url: item['website_url'])
-        website_object.save
+        @user.websites.build(website_url: item['website_url'])
+        @user.save
       elsif item['id'] != '' && item['website_url'] != ''
         website_object = Website.find(item['id'])
         if website_object.website_url != item['website_url']
@@ -48,7 +68,7 @@ class Admin::OptionalItemsController < ApplicationController
         website_object.destroy
       end
     end
-    redirect_to @user, notice: 'Website(s) were successfully created.'
+    redirect_to @user
   end
 
   # PATCH/PUT /optional_items/1
@@ -84,6 +104,10 @@ class Admin::OptionalItemsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def find_user
       @user = User.find(params[:user_id])
+    end
+
+    def publication_params
+      params.require(:user).permit(:user_id, publications_attributes: [:id, :description])
     end
 
     def website_params
