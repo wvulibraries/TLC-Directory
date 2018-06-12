@@ -1,7 +1,13 @@
-<div id="dynamic-child-form">
+<div id="address<%= count %>">
+  <%= address.hidden_field :id, id: 'id' %>
   <%= address.text_field :street_address_1 %>
   <%= address.text_field :street_address_2 %>
   <%= address.text_field :city %>
   <%= address.text_field :state %>
   <%= address.text_field :zip_code %>
+  <% if count < @user.addresses.count %>
+    <input id="button" type="button" name="button" value="-" onClick="Javascript:onClickRemove(this)">
+  <% else %>
+    <input id="button" type="button" name="button" value="+" onClick="Javascript:addField(this)">
+  <% end %>
 </div>

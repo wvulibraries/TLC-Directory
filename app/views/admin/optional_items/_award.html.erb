@@ -1,3 +1,9 @@
-<div class="dynamic-child-form">
-  <%= award.text_field :description %>  
+<div id="award<%= count %>">
+  <%= award.hidden_field :id, id: 'id' %>
+  <%= award.text_field :description %>
+  <% if count < @user.awards.count %>
+    <input id="button" type="button" name="button" value="-" onClick="Javascript:onClickRemove(this)">
+  <% else %>
+    <input id="button" type="button" name="button" value="+" onClick="Javascript:addField(this)">
+  <% end %>
 </div>

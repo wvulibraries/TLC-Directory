@@ -3,7 +3,8 @@ class Admin::OptionalItemsController < ApplicationController
   layout 'admin'
 
   before_action :find_user, only: [:index, :new, :edit]
-  before_action :publication_params, :website_params, only: [:show, :update, :destroy]
+  before_action :create_empty_fields, only: [:new, :edit]
+  before_action :address_params, :publication_params, :website_params, only: [:show, :update, :destroy]
 
   # GET /optional_items
   # GET /optional_items.json
@@ -16,22 +17,10 @@ class Admin::OptionalItemsController < ApplicationController
 
   # GET /optional_items/new
   def new
-    @user.phone.new
-    @user.publication.new
-    @user.websites.new
-
-    # @email_address = EmailAddress.new(user: @user)
-    # @address = Address.new(user: @user)
-    # @website = Website.new(user: @user)
-    # @phone = Phone.new(user: @user)
-    # @publication = Publication.new(user: @user)
   end
 
   # GET /optional_items/1/edit
   def edit
-    @user.phones.new
-    @user.publications.new
-    @user.websites.new
   end
 
   # POST /optional_items
@@ -39,16 +28,61 @@ class Admin::OptionalItemsController < ApplicationController
   def create
     @user = User.find(website_params[:user_id])
 
+    address_params[:addresses_attributes].each do |key, item|
+      if item['id'] == '' && item['street_address_1'] != '' && item['city'] != '' && item['state'] != '' && item['zip_code'] != ''
+        @user.addresses.build(street_address_1: item['street_address_1'], street_address_2: item['street_address_2'], city: item['city'], state: item['state'], zip_code: item['zip_code'])
+        @user.save
+      elsif item['id'] != '' && item['street_address_1'] != '' && item['city'] != '' && item['state'] != '' && item['zip_code'] != ''
+        address_object = Address.find(item['id'])
+        if address_object.street_address_1 != item['street_address_1'] || address_object.street_address_2 != item['street_address_2'] || address_object.city != item['city'] || address_object.state != item['state'] || address_object.zip_code != item['zip_code']
+          address_object.update(street_address_1: item['street_address_1'], street_address_2: item['street_address_2'], city: item['city'], state: item['state'], zip_code: item['zip_code'])
+        end
+      elsif item['id'] != '' && item['street_address_1'] == '' && item['street_address_2'] == '' && item['city'] == '' && item['state'] == '' && item['zip_code'] == ''
+        address_object = Address.find(item['id'])
+        address_object.destroy
+      end
+    end
+
+    award_params[:awards_attributes].each do |key, item|
+      if item['id'] == '' && item['description'] != ''
+        @user.awards.build(description: item['description'])
+        @user.save
+      elsif item['id'] != '' && item['description'] != ''
+        award_object = Award.find(item['id'])
+        if award_object.description != item['description']
+          award_object.update(description: item['description'])
+        end
+      elsif item['id'] != '' && item['description'] == ''
+        award_object = Award.find(item['id'])
+        award_object.destroy
+      end
+    end
+
+    email_address_params[:email_addresses_attributes].each do |key, item|
+      if item['id'] == '' && item['email'] != ''
+        @user.email_addresses.build(email: item['email'])
+        @user.save
+      elsif item['id'] != '' && item['email'] != ''
+        email_object = EmailAddress.find(item['id'])
+        if email_object.email != item['email']
+          email_object.update(email: item['email'])
+        end
+      elsif item['id'] != '' && item['email'] == ''
+        email_object = EmailAddress.find(item['id'])
+        email_object.destroy
+      end
+    end
+
     phone_params[:phones_attributes].each do |key, item|
       if item['id'] == '' && item['phone_number'] != '' && item['type'] != ''
-        @user.phones.build(phone_number: item['phone_number'], type: item['type'])
+        @user.phones.build(phone_number: item['phone_number'], phone_type: item['phone_type'])
         @user.save
-      elsif item['id'] != '' && item['phone_number'] != '' && item['type'] != ''
+      elsif item['id'] != '' && item['phone_number'] != '' && item['phone_type'] != ''
         phone_object = Phone.find(item['id'])
-        if phone_object.phone_number != item['phone_number'] || phone_object.type != item['type']
-          phone_object.update(phone_number: item['phone_number'], type: item['type'])
+        if phone_object.phone_number != item['phone_number'] || phone_object.phone_type != item['phone_type']
+          phone_object.update(phone_number: item['phone_number'], phone_type: item['phone_type'])
         end
-      elsif item['id'] != '' && item['phone_number'] == '' && item['type'] == ''
+      elsif item['id'] != '' && item['phone_number'] == '' && item['phone_type'] == ''
         phone_object = Phone.find(item['id'])
         phone_object.destroy
       end
@@ -122,8 +156,29 @@ class Admin::OptionalItemsController < ApplicationController
       @user = User.find(params[:user_id])
     end
 
+    def create_empty_fields
+      @user.addresses.new
+      @user.awards.new
+      @user.email_addresses.new
+      @user.phones.new
+      @user.publications.new
+      @user.websites.new
+    end
+
+    def address_params
+      params.require(:user).permit(:user_id, addresses_attributes: [:id, :street_address_1, :street_address_2, :city, :state, :zip_code])
+    end
+
+    def award_params
+      params.require(:user).permit(:user_id, awards_attributes: [:id, :description])
+    end
+
+    def email_address_params
+      params.require(:user).permit(:user_id, email_addresses_attributes: [:id, :email])
+    end
+
     def phone_params
-      params.require(:user).permit(:user_id, phones_attributes: [:id, :phone_number, :type])
+      params.require(:user).permit(:user_id, phones_attributes: [:id, :phone_number, :phone_type])
     end
 
     def publication_params

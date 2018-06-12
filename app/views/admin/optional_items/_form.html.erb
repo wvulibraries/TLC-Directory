@@ -2,24 +2,45 @@
       <%= form_for @user, :url => optional_items_path, :html => {:method => :post} do |f| %>
         <%= f.hidden_field :user_id, value: @user.id %>
 
+        <div id="address-fields">
+          <%= f.label 'address(es)' %>
+          <%= f.fields_for(:addresses) do |address| %>
+            <%= render partial: 'address', locals: {user_id: @user.id, count: address.options[:child_index], address: address} %>
+          <% end %>
+        </div>
+
+        <div id="award-fields">
+          <%= f.label 'award(s)' %>
+          <%= f.fields_for(:awards) do |award| %>
+            <%= render partial: 'award', locals: {user_id: @user.id, count: award.options[:child_index], award: award} %>
+          <% end %>
+        </div>
+
+        <div id="email-fields">
+          <%= f.label 'email address(es)' %>
+          <%= f.fields_for(:email_addresses) do |email_address| %>
+            <%= render partial: 'email', locals: {user_id: @user.id, count: email_address.options[:child_index], email_address: email_address} %>
+          <% end %>
+        </div>
+
         <div id="phone-fields">
           <%= f.label 'phone(s)' %>
           <%= f.fields_for(:phones) do |phone| %>
-            <%= render partial: 'phone', locals: {user_id: @user.id, count: phone.options[:child_index], current_items: @user.phones.count, phone: phone} %>
+            <%= render partial: 'phone', locals: {user_id: @user.id, count: phone.options[:child_index], phone: phone} %>
           <% end %>
         </div>
 
         <div id="publication-fields">
            <%= f.label 'publication(s)' %>
            <%= f.fields_for(:publications) do |publication| %>
-             <%= render partial: 'publication', locals: {user_id: @user.id, count: publication.options[:child_index], current_items: @user.publications.count, publication: publication} %>
+             <%= render partial: 'publication', locals: {user_id: @user.id, count: publication.options[:child_index], publication: publication} %>
            <% end %>
         </div>
 
         <div id="website-fields">
            <%= f.label 'website(s)' %>
            <%= f.fields_for :websites do |website| %>
-             <%= render partial: 'website', locals: {user_id: @user.id, count: website.options[:child_index], current_items: @user.websites.count, website: website} %>
+             <%= render partial: 'website', locals: {user_id: @user.id, count: website.options[:child_index], website: website} %>
            <% end %>
         </div>
 

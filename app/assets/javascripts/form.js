@@ -5,9 +5,20 @@ function onClickRemove(currentItem) {
     document.getElementById(divId).remove();
   }
   else {
-    // clear field of values
-    currentItem.parentNode.childNodes[3].value = '';
     currentItem.parentNode.style.display = "none";
+    var children = currentItem.parentNode.childNodes;
+    children.forEach(function(item) {
+      if ('name' in item) {
+        if (item.type == 'text') {
+          //Replace 0 with milliseconds
+          item.value = '';
+      }}
+    });
+
+
+    // clear field of values
+    // currentItem.parentNode.childNodes[3].value = '';
+    // currentItem.parentNode.style.display = "none";
   }
 }
 

@@ -1,3 +1,9 @@
-<div class="dynamic-child-form">
-  <%= email_address.text_field :email %>  
+<div id="email<%= count %>">
+  <%= email_address.hidden_field :id, id: 'id' %>
+  <%= email_address.text_field :email, id: 'email' %>
+  <% if count < @user.email_addresses.count %>
+    <input id="button" type="button" name="button" value="-" onClick="Javascript:onClickRemove(this)">
+  <% else %>
+    <input id="button" type="button" name="button" value="+" onClick="Javascript:addField(this)">
+  <% end %>
 </div>

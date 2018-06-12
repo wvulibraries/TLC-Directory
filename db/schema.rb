@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2018_05_30_102800) do
   create_table "phones", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.string "phone_number"
-    t.string "type"
+    t.string "phone_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_phones_on_user_id"

@@ -24,8 +24,14 @@ class User < ApplicationRecord
   before_create :create_profile
 
   has_many :awards, dependent: :destroy
-  has_many :address, dependent: :destroy
-  has_many :email_address, dependent: :destroy
+  accepts_nested_attributes_for :awards
+
+  has_many :addresses, dependent: :destroy
+  accepts_nested_attributes_for :addresses
+
+  has_many :email_addresses, dependent: :destroy
+  accepts_nested_attributes_for :email_addresses
+
   has_many :phones, dependent: :destroy
   accepts_nested_attributes_for :phones
 
