@@ -1,4 +1,10 @@
-<div class="dynamic-child-form">
-  <%= phone.text_field :phone_number %>
-  <%= phone.text_field :type %>    
+<div id="phone<%= count %>">
+  <%= phone.hidden_field :id, id: 'id' %>
+  <%= phone.text_field :phone_number, id: 'phone_number' %>
+  <%= phone.text_field :type, id: 'type' %>
+  <% if count < @user.phones.count %>
+    <input id="button" type="button" name="button" value="-" onClick="Javascript:onClickRemove(this)">
+  <% else %>
+    <input id="button" type="button" name="button" value="+" onClick="Javascript:addField(this)">
+  <% end %>
 </div>

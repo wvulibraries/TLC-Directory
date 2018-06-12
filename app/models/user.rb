@@ -27,6 +27,7 @@ class User < ApplicationRecord
   has_many :address, dependent: :destroy
   has_many :email_address, dependent: :destroy
   has_many :phones, dependent: :destroy
+  accepts_nested_attributes_for :phones
 
   has_many :publications, dependent: :destroy
   accepts_nested_attributes_for :publications

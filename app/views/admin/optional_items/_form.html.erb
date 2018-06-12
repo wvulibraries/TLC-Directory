@@ -2,10 +2,17 @@
       <%= form_for @user, :url => optional_items_path, :html => {:method => :post} do |f| %>
         <%= f.hidden_field :user_id, value: @user.id %>
 
+        <div id="phone-fields">
+          <%= f.label 'phone(s)' %>
+          <%= f.fields_for(:phones) do |phone| %>
+            <%= render partial: 'phone', locals: {user_id: @user.id, count: phone.options[:child_index], current_items: @user.phones.count, phone: phone} %>
+          <% end %>
+        </div>
+
         <div id="publication-fields">
            <%= f.label 'publication(s)' %>
            <%= f.fields_for(:publications) do |publication| %>
-             <%= render partial: 'publication', locals: {user_id: @user.id, count: publication.options[:child_index], current_items: @user.websites.count, publication: publication} %>
+             <%= render partial: 'publication', locals: {user_id: @user.id, count: publication.options[:child_index], current_items: @user.publications.count, publication: publication} %>
            <% end %>
         </div>
 

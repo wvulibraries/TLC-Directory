@@ -39,6 +39,21 @@ class Admin::OptionalItemsController < ApplicationController
   def create
     @user = User.find(website_params[:user_id])
 
+    phone_params[:phones_attributes].each do |key, item|
+      if item['id'] == '' && item['phone_number'] != '' && item['type'] != ''
+        @user.phones.build(phone_number: item['phone_number'], type: item['type'])
+        @user.save
+      elsif item['id'] != '' && item['phone_number'] != '' && item['type'] != ''
+        phone_object = Phone.find(item['id'])
+        if phone_object.phone_number != item['phone_number'] || phone_object.type != item['type']
+          phone_object.update(phone_number: item['phone_number'], type: item['type'])
+        end
+      elsif item['id'] != '' && item['phone_number'] == '' && item['type'] == ''
+        phone_object = Phone.find(item['id'])
+        phone_object.destroy
+      end
+    end
+
     publication_params[:publications_attributes].each do |key, item|
       if item['id'] == '' && item['description'] != ''
         @user.publications.build(description: item['description'])
@@ -68,6 +83,7 @@ class Admin::OptionalItemsController < ApplicationController
         website_object.destroy
       end
     end
+
     redirect_to @user
   end
 
@@ -104,6 +120,10 @@ class Admin::OptionalItemsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def find_user
       @user = User.find(params[:user_id])
+    end
+
+    def phone_params
+      params.require(:user).permit(:user_id, phones_attributes: [:id, :phone_number, :type])
     end
 
     def publication_params

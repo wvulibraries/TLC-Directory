@@ -1,15 +1,3 @@
-var fieldId = 0;
-
-function onClickAdd(sectionName) {
-  var parentDiv = document.getElementById(sectionName);
-  var cloneDiv = parentDiv.cloneNode(true);
-  ++fieldId;
-  cloneDiv.id += fieldId;
-  cloneDiv.childNodes[1].name = cloneDiv.childNodes[1].name.replace("0", fieldId);
-  //console.log(cloneDiv.childNodes[1]);
-  parentDiv.parentNode.insertBefore(cloneDiv, parentDiv.nextSibling);
-}
-
 function onClickRemove(currentItem) {
   var recordId = currentItem.parentNode.childNodes[1].value;
   var divId = currentItem.parentNode.id;
@@ -23,7 +11,7 @@ function onClickRemove(currentItem) {
   }
 }
 
-function addWebsiteField(currentItem) {
+function addField(currentItem) {
   //console.log(document.getElementById('button'));
 
   //create Date object
@@ -37,25 +25,20 @@ function addWebsiteField(currentItem) {
   var cloneDiv = parentDiv.cloneNode(true);
   cloneDiv.id += mSec;
 
-  //Replace 0 with milliseconds
-  cloneDiv.childNodes[1].name = cloneDiv.childNodes[1].name.replace("0", mSec);
-  cloneDiv.childNodes[1].value = '';
-
-  cloneDiv.childNodes[3].name = cloneDiv.childNodes[3].name.replace("0", mSec);
-  // cloneDiv.childNodes[5].value = '';
-  cloneDiv.childNodes[5].name = cloneDiv.childNodes[5].name.replace("0", mSec);
-
-  cloneDiv.childNodes[5].value = '-';
-  cloneDiv.childNodes[5].setAttribute('onclick', "onClickRemove(this)");
-
-  // cloneDiv.childNodes[5].value = '+';
-  // cloneDiv.childNodes[5].setAttribute('onclick', "addWebsiteField(this)");
-
-  //console.log(cloneDiv.childNodes);
-
-  // var button = document.getElementById('button');
-  // button.value = '-';
-  // button.setAttribute('onclick', "onClickRemove(this)");
+  var children = cloneDiv.childNodes;
+  children.forEach(function(item) {
+    if ('name' in item) {
+      if (item.name == 'button') {
+        item.value = '-';
+        item.setAttribute('onclick', "onClickRemove(this)");
+      }
+      else {
+        //Replace 0 with milliseconds
+        item.name = item.name.replace("0", mSec);
+        item.value = '';
+      }
+    }
+  });
 
   parentDiv.parentNode.insertBefore(cloneDiv, parentDiv);
 }
