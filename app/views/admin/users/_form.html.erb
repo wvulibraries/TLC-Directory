@@ -35,6 +35,10 @@
     <%= f.check_box :visible %>
   </div>
 
+  <%= f.fields_for :imageable do |image_upload| %>
+    <%= image_upload.file_field :image, class: "form-control"  %>
+  <% end %>
+
   <%= fields_for :profile, @user.profile do |profile_fields| %>
     <div class="field">
       <%= profile_fields.label :title %>

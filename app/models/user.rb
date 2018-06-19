@@ -18,6 +18,8 @@ class User < ApplicationRecord
   validates :visible, inclusion: { in: [true, false] }
 
   has_one :picture, as: :imageable, dependent: :destroy
+  accepts_nested_attributes_for :picture
+  before_create :create_picture
 
   # profile
   has_one :profile, dependent: :destroy
@@ -60,14 +62,6 @@ class User < ApplicationRecord
     picture != nil
   end
 
-  def filename
-    if picture.nil?
-      "No_picture_available.png"
-    else
-      picture.image
-    end
-  end
-
   scope :sorted, lambda { order('last_name ASC', 'first_name ASC') }
   scope :show, lambda { where(["visible = ? and status = ?", true, "active"]) }
 
@@ -81,8 +75,19 @@ class User < ApplicationRecord
     @profile_params = params
   end
 
+  def assign_picture_params(params)
+    puts "assign picture params"
+    puts params
+    @picture_params = params
+  end
+
   private
   def create_profile
     build_profile(@profile_params)
+  end
+
+  def create_picture
+    puts @picture_params
+    build_picture(@picture_params)
   end
 end

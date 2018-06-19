@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # root
   root 'public#index'
+  resources :registration, only: [:new, :create], module: 'public'
 
   # admin
   get  '/admin', to: 'admin#index'

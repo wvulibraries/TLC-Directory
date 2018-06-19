@@ -21,6 +21,7 @@ class Admin::UsersController < ApplicationController
   def new
     @user = User.new
     @user.profile = @user.build_profile
+    @user.picture = @user.build_picture
   end
 
   # GET /users/1/edit
@@ -31,6 +32,7 @@ class Admin::UsersController < ApplicationController
   def create
     @user = User.new user_params
     @user.assign_profile_params profile_params
+    @user.assign_picture_params picture_params
     respond_to do |format|
       if @user.save
         # format.html { redirect_to @user, notice: 'User was successfully created.' }
@@ -49,6 +51,7 @@ class Admin::UsersController < ApplicationController
   def update
     respond_to do |format|
       @user.assign_profile_params profile_params
+      @user.assign_picture_params picture_params
       if @user.update user_params
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
@@ -79,12 +82,16 @@ class Admin::UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      puts params
       params.require(:user).permit(:username, :last_name, :first_name, :middle_name, :status, :role, :visible)
     end
 
     def profile_params
       params.require(:profile).permit(:title, :department, :biography, :research_interests)
+    end
+
+    def picture_params
+      puts params[:user][:imageable]
+      params.require(:user).require(:imageable).permit(:image)
     end
 
 end

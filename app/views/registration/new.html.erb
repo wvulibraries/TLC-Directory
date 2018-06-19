@@ -1,0 +1,7 @@
+# app/views/registration/new.html.erb
+<%= form_for @registration do |f| %>
+  <%= f.label :first_name, 'First Name' %>:
+  <%= f.text_field :first_name %>
+  ...
+  <%= f.submit %>
+<% end %>

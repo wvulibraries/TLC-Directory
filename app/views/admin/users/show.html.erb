@@ -20,6 +20,11 @@
            <li><strong>Visible: </strong><%= @user.visible %></li>
         </ul>
 
+        <% if @user.haspicture? %>
+         <h3>Picture</h3>
+         <%= image_tag @user.picture.image.url(:medium) %>
+        <% end %>
+
         <% if @email_addresses != nil && @email_addresses.count > 0 %>
           <h3>Email Addresses</h3>
           <table>
