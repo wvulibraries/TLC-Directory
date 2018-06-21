@@ -10,7 +10,7 @@
       <tbody>
         <h2>User Profile</h2>
         <div>
-          <% if @user.haspicture? %>
+          <% if haspicture?(@user) %>
             <%= image_tag @user.picture.image.url(:medium) %>
           <% end %>
         </div>
