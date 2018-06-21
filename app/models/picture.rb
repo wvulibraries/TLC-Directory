@@ -4,7 +4,8 @@ class Picture < ApplicationRecord
   :styles => {
     :thumb => "100x100#",
     :small  => "150x150>",
-    :medium => "200x200" },
+    :medium => "300x300",
+    :large => "600x600"},
     path: ":rails_root/public/system/:attachment/:id/:style/:filename",
     url: "/system/:attachment/:id/:style/:filename"
 

@@ -9,6 +9,12 @@
     <div class="col-8 sol-s-12 wvu-main-content-right">
       <tbody>
         <h2>User Profile</h2>
+        <div>
+          <% if @user.haspicture? %>
+            <%= image_tag @user.picture.image.url(:medium) %>
+          <% end %>
+        </div>
+
         <ul>
            <li><strong>Username: </strong><%= @user.username %></li>
            <li><strong>Full Name: </strong><%= @user.name %></li>
@@ -20,20 +26,13 @@
            <li><strong>Visible: </strong><%= @user.visible %></li>
         </ul>
 
-        <% if @user.haspicture? %>
-         <h3>Picture</h3>
-         <%= image_tag @user.picture.image.url(:medium) %>
-        <% end %>
-
         <% if @email_addresses != nil && @email_addresses.count > 0 %>
           <h3>Email Addresses</h3>
-          <table>
             <% @email_addresses.each do |email_address| %>
-              <tr>
-                <td><%= email_address.email %></td>
-              </tr>
+              <ul>
+                <li><%= email_address.email %></li>
+              </ul>
           <% end %>
-          </table>
         <% end %>
 
         <% if @addresses != nil && @addresses.count > 0 %>

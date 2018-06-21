@@ -31,8 +31,8 @@ class Admin::UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new user_params
-    @user.assign_profile_params profile_params
-    @user.assign_picture_params picture_params
+    @user.assign_profile_params profile_params if !profile_params.nil?
+    @user.assign_picture_params picture_params if !picture_params.nil?
     respond_to do |format|
       if @user.save
         # format.html { redirect_to @user, notice: 'User was successfully created.' }
@@ -49,9 +49,9 @@ class Admin::UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    @user.profile.update profile_params unless profile_params.nil?
+    @user.picture.update picture_params unless picture_params.nil?
     respond_to do |format|
-      @user.assign_profile_params profile_params
-      @user.assign_picture_params picture_params
       if @user.update user_params
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
@@ -86,11 +86,12 @@ class Admin::UsersController < ApplicationController
     end
 
     def profile_params
+      return unless params.fetch(:profile, false)
       params.require(:profile).permit(:title, :department, :biography, :research_interests)
     end
 
     def picture_params
-      puts params[:user][:imageable]
+      return unless params.fetch(:user, {}).fetch(:imageable, false)
       params.require(:user).require(:imageable).permit(:image)
     end
 

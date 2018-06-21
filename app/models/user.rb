@@ -54,14 +54,6 @@ class User < ApplicationRecord
     end
   end
 
-  def isadmin?
-    role == 'admin'
-  end
-
-  def haspicture?
-    picture != nil
-  end
-
   scope :sorted, lambda { order('last_name ASC', 'first_name ASC') }
   scope :show, lambda { where(["visible = ? and status = ?", true, "active"]) }
 
@@ -76,8 +68,6 @@ class User < ApplicationRecord
   end
 
   def assign_picture_params(params)
-    puts "assign picture params"
-    puts params
     @picture_params = params
   end
 
