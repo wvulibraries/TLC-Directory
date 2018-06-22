@@ -23,6 +23,7 @@ class User < ApplicationRecord
 
   # profile
   has_one :profile, dependent: :destroy
+  accepts_nested_attributes_for :profile
   before_create :create_profile
 
   has_many :awards, dependent: :destroy
@@ -70,6 +71,10 @@ class User < ApplicationRecord
   def assign_picture_params(params)
     @picture_params = params
   end
+
+  # def build_profile
+  #
+  # end
 
   private
   def create_profile
