@@ -1,6 +1,7 @@
 class Picture < ApplicationRecord
   belongs_to :imageable, polymorphic: true
   has_attached_file :image,
+  :default_url => 'flying-wv.jpg',
   :styles => {
     :thumb => "100x100#",
     :small  => "150x150>",

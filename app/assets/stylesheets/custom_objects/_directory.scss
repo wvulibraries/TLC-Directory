@@ -1,0 +1,22 @@
+.directory {
+  float: left;
+  margin: 10px;
+
+  .directory__individual-photo {
+    height: 200px;
+    width: 200px;
+    overflow: hidden;
+  }
+
+  .directory__individual-photo img {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .directory__individual-info h2 {
+    color: $primary-blue;
+    text-align: center;
+  }
+
+}

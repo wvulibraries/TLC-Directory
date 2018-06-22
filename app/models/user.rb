@@ -77,7 +77,6 @@ class User < ApplicationRecord
   end
 
   def create_picture
-    puts @picture_params
     build_picture(@picture_params)
   end
 end

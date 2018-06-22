@@ -7,22 +7,19 @@
 
   <div class="wrap content-wrapper">
 
-    <div class="col-4 col-8 sol-s-12 wvu-main-content">
+    <div class="col-3 col-6 col-12 wvu-main-content-left">
       <tbody>
-        <ul>
-            <% @user_profiles.each do |user_profile| %>
-              <li>
-                 <!-- Show Profile picture -->
-                 <div>
-                   <%= user_photo(user_profile) %>
-                   <h2>
-                     <%= link_to user_profile.name, show_user_profile_path(user_profile.id) %>
-                   </h2>
-                 </div>
-              </li>
-            <% end %>
-          </ul>
-        </div>
+        <% @user_profiles.each do |user_profile| %>
+          <div class="directory">
+             <!-- Show Profile picture -->
+             <div class="directory__individual-photo">
+               <%= image_tag(user_profile.picture.image.url(:medium), alt: "Profile Picture", title: "Profile Picture") %>
+             </div>
+             <div class="directory__individual-info">
+               <h2><%= link_to user_profile.name, show_user_profile_path(user_profile.id) %></h2>
+             </div>
+          </div>
+        <% end %>
       </tbody>
     </div>
   </div>
