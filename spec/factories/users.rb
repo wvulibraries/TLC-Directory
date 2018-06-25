@@ -6,9 +6,12 @@ FactoryBot.define do
     role :user
     status :disabled
     visible false
+    # after(:build) do |user|
+    #   user.picture { FactoryBot.create(:picture) }
+    # end
+    #trait :has_picture do
+    # picture { FactoryBot.create(:picture) }
+    #end
 
-    trait :has_picture do
-      picture { FactoryBot.create(:picture) }
-    end
   end
 end

@@ -1,14 +1,16 @@
 require 'rails_helper'
+# require 'app/helpers/users_helper'
 
 RSpec.describe User, type: :model do
-  # it { should validate_presence_of(:username) }
-  # it { should validate_presence_of(:last_name) }
-  # it { should validate_presence_of(:first_name) }
-  # it { should validate_inclusion_of(:visible).in_array([true, false]) }
+  it { should validate_presence_of(:username) }
+  it { should validate_presence_of(:last_name) }
+  it { should validate_presence_of(:first_name) }
+  it { should validate_inclusion_of(:visible).in_array([true, false]) }
   it { should have_one(:picture) }
 
   it 'has a valid factory' do
     user = FactoryBot.create(:user)
+    user.picture = FactoryBot.create(:picture)
     expect(user).to be_valid
     expect(user).to be_persisted
   end
@@ -16,14 +18,18 @@ RSpec.describe User, type: :model do
   it 'has default role as user' do
     user = FactoryBot.create(:user)
     expect(user.role).to eq('user')
-    expect(user.isadmin?).to eq(false)
   end
 
   it 'change role to admin' do
     user = FactoryBot.create(:user)
     user.update_attributes(role: :admin)
     expect(user.role).to eq('admin')
-    expect(user.isadmin?).to eq(true)
+  end
+
+  it 'change role to editor' do
+    user = FactoryBot.create(:user)
+    user.update_attributes(role: :editor)
+    expect(user.role).to eq('editor')
   end
 
   it 'has default status of disabled' do
@@ -48,10 +54,10 @@ RSpec.describe User, type: :model do
     expect(user.visible).to eq(true)
   end
 
-  it 'user has no profile picture' do
-    user = FactoryBot.create(:user)
-    expect(user.haspicture?).to eq(false)
-  end
+  # it 'user has no profile picture' do
+  #   user = FactoryBot.create(:user)
+  #   expect(user.picture.).to eq(false)
+  # end
 
   # it 'When the user does not have any universities' do
   #   user = FactoryBot.create(:user)

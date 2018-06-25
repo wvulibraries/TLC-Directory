@@ -45,6 +45,15 @@
                   </div>
              <% end %>
 
+             <% if hasuniversities?(@user_profile) %>
+               <div name='universities'>
+                 <h4>University(s):</h4>
+                 <% @user_profile.universities.each do |university| %>
+                     <%= university.name %>
+                 <% end %>
+               </div>
+             <% end %>
+
             <% if hasawards?(@user_profile) %>
               <div name='awards'>
                 <h4>Award(s):</h4>

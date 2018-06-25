@@ -72,9 +72,9 @@ class User < ApplicationRecord
     @picture_params = params
   end
 
-  # def build_profile
-  #
-  # end
+  def assign_university_params(params)
+    @university_params = params
+  end
 
   private
   def create_profile
@@ -84,4 +84,9 @@ class User < ApplicationRecord
   def create_picture
     build_picture(@picture_params)
   end
+
+  def create_university
+    build_picture(@university_params)
+  end
+
 end

@@ -32,6 +32,10 @@ module UsersHelper
     user.publications != nil
   end
 
+  def hasuniversities?(user)
+
+  end
+
   def haswebsites?(user)
     user.phones != nil
   end

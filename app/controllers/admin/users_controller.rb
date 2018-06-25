@@ -31,6 +31,7 @@ class Admin::UsersController < ApplicationController
     @user = User.new user_params
     @user.assign_profile_params profile_params unless profile_params.nil?
     @user.assign_picture_params picture_params unless picture_params.nil?
+    @user.assign_university_params university_params unless university_params.nil?
     respond_to do |format|
       if @user.save
         # format.html { redirect_to @user, notice: 'User was successfully created.' }
@@ -84,8 +85,11 @@ class Admin::UsersController < ApplicationController
     end
 
     def profile_params
-      # return unless params.fetch(:profile, false)
       params.require(:profile).permit(:title, :department, :biography, :research_interests)
+    end
+
+    def university_params
+      params.require(:user).require(:universities).permit(:id)
     end
 
     def picture_params
