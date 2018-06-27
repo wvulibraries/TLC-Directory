@@ -1,12 +1,19 @@
 require 'rails_helper'
-# require 'app/helpers/users_helper'
 
 RSpec.describe User, type: :model do
   it { should validate_presence_of(:username) }
   it { should validate_presence_of(:last_name) }
   it { should validate_presence_of(:first_name) }
   it { should validate_inclusion_of(:visible).in_array([true, false]) }
-  it { should have_one(:picture) }
+
+  it { should have_many(:awards) }
+  it { should have_many(:addresses) }
+  it { should have_many(:email_addresses) }
+  it { should have_many(:phones) }
+  it { should have_many(:publications) }
+  it { should have_many(:websites) }
+  it { should have_many(:enrollments) }
+  it { should have_many(:universities).through(:enrollments) }
 
   it 'has a valid factory' do
     user = FactoryBot.create(:user)
@@ -62,5 +69,26 @@ RSpec.describe User, type: :model do
   # it 'When the user does not have any universities' do
   #   user = FactoryBot.create(:user)
   #   expect(user.universities).to eq(nil)
+  # end
+
+  # it 'Can Add a University' do
+  #   user = FactoryBot.create(:user)
+  #
+  #   let(:user) { FactoryBot.create(:university) }
+  # end
+
+  # it 'Has Many Universities' do
+  #   user = FactoryBot.create(:user)
+  #   expect(user).to have_many(:universities)
+  # end
+
+  # it 'If Admin Can add Universities w/o attaching to user or self' do
+  #
+  # end
+
+  # it 'Can add existing university' do
+  #   university = FactoryBot.create(:university)
+  #   user = FactoryBot.create(:user)
+  #   user.universities << university
   # end
 end

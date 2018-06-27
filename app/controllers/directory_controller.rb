@@ -4,7 +4,7 @@ class DirectoryController < ApplicationController
   before_action :profile_params, only: [:show]
 
   def index
-    @user_profiles = User.all.show
+    @user_profiles = User.all.show.sorted
   end
 
   def show

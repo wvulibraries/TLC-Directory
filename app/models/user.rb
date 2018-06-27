@@ -41,10 +41,11 @@ class User < ApplicationRecord
   has_many :publications, dependent: :destroy
   accepts_nested_attributes_for :publications
 
-  has_many :universities
-
   has_many :websites, dependent: :destroy
   accepts_nested_attributes_for :websites
+
+  has_many :enrollments
+  has_many :universities, through: :enrollments
 
   after_initialize do
     if new_record?
@@ -55,8 +56,8 @@ class User < ApplicationRecord
     end
   end
 
+  scope :show, lambda { where(["visible = ? and status = ?", true, "active"])}
   scope :sorted, lambda { order('last_name ASC', 'first_name ASC') }
-  scope :show, lambda { where(["visible = ? and status = ?", true, "active"]) }
 
   def name
     "#{first_name} #{last_name}"
@@ -86,7 +87,7 @@ class User < ApplicationRecord
   end
 
   def create_university
-    build_picture(@university_params)
+    build_university(@university_params)
   end
 
 end
