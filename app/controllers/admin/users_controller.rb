@@ -3,6 +3,7 @@ class Admin::UsersController < ApplicationController
   layout 'admin'
 
   before_action :set_user, only: %i[show edit update destroy]
+  before_action :create_empty_fields, only: %i[edit]
 
   # GET /users
   # GET /users.json
@@ -20,6 +21,7 @@ class Admin::UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    @user.universities.new
   end
 
   # GET /users/1/edit
@@ -31,7 +33,9 @@ class Admin::UsersController < ApplicationController
     @user = User.new user_params
     @user.assign_profile_params profile_params unless profile_params.nil?
     @user.assign_picture_params picture_params unless picture_params.nil?
-    #@user.assign_university_params university_params unless university_params.nil?
+
+    # add university from drop down to prevent duplicates we check if there is already an association
+    #@user.universities << University.find(university_params[:university_id]) unless user.universities.exists?(university_params[:university_id])
     respond_to do |format|
       if @user.save
         # format.html { redirect_to @user, notice: 'User was successfully created.' }
@@ -50,6 +54,25 @@ class Admin::UsersController < ApplicationController
   def update
     @user.profile.update profile_params unless profile_params.nil?
     @user.picture.update picture_params unless picture_params.nil?
+
+    # add university from drop down to prevent duplicates we check if there is already an association
+    #@user.universities << University.find(university_params[:university_id]) unless @user.universities.exists?(university_params[:university_id])
+
+    # address_params[:addresses_attributes].each do |key, item|
+    #   if item['id'] == '' && item['street_address_1'] != '' && item['city'] != '' && item['state'] != '' && item['zip_code'] != ''
+    #     @user.addresses.build(street_address_1: item['street_address_1'], street_address_2: item['street_address_2'], city: item['city'], state: item['state'], zip_code: item['zip_code'])
+    #     @user.save
+    #   elsif item['id'] != '' && item['street_address_1'] != '' && item['city'] != '' && item['state'] != '' && item['zip_code'] != ''
+    #     address_object = Address.find(item['id'])
+    #     if address_object.street_address_1 != item['street_address_1'] || address_object.street_address_2 != item['street_address_2'] || address_object.city != item['city'] || address_object.state != item['state'] || address_object.zip_code != item['zip_code']
+    #       address_object.update(street_address_1: item['street_address_1'], street_address_2: item['street_address_2'], city: item['city'], state: item['state'], zip_code: item['zip_code'])
+    #     end
+    #   elsif item['id'] != '' && item['street_address_1'] == '' && item['street_address_2'] == '' && item['city'] == '' && item['state'] == '' && item['zip_code'] == ''
+    #     address_object = Address.find(item['id'])
+    #     address_object.destroy
+    #   end
+    #end
+
     respond_to do |format|
       if @user.update user_params
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
@@ -79,6 +102,10 @@ class Admin::UsersController < ApplicationController
       @user = User.find(params[:id])
     end
 
+    def create_empty_fields
+      @user.universities.new
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:username, :last_name, :first_name, :middle_name, :status, :role, :visible)
@@ -88,8 +115,12 @@ class Admin::UsersController < ApplicationController
       params.require(:profile).permit(:title, :department, :biography, :research_interests)
     end
 
-    def university_params
-      params.require(:user).require(:universities).permit(:id)
+    # def university_params
+    #   params.require(:user).require(:universities).permit(:university_id)
+    # end
+
+    def universities_params
+      params.require(:user).require(:universities).permit(:user_id, universities_attributes: [:id, :name])
     end
 
     def picture_params

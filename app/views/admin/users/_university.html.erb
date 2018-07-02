@@ -1,0 +1,8 @@
+<div id="university<%= university_counter %>">
+  <%= collection_select(:university, :university_id, University.all, :id, :name, selected: university.id, :include_blank => true) %>
+  <% if university_counter < @user.universities.count %>
+    <input id="button" type="button" name="button" value="-" onClick="Javascript:onClickRemove(this)">
+  <% else %>
+    <input id="button" type="button" name="button" value="+" onClick="Javascript:addField(this)">
+  <% end %>
+</div>

@@ -26,8 +26,14 @@
            <li><strong>Visible: </strong><%= @user.visible %></li>
         </ul>
 
+        <% if @user.universities.count > 0 %>
           <h3>Universities</h3>
-            <% @user.universities %>
+            <% @user.universities.each do |university| %>
+              <ul>
+                <li><%= university.name %></li>
+              </ul>
+          <% end %>
+        <% end %>
 
         <% if @email_addresses != nil && @email_addresses.count > 0 %>
           <h3>Email Addresses</h3>

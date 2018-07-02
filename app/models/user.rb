@@ -45,7 +45,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :websites
 
   has_many :enrollments
-  has_many :universities, through: :enrollments
+  has_many :universities, -> { distinct }, through: :enrollments
 
   after_initialize do
     if new_record?

@@ -30,10 +30,12 @@
     <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}) %>
   </div>
 
-  <%= f.fields_for :universities do |universities_fields| %>
-    <%= universities_fields.label :name %>
-    <%= universities_fields.collection_select :university_id, University.all, :id, :name  %>
-  <% end %>
+  <div id="university-fields">
+    <%= f.label 'Universities' %>
+    <%= f.fields_for :universities do |university| %>
+      <%= render partial: 'university', collection: @user.universities, locals: {user_id: @user.id} %>
+    <% end %>
+  </div>
 
   <div class="field">
     <%= f.label :visible %>
