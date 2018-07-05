@@ -3,4 +3,11 @@ class University < ApplicationRecord
 
   has_many :enrollments
   has_many :users, -> { distinct }, through: :enrollments
+
+  def as_json
+    {
+      id: id,
+      text: name
+    }
+  end
 end

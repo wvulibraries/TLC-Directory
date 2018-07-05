@@ -14,11 +14,6 @@ function onClickRemove(currentItem) {
           item.value = '';
       }}
     });
-
-
-    // clear field of values
-    // currentItem.parentNode.childNodes[3].value = '';
-    // currentItem.parentNode.style.display = "none";
   }
 }
 

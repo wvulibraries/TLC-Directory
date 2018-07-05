@@ -55,7 +55,6 @@ RSpec.describe Admin::UniversitiesController, type: :controller do
       get :show, params: {id: university.to_param}, session: valid_session
       expect(response).to be_success
     end
-  end
 
   describe "GET #new" do
     it "returns a success response" do

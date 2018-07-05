@@ -31,10 +31,8 @@
   </div>
 
   <div id="university-fields">
-    <%= f.label 'Universities' %>
-    <%= f.fields_for :universities do |university| %>
-      <%= render partial: 'university', collection: @user.universities, locals: {user_id: @user.id} %>
-    <% end %>
+    <%= f.label 'university-list' %>
+    <select class="js-data-example-ajax" id="university-list"></select>
   </div>
 
   <div class="field">

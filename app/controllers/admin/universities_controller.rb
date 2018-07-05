@@ -2,12 +2,15 @@ class Admin::UniversitiesController < ApplicationController
   # tell rails which view layout to use with this controller
   layout 'admin'
 
-  before_action :set_university, only: [:show, :edit, :update, :destroy]
+  before_action :find_university, only: [:show, :edit, :update, :destroy]
 
   # GET /universities
   # GET /universities.json
   def index
-    @universities = University.all
+    @universities = University.order('name asc').all
+    respond_to do |format|
+      format.json { render json: @universities.as_json }
+    end
   end
 
   # GET /universities/1
@@ -67,7 +70,7 @@ class Admin::UniversitiesController < ApplicationController
   private
 
     # Use callbacks to share common setup or constraints between actions.
-    def set_university
+    def find_university
       @university = University.find(params[:id])
     end
 
