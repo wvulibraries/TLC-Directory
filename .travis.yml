@@ -1,9 +1,4 @@
 language: ruby
-rvm:
- - 2.4.4
- - jruby
-
-language: ruby
 rvm: 2.4.4
 env:
   global:
@@ -17,7 +12,7 @@ notifications:
 script:
   - bundle install
   - bundle exec rake db:schema:load
-  - bundle exec rake db:migrate
+  - bundle exec rake db:migrate --trace
   - bundle exec rspec
 before_script:
   - mysql -e 'create database tlcdirectory_test'
