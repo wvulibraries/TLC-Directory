@@ -2,3 +2,22 @@ language: ruby
 rvm:
  - 2.4.4
  - jruby
+
+language: ruby
+rvm: 2.4.4
+env:
+  global:
+    - RAILS_ENV=test
+    - DB=mysql
+branches:
+  only:
+    - master
+notifications:
+  - false
+script:
+  - bundle install
+  - bundle exec rake db:schema:load
+  - bundle exec rake db:migrate
+  - bundle exec rspec
+before_script:
+  - mysql -e 'create database tlcdirectory_test'
