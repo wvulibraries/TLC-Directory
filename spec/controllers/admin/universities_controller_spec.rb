@@ -43,7 +43,7 @@ RSpec.describe Admin::UniversitiesController, type: :controller do
 
   describe "GET #index" do
     it "returns a success response" do
-      university = University.create! valid_attributes
+      # university = University.create! valid_attributes
       get :index, params: {}, session: valid_session
       expect(response).to be_success
     end
@@ -55,6 +55,7 @@ RSpec.describe Admin::UniversitiesController, type: :controller do
       get :show, params: {id: university.to_param}, session: valid_session
       expect(response).to be_success
     end
+  end
 
   describe "GET #new" do
     it "returns a success response" do
@@ -79,7 +80,6 @@ RSpec.describe Admin::UniversitiesController, type: :controller do
           post :create, params: {university: valid_attributes}, session: valid_session
         }.to change(University, :count).by(1)
       end
-
       it "redirects to the created university" do
         post :create, params: {university: valid_attributes}, session: valid_session
         expect(response).to redirect_to(University.last)
