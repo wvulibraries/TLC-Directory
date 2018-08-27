@@ -43,7 +43,7 @@ RSpec.describe Admin::UniversitiesController, type: :controller do
 
   describe "GET #index" do
     it "returns a success response" do
-      # university = University.create! valid_attributes
+      university = University.create! valid_attributes
       get :index, params: {}, session: valid_session
       expect(response).to be_success
     end
