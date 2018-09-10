@@ -1,0 +1,7 @@
+// Skip Nav
+// If you hit "Tab" on your keyboard, you'll see "Skip to Main Content".
+// This file contains styles for that feature.
+
+.wvu-skip-nav { position: absolute; z-index: 10; padding: 0.5em; left: -99999em; background: white;
+  &:focus { left: 0; }
+} //.wvu-skip-nav

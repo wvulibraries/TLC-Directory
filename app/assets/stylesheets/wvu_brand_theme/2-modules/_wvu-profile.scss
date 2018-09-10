@@ -1,0 +1,47 @@
+// Styles for profile pages.
+.wvu-profile {
+  @include clearfix;
+  width: 100%;
+  margin-bottom: 2em;
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.wvu-profile__individual {
+  float: left;
+  border-top: 1px solid #eaeaea;
+  &:first-child {
+    margin-top: 0;
+    border-top: 0;
+  }
+}
+
+.wvu-profile__individual-photo {
+  margin-top: 38px;
+  margin-bottom: 18px;
+}
+
+.wvu-profile__name {
+  margin-bottom: 18px;
+}
+
+.wvu-profile__job-title {
+  text-transform: uppercase;
+}
+
+.wvu-profile__phone {
+  color: $base-font-color;
+  text-decoration: none;
+}
+
+// Icons from the IcoMoon free icon library
+// https://icomoon.io
+.wvu-profile__phone-icon, .wvu-profile__email {
+  background: url(https://patterns.wvu.edu/images/1444934192/icon-phone.svg) no-repeat left 3px;
+  background-size: 18px;
+  padding-left: 2em;
+}
+
+.wvu-profile__email {
+  background-image: url(https://patterns.wvu.edu/images/1444934192/icon-mail.svg);
+}

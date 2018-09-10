@@ -18,7 +18,7 @@ class Admin::EmailAddressesController < ApplicationController
 
   # GET /email_addresses/new
   def new
-    @email_address = EmailAddress.new(user: @user)
+    #@email_address = EmailAddress.new(user: @user)
   end
 
   # GET /email_addresses/1/edit
@@ -68,18 +68,17 @@ class Admin::EmailAddressesController < ApplicationController
   end
 
   private
+  # Use callbacks to share common setup or constraints between actions.
+  def find_user
+    @user = User.find(params[:user_id])
+  end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def find_user
-      @user = User.find(params[:user_id])
-    end
+  def set_email_address
+    @email_address = EmailAddress.find(params[:id])
+  end
 
-    def set_email_address
-      @email_address = EmailAddress.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def email_address_params
-      params.require(:email_address).permit(:user_id, :email)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def email_address_params
+    params.require(:email_address).permit(:user_id, :email)
+  end
 end

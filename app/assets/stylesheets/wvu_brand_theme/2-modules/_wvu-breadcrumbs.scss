@@ -1,0 +1,15 @@
+.wvu-breadcrumbs { width: 100%; }
+
+.wvu-breadcrumbs__crumbs { padding: 0.5em 1em; list-style-type: none;
+  @include mq($bp-xlarge) { padding: 0.5em 0; }
+  li { float: left; font-size: .8em; margin-right: 0.5em;
+    &:after { content: ' / '; }
+    &:last-child {
+      &:after { content: ''; }
+    };
+  }
+}
+
+.wvu-breadcrumbs__list--white { color: white;
+  a { color: white; }
+}

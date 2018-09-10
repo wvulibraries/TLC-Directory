@@ -1,0 +1,59 @@
+
+.form-search { clear: both; }
+
+.form-search__label-text {
+  position: absolute; top: -99999em;
+}
+
+.form-search__search-type {
+  legend {
+    position: absolute;
+    top: -9999999em;
+  }
+  label {
+    float: left; margin: 0 1em 0 .5em;
+  }
+  input { float: left; position: relative; top: 3px; }
+}
+
+.wvu-search__search-bar { padding-top: 2.1em; font-size: .8em;
+  input[type="checkbox"], input[type="radio"] { margin-right: 0; }
+}
+
+.wvu-search__search-form { clear: both; }
+.wvu-search__search-box { color: $black; clear: both; }
+
+input[type="search"] {
+  &.wvu-search__search-box { margin-bottom: .25em; }
+}
+
+.form-search__search-type { clear: both; font-weight: bold; padding-top: .5em;
+  @include mq($bp-medium) { padding-top: 0; }
+  input {
+    &:last-child { margin-left: 1em; }
+  }
+}
+
+#q {
+  margin-bottom: 0;
+}
+
+input[type="submit"] {
+  &.form-search__submit {
+    color: $black;
+    height: 30px;
+    text-indent: -99999em;
+    border: 2px solid white;
+    background-color: transparent;
+    background-image: url(https://patterns.wvu.edu/images/search-icon.png);
+    background-repeat: no-repeat;
+    background-size: 20px;
+    background-position: 50% 4px;
+    padding: 4px 4px 0 4px;
+    img { max-height: 20px; }
+    &:hover {
+      background-color: $wvu-gold;
+      border-color: $wvu-gold;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+.wvu-quicklinks { width: 100%;
+  @include pms-432-c-background();
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  li {
+    padding-left: 1em;
+    background: url(https://patterns.wvu.edu/images/diagonal-gold.svg) no-repeat 0 0px;
+    background-size: 20px;
+    margin-left: 0;
+  }
+}
+
+.wvu-quicklinks__container {
+  padding: $wvu-container-padding;
+}

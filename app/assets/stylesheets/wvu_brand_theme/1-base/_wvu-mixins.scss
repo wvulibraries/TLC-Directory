@@ -1,0 +1,293 @@
+@mixin wvu-shout {
+  line-height: $wvu-shout-line-height; font-family: $wvu-shout; text-transform: uppercase; font-weight: normal;
+  .fonts-loaded & { font-family: $wvu-shout; }
+}
+
+@mixin wvu-subhead {
+  line-height: $helvetica-neue-bold-line-height; font-weight: bold; text-transform: none;
+}
+
+@mixin wvu-traditional-audience {
+  line-height: $wvu-traditional-audience-line-height; font-family: $wvu-traditional-audience; font-weight: normal; text-transform: none;
+}
+
+@mixin wvu-typography-anchor-tag  {
+  a { color: $wvu-base-link-color; text-decoration: underline;
+    &:visited { color: $wvu-visited-link-color; text-decoration: none; }
+    &:active { text-decoration: none; }
+    &:hover { color: $wvu-hover-link-color; text-decoration: underline; }
+  } //a
+} //@wvu-typography-anchor-tag
+
+@mixin so-vignetting($vignetting-opacity) {
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: radial-gradient(farthest-side at 90% 55%, transparent, #000 131%);
+    opacity: $vignetting-opacity;
+    z-index: 1;
+  }
+}
+
+@mixin so-gold-slash() {
+  &:before {
+    content: '';
+    height: 500px;
+    position: absolute;
+    right: 0;
+    bottom: -433px;
+    left: -280px;
+    background-image: url(https://patterns.wvu.edu/images/diagonal-gold.svg);
+    background-repeat: no-repeat;
+    background-size: 312px;
+    opacity: 1;
+    z-index: 2;
+  }
+}
+
+@mixin wvu-lede() {
+  font-family: $helvetica-neue-light;
+  font-weight: normal;
+  line-height: $wvu-lede-line-height;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+}
+
+@mixin wvu-postscript() {
+  clear: both;
+  display: block;
+  margin: 2em auto 0 auto;
+  text-align: center;
+}
+
+@mixin wvu-primary-pattern-heading() {
+  margin: $wvu-shout-margin;
+  text-align: center;
+  text-transform: uppercase;
+  @include wvu-shout();
+  font-size: 2em;
+}
+
+@mixin wvu-secondary-pattern-heading() {
+  @include wvu-lede();
+  -webkit-font-smoothing: antialiased;
+  margin-bottom: .5em;
+  margin-top: 0;
+  text-align: center;
+}
+
+@mixin omega-reset($nth) {
+  &:nth-child(#{$nth}) { margin-right: flex-gutter(); }
+  &:nth-child(#{$nth}+1) { clear: none }
+}
+
+@mixin u-wvu-embed-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16/9 ratio */
+  padding-top: 30px; /* IE6 workaround*/
+  height: 0;
+  overflow: hidden;
+  iframe, object, video, embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@mixin u-wvu-container-padding {
+  padding: $wvu-container-padding;
+  padding-left: 1em;
+  padding-right: 1em;
+  @include mq($bp-xlarge) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+@mixin wvu-container {
+  @include outer-container(); position: relative; padding: $wvu-container-padding; padding-left: 1em; padding-right: 1em;
+  @include mq($bp-xlarge) {
+    padding: $wvu-container-padding; padding-left: 0; padding-right: 0;
+  }
+}
+
+// http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/
+// Parent elements must have a fixed height (not min-height)
+@mixin u-wvu-vertical-align { position: relative; top: 50%; -webkit-transform: translateY(-50%); -ms-transform: translateY(-50%); transform: translateY(-50%); }
+
+// Colors
+// =====================================
+
+@mixin linear-gradient-background($top-background-color, $bottom-background-color) {
+  background: $top-background-color; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient($top-background-color, $bottom-background-color); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient($top-background-color, $bottom-background-color); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient($top-background-color, $bottom-background-color); /* For Firefox 3.6 to 15 */
+  background: linear-gradient($top-background-color, $bottom-background-color); /* Standard syntax */
+}
+
+@mixin wvu-dark-background($wvu-pattern-background-color, $wvu-pattern-text-color) {
+  $wvu-background-color-five-percent: tint($wvu-pattern-background-color, 2%);
+  background-color: $wvu-pattern-background-color;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  @include linear-gradient-background($wvu-pattern-background-color, $wvu-background-color-five-percent);
+  h1, h2, h3, h4, h5, h6 {
+    color: white;
+    a {
+      color: white;
+      text-decoration: none;
+      &:hover {
+        color: tint($wvu-pattern-background-color, 90%);
+      }
+    }
+  }
+  h3 a {
+    color: white;
+    text-decoration: none;
+    &:hover {
+      color: tint($wvu-pattern-background-color, 90%);
+    }
+  }
+  a {
+    color: white;
+    text-decoration: underline;
+    &:hover {
+      color: tint($wvu-pattern-background-color, 90%);
+    }
+    &.button {
+      border-color: white;
+      text-decoration: none;
+      &:visited {
+        color: white;
+      }
+      &:hover {
+        background-color: white;
+        color: $wvu-pattern-background-color;
+      }
+    }
+  }
+}
+
+@mixin wvu-light-background($wvu-pattern-background-color, $wvu-pattern-text-color) {
+  $wvu-background-color-five-percent: shade($wvu-pattern-background-color, 2%);
+  background-color: $wvu-pattern-background-color;
+  color: $wvu-pattern-text-color;
+  -webkit-font-smoothing: antialiased;
+  @include linear-gradient-background($wvu-background-color-five-percent, $wvu-pattern-background-color);
+  h1, h2, h3, h4, h5, h6 {
+    color: $wvu-pattern-text-color;
+    a {
+      color: $wvu-pattern-text-color;
+      text-decoration: none;
+      &:hover {
+        color: shade($wvu-pattern-background-color, 90%);
+      }
+    }
+  }
+  a {
+    color: $wvu-pattern-text-color;
+    text-decoration: underline;
+    &:hover {
+      color: shade($wvu-pattern-background-color, 90%);
+    }
+    &.button {
+      border-color: $wvu-pattern-text-color;
+      text-decoration: none;
+      &:hover {
+        background-color: $wvu-pattern-text-color;
+        color: $wvu-pattern-background-color;
+      }
+    }
+  }
+}
+
+@mixin wvu-white-background {
+  @include wvu-light-background(white, $black);
+}
+
+@mixin wvu-blue-background {
+  @include wvu-dark-background($wvu-blue, white);
+}
+
+@mixin wvu-gold-background {
+  @include wvu-light-background($wvu-gold, $wvu-blue);
+}
+
+@mixin black-background {
+  @include wvu-dark-background($black, white);
+}
+
+@mixin pms-432-c-background {
+  @include wvu-dark-background($pms-432-c, white);
+}
+
+@mixin pms-429-c-background {
+  @include wvu-light-background($pms-429-c, $black);
+}
+
+@mixin pms-warm-gray-11-background {
+  @include wvu-dark-background($pms-warm-gray-11, white);
+}
+
+@mixin pms-warm-gray-7-background {
+  @include wvu-dark-background($pms-warm-gray-7, $black);
+}
+
+@mixin pms-warm-gray-3-background {
+  @include wvu-light-background($pms-warm-gray-3, $black);
+}
+
+@mixin pms-286-c-background {
+  @include wvu-dark-background($pms-286-c, white);
+}
+
+@mixin pms-300-c-background {
+  @include wvu-dark-background($pms-300-c, white);
+}
+
+@mixin pms-629-c-background {
+  @include wvu-light-background($pms-629-c, $pms-629-c);
+}
+
+@mixin pms-7554-c-background {
+  @include wvu-dark-background($pms-7554-c, white);
+}
+
+@mixin pms-7557-c-background {
+  @include wvu-dark-background($pms-7557-c, white);
+}
+
+@mixin pms-144-c-background {
+  @include wvu-dark-background($pms-144-c, white);
+}
+
+@mixin pms-7476-c-background {
+  @include wvu-dark-background($pms-7476-c, white);
+}
+
+@mixin pms-5625-c-background {
+  @include wvu-dark-background($pms-5625-c, white);
+}
+
+@mixin pms-558-c-background {
+  @include wvu-dark-background($pms-558-c, white);
+}
+
+@mixin pms-180-c-background {
+  @include wvu-dark-background($pms-180-c, white);
+}
+
+@mixin pms-166-c-background {
+  @include wvu-dark-background($pms-166-c, white);
+}
+
+@mixin pms-115-c-background {
+  @include wvu-light-background($pms-115-c, $black);
+}

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "admin/users/new", type: :view do
   before(:each) do
     assign(:user, User.new(
-      :username => Faker::Internet.user_name,
+      :wvu_username => Faker::Internet.user_name,
       :first_name => Faker::Name.first_name,
       :last_name => Faker::Name.last_name,
       :status => :disabled,
@@ -18,7 +18,7 @@ RSpec.describe "admin/users/new", type: :view do
 
     assert_select "form[action=?][method=?]", users_path, "post" do
 
-      assert_select "input[name=?]", "user[username]"
+      assert_select "input[name=?]", "user[wvu_username]"
 
       assert_select "input[name=?]", "user[last_name]"
 

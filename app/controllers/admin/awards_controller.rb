@@ -3,7 +3,7 @@ class Admin::AwardsController < ApplicationController
   layout 'admin'
 
   before_action :find_user, only: [:new]
-  before_action :set_address, only: [:show, :edit, :update, :destroy]
+  before_action :set_address, only: %i[show edit update destroy]
 
   # GET /awards
   # GET /awards.json
@@ -68,18 +68,18 @@ class Admin::AwardsController < ApplicationController
   end
 
   private
-  
-    # Use callbacks to share common setup or constraints between actions.
-    def find_user
-      @user = User.find(params[:user_id])
-    end
 
-    def set_award
-      @award = Award.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def find_user
+    @user = User.find(params[:user_id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def award_params
-      params.require(:award).permit(:user_id, :starting_year, :ending_year, :description)
-    end
+  def set_award
+    @award = Award.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def award_params
+    params.require(:award).permit(:user_id, :starting_year, :ending_year, :description)
+  end
 end

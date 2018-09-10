@@ -1,0 +1,15 @@
+@import 'wvu-spotlight';
+
+.wvu-triptych { width: 100%;
+  h2 {
+    margin: 0.5em 0;
+  }
+  p {
+    font-size: 0.8em;
+    padding-bottom: 1em;
+  }
+}
+
+.wvu-triptych__container {
+  padding: $wvu-container-padding;
+}

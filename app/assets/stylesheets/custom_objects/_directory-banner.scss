@@ -1,18 +1,11 @@
 .directory-banner {
-  color: white;
-  // overflow: hidden;
-  // height: 100%;
-  // width: 100%;
-  //line-height: 1.1em;
+  padding: 0;
+  text-align:left;
+  margin: auto;
   background-color: $primary-orange;
-  text-align: left;
-  // text-justify: inter-word;
-  font-size: 12px;
-
-  //position: relative;
-  padding-top: 10px;
-  padding-bottom: 10px;
-
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
+  h1 {
+    color: white;
+    font-size: 25px;
+    text-shadow: 2px 2px $neutral-black;
+  }
 }

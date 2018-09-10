@@ -1,0 +1,293 @@
+// WVU Color Pallette
+//==================================================
+
+// Primary
+$wvu-blue: #002855;
+$wvu-gold: #EAAA00;
+
+// Neutral
+$black: #2C2A29;
+$pms-432-c: #333F48;
+$pms-429-c: #A2AAAD;
+$pms-warm-gray-11: #6E6259;
+$pms-warm-gray-7: #7C736A;
+$pms-warm-gray-3: #BFB8AF;
+
+// Accent
+$pms-286-c: #0033A0;
+$pms-300-c: #005EB8;
+$pms-629-c: #9BD3DD;
+$pms-7554-c: #4B3D2A;
+$pms-7557-c: #8F701E;
+$pms-144-c: #ED8B00;
+$pms-7476-c: #0D5257;
+$pms-5625-c: #657A68;
+$pms-558-c: #9ABEAA;
+$pms-180-c: #BE3A34;
+$pms-166-c: #CD4C08;
+$pms-115-c: #FDDA24;
+
+// Primary
+.u-wvu-blue { color: $wvu-blue; border-color: $wvu-blue;
+  &.background { color: white; background-color: $wvu-blue; -webkit-font-smoothing: antialiased;}
+}
+
+@mixin wvu-blue-background {
+  color: white; background-color: $wvu-blue;
+  -webkit-font-smoothing: antialiased;
+}
+
+.u-wvu-gold { color: $wvu-gold; border-color: $wvu-gold;
+  &.background { color: $wvu-blue; background-color: $wvu-gold; }
+}
+
+@mixin wvu-gold-background {
+  color: $wvu-blue; background-color: $wvu-gold;
+}
+
+//  Secondary
+.u-black { color: $black;
+  &.background { color: white; background-color: $black; -webkit-font-smoothing: antialiased;
+    h1, h2, h3, h4, h5, h6, a { color: white; }
+    .button { border-color: white; }
+    a {
+      &:hover { color: $black; }
+    }
+  }
+}
+
+@mixin black-background {
+  color: white; background-color: $black; -webkit-font-smoothing: antialiased;
+  h1, h2, h3, h4, h5, h6, a { color: white; }
+  .button { border-color: white; }
+  a {
+    &:hover { color: $black; }
+  }
+}
+
+.u-pms-432-c { color: $pms-432-c; border-color: $pms-432-c;
+  &.background { color: white; background-color: $pms-432-c; -webkit-font-smoothing: antialiased;
+    h1, h2, h3, h4, h5, h6, a { color: white; }
+    .button { border-color: white; }
+    a {
+      &:hover { color: $pms-432-c; background: white; }
+    }
+  }
+}
+
+@mixin pms-432-c-background {
+  color: white; background-color: $pms-432-c; -webkit-font-smoothing: antialiased;
+  h1, h2, h3, h4, h5, h6, a { color: white; }
+  .button { border-color: white; }
+  a {
+    &:hover { color: $pms-432-c; background: white; }
+  }
+}
+
+.u-pms-429-c { color: $pms-429-c; border-color: $pms-429-c;
+  &.background { color: $black; background-color: $pms-429-c;
+    h1, h2, h3, h4, h5, h6, a { color: $black; }
+    hr { border-bottom-color: $pms-432-c; }
+  }
+}
+
+@mixin pms-429-c-background {
+  color: $black; background-color: $pms-429-c;
+  h1, h2, h3, h4, h5, h6, a { color: $black; }
+  hr { border-bottom-color: $pms-432-c; }
+}
+
+.u-pms-warm-gray-11 { color: $pms-warm-gray-11; border-color: $pms-warm-gray-11;
+  &.background { color: white; background-color: $pms-warm-gray-11; -webkit-font-smoothing: antialiased;
+    h1, h2, h3, h4, h5, h6, a { color: white; }
+    a {
+      &:hover { color: $pms-warm-gray-11; background: white; }
+    }
+  }
+}
+
+@mixin pms-warm-gray-11-background {
+  color: white; background-color: $pms-warm-gray-11; -webkit-font-smoothing: antialiased;
+  h1, h2, h3, h4, h5, h6, a { color: white; }
+  a {
+    &:hover { color: $pms-warm-gray-11; background: white; }
+  }
+}
+
+.u-pms-warm-gray-7 { color: $pms-warm-gray-7; border-color: $pms-warm-gray-7;
+  &.background { color: white; background-color: $pms-warm-gray-7; -webkit-font-smoothing: antialiased;
+    h1, h2, h3, h4, h5, h6, a { color: white; }
+    a {
+      &:hover { color: $pms-warm-gray-7; background: white; }
+    }
+  }
+}
+
+@mixin pms-warm-gray-7-background {
+  color: white; background-color: $pms-warm-gray-7; -webkit-font-smoothing: antialiased;
+  h1, h2, h3, h4, h5, h6, a { color: white; }
+  a {
+    &:hover { color: $pms-warm-gray-7; background: white; }
+  }
+}
+
+.u-pms-warm-gray-3 { color: $pms-warm-gray-3; border-color: $pms-warm-gray-3;
+  &.background { color: $black; background-color: $pms-warm-gray-3;
+    h1, h2, h3, h4, h5, h6, a { color: $black; }
+  }
+}
+
+@mixin pms-warm-gray-3-background {
+  color: $black; background-color: $pms-warm-gray-3;
+  h1, h2, h3, h4, h5, h6, a { color: $black; }
+  a {
+    &:hover { color: $pms-warm-gray-3; background: white; }
+  }
+}
+
+// Tertiary
+.u-pms-286-c { color: $pms-286-c; border-color: $pms-286-c;
+  &.background { color: white; background-color: $pms-286-c; -webkit-font-smoothing: antialiased;}
+}
+
+@mixin pms-286-c-background {
+  color: white; background-color: $pms-286-c; -webkit-font-smoothing: antialiased;
+  h1, h2, h3, h4, h5, h6, a { color: white; }
+  a { text-decoration: underline;
+    &:hover { color: $pms-629-c; };
+  }
+}
+
+.u-pms-300-c { color: $pms-300-c; border-color: $pms-300-c;
+  &.background { color: white; background-color: $pms-300-c; -webkit-font-smoothing: antialiased;}
+}
+
+@mixin pms-300-c-background {
+  color: white; background-color: $pms-300-c; -webkit-font-smoothing: antialiased;
+  h1, h2, h3, h4, h5, h6, a { color: white; }
+  a { text-decoration: underline;
+    &:hover { color: $pms-629-c; };
+  }
+}
+
+.u-pms-629-c { color: $pms-629-c; border-color: $pms-629-c;
+  &.background { color: $wvu-blue; background-color: $pms-629-c;
+    h1, h2, h3, h4, h5, h6 { color: $wvu-blue; }
+  }
+}
+
+@mixin pms-629-c-background {
+  color: $wvu-blue; background-color: $pms-629-c;
+  h1, h2, h3, h4, h5, h6, a { color: $wvu-blue; }
+  a { text-decoration: underline;
+    &:hover { color: $pms-300-c; };
+  }
+}
+
+.u-pms-7554-c { color: $pms-7554-c; border-color: $pms-7554-c;
+  &.background { color: white; background-color: $pms-7554-c; -webkit-font-smoothing: antialiased;}
+}
+
+@mixin pms-7554-c-background {
+  color: white; background-color: $pms-7554-c; -webkit-font-smoothing: antialiased;
+  h1, h2, h3, h4, h5, h6, a { color: white; }
+  a { text-decoration: underline;
+    &:hover { color: $pms-7557-c; };
+  }
+}
+
+.u-pms-7557-c { color: $pms-7557-c; border-color: $pms-7557-c;
+  &.background { color: white; background-color: $pms-7557-c; -webkit-font-smoothing: antialiased;}
+}
+
+@mixin pms-7557-c-background {
+  color: white; background-color: $pms-7557-c; -webkit-font-smoothing: antialiased;
+  h1, h2, h3, h4, h5, h6, a { color: white; }
+  a { text-decoration: underline;
+    &:hover { color: $pms-7554-c; };
+  }
+}
+
+.u-pms-144-c { color: $pms-144-c; border-color: $pms-144-c;
+  &.background { color: white; background-color: $pms-144-c; -webkit-font-smoothing: antialiased;}
+}
+
+@mixin pms-144-c-background {
+  color: $black; background-color: $pms-144-c; -webkit-font-smoothing: antialiased;
+  h1, h2, h3, h4, h5, h6, a { color: $black; }
+  a { text-decoration: underline;
+    &:hover { color: $pms-7476-c; };
+  }
+}
+
+.u-pms-7476-c { color: $pms-7476-c; border-color: $pms-7476-c;
+  &.background { color: white; background-color: $pms-7476-c; -webkit-font-smoothing: antialiased;}
+}
+
+@mixin pms-7476-c-background {
+  color: white; background-color: $pms-7476-c; -webkit-font-smoothing: antialiased;
+  h1, h2, h3, h4, h5, h6, a { color: $white; }
+  a { text-decoration: underline;
+    &:hover { color: $pms-5625-c; };
+  }
+}
+
+.u-pms-5625-c { color: $pms-5625-c; border-color: $pms-5625-c;
+  &.background { color: white; background-color: $pms-5625-c; -webkit-font-smoothing: antialiased;}
+}
+
+@mixin pms-5625-c-background {
+  color: white; background-color: $pms-5625-c; -webkit-font-smoothing: antialiased;
+  h1, h2, h3, h4, h5, h6, a { color: white; }
+  a { text-decoration: underline;
+    &:hover { color: $pms-558-c; };
+  }
+}
+
+.u-pms-558-c { color: $pms-558-c; border-color: $pms-558-c;
+  &.background { color: white; background-color: $pms-558-c; -webkit-font-smoothing: antialiased;}
+}
+
+@mixin pms-558-c-background {
+  color: $black; background-color: $pms-558-c; -webkit-font-smoothing: antialiased;
+  h1, h2, h3, h4, h5, h6, a { color: $black; }
+  a { text-decoration: underline;
+    &:hover { color: $pms-5625-c; };
+  }
+}
+
+.u-pms-180-c { color: $pms-180-c; border-color: $pms-180-c;
+  &.background { color: white; background-color: $pms-180-c; -webkit-font-smoothing: antialiased;}
+}
+
+@mixin pms-180-c-background {
+  color: white; background-color: $pms-180-c; -webkit-font-smoothing: antialiased;
+  h1, h2, h3, h4, h5, h6, a { color: white; }
+  a { text-decoration: underline;
+    &:hover { color: $pms-115-c; };
+  }
+}
+
+.u-pms-166-c { color: $pms-166-c; border-color: $pms-166-c;
+  &.background { color: white; background-color: $pms-166-c; -webkit-font-smoothing: antialiased;}
+}
+
+@mixin pms-166-c-background {
+  color: white; background-color: $pms-166-c; -webkit-font-smoothing: antialiased;
+  h1, h2, h3, h4, h5, h6, a { color: white; }
+  a { text-decoration: underline;
+    &:hover { color: $pms-115-c; };
+  }
+}
+
+.u-pms-115-c { color: $pms-115-c; border-color: $pms-115-c;
+  &.background { color: black; background-color: $pms-115-c; }
+}
+
+@mixin pms-115-c-background {
+  color: $black; background-color: $pms-115-c;
+  h1, h2, h3, h4, h5, h6, a { color: $black; }
+  a { text-decoration: underline;
+    &:hover { color: $pms-166-c; };
+  }
+}

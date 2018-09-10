@@ -1,0 +1,60 @@
+$header-background-color: 'light' !default;
+
+// options are 'light' and 'dark'
+
+.wvu-header {
+  margin: 0 1em;
+  @include mq($bp-xlarge) {
+    margin: 0;
+  }
+}
+
+.wvu-header__title {
+  font-size: 1em;
+  margin: 1.5em 0;
+  @include wvu-subhead;
+  @include mq($bp-micro) {
+    font-size: 1.25em;
+  }
+  @include mq($bp-small) {
+    font-size: 1.5em;
+  }
+  @include mq($bp-large) {
+    font-size: 1.8em;
+  }
+}
+
+@mixin header-has-light-background {
+  @if $header-background-color == 'light' {
+    .wvu-header {
+      .wvu-masthead__link { color: $wvu-base-link-color;
+        &:visited { color: $wvu-visited-link-color; }
+      }
+      input[type="submit"].form-search__submit {
+        background-color: $wvu-blue;
+        border-color: $wvu-blue;
+        &:hover {
+         background-color: $wvu-gold;
+         border-color: $wvu-gold;
+        }
+      }
+    }
+  }
+  @else {
+    .wvu-header {
+      .wvu-masthead__link { color: white;
+        &:visited { color: white; }
+      }
+      input[type="submit"].form-search__submit {
+        background-color: $wvu-gold;
+        border-color: $wvu-gold;
+        &:hover {
+         background-color: $wvu-blue;
+         border-color: $wvu-blue;
+        }
+      }
+    }
+  }
+}
+
+@include header-has-light-background();

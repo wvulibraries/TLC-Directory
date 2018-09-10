@@ -1,24 +1,43 @@
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
  *= require_self
- *= require select2
  */
- // it is important that the order gets imported in a certain way so that variables are able to be used in other scss files
- @import "partials/variables";
- @import "partials/wvu";
+
+ // WVU Brand Stuff
+ @import 'wvu_brand_theme/4-custom/variables';
+ @import 'wvu_brand_theme/0-plugins/*';
+ @import 'wvu_brand_theme/1-base/base_import';
+ @import 'wvu_brand_theme/2-modules/*';
+ @import 'wvu_brand_theme/3-layouts/*';
+ @import 'wvu_brand_theme/1-base/ie9';
+ @import 'wvu_brand_theme/4-custom/*';
 
  // Font Awesome
  @import "font-awesome-sprockets";
  @import "font-awesome";
 
+ // import mixins so that all partials can use them.
+ @import "mixins/*";
+ // @import "custom_objects/content-wrapper";
+ // @import "custom_objects/info_boxes";
+ // @import "custom_objects/libraries_list";
+ // @import "custom_objects/nav";
+ // @import "custom_objects/search_box";
+ // @import "custom_objects/search_wrapper";
+ // @import "custom_objects/main-content-left";
+ // @import "custom_objects/main-content-right";
+
+
+ //@import "custom_objects/alerts_defined";
+ //@import "custom_objects/buttons";
+
+ // application wide
+ //@import "admin/*";
+ @import "partials/*";
+
+
+ // it is important that the order gets imported in a certain way so that variables are able to be used in other scss files
+ // @import "partials/variables";
+ // @import "partials/wvu";
+ //
  @import "custom_objects/*";

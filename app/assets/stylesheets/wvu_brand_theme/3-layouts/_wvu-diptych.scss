@@ -1,0 +1,20 @@
+.wvu-diptych {
+  .wvu-diptych__container {
+    @include outer-container();
+  }
+  .wvu-spotlight {
+    @include mq($bp-medium) {
+      @include span-columns(6);
+    }
+  }
+  .wvu-spotlight__image {
+    @include mq($bp-medium) {
+      @include span-columns(4);
+    }
+  }
+  .wvu-spotlight__copy {
+    @include mq($bp-medium) {
+      @include span-columns(8);
+    }
+  }
+}

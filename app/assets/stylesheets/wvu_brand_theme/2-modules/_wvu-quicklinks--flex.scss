@@ -1,0 +1,25 @@
+.wvu-quicklinks { width: 100%;
+  ul {
+    list-style-type: none;
+    @include mq($bp-medium) {
+      display: flex;
+      align-items: stretch;
+      flex-flow: row wrap;
+    }
+    li {
+      padding-left: 1.5em;
+      background: url(https://patterns.wvu.edu/images/diagonal-gold.svg) no-repeat 0 0px;
+      margin-left: 0;
+      font-size: 1em;
+      box-sizing: border-box;
+      background-size: 20px;
+      border-right: 5px solid $pms-432-c;
+      border-bottom: 5px solid $pms-432-c;
+      @include mq($bp-medium) {
+        width: 25%;
+        float: left;
+      }
+      a { color: white; display: block; }
+    }
+  }
+}

@@ -7,5 +7,5 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Create Users
-User.create(username: 'djdavis', first_name: 'David', last_name: 'Davis', role: :admin, status: :active, visible: false)
-User.create(username: 'tam0013', first_name: 'Tracy', last_name: 'McCormick', role: :admin, status: :active, visible: false)
+User.create(wvu_username: 'djdavis', first_name: 'David', last_name: 'Davis', role: :admin, status: :active, visible: false)
+User.create(wvu_username: 'tam0013', first_name: 'Tracy', last_name: 'McCormick', role: :admin, status: :active, visible: false)

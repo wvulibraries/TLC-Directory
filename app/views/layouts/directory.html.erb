@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= page_title('Directory | Scholarship of Teaching & Learning') %></title>
+    <%= stylesheet_link_tag 'application', :media => 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <!-- Skip to Navigation -->
+    <a class="wvu-skip-nav" href="#main">Skip to main content</a>
+
+    <%= render(:partial => 'shared/public_header') %>
+    <%= render(:partial => 'shared/navigation') %>
+    <%= render(:partial => 'shared/directory_banner') %>
+
+    <!-- Main -->
+    <main id="main" class="backend">
+      <div class="wvu-container">
+
+        <!-- Flash -->
+        <%= render "utilities/alerts" %>
+
+        <!-- Yield -->
+        <div class="main-content">
+          <%= yield %>
+        </div>
+      </div>
+    </main>
+
+    <%= render(:partial => 'shared/public_footer') %>
+
+  </body>
+</html>

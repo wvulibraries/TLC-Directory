@@ -3,7 +3,7 @@ class Admin::AddressesController < ApplicationController
   layout 'admin'
 
   before_action :find_user, only: [:new]
-  before_action :set_address, only: [:show, :edit, :update, :destroy]
+  before_action :set_address, only: %i[show edit update destroy]
 
   # GET /addresses
   # GET /addresses.json
@@ -68,18 +68,23 @@ class Admin::AddressesController < ApplicationController
   end
 
   private
-  
-    # Use callbacks to share common setup or constraints between actions.
-    def find_user
-      @user = User.find(params[:user_id])
-    end
 
-    def set_address
-      @address = Address.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def find_user
+    @user = User.find(params[:user_id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def address_params
-      params.require(:address).permit(:user_id, :street_address_1, :street_address_2, :city, :state, :zip_code)
-    end
+  def set_address
+    @address = Address.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def address_params
+    params.require(:address).permit(:user_id,
+                                    :street_address_1,
+                                    :street_address_2,
+                                    :city,
+                                    :state,
+                                    :zip_code)
+  end
 end

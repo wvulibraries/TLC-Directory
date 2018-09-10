@@ -1,6 +1,6 @@
 # Lib Management Tool
 
-[![Build Status](https://travis-ci.org/wvulibraries/TLC-Directory.svg?branch=master)](https://travis-ci.org/wvulibraries/TLC-Directory)[![Maintainability](https://api.codeclimate.com/v1/badges/1eec8b064ca2d1e6a761/maintainability)](https://codeclimate.com/github/wvulibraries/TLC-Directory/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/1eec8b064ca2d1e6a761/test_coverage)](https://codeclimate.com/github/wvulibraries/TLC-Directory/test_coverage)
+[![Build Status](https://travis-ci.org/wvulibraries/TLC-Directory.svg?branch=master)](https://travis-ci.org/wvulibraries/TLC-Directory) [![Maintainability](https://api.codeclimate.com/v1/badges/1eec8b064ca2d1e6a761/maintainability)](https://codeclimate.com/github/wvulibraries/TLC-Directory/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/1eec8b064ca2d1e6a761/test_coverage)](https://codeclimate.com/github/wvulibraries/TLC-Directory/test_coverage)
 
 
 # README

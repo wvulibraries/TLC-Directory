@@ -1,0 +1,20 @@
+.wvu-container { @include outer-container(); position: relative; padding: $wvu-container-padding; padding-left: 1em; padding-right: 1em;
+  @include mq($bp-xlarge) {
+    padding: $wvu-container-padding; padding-left: 0; padding-right: 0;
+  }
+}
+
+@mixin wvu-container {
+  @include outer-container(); position: relative; padding: $wvu-container-padding; padding-left: 1em; padding-right: 1em;
+  @include mq($bp-xlarge) {
+    padding: $wvu-container-padding; padding-left: 0; padding-right: 0;
+  }
+}
+
+.main {
+  @include mq($bp-medium) { @include span-columns(9); }
+}
+
+.wvu-sidebar {
+  @include mq($bp-medium) { @include span-columns(3); }
+}

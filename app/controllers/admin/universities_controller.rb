@@ -2,7 +2,7 @@ class Admin::UniversitiesController < ApplicationController
   # tell rails which view layout to use with this controller
   layout 'admin'
 
-  before_action :find_university, only: [:show, :edit, :update, :destroy]
+  before_action :find_university, only: %i[show edit update destroy]
 
   # GET /universities
   # GET /universities.json

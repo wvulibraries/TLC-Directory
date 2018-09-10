@@ -2,35 +2,39 @@
 <html>
   <head>
     <title><%= page_title('TLC Directory') %></title>
-    <%= stylesheet_link_tag('application', :media => 'all') %>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', :media => 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+
   <body>
+    <!-- Skip to Navigation -->
+    <a class="wvu-skip-nav" href="#main">Skip to main content</a>
 
-    <div>
-      <%= render(:partial => 'shared/wvu_admin_header') %>
-    </div>
+    <%= render(:partial => 'shared/header') %>
+    <%= render(:partial => 'shared/navigation') %>
+    <%= render(:partial => 'shared/admin_banner') %>
 
-    <main>
+    <!-- Main -->
+    <main id="main" class="backend">
+      <div class="wvu-container">
+        <!-- Flash -->
+        <%= render "utilities/alerts" %>
 
-      <div>
         <%= render(:partial => 'shared/admin_navigation') %>
-      </div>
 
-      <div>
-        <%= render(:partial => 'shared/admin_banner') %>
+        <!-- Yield -->
+        <div class="main-content">
+          <%= yield %>
+        </div>
       </div>
-
-      <div>
-        <%= yield %>
-      </div>
-      <div class="clear"></div>
-
     </main>
 
-    <div>
-      <%= render(:partial => 'shared/admin_footer') %>
-    </div>
+    <%= render(:partial => 'shared/builtby_footer') %>
+
+    <!-- JavaScripts -->
+    <%= yield :js %>
 
   </body>
 </html>

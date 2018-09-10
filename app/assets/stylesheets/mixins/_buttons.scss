@@ -1,0 +1,38 @@
+@mixin button_maker($color, $type) {
+  display:inline-block;
+  padding:10px 20px;
+  border-radius:4px;
+
+  @if $type == 'ghost' {
+    background-color: transparent;
+    color: $color;
+    border: 2px solid $color;
+  } @else {
+    background-color: $color;
+    color: #fff;
+  }
+
+  &:visited {
+    @if $type == 'ghost' {
+      background-color: transparent;
+      color: $color;
+      border: 2px solid $color;
+    } @else {
+      background-color: $color;
+      color: #fff;
+    }
+    border-color: $color;
+  }
+
+  &:hover,&:active,&:focus {
+    @if type == 'ghost' {
+      background-color: $color;
+      border-color: $color;
+      border: 2px solid $color;
+    } @else {
+      background-color: darken($color, 10%);
+      border-color: darken($color, 10%);
+    }
+    color: #fff;
+  }
+}

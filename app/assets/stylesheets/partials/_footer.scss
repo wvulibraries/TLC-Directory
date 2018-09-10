@@ -1,0 +1,24 @@
+footer{
+  @include span-columns(12);
+  background: $wvu-blue;
+  padding: 10px;
+  border-top: $border;
+  font-size:10px;
+  height:35px;
+  margin-top:35px;
+
+  .builtBy {
+    color: $gray-text;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    width:16%;
+    min-width:250px;
+    float:right;
+    text-align:right;
+  }
+
+  .built, .by { font-weight: 300; }
+  .wvu { color: $gold; }
+  .libs { color: #fff; margin-left:-4px; }
+}

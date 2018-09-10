@@ -1,0 +1,173 @@
+.wvu-nav__items,
+.wvu-nav__items ul,
+.wvu-nav ul,
+.wvu-nav ul ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.wvu-nav {
+  @include black-background();
+}
+
+.wvu-nav__items, .wvu-nav ul {
+  @include mq($bp-small) { padding: 0 20px; }
+  @include mq($bp-xlarge) { padding: 0; }
+
+  @include mq($bp-medium) { margin-left: -1em; }
+  li { margin-bottom: 0; margin-top: 0; float: left;
+    a { float: left; color: white; margin-right: 0; padding: 1em; width: 100%; text-decoration: none;
+      &:hover { background: $wvu-gold; color: $wvu-blue; }
+    }
+  }
+
+  > li { border-right: 1px solid #444; }
+
+  &.nav-collapse { clear: both; overflow: visible;
+    li {
+      @include mq($bp-small) { width: auto; float: left; }
+    }
+  }
+}
+
+// Responsive-nav.com toggle (inside of .nav-department)
+.nav-toggle { float: left; width: 100%; padding: 1em; text-align: center; color: white;
+  @include mq($bp-medium) { margin-left: 10px; }
+  &:visited { color: white; }
+  &:hover { text-decoration: none; background-color: $wvu-gold; color: $wvu-blue; }
+} //.nav-toggle
+
+
+
+.wvu-nav__items, .wvu-nav ul {
+  &.nav-collapse {
+    li {
+      ul {
+        li { width: 100%; }
+      }
+    }
+  }
+}
+
+/* Dropdowns */
+.wvu-nav__items ul, .wvu-nav ul ul {
+  display: none;
+  background: $black;
+  @include mq($bp-medium) {
+    display: block;
+  	position: absolute;
+  	top: 3.45em;
+  	left: -9999px;
+    z-index: 9999;
+  	opacity: 0;
+
+  	-webkit-transition: 0.1s linear opacity;
+
+  	width: 200px;
+  }
+}
+
+.wvu-nav__items li, .wvu-nav ul li {
+	float: left;
+	position: relative;
+}
+
+.wvu-nav__items li:hover ul,
+.wvu-nav__items li:focus ul,
+.wvu-nav ul li:hover ul,
+.wvu-nav ul li:focus ul,
+ul.show-menu {
+	left: 0;
+	opacity: 0.99;
+  ul { left: -99999em; }
+}
+
+.wvu-nav__items ul li:hover ul,
+.wvu-nav__items ul li:focus ul,
+.wvu-nav__items ul ul.show-menu,
+.wvu-nav ul ul li:hover ul,
+.wvu-nav ul ul li:focus ul,
+.wvu-nav ul ul ul.show-menu {
+  top: 0;
+  left: 195px;
+  ul { left: -9999em; }
+}
+
+.wvu-nav__items ul ul li:hover ul,
+.wvu-nav__items ul ul li:focus ul,
+.wvu-nav__items ul ul ul.show-menu,
+.wvu-nav ul ul ul li:hover ul,
+.wvu-nav ul ul ul li:focus ul,
+.wvu-nav ul ul ul ul.show-menu {
+  top: 0;
+  left: 195px;
+  ul { left: -9999em; }
+}
+
+.wvu-nav__items ul li, .wvu-nav ul ul li {
+	float: none;
+	position: relative;
+  width: 100%;
+}
+
+.wvu-nav__items ul a, .wvu-nav ul ul a {
+	float: none;
+	display: block;
+  width: 100%;
+}
+
+.wvu-nav__items ul a:hover,
+.wvu-nav__items ul a:focus,
+.wvu-nav ul ul a:hover,
+.wvu-nav ul ul a:focus {
+	background: $wvu-gold;
+	color: $black;
+}
+
+////// Dropdown indicators
+
+.wvu-nav__items li.more, .wvu-nav ul li.more {
+  padding-right: 0;
+
+  > ul > li:first-child a  {
+    padding-top: 1em;
+  }
+
+  a {
+    margin-right: 0;
+  }
+
+  > a {
+    padding-right: 1.5em;
+  }
+
+  > a:after {
+    @include mq($bp-medium) {
+      position: absolute;
+      top: auto;
+      right: 0.5em;
+      content: '\25BE';
+    }
+  }
+
+  li.more { padding-right: 0;
+    > a {
+
+      @include mq($bp-large) {
+        padding-right: 1em;
+      }
+
+      &:after {
+        @include mq($bp-medium) {
+          content: '›';
+          font-size: 1.2em;
+          position: absolute;
+          right: 0.5em;
+        }
+      }
+    }
+  }
+
+}
+

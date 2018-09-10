@@ -1,5 +1,5 @@
 class DirectoryController < ApplicationController
-  layout 'public'
+  layout 'directory'
 
   before_action :profile_params, only: [:show]
 

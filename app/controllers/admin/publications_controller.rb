@@ -3,7 +3,7 @@ class Admin::PublicationsController < ApplicationController
   layout 'admin'
 
   before_action :find_user, only: [:new]
-  before_action :set_publication, only: [:show, :edit, :update, :destroy]
+  before_action :set_publication, only: %i[show edit update destroy]
 
   # GET /biographies
   # GET /biographies.json

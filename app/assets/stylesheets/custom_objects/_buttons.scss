@@ -1,0 +1,44 @@
+.show-button {
+  @include button_maker($success, 'solid');
+  @include determine-text-color($success);
+}
+
+.edit-button {
+  @include button_maker($warning, 'solid');
+  @include determine-text-color($warning);
+}
+
+.delete-button {
+  @include button_maker($error, 'solid');
+  @include determine-text-color($error);
+}
+
+.submit-button{
+  @include button_maker($success, 'solid');
+  text-decoration: underline;
+  @include determine-text-color($success);
+  &:hover,&:active, &:visited { 
+    @include determine-text-color($success);
+  }
+}
+
+input[type="submit"], input[type="reset"]{
+  position:relative; 
+  height:44px; 
+  top:-1px; 
+  @extend .submit-button;
+}
+
+.cancel-button {
+  @include button_maker(darken($default,20%), 'solid');
+  @include determine-text-color(darken($default,20%));
+  &:hover,&:active, &:visited { 
+    @include determine-text-color(darken($default,20%));
+  }
+}
+
+.new-button {
+  @include button_maker($action-color, 'solid');
+  @include determine-text-color($action-color);
+}
+

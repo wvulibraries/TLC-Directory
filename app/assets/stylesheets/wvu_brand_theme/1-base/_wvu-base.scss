@@ -1,0 +1,24 @@
+// #Basic Styles
+// Only root elements are allowed in this file. No classes or ID's
+body { font-size: 1em; line-height: 1.5; background-color: white; }
+// Fluid images and objects
+img, iframe, video, audio, embed, object { max-width: 100%; }
+// You should DEFINITELY understand what box-sizing: border-box; does: http://css-tricks.com/box-sizing/
+html { -webkit-box-sizing: border-box; box-sizing: border-box; }
+*, *:before, *:after { -webkit-box-sizing: inherit; box-sizing: inherit; }
+// A better looking default horizontal rule
+hr { display: block; height: 1px; border: 0; border-top: 1px solid $wvu-gold; margin: 4em 0; padding: 0; }
+// Remove the gap between images and the bottom of their containers: h5bp.com/i/440
+iframe { border: 0; }
+// Remove border on iframe.
+img { vertical-align: middle; }
+// Remove default fieldset styles.
+fieldset { border: 0; margin: 0; padding: 0; }
+// Allow only vertical resizing of textareas.
+textarea { resize: vertical; }
+abbr { cursor: help; }
+header, nav, main, footer {
+  clear: both;
+  display: table;
+  width: 100%;
+}

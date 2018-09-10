@@ -1,0 +1,23 @@
+// Any IE9 specific styling can go here, eg: `.ie9 .example`
+// There's a conditional comment for IE8 and IE9 on the HTML tag...
+// ...that allows you to prefix a class with `.ie8` or `.ie9` and target IE.
+
+.ie9 {
+  .wvu-masthead__search-slider {
+    position: relative;
+    top: 0;
+    background: transparent;
+    width:100%;
+  }
+
+  .wvu-nav__search-toggle {
+    &.inactive-search {
+      display: none;
+    }
+    &.active-search {
+      display: none;
+    }
+  }
+
+  .nav-toggle { float: left; width: 100%; height: 56px; }
+} //.ie9

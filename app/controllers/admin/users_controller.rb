@@ -97,35 +97,40 @@ class Admin::UsersController < ApplicationController
 
   private
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    def create_empty_fields
-      @user.universities.new
-    end
+  def create_empty_fields
+    @user.universities.new
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:username, :last_name, :first_name, :middle_name, :status, :role, :visible)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user).permit(:wvu_username,
+                                 :last_name,
+                                 :first_name,
+                                 :middle_name,
+                                 :status,
+                                 :role,
+                                 :visible)
+  end
 
-    def profile_params
-      params.require(:profile).permit(:title, :department, :biography, :research_interests)
-    end
+  def profile_params
+    params.require(:profile).permit(:title, :department, :biography, :research_interests)
+  end
 
-    # def university_params
-    #   params.require(:user).require(:universities).permit(:university_id)
-    # end
+  # def university_params
+  #   params.require(:user).require(:universities).permit(:university_id)
+  # end
 
-    def universities_params
-      params.require(:user).require(:universities).permit(:user_id, universities_attributes: [:id, :name])
-    end
+  def universities_params
+    params.require(:user).require(:universities).permit(:user_id, universities_attributes: %i[id name])
+  end
 
-    def picture_params
-      return unless params.fetch(:user, {}).fetch(:imageable, false)
-      params.require(:user).require(:imageable).permit(:image)
-    end
-
+  def picture_params
+    return unless params.fetch(:user, {}).fetch(:imageable, false)
+    params.require(:user).require(:imageable).permit(:image)
+  end
 end

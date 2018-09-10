@@ -18,5 +18,7 @@ Rails.application.routes.draw do
   end
 
   get '/directory', to: 'directory#index'
+  resources :directory, only: [:index, :show]
+
   get '/directory/show/:user_id', to: 'directory#show', as: 'show_user_profile'
 end

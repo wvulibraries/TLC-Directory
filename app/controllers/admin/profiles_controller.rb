@@ -3,7 +3,7 @@ class Admin::ProfilesController < ApplicationController
   layout 'admin'
 
   before_action :find_user, only: [:new]
-  before_action :set_profile, only: [:show, :edit, :update, :destroy]
+  before_action :set_profile, only: %i[show edit update destroy]
 
   # GET /biographies
   # GET /biographies.json
@@ -68,21 +68,21 @@ class Admin::ProfilesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def find_user
-      @user = User.find(params[:user_id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def find_user
+    @user = User.find(params[:user_id])
+  end
 
-    def set_profile
-      @profile = Profile.find(params[:id])
-    end
+  def set_profile
+    @profile = Profile.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def profile_params
-      params.require(:profile).permit(:user_id,
-                                      :title,
-                                      :department,
-                                      :biography,
-                                      :research_interests)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def profile_params
+    params.require(:profile).permit(:user_id,
+                                    :title,
+                                    :department,
+                                    :biography,
+                                    :research_interests)
+  end
 end

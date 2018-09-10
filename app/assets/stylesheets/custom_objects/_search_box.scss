@@ -6,7 +6,7 @@
   height: 100%;
   width: 100%;
   line-height: 1.1em;
-  text-align: center;  
+  text-align: center;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
 
@@ -17,10 +17,19 @@
       padding: 20px;
       margin: 20px;
       display: inline;
+      color: white;
   }
+
   h1 span {
       position: relative;
   }
+
+  p {
+    word-break: break-all;
+    white-space: normal;
+    display: inline;
+  }
+
 }
 
 .tinted-background {

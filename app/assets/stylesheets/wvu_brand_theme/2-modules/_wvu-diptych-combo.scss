@@ -1,0 +1,13 @@
+.wvu-diptych-combo__panel { font-size: 0.8em; }
+
+.wvu-diptych-combo__panel--spotlights { padding-right: 4em;
+  .wvu-spotlight { padding-bottom: 2em; float: left; width: 100%;
+    h2 { font-size: 1.75em; margin-bottom: 0.5em;
+      @include mq($bp-medium) { margin-top: 0; }
+    }
+    p { margin-bottom: 1em; }
+  }
+  .wvu-spotlight__photo { margin-top: 1.5em; }
+}
+
+.wvu-diptych-combo__panel--quicklinks { margin-right: 0; }

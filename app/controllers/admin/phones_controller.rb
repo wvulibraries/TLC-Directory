@@ -3,7 +3,7 @@ class Admin::PhonesController < ApplicationController
   layout 'admin'
 
   before_action :find_user, only: [:new]
-  before_action :set_email_address, only: [:show, :edit, :update, :destroy]
+  before_action :set_email_address, only: %i[show edit update destroy]
 
   # GET /phones
   # GET /phones.json
@@ -68,18 +68,17 @@ class Admin::PhonesController < ApplicationController
   end
 
   private
-  
-    # Use callbacks to share common setup or constraints between actions.
-    def find_user
-      @user = User.find(params[:user_id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def find_user
+    @user = User.find(params[:user_id])
+  end
 
-    def set_phone
-      @phone = Phone.find(params[:id])
-    end
+  def set_phone
+    @phone = Phone.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def phone_params
-      params.require(:phone).permit(:user_id, :phone_number, :type)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def phone_params
+    params.require(:phone).permit(:user_id, :phone_number, :type)
+  end
 end

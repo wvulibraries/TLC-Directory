@@ -3,7 +3,7 @@ class Admin::WebsitesController < ApplicationController
   layout 'admin'
 
   before_action :find_user, only: [:new]
-  before_action :set_website, only: [:show, :edit, :update, :destroy]
+  before_action :set_website, only: %i[show edit update destroy]
 
   # GET /websites
   # GET /websites.json
@@ -69,17 +69,17 @@ class Admin::WebsitesController < ApplicationController
 
   private
 
-    # Use callbacks to share common setup or constraints between actions.
-    def find_user
-      @user = User.find(params[:user_id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def find_user
+    @user = User.find(params[:user_id])
+  end
 
-    def set_website
-      @website = Website.find(params[:id])
-    end
+  def set_website
+    @website = Website.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def website_params
-      params.require(:website).permit(:user_id, :website_url)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def website_params
+    params.require(:website).permit(:user_id, :website_url)
+  end
 end

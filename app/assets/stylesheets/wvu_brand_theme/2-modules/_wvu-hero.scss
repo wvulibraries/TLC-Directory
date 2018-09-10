@@ -1,0 +1,352 @@
+$wvu-hero-image-width: 1720px !default;
+$wvu-hero-image-height: 580px !default;
+$wvu-hero-container-padding: $wvu-container-padding !default;
+
+// Typography
+$wvu-shout-font-size-medium: 4.5em !default;
+$wvu-shout-font-size-long: 3em !default;
+
+$wvu-hero-title-typeface: $wvu-shout !default;
+
+/*
+  Options for WVU Hero Title typeface:
+  $wvu-shout (Helvetica Neue Black Condensed)
+  $base-font-family (Helvetica Neue)
+  $wvu-traditional-audience (Iowan Old Style)
+  $narrow-audience (Iowan Old Style Italic)
+*/
+
+$wvu-shout-length: 'short' !default;
+
+/*
+  If using Shout, options for WVU Shout length:
+  short
+  medium
+  long
+*/
+
+// Elements
+
+$wvu-pattern-grid-zoom: $grid-zoom-1 !default;
+
+/*
+  Options for $wvu-pattern-grid-zoom:
+  $grid-zoom-1 (close)
+  $grid-zoom-2 (wide)
+  $grid-zoom-3 (cover)
+*/
+
+$diagonal-line: $diagonal-line-gold-transparent !default;
+
+/*
+  Options for diagonal line:
+  $diagonal-line-gold
+  $diagonal-line-blue
+  $diagonal-line-white
+  $diagonal-line-gold-transparent
+  $diagonal-line-blue-transparent
+  $diagonal-line-white-transparent
+*/
+
+$wvu-hero-title-color: white !default;
+$is-wvu-shout-bottom-gold: true !default;
+$has-small-photo: false !default;
+$has-vignetting: false !default;
+$wvu-hero-vignetting-opacity: 0 !default;
+
+// Pick one -- Can only have one or the other (diagonal line or WVU grid pattern)
+
+$has-diagonal-line: true !default;
+$has-wvu-pattern-grid: true !default;
+
+@mixin wvu-hero-title-typeface {
+
+  @if $wvu-hero-title-typeface == $wvu-traditional-audience {
+    font-family: $iowan-old-style; font-weight: normal; text-transform: none; line-height: $wvu-traditional-audience-line-height;
+    .wvu-hero__title-bottom { color: white; }
+  }
+  @else if $wvu-hero-title-typeface == $narrow-audience {
+    font-family: $iowan-old-style-italic; font-weight: normal; text-transform: none; line-height: $wvu-traditional-audience-line-height;
+    .wvu-hero__title-bottom { color: white; }
+  }
+  @else if $wvu-hero-title-typeface == $base-font-family {
+    font-weight: bold; text-transform: none;
+    .wvu-hero__title-bottom { color: white; }
+  }
+  @else if $wvu-hero-title-typeface == $wvu-shout { font-size: 3em; line-height: $wvu-shout-line-height; text-transform: uppercase; font-weight: normal;
+    @include mq($bp-medium) { font-size: $wvu-shout-font-size; }
+    @if $is-wvu-shout-bottom-gold == true {
+      .wvu-hero__title-bottom { color: $wvu-gold; }
+    }
+  }
+}
+
+.wvu-hero {
+  background-color: $pms-432-c;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  overflow: hidden;
+  padding: 0 2em;
+  position: relative;
+  @include mq($bp-xlarge) {
+    padding: 0;
+  }
+  a {
+    color: white;
+    position: relative;
+    z-index: 3;
+  }
+  h1 {
+    font-size: 4.5em;
+    line-height: $header-line-height;
+    margin-bottom: 0;
+    margin-top: 0;
+    max-width: 8em;
+    position: relative;
+    @include wvu-shout();
+    text-transform: uppercase;
+    @include mq($bp-large) {
+      margin-top: 1em;
+    }
+    span {
+      position: relative;
+      z-index: 3;
+    }
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: white;
+  }
+  img {
+    border: 1px solid $black;
+    position: relative;
+    z-index: 3;
+  }
+  p {
+    margin-bottom: 2em;
+    margin-top: 2em;
+    position: relative;
+    z-index: 3;
+  }
+}
+
+.wvu-hero--big-photo {
+  .wvu-hero__copy {
+    h1 {
+      margin-top: .8em;
+      @include mq($bp-large) {
+        font-size: 6.2em;
+        max-width: 6em;
+      }
+    }
+    p {
+      font-size: 1.25em;
+      max-width: 24em;
+    }
+    h1, p, a {
+      text-shadow: 1px 1px 1px #000000;
+    }
+    a {
+      &:hover {
+        text-shadow: none;
+      }
+    }
+    @include mq($bp-medium) {
+      @include span-columns(12);
+    }
+    &.wvu-hero__copy--edit-mode {
+      @include mq($bp-medium) {
+        @include span-columns(6);
+      }
+    }
+  }
+  .wvu-hero__container {
+    padding: 4em 0 8.3em 0;
+  }
+}
+
+.wvu-hero--right {
+  .wvu-hero__container {
+    &:before {
+      background: radial-gradient(farthest-side at 30% 55%, transparent, #000 131%);
+    }
+  }
+  .wvu-hero__copy {
+    float: right;
+    width: auto;
+  }
+}
+
+.wvu-hero__container {
+  @include u-wvu-container-padding();
+  @include so-vignetting($wvu-hero-vignetting-opacity);
+}
+
+.wvu-hero__copy {
+  margin-bottom: 2em;
+  @include mq($bp-medium) {
+    margin-bottom: 0;
+  }
+}
+
+.wvu-hero__copy, .wvu-hero__photo {
+  @include mq($bp-medium) {
+    @include span-columns(6);
+  }
+}
+
+.wvu-hero__photo-caption {
+  background-color: $black;
+  color: shade(white, 20%);
+  font-size: 0.8em;
+  position: relative;
+  text-transform: uppercase;
+  z-index: 3;
+  @include mq($bp-medium) {
+    float: right;
+  }
+}
+
+.wvu-hero__photo-container--has-video-true {
+  @include u-wvu-embed-container();
+  z-index: 3;
+}
+
+.wvu-hero__photo--edit-mode {
+  .wvu-hero__photo-container--has-video-true {
+    position: relative;
+    padding-bottom: 0;
+    padding-top: 0;
+    height: auto;
+    overflow: auto;
+    iframe, object, video, embed {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.page--edit-mode {
+  .wvu-hero {
+    h1 {
+      &:before {
+        display: none;
+      }
+    }
+  }
+  .wvu-hero__container {
+    &:before {
+      display: none;
+    }
+  }
+}
+
+$i: 90;
+@while $i > 0 {
+  .wvu-hero__container {
+    &.wvu-hero__container--vignetting-#{$i} {
+      &:before {
+        opacity: $i * .01;
+      }
+    }
+    $i: $i - 10;
+  }
+}
+
+@mixin has-vignetting {
+  @if $has-vignetting == true {
+    .wvu-hero__container {
+      :before {
+        opacity: $wvu-hero-vignetting-opacity;
+      }
+    }
+  }
+}
+
+@mixin has-diagonal-line {
+  @if $has-diagonal-line == true {
+    .wvu-hero {
+      .wvu-hero__copy {
+        h1 {
+          @include so-gold-slash();
+          &:before {
+            background-size: 292px;
+            left: -202px;
+            top: -83px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.edit-mode {
+  .wvu-hero__container {
+    &:before {
+      display: none;
+    }
+  }
+  .wvu-hero__copy {
+    h1 {
+      &:before {
+        display: none;
+      }
+    }
+  }
+}
+
+@mixin wvu-shout-length {
+  @if $wvu-shout-length == 'medium' {
+    @if $wvu-hero-title-typeface == $wvu-shout {
+      .wvu-hero--big-photo {
+        &.wvu-hero--medium-shout {
+          .wvu-hero__copy {
+            h1 { font-size: 4.5em; }
+          }
+          .wvu-hero__container {
+            padding: 4em 0 6em 0;
+            @include mq($bp-jumbo) {
+              padding: 4em 0;
+            }
+          }
+        }
+      }
+      .wvu-hero--medium-shout {
+        .wvu-hero__copy {
+          h1 { font-size: 4.5em; }
+        }
+        .wvu-hero__container {
+          padding: 4em 0 6em 0;
+          @include mq($bp-jumbo) {
+            padding: 4em 0;
+          }
+        }
+      }
+    }
+  }
+  @else if $wvu-shout-length == 'long' {
+    @if $wvu-hero-title-typeface == $wvu-shout {
+      .wvu-hero--big-photo {
+        &.wvu-hero--long-shout {
+          .wvu-hero__copy {
+            h1 { font-size: 3em; }
+          }
+        }
+      }
+      .wvu-hero--long-shout {
+        .wvu-hero__copy {
+          h1 { font-size: 3em; }
+        }
+      }
+    }
+  }
+}
+
+@include wvu-shout-length;
+@include has-vignetting;
+@include has-diagonal-line;

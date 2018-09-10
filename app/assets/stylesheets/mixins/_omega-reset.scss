@@ -1,0 +1,9 @@
+// ------------------------------------------------------------
+// Omega Reset
+// ------------------------------------------------------------
+// * CREDIT JOSH FRY
+
+@mixin omega-reset($nth) {
+  &:nth-child(#{$nth}) { margin-right: flex-gutter(); }
+  &:nth-child(#{$nth}+1) { clear: none }
+}

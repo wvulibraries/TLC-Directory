@@ -1,0 +1,25 @@
+@mixin alert($type){
+  padding:10px;
+  color:#000;
+  font-size: 12px;
+  font-weight:bold;
+  @include span-columns(12);
+  margin-bottom:20px;
+
+  @if $type == 'notice' {
+    background: $notice;
+    // text-shadow: 2px 2px 5px darken($notice, 20%);
+  } @else if $type == 'warning' {
+    background: $warning;
+    // text-shadow: 2px 2px 5px darken($warning, 20%);
+  } @else if $type == 'success' {
+    background: $success;
+    // text-shadow: 2px 2px 5px darken($success, 20%);
+  } @else if $type == 'error'{
+    background: $error;
+    // text-shadow: 2px 2px 5px darken($error, 20%);
+  } @else {
+    background: $default;
+    // text-shadow: 2px 2px 5px darken($default, 20%);
+  }
+}

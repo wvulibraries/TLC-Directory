@@ -1,0 +1,20 @@
+.wvu-triptych-combo__panel--spotlights {
+  @include mq($bp-medium) {
+    @include span-columns(8);
+    .wvu-spotlight__image {
+      @include mq($bp-medium) {
+        @include span-columns(3.5);
+      }
+    }
+    .wvu-spotlight__copy {
+      @include mq($bp-medium) {
+        @include span-columns(8.5);
+      }
+    }
+  }
+}
+.wvu-triptych-combo__panel--calendar {
+  @include mq($bp-medium) {
+    @include span-columns(4);
+  }
+}

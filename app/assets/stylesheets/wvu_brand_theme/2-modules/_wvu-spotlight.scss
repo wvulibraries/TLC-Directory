@@ -1,0 +1,10 @@
+.wvu-spotlight {
+  margin-bottom: 2em;
+  padding: 0 1em;
+  img { padding-bottom: 1em; }
+  h2 { margin-top: 0; }
+  @include mq($bp-medium) {
+    margin-bottom: 0;
+    padding: 0;
+  }
+}

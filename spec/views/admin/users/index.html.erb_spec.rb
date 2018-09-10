@@ -4,7 +4,7 @@ RSpec.describe "admin/users/index", type: :view do
   before(:each) do
     assign(:users, [
       User.create!(
-        username: 'Username',
+        wvu_username: 'Username',
         last_name: 'Last Name',
         first_name: 'First Name',
         role: :user,

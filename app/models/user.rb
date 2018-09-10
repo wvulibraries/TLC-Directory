@@ -7,9 +7,7 @@ class User < ApplicationRecord
   enum status: %i[active disabled]
   enum role: %i[user editor admin]
   # all the basic validations for this new record to be inserted
-  validates :username, presence: true,
-                       length: { within: 7..25 },
-                       uniqueness: true
+  validates :wvu_username, presence: true, length: { within: 7..70 }, uniqueness: true
   validates :first_name, presence: true,
                          length: { maximum: 25 }
   validates :last_name, presence: true,

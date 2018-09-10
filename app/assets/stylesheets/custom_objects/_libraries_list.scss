@@ -1,0 +1,42 @@
+@import "../partials/_variables";
+
+.wvu-masthead__libraries-links {
+  //margin-top: 40px;
+
+}
+
+.wvu-masthead__libraries-links-list {
+  float: right;
+  list-style-type: inline-block;
+  // list-style-image: none;
+  font-size: 12px;
+  li {
+    display: inline;
+    margin: 0;
+    padding: 0;
+  }
+
+  // width: 50%;
+  float: right;
+  // padding: 0px 0px 20px 0px;
+  // list-style-type: none;
+  // list-style-image: none;
+  // float: right;
+  // font-size: 12px;
+  // li {
+  //   display: inline-block;
+  // }
+}
+
+.wvu-masthead__libraries-links-item {
+  a {
+    font-weight: bold;
+    margin: 0 0.5em;
+    color: white;
+    text-decoration: none;
+    &:hover {
+      text-decoration:underline;
+    }
+  }
+
+}

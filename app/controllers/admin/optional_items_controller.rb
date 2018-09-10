@@ -1,4 +1,6 @@
 class Admin::OptionalItemsController < ApplicationController
+  include OptionalItemsConcern
+
   # tell rails which view layout to use with this controller
   layout 'admin'
 
@@ -28,94 +30,28 @@ class Admin::OptionalItemsController < ApplicationController
   def create
     @user = User.find(website_params[:user_id])
 
-    address_params[:addresses_attributes].each do |key, item|
-      if item['id'] == '' && item['street_address_1'] != '' && item['city'] != '' && item['state'] != '' && item['zip_code'] != ''
-        @user.addresses.build(street_address_1: item['street_address_1'], street_address_2: item['street_address_2'], city: item['city'], state: item['state'], zip_code: item['zip_code'])
-        @user.save
-      elsif item['id'] != '' && item['street_address_1'] != '' && item['city'] != '' && item['state'] != '' && item['zip_code'] != ''
-        address_object = Address.find(item['id'])
-        if address_object.street_address_1 != item['street_address_1'] || address_object.street_address_2 != item['street_address_2'] || address_object.city != item['city'] || address_object.state != item['state'] || address_object.zip_code != item['zip_code']
-          address_object.update(street_address_1: item['street_address_1'], street_address_2: item['street_address_2'], city: item['city'], state: item['state'], zip_code: item['zip_code'])
-        end
-      elsif item['id'] != '' && item['street_address_1'] == '' && item['street_address_2'] == '' && item['city'] == '' && item['state'] == '' && item['zip_code'] == ''
-        address_object = Address.find(item['id'])
-        address_object.destroy
-      end
+    address_params[:addresses_attributes].each do |_key, item|
+      process_address(website_params[:user_id], item)
     end
 
-    award_params[:awards_attributes].each do |key, item|
-      if item['id'] == '' && item['description'] != ''
-        @user.awards.build(description: item['description'])
-        @user.save
-      elsif item['id'] != '' && item['description'] != ''
-        award_object = Award.find(item['id'])
-        if award_object.description != item['description']
-          award_object.update(description: item['description'])
-        end
-      elsif item['id'] != '' && item['description'] == ''
-        award_object = Award.find(item['id'])
-        award_object.destroy
-      end
+    award_params[:awards_attributes].each do |_key, item|
+      process_description(website_params[:user_id], item)
     end
 
-    email_address_params[:email_addresses_attributes].each do |key, item|
-      if item['id'] == '' && item['email'] != ''
-        @user.email_addresses.build(email: item['email'])
-        @user.save
-      elsif item['id'] != '' && item['email'] != ''
-        email_object = EmailAddress.find(item['id'])
-        if email_object.email != item['email']
-          email_object.update(email: item['email'])
-        end
-      elsif item['id'] != '' && item['email'] == ''
-        email_object = EmailAddress.find(item['id'])
-        email_object.destroy
-      end
+    email_address_params[:email_addresses_attributes].each do |_key, item|
+      process_email_address(website_params[:user_id], item)
     end
 
-    phone_params[:phones_attributes].each do |key, item|
-      if item['id'] == '' && item['phone_number'] != '' && item['type'] != ''
-        @user.phones.build(phone_number: item['phone_number'], phone_type: item['phone_type'])
-        @user.save
-      elsif item['id'] != '' && item['phone_number'] != '' && item['phone_type'] != ''
-        phone_object = Phone.find(item['id'])
-        if phone_object.phone_number != item['phone_number'] || phone_object.phone_type != item['phone_type']
-          phone_object.update(phone_number: item['phone_number'], phone_type: item['phone_type'])
-        end
-      elsif item['id'] != '' && item['phone_number'] == '' && item['phone_type'] == ''
-        phone_object = Phone.find(item['id'])
-        phone_object.destroy
-      end
+    phone_params[:phones_attributes].each do |_key, item|
+      process_phone(website_params[:user_id], item)
     end
 
-    publication_params[:publications_attributes].each do |key, item|
-      if item['id'] == '' && item['description'] != ''
-        @user.publications.build(description: item['description'])
-        @user.save
-      elsif item['id'] != '' && item['description'] != ''
-        publication_object = Publication.find(item['id'])
-        if publication_object.description != item['description']
-          publication_object.update(description: item['description'])
-        end
-      elsif item['id'] != '' && item['description'] == ''
-        publication_object = Publication.find(item['id'])
-        publication_object.destroy
-      end
+    publication_params[:publications_attributes].each do |_key, item|
+      process_publication(website_params[:user_id], item)
     end
 
-    website_params[:websites_attributes].each do |key, item|
-      if item['id'] == '' && item['website_url'] != ''
-        @user.websites.build(website_url: item['website_url'])
-        @user.save
-      elsif item['id'] != '' && item['website_url'] != ''
-        website_object = Website.find(item['id'])
-        if website_object.website_url != item['website_url']
-          website_object.update(website_url: item['website_url'])
-        end
-      elsif item['id'] != '' && item['website_url'] == ''
-        website_object = Website.find(item['id'])
-        website_object.destroy
-      end
+    website_params[:websites_attributes].each do |_key, item|
+      process_website(website_params[:user_id], item)
     end
 
     redirect_to @user

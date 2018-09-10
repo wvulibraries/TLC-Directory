@@ -1,0 +1,92 @@
+// Make writing media queries easier
+// =======================
+// From:
+// https://github.com/sturobson/sassifaction/blob/master/modules/mixins/_media-queries.scss
+// and
+// http://alwaystwisted.com/post.php?s=2013-04-01-my-media-query-mixin
+// Use the mixin and use pixel values (eg 320), it outputs em based queries
+
+// Required stuffs:
+$doc-font-size: 16;
+
+// Some things you can optionally configure:
+// $doc-line-height: 24;
+// $point : is the pixel value for your major or minor breakpoint
+// $IE9 : is predefined as false, changing this to true would include the IE9 conditional class of CSS
+// $query1 : this is for either min,max, min-device, or max-device defining the first part of the media query. Predefined as min
+// $query2 : this if for either width or height defining the second part of the media query. Predefined as max.
+
+// media query 'major breakpoint' variables
+// These are optional, but helpful if you don't want to remember sizes
+// $tiny              :  320;
+// $smaller         :  480;
+// $small            :  600;
+// $medium        :  760;
+// $regular          :  900;
+// $large             : 1100;
+// $extra-large    : 1300;
+
+
+// Media Query Mixin for min/max/min-device and max-device width or height
+// =======================
+@mixin mq($point, $IE9: false, $query1: min, $query2: width) {
+    @if $IE9 == true{
+        .lt-ie9 & {
+            @content;
+        }
+        @media (#{$query1}-#{$query2}: $point / $doc-font-size +em) {
+            @content;
+        }
+    }
+
+    @else {
+        @media (#{$query1}-#{$query2}: $point / $doc-font-size +em) {
+            @content;
+        }
+    }
+}
+
+// Usage example
+// .example { @include mq(320); }
+
+//Outputs
+// @media screen and (min-width: 20em) {
+//     .example {
+//         width: 100%;
+//     }
+// }
+
+
+
+
+
+// Orientation Media Query Mixin
+// =======================
+@mixin orient($orientation: landscape) {
+    @media (orientation : $orientation) {
+        @content;
+    }
+}
+// Usage example:
+// .example {
+//     @include mq(768) {
+//         @include orient { .. stuff goes in here... }
+//     }
+// }
+// '@include orient' defaults to landscape
+
+// or
+
+// @include mq(768) {
+//     @include orient(portrait) {
+//         .example {
+//             width: 100%;
+//         }
+//     }
+// }
+// Outputs:
+// @media (min-width: 48em) and (orientation: portrait) {
+//     .example {
+//         width: 100%;
+//     }
+// }
