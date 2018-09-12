@@ -2,30 +2,49 @@
 module OptionalItemsConcern
   extend ActiveSupport::Concern
 
-  def process_address(user_id, item)
+  def valid_address_id(id)
+    address_object = Address.find(item['id']) if id != ''
+    !address_object.nil?
+  end
+
+  def blank_address?(item)
+    # return true if all address fields are blank
+    item['street_address_1'] == '' && item['street_address_2'] == '' && item['city'] == '' && item['state'] == '' && item['zip_code'] == ''
+  end
+
+  def create_new_address(user_id, item)
     @user = User.find(user_id)
+    @user.addresses.build(street_address_1: item['street_address_1'],
+                          street_address_2: item['street_address_2'],
+                          city: item['city'],
+                          state: item['state'],
+                          zip_code: item['zip_code'])
+    @user.save
+  end
 
-    # if item['id'] is set will will look for the Address item
-    if item['id'] != ''
-      address_object = Address.find(item['id'])
+  def update_address(item)
+    address_object = Address.find(item['id'])
+    address_object.update(street_address_1: item['street_address_1'],
+                          street_address_2: item['street_address_2'],
+                          city: item['city'],
+                          state: item['state'],
+                          zip_code: item['zip_code'])
+  end
 
-      # if all fields are blank then we delete the item
-      if item['street_address_1'] == '' && item['street_address_2'] == '' && item['city'] == '' && item['state'] == '' && item['zip_code'] == ''
-        address_object.destroy
-      else
-        address_object.update(street_address_1: item['street_address_1'],
-                              street_address_2: item['street_address_2'],
-                              city: item['city'],
-                              state: item['state'],
-                              zip_code: item['zip_code'])
-      end
+  def update_or_destroy(item)
+    if blank_address?(item['id'])
+      address_object.destroy
     else
-      @user.addresses.build(street_address_1: item['street_address_1'],
-                            street_address_2: item['street_address_2'],
-                            city: item['city'],
-                            state: item['state'],
-                            zip_code: item['zip_code'])
-      @user.save
+      update_address(item)
+    end
+  end
+
+  def process_address(user_id, item)
+    # if blank fields and valid id destroy record
+    if valid_address_id(item['id'])
+      update_or_destroy(item)
+    elsif !blank_address?(item)
+      create_new_address(user_id, item)
     end
   end
 
