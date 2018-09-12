@@ -16,3 +16,4 @@ script:
   - bundle exec rspec
 before_script:
   - mysql -e 'create database tlcdirectory_test'
+  - "cp ./.travis.database.yml ./config/database.yml"
