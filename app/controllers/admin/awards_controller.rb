@@ -13,8 +13,7 @@ class Admin::AwardsController < ApplicationController
 
   # GET /awards/1
   # GET /awards/1.json
-  def show
-  end
+  def show; end
 
   # GET /awards/new
   def new
@@ -22,8 +21,7 @@ class Admin::AwardsController < ApplicationController
   end
 
   # GET /awards/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /awards
   # POST /awards.json
@@ -78,7 +76,8 @@ class Admin::AwardsController < ApplicationController
     @award = Award.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the white list
+  # through.
   def award_params
     params.require(:award).permit(:user_id, :starting_year, :ending_year, :description)
   end

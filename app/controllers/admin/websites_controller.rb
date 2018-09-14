@@ -13,8 +13,7 @@ class Admin::WebsitesController < ApplicationController
 
   # GET /websites/1
   # GET /websites/1.json
-  def show
-  end
+  def show; end
 
   # GET /websites/new
   def new
@@ -22,8 +21,7 @@ class Admin::WebsitesController < ApplicationController
   end
 
   # GET /websites/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /websites
   # POST /websites.json

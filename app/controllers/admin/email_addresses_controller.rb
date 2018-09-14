@@ -13,8 +13,7 @@ class Admin::EmailAddressesController < ApplicationController
 
   # GET /email_addresses/1
   # GET /email_addresses/1.json
-  def show
-  end
+  def show; end
 
   # GET /email_addresses/new
   def new
@@ -22,8 +21,7 @@ class Admin::EmailAddressesController < ApplicationController
   end
 
   # GET /email_addresses/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /email_addresses
   # POST /email_addresses.json
@@ -68,6 +66,7 @@ class Admin::EmailAddressesController < ApplicationController
   end
 
   private
+
   # Use callbacks to share common setup or constraints between actions.
   def find_user
     @user = User.find(params[:user_id])
@@ -77,7 +76,8 @@ class Admin::EmailAddressesController < ApplicationController
     @email_address = EmailAddress.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the white list
+  # through.
   def email_address_params
     params.require(:email_address).permit(:user_id, :email)
   end

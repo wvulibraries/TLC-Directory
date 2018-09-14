@@ -13,8 +13,7 @@ class Admin::PhonesController < ApplicationController
 
   # GET /phones/1
   # GET /phones/1.json
-  def show
-  end
+  def show; end
 
   # GET /phones/new
   def new
@@ -22,8 +21,7 @@ class Admin::PhonesController < ApplicationController
   end
 
   # GET /phones/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /phones
   # POST /phones.json
@@ -68,6 +66,7 @@ class Admin::PhonesController < ApplicationController
   end
 
   private
+
   # Use callbacks to share common setup or constraints between actions.
   def find_user
     @user = User.find(params[:user_id])
@@ -79,6 +78,6 @@ class Admin::PhonesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def phone_params
-    params.require(:phone).permit(:user_id, :phone_number, :type)
+    params.require(:phone).permit(:user_id, :number, :number_types)
   end
 end

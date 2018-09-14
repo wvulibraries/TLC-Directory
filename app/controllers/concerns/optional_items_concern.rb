@@ -3,7 +3,7 @@ module OptionalItemsConcern
   extend ActiveSupport::Concern
 
   def valid_address_id(id)
-    address_object = Address.find(item['id']) if id != ''
+    address_object = Address.find(id) if id != ''
     !address_object.nil?
   end
 
@@ -85,15 +85,15 @@ module OptionalItemsConcern
   def process_phone(user_id, item)
     @user = User.find(user_id)
 
-    if item['id'] == '' && item['phone_number'] != '' && item['type'] != ''
-      @user.phones.build(phone_number: item['phone_number'], phone_type: item['phone_type'])
+    if item['id'] == '' && item['number'] != '' && item['number_types'] != ''
+      @user.phones.build(number: item['number'], number_types: item['number_types'])
       @user.save
-    elsif item['id'] != '' && item['phone_number'] != '' && item['phone_type'] != ''
+    elsif item['id'] != '' && item['number'] != '' && item['number_types'] != ''
       phone_object = Phone.find(item['id'])
-      if phone_object.phone_number != item['phone_number'] || phone_object.phone_type != item['phone_type']
-        phone_object.update(phone_number: item['phone_number'], phone_type: item['phone_type'])
+      if phone_object.number != item['number'] || phone_object.number_types != item['number_types']
+        phone_object.update(number: item['number'], number_types: item['number_types'])
       end
-    elsif item['id'] != '' && item['phone_number'] == '' && item['phone_type'] == ''
+    elsif item['id'] != '' && item['number'] == '' && item['number_types'] == ''
       phone_object = Phone.find(item['id'])
       phone_object.destroy
     end

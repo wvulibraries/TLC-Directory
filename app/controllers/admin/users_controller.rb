@@ -55,30 +55,14 @@ class Admin::UsersController < ApplicationController
     @user.profile.update profile_params unless profile_params.nil?
     @user.picture.update picture_params unless picture_params.nil?
 
-    # add university from drop down to prevent duplicates we check if there is already an association
-    #@user.universities << University.find(university_params[:university_id]) unless @user.universities.exists?(university_params[:university_id])
-
-    # address_params[:addresses_attributes].each do |key, item|
-    #   if item['id'] == '' && item['street_address_1'] != '' && item['city'] != '' && item['state'] != '' && item['zip_code'] != ''
-    #     @user.addresses.build(street_address_1: item['street_address_1'], street_address_2: item['street_address_2'], city: item['city'], state: item['state'], zip_code: item['zip_code'])
-    #     @user.save
-    #   elsif item['id'] != '' && item['street_address_1'] != '' && item['city'] != '' && item['state'] != '' && item['zip_code'] != ''
-    #     address_object = Address.find(item['id'])
-    #     if address_object.street_address_1 != item['street_address_1'] || address_object.street_address_2 != item['street_address_2'] || address_object.city != item['city'] || address_object.state != item['state'] || address_object.zip_code != item['zip_code']
-    #       address_object.update(street_address_1: item['street_address_1'], street_address_2: item['street_address_2'], city: item['city'], state: item['state'], zip_code: item['zip_code'])
-    #     end
-    #   elsif item['id'] != '' && item['street_address_1'] == '' && item['street_address_2'] == '' && item['city'] == '' && item['state'] == '' && item['zip_code'] == ''
-    #     address_object = Address.find(item['id'])
-    #     address_object.destroy
-    #   end
-    #end
-
     respond_to do |format|
       if @user.update user_params
-        format.html { redirect_to admin_user_path, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
+        # format.html { redirect_to @user, notice: 'User was successfully created.' }
+        # format.json { render :show, status: :created, location: @user }
+        format.html { redirect_to edit_optional_item_path(user_id: @user.id), notice: 'User was successfully Updated.' }
+        format.json { render :show, status: :created, location: @user }
       else
-        format.html { render :edit }
+        format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

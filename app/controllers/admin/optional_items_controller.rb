@@ -4,9 +4,12 @@ class Admin::OptionalItemsController < ApplicationController
   # tell rails which view layout to use with this controller
   layout 'admin'
 
-  before_action :find_user, only: [:index, :new, :edit]
-  before_action :create_empty_fields, only: [:new, :edit]
-  before_action :address_params, :publication_params, :website_params, only: [:show, :update, :destroy]
+  before_action :find_user, only: %i[index new edit]
+  before_action :create_empty_fields, only: %i[new edit]
+  before_action :address_params,
+                :publication_params,
+                :website_params,
+                only: %i[show update destroy]
 
   # GET /optional_items
   # GET /optional_items.json
@@ -87,41 +90,41 @@ class Admin::OptionalItemsController < ApplicationController
 
   private
 
-    # Use callbacks to share common setup or constraints between actions.
-    def find_user
-      @user = User.find(params[:user_id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def find_user
+    @user = User.find(params[:user_id])
+  end
 
-    def create_empty_fields
-      @user.addresses.new
-      @user.awards.new
-      @user.email_addresses.new
-      @user.phones.new
-      @user.publications.new
-      @user.websites.new
-    end
+  def create_empty_fields
+    @user.addresses.new
+    @user.awards.new
+    @user.email_addresses.new
+    @user.phones.new
+    @user.publications.new
+    @user.websites.new
+  end
 
-    def address_params
-      params.require(:user).permit(:user_id, addresses_attributes: [:id, :street_address_1, :street_address_2, :city, :state, :zip_code])
-    end
+  def address_params
+    params.require(:user).permit(:user_id, addresses_attributes: %i[id street_address_1 street_address_2 city state zip_code])
+  end
 
-    def award_params
-      params.require(:user).permit(:user_id, awards_attributes: [:id, :description])
-    end
+  def award_params
+    params.require(:user).permit(:user_id, awards_attributes: %i[id description])
+  end
 
-    def email_address_params
-      params.require(:user).permit(:user_id, email_addresses_attributes: [:id, :email])
-    end
+  def email_address_params
+    params.require(:user).permit(:user_id, email_addresses_attributes: %i[id email])
+  end
 
-    def phone_params
-      params.require(:user).permit(:user_id, phones_attributes: [:id, :phone_number, :phone_type])
-    end
+  def phone_params
+    params.require(:user).permit(:user_id, phones_attributes: %i[id number number_type])
+  end
 
-    def publication_params
-      params.require(:user).permit(:user_id, publications_attributes: [:id, :description])
-    end
+  def publication_params
+    params.require(:user).permit(:user_id, publications_attributes: %i[id description])
+  end
 
-    def website_params
-      params.require(:user).permit(:user_id, websites_attributes: [:id, :website_url])
-    end
+  def website_params
+    params.require(:user).permit(:user_id, websites_attributes: %i[id website_url])
+  end
 end

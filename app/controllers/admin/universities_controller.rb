@@ -15,8 +15,7 @@ class Admin::UniversitiesController < ApplicationController
 
   # GET /universities/1
   # GET /universities/1.json
-  def show
-  end
+  def show; end
 
   # GET /universities/new
   def new
@@ -24,8 +23,7 @@ class Admin::UniversitiesController < ApplicationController
   end
 
   # GET /universities/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /universities
   # POST /universities.json
@@ -69,13 +67,14 @@ class Admin::UniversitiesController < ApplicationController
 
   private
 
-    # Use callbacks to share common setup or constraints between actions.
-    def find_university
-      @university = University.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def find_university
+    @university = University.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def university_params
-      params.require(:university).permit(:name)
-    end
+  # Never trust parameters from the scary internet, only allow the white list
+  # through.
+  def university_params
+    params.require(:university).permit(:name)
+  end
 end

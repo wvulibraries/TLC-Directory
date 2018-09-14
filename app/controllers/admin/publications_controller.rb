@@ -13,8 +13,7 @@ class Admin::PublicationsController < ApplicationController
 
   # GET /biographies/1
   # GET /biographies/1.json
-  def show
-  end
+  def show; end
 
   # GET /biographies/new
   def new
@@ -22,8 +21,7 @@ class Admin::PublicationsController < ApplicationController
   end
 
   # GET /biographies/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /biographies
   # POST /biographies.json
@@ -68,17 +66,19 @@ class Admin::PublicationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def find_user
-      @user = User.find(params[:user_id])
-    end
 
-    def set_publication
-      @publication = Publication.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def find_user
+    @user = User.find(params[:user_id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def publication_params
-      params.require(:publication).permit(:user_id, :description)
-    end
+  def set_publication
+    @publication = Publication.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list
+  # through.
+  def publication_params
+    params.require(:publication).permit(:user_id, :description)
+  end
 end

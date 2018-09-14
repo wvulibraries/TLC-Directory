@@ -17,6 +17,6 @@ class Address < ApplicationRecord
 
   # human_readable
   def human_readable
-    "#{line1} #{line2}, #{city}, #{state} #{zip}"
+    "#{street_address_1} #{street_address_2}, #{city}, #{state} #{zip_code}"
   end
 end

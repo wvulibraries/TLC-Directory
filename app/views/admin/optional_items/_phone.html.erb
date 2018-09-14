@@ -1,7 +1,7 @@
 <div id="phone<%= count %>">
   <%= phone.hidden_field :id, id: 'id' %>
-  <%= phone.text_field :phone_number, id: 'phone_number' %>
-  <%= phone.text_field :phone_type, id: 'phone_type' %>
+  <%= phone.text_field :number, id: 'number' %>
+  <%= phone.text_field :number_types, id: 'number_types' %>
   <% if count < @user.phones.count %>
     <input id="button" type="button" name="button" value="-" onClick="Javascript:onClickRemove(this)">
   <% else %>
