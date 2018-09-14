@@ -1,50 +1,36 @@
-<div class="wvu-main-content">
+<h2>User's</h2>
 
-  <div class="wrap content-wrapper">
+<tbody>
 
-    <div class="col-4 col-s-12 side-content-left">
-         <h3>Admin Navigation</h3>
-    </div>
+  <table>
+    <thead>
+      <tr>
+        <th>WVU Username</th>
+        <th>Last name</th>
+        <th>First name</th>
+        <th>Middle name</th>
+        <th>Status</th>
+        <th>Role</th>
+        <th>Visible</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
 
-    <div class="col-8 sol-s-12 wvu-main-content-right">
-      <tbody>
-        <h1>Users</h1>
-        <table>
-          <thead>
-            <tr>
-              <th>Username</th>
-              <th>Full name</th>
-              <th>Last name</th>
-              <th>First name</th>
-              <th>Middle name</th>
-              <th>Status</th>
-              <th>Role</th>
-              <th>Visible</th>
-              <th colspan="3"></th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <% @users.each do |user| %>
-              <tr>
-                <td><%= user.wvu_username %></td>
-                <td><%= user.name %></td>
-                <td><%= user.last_name %></td>
-                <td><%= user.first_name %></td>
-                <td><%= user.middle_name %></td>
-                <td><%= user.status %></td>
-                <td><%= user.role %></td>
-                <td><%= user.visible %></td>
-                <td><%= link_to 'Show', user %></td>
-                <td><%= link_to 'Edit', edit_user_path(user) %></td>
-                <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-        <br>
-        <%= link_to 'New User', new_user_path %>
-      </tbody>
-    </div>
-  </div>
-</div>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.wvu_username %></td>
+          <td><%= user.last_name %></td>
+          <td><%= user.first_name %></td>
+          <td><%= user.middle_name %></td>
+          <td><%= user.status %></td>
+          <td><%= user.role %></td>
+          <td><%= user.visible %></td>
+          <td><%= link_to 'Show', admin_user_path(user) %></td>
+          <td><%= link_to 'Edit', edit_admin_user_path(user) %></td>
+          <td><%= link_to 'Destroy', admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</tbody>

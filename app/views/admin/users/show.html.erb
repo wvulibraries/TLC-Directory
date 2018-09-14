@@ -1,67 +1,75 @@
-<div class="wvu-main-content">
+<h2> Showing <%= @user.display_name %> </h2>
 
-  <div class="wrap content-wrapper">
+<div class="show-action">
+    <div class="image">
+      <% if haspicture?(@user) %>
+        <%= image_tag @user.picture.image.url(:medium), alt: "users profile image" %>
+      <% end %>
+    </div>
+      <div class="text-attributes">
+      <ul>
 
-    <div id="sidecontent" class="col-4 col-s-12 side-content-left">
-         <h3>Admin Navigation</h3>
+        <li>
+          <strong> First Name: </strong>
+          <%= @user.first_name %>
+        </li>
+
+        <li>
+          <strong> Middle Name: </strong>
+          <%= @user.middle_name %>
+        </li>
+
+        <li>
+          <strong> Last Name: </strong>
+          <%= @user.last_name %>
+        </li>
+
+        <li>
+          <strong> WVU Username: </strong>
+          <%= @user.wvu_username %>
+        </li>
+
+        <li>
+          <strong> Role: </strong>
+          <%= @user.role.capitalize %>
+        </li>
+
+        <li>
+          <strong> Status: </strong>
+          <%= @user.status.capitalize %>
+        </li>
+
+        <li>
+          <strong> Phone(s): </strong>
+          <ul>
+          <% @user.phones.each do |phone| %>
+            <li>
+              <a href="tel:<%= phone.number %>">
+                <%= phone.number %>
+              </a>
+            </li>
+          <% end %>
+          </ul>
+        </li>
+
+        <li>
+          <strong> Address(es): </strong>
+          <ul>
+          <% @user.addresses.each do |address| %>
+            <li> <%= address.human_readable %> </li>
+          <% end %>
+          </ul>
+        </li>
+
+      </ul>
+      <div class="micro-text">
+        Created at <%= @user.created_at.strftime("%B %d, %Y at %I:%M%p") %> <br/> Updated at <%= @user.updated_at.strftime("%B %d, %Y at %I:%M%p")%>
+      </div>
     </div>
 
-    <div class="col-8 sol-s-12 wvu-main-content-right">
-      <tbody>
-        <h2>User Profile</h2>
-        <div>
-          <% if haspicture?(@user) %>
-            <%= image_tag @user.picture.image.url(:medium) %>
-          <% end %>
-        </div>
-
-        <ul>
-           <li><strong>Username: </strong><%= @user.wvu_username %></li>
-           <li><strong>Full Name: </strong><%= @user.name %></li>
-           <li><strong>Last Name: </strong><%= @user.last_name %></li>
-           <li><strong>First Name: </strong><%= @user.first_name %></li>
-           <li><strong>Middle Name: </strong><%= @user.middle_name %></li>
-           <li><strong>Status: </strong><%= @user.status %></li>
-           <li><strong>Role: </strong><%= @user.role %></li>
-           <li><strong>Visible: </strong><%= @user.visible %></li>
-        </ul>
-
-        <% if @user.universities.count > 0 %>
-          <h3>Universities</h3>
-            <% @user.universities.each do |university| %>
-              <ul>
-                <li><%= university.name %></li>
-              </ul>
-          <% end %>
-        <% end %>
-
-        <% if @email_addresses != nil && @email_addresses.count > 0 %>
-          <h3>Email Addresses</h3>
-            <% @email_addresses.each do |email_address| %>
-              <ul>
-                <li><%= email_address.email %></li>
-              </ul>
-          <% end %>
-        <% end %>
-
-        <% if @addresses != nil && @addresses.count > 0 %>
-          <h3>Addresses</h3>
-          <% @addresses.each do |address| %>
-            <ul>
-               <li><strong>Street Address 1: </strong><%= address.street_address_1 %></li>
-               <li><strong>Street Address 2: </strong><%= address.street_address_2 %></li>
-               <li><strong>City: </strong><%= address.city %></li>
-               <li><strong>State: </strong><%= address.state %></li>
-               <li><strong>Zip Code: </strong><%= address.zip_code %></li>
-            </ul>
-          <% end %>
-        <% end %>
-
-        <%= link_to 'New Email Address', new_email_address_path(user_id: @user.id) %>
-        <%= link_to 'Edit Optional Items', edit_optional_items_path(user_id: @user.id) %>
-        <%= link_to 'Edit', edit_user_path(@user) %> |
-        <%= link_to 'Back', users_path %>
-      </tbody>
+    <div class="actions">
+      <%= link_to '<span class="fas fa-user"></span> Users'.html_safe, '/admin/users', { class: 'new-button' } %>
+      <%= link_to '<span class="fas fa-edit"></span> Edit'.html_safe, edit_admin_user_path(@user), { class: 'edit-button' } %>
+      <%= link_to '<span class="fas fa-trash"></span> Destroy'.html_safe, admin_user_path(@user), method: :delete, class: 'delete-button', data: { confirm: 'Are you sure?' }, title:'delete' %>
     </div>
-  </div>
 </div>

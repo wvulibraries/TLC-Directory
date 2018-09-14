@@ -1,10 +1,14 @@
 class DirectoryController < ApplicationController
-  layout 'directory'
+  #layout 'directory'
 
   before_action :profile_params, only: [:show]
 
   def index
     @user_profiles = User.all.show.sorted
+  end
+
+  def list
+    @users = User.where(visible: true).order(:name)
   end
 
   def show

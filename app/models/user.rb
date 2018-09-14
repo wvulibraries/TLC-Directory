@@ -3,17 +3,21 @@
 # AUTHORS : Tracy McCormick
 # Description:
 class User < ApplicationRecord
-
-  enum status: %i[active disabled]
-  enum role: %i[user editor admin]
   # all the basic validations for this new record to be inserted
-  validates :wvu_username, presence: true, length: { within: 7..70 }, uniqueness: true
+  validates :wvu_username, presence: true,
+                           length: { within: 7..70 },
+                           uniqueness: true
   validates :first_name, presence: true,
                          length: { maximum: 25 }
   validates :last_name, presence: true,
-                         length: { maximum: 50 }
+                        length: { maximum: 50 }
   validates :status, presence: true
   validates :visible, inclusion: { in: [true, false] }
+
+  # enums
+  enum status: %i[active disabled]
+  enum role: %i[user editor admin]
+
 
   has_one :picture, as: :imageable, dependent: :destroy
   accepts_nested_attributes_for :picture
@@ -55,7 +59,12 @@ class User < ApplicationRecord
   end
 
   scope :show, lambda { where(["visible = ? and status = ?", true, "active"])}
-  scope :sorted, lambda { order('last_name ASC', 'first_name ASC') }
+  scope :sorted, lambda { order("last_name ASC", "first_name ASC") }
+
+  # custom methods
+  def display_name
+    [first_name, middle_name, last_name].join(' ')
+  end
 
   def name
     "#{first_name} #{last_name}"
@@ -76,6 +85,7 @@ class User < ApplicationRecord
   end
 
   private
+
   def create_profile
     build_profile(@profile_params)
   end
@@ -87,5 +97,4 @@ class User < ApplicationRecord
   def create_university
     build_university(@university_params)
   end
-
 end

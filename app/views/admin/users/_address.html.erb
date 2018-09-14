@@ -1,0 +1,36 @@
+<fieldset class="address">
+  <legend> Address </legend>
+
+  <div class="field full">
+    <%= form.label :street_address_1, "Street Address", class: 'required' %>
+    <%= form.text_field :street_address_1, placeholder:'124 Fake Street' %>
+  </div>
+
+  <div class="field full">
+    <%= form.label :street_address_2, "Additional Line (Optional)" %>
+    <%= form.text_field :street_address_2, placeholder:'Room 2020 Cube 1' %>
+  </div>
+
+  <div class="field third">
+    <%= form.label :city, class: 'required' %>
+    <%= form.text_field :city, placeholder: 'Great City Falls' %>
+  </div>
+
+  <div class="field third">
+    <%= form.label :state, class: 'required' %>
+    <div class="select-style">
+      <%= form.select :state, options_for_select(us_states, selected: form.object.state), { include_blank: "Select a State" }, { class: "state-select" } %>
+    </div>
+  </div>
+
+  <div class="field third">
+    <%= form.label :zip_code, class: 'required' %>
+    <%= form.text_field :zip_code, placeholder: '55555' %>
+  </div>
+
+  <div class="action">
+    <%= form.hidden_field :_destroy %>
+    <%# form.label :_destroy, "Delete Address" %>
+    <%= link_to '<span class="fas fa-trash-alt"></span>'.html_safe , '#', class: "remove-fields delete-address", title: "Delete Address" %>
+  </div>
+</fieldset>

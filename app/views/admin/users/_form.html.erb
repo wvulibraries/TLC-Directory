@@ -1,82 +1,124 @@
-<%= form_for @user do |f| %>
-
-  <div class="field">
-    <%= f.label :wvu_username %>
-    <%= f.text_field :wvu_username %>
-  </div>
-
-  <div class="field">
-    <%= f.label :last_name %>
-    <%= f.text_field :last_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :first_name %>
-    <%= f.text_field :first_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :middle_name %>
-    <%= f.text_field :middle_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :status %>
-    <%= f.select(:status, User.statuses.keys.map {|status| [status.titleize,status]}) %>
-  </div>
-
-  <div class="field">
-    <%= f.label :role %>
-    <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}) %>
-  </div>
-
-  <div id="university-fields">
-    <%= f.label 'university-list' %>
-    <select class="js-data-example-ajax" id="university-list"></select>
-  </div>
-
-  <div class="field">
-    <%= f.label :visible %>
-    <%= f.check_box :visible %>
-  </div>
-
-  <%= f.fields_for :imageable do |image_upload| %>
-    <%= image_upload.file_field :image, class: "form-control"  %>
+<%= form_for [:admin, user], html: { multipart: true } do |f| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h3><%= pluralize(user.errors.count, "Error") %> </h3>
+      <p> The following prohibited this user from being saved: </p>
+      <ul>
+      <% user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
   <% end %>
 
-  <%= fields_for :profile, @user.profile do |profile_fields| %>
-    <div class="field">
-      <%= profile_fields.label :title %>
-      <%= profile_fields.text_field :title %>
+  <fieldset>
+    <legend> Profile Information </legend>
+    <div class="row">
+
+      <div class="field three-fourth last">
+        <%= f.label :first_name, class: 'required' %>
+        <%= f.text_field :first_name, placeholder: "Joanna" %>
+      </div>
+
+      <div class="field two-fourth last">
+        <%= f.label :middle_name, class: 'required' %>
+        <%= f.text_field :middle_name, placeholder: "Q. (Quinn)" %>
+      </div>
+
+      <div class="field three-fourth">
+        <%= f.label :last_name, class: 'required' %>
+        <%= f.text_field :last_name, placeholder: "Smith" %>
+      </div>
+
+      <div id="university-fields">
+        <%= f.label 'university-list' %>
+        <select class="js-data-example-ajax" id="university-list"></select>
+      </div>
+
+      <div class="field">
+        <%= f.label :visible %>
+        <%= f.check_box :visible %>
+      </div>
+
+      <%= f.fields_for :imageable do |image_upload| %>
+        <%= image_upload.file_field :image, class: "form-control"  %>
+      <% end %>
+
+      <%= fields_for :profile, @user.profile do |profile_fields| %>
+        <div class="field">
+          <%= profile_fields.label :title %>
+          <%= profile_fields.text_field :title %>
+        </div>
+
+        <div class="field">
+          <%= profile_fields.label :department %>
+          <%= profile_fields.text_field :department %>
+        </div>
+
+        <div class="field">
+          <%= profile_fields.label :biography %>
+          <%= profile_fields.text_field :biography %>
+        </div>
+
+        <div class="field">
+          <%= profile_fields.label :research_interests %>
+          <%= profile_fields.text_field :research_interests %>
+        </div>
+
+      <% end %>
+
     </div>
 
-    <div class="field">
-      <%= profile_fields.label :department %>
-      <%= profile_fields.text_field :department %>
+  </fieldset>
+
+  <fieldset>
+    <legend> WVU Profile Information </legend>
+     <div class="row">
+      <div class="field half">
+        <%= f.label :wvu_username, class: 'required' %>
+        <%= f.text_field :wvu_username, placeholder: "jqsmith001" %>
+      </div>
     </div>
 
-    <div class="field">
-      <%= profile_fields.label :biography %>
-      <%= profile_fields.text_field :biography %>
-    </div>
+  </fieldset>
 
-    <div class="field">
-      <%= profile_fields.label :research_interests %>
-      <%= profile_fields.text_field :research_interests %>
-    </div>
+  <fieldset>
+    <legend> Application Access Information </legend>
+    <div class="row">
+      <div class="field half">
+        <%= f.label :role, 'User Role', class:'required' %>
+        <div class="select-style">
+            <%= f.select :role, options_for_select(User.roles.keys.to_a, selected: f.object.role), include_blank: "Select a Role" %>
+        </div>
+      </div>
 
+      <div class="field half last">
+       <%= f.label :status, 'User Status', class:'required' %>
+        <div class="select-style">
+            <%= f.select :status, options_for_select(User.statuses.keys.to_a, selected: f.object.status), include_blank: "Select a Status" %>
+        </div>
+      </div>
+
+      <div class="micro-text">
+        <%= t('notes.user_status') %>
+      </div>
+    </div>
+  </fieldset>
+
+  <!-- Addresses -->
+  <%= f.fields_for :addresses do |form| %>
+    <%= render "address", form: form %>
   <% end %>
+  <%= link_to_add_fields "Add Address", f, :addresses %>
+
+  <!-- Phones -->
+  <%= f.fields_for :phones do |form| %>
+    <%= render "phone", form: form %>
+  <% end %>
+  <%= link_to_add_fields "Add Phones", f, :phones %>
 
   <div class="actions">
-    <div class="submit-button-wrapper">
-      <% if user.id.present? %>
-        <%= f.submit 'Edit User', class: 'submit-button' %>
-      <% else %>
-        <%= f.submit 'Create User', class: 'submit-button' %>
-      <% end %>
-    </div>
-    <div class="cancel-button-wrapper">
-      <%= link_to 'Cancel', users_path, class: 'cancel-button' %>
-    </div>
+    <%= link_to 'Cancel', admin_users_path, class: 'cancel-button' %>
+    <%= f.submit 'Submit', class: 'submit-button' %>
   </div>
 <% end %>

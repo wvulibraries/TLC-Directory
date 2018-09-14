@@ -1,15 +1,44 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TLCDirectory</title>
+    <title> <%= yield :title %> :: Library TLC Directory :: WVU </title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= yield :head %>
   </head>
 
   <body>
-    <%= yield %>
+    <!-- Skip to Navigation -->
+    <a class="wvu-skip-nav" href="#main">Skip to main content</a>
+
+    <!-- Header -->
+    <%= render(:partial => 'shared/public_header') %>
+
+    <!-- Navigation -->
+    <%= render(:partial => 'shared/navigation') %>
+
+    <!-- Main Banner -->
+    <%= render(:partial => 'shared/public_banner') %>
+
+    <!-- Main -->
+    <main id="main" class="backend">
+      <div class="wvu-container">
+        <!-- Flash -->
+        <%= render "utilities/alerts" %>
+
+        <!-- Yield -->
+        <div class="main-content">
+          <%= yield %>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footers -->
+    <%= render(:partial => 'shared/builtby_footer') %>
+
+    <!-- JavaScripts -->
+    <%= yield :js %>
   </body>
 </html>

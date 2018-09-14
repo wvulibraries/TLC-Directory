@@ -1,40 +1,48 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= page_title('TLC Directory') %></title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag 'application', :media => 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
 
-  <body>
-    <!-- Skip to Navigation -->
-    <a class="wvu-skip-nav" href="#main">Skip to main content</a>
+<head>
+  <title> <%= yield :title %> :: Library TLC Directory :: Admin Panel :: WVU </title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= yield :head %>
+</head>
 
-    <%= render(:partial => 'shared/header') %>
-    <%= render(:partial => 'shared/navigation') %>
-    <%= render(:partial => 'shared/admin_banner') %>
+<body>
+  <!-- Skip to Navigation -->
+  <a class="wvu-skip-nav" href="#main">Skip to main content</a>
 
-    <!-- Main -->
-    <main id="main" class="backend">
-      <div class="wvu-container">
-        <!-- Flash -->
-        <%= render "utilities/alerts" %>
+  <!-- Header -->
+  <%= render(:partial => 'shared/header') %>
 
-        <%= render(:partial => 'shared/admin_navigation') %>
+  <!-- Navigation -->
+  <%= render(:partial => 'shared/navigation') %>
 
-        <!-- Yield -->
-        <div class="main-content">
-          <%= yield %>
-        </div>
+  <!-- Main Banner -->
+  <%= render(:partial => 'shared/admin_banner') %>
+
+  <!-- Main -->
+  <main id="main" class="backend">
+    <div class="wvu-container">
+      <!-- Flash -->
+      <%= render "utilities/alerts" %>
+
+      <!-- Admin Menu -->
+      <%= render(:partial => 'shared/admin_navigation') %>
+
+      <!-- Yield -->
+      <div class="main-content">
+        <%= yield %>
       </div>
-    </main>
+    </div>
+  </main>
 
-    <%= render(:partial => 'shared/builtby_footer') %>
+  <!-- Footers -->
+  <%= render(:partial => 'shared/builtby_footer') %>
 
-    <!-- JavaScripts -->
-    <%= yield :js %>
-
-  </body>
+  <!-- JavaScripts -->
+  <%= yield :js %>
+</body>
 </html>
