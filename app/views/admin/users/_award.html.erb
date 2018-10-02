@@ -1,0 +1,24 @@
+<fieldset class="award">
+  <legend> Award </legend>
+
+  <div class="field full">
+    <%= form.label :starting_year, "Starting Year", class: 'required' %>
+    <%= form.text_field :starting_year, placeholder:'2018' %>
+  </div>
+
+  <div class="field full">
+    <%= form.label :ending_year, "Ending Year", class: 'required' %>
+    <%= form.text_field :ending_year, placeholder:'2018' %>
+  </div>
+
+  <div class="field full">
+    <%= form.label :description, "Description", class: 'required' %>
+    <%= form.text_field :description, placeholder:'1st Place in underwater basket weaving' %>
+  </div>
+
+  <div class="action">
+    <%= form.hidden_field :_destroy %>
+    <%# form.label :_destroy, "Delete Address" %>
+    <%= link_to '<span class="fas fa-trash-alt"></span>'.html_safe , '#', class: "remove-fields delete-award", title: "Delete Award" %>
+  </div>
+</fieldset>

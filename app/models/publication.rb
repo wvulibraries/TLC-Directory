@@ -1,4 +1,7 @@
 class Publication < ApplicationRecord
-  belongs_to :user
-  validates :description, presence: true
+  # association
+  belongs_to :publishable, polymorphic: true
+
+  # validations
+  validates :description, length: { within: 0..500 }
 end

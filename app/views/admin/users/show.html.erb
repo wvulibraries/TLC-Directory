@@ -40,14 +40,10 @@
         </li>
 
         <li>
-          <strong> Phone(s): </strong>
+          <strong> Universities: </strong>
           <ul>
-          <% @user.phones.each do |phone| %>
-            <li>
-              <a href="tel:<%= phone.number %>">
-                <%= phone.number %>
-              </a>
-            </li>
+          <% @user.universities.each do |university| %>
+            <li> <%= university.name %> </li>
           <% end %>
           </ul>
         </li>
@@ -57,6 +53,41 @@
           <ul>
           <% @user.addresses.each do |address| %>
             <li> <%= address.human_readable %> </li>
+          <% end %>
+          </ul>
+        </li>
+
+        <li>
+          <strong> Award(s): </strong>
+          <ul>
+          <% @user.awards.each do |award| %>
+            <li> <%= award.description %> </li>
+          <% end %>
+          </ul>
+        </li>
+
+        <li>
+          <strong> Email Address(es): </strong>
+          <ul>
+          <% @user.email_addresses.each do |email| %>
+            <li>
+              <a href="mailto:<%= email.email_address %>">
+                <%= email.email_address %>
+              </a>
+            </li>
+          <% end %>
+          </ul>
+        </li>
+
+        <li>
+          <strong> Phone(s): </strong>
+          <ul>
+          <% @user.phones.each do |phone| %>
+            <li>
+              <a href="tel:<%= phone.number %>">
+                <%= phone.number %>
+              </a>
+            </li>
           <% end %>
           </ul>
         </li>

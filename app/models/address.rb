@@ -1,4 +1,4 @@
-# Building Active Record Object for storing the directories buildings
+# Address Active Record Object for storing addresses
 #
 # @author David J. Davis
 # @author Tracy A. McCormick
@@ -6,7 +6,7 @@
 # @since 0.0.1
 class Address < ApplicationRecord
   # association
-  belongs_to :user
+  belongs_to :addressable, polymorphic: true
 
   # validations
   validates :street_address_1, length: { within: 0..50 }

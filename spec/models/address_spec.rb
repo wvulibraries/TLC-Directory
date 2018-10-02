@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Address, type: :model do
-  it { should belong_to(:user) }
+  let(:address) { FactoryBot.create :address_user_association }
+
+  it { should belong_to(:addressable) }
 
   context 'validations' do
     it { should validate_length_of(:street_address_1).is_at_most(50) }
@@ -11,10 +13,10 @@ RSpec.describe Address, type: :model do
     it { should validate_length_of(:zip_code).is_at_most(20) }
   end
 
-  it "has a valid factory" do
-    user = FactoryBot.create(:user)
-    address = FactoryBot.create(:address, user: user)
-    expect(address).to be_valid
-    expect(address).to be_persisted
+  context 'valid object' do
+    it 'expects address to be valid' do
+      expect(address).to be_valid
+    end
   end
+
 end

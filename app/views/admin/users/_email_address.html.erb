@@ -1,0 +1,14 @@
+<fieldset class="email_address">
+  <legend> Email </legend>
+
+  <div class="field full">
+    <%= form.label :email_address, "Email Address", class: 'required' %>
+    <%= form.text_field :email_address, placeholder:'noneone@nowhere.com' %>
+  </div>
+
+  <div class="action">
+    <%= form.hidden_field :_destroy %>
+    <%# form.label :_destroy, "Delete Address" %>
+    <%= link_to '<span class="fas fa-trash-alt"></span>'.html_safe , '#', class: "remove-fields delete-address", title: "Delete Address" %>
+  </div>
+</fieldset>

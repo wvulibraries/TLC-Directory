@@ -2,6 +2,11 @@
 module OptionalItemsConcern
   extend ActiveSupport::Concern
 
+  def destroy?(item)
+    # return true if we are to delete item
+    item['_destroy'] == '1'
+  end
+
   def valid_address_id(id)
     address_object = Address.find(id) if id != ''
     !address_object.nil?
@@ -13,13 +18,13 @@ module OptionalItemsConcern
   end
 
   def create_new_address(user_id, item)
-    @user = User.find(user_id)
-    @user.addresses.build(street_address_1: item['street_address_1'],
-                          street_address_2: item['street_address_2'],
-                          city: item['city'],
-                          state: item['state'],
-                          zip_code: item['zip_code'])
-    @user.save
+    user = User.find(user_id)
+    user.addresses.build(street_address_1: item['street_address_1'],
+                         street_address_2: item['street_address_2'],
+                         city: item['city'],
+                         state: item['state'],
+                         zip_code: item['zip_code'])
+    user.save
   end
 
   def update_address(item)
@@ -31,19 +36,23 @@ module OptionalItemsConcern
                           zip_code: item['zip_code'])
   end
 
-  def update_or_destroy(item)
-    if blank_address?(item['id'])
-      address_object.destroy
+  def delete_address(user_id, item_id)
+    user = User.find(user_id)
+    user.addresses.find(item_id).destroy
+  end
+
+  def update_or_destroy(user_id, item)
+    if destroy?(item)
+      delete_address(user_id, item['id'])
     else
       update_address(item)
     end
   end
 
   def process_address(user_id, item)
-    # if blank fields and valid id destroy record
-    if valid_address_id(item['id'])
-      update_or_destroy(item)
-    elsif !blank_address?(item)
+    if Address.exists?(id: item['id'])
+      update_or_destroy(user_id, item)
+    else
       create_new_address(user_id, item)
     end
   end

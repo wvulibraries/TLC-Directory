@@ -13,7 +13,8 @@
 ActiveRecord::Schema.define(version: 2018_06_26_152200) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "user_id"
+    t.string "addressable_type"
+    t.bigint "addressable_id"
     t.string "street_address_1"
     t.string "street_address_2"
     t.string "city"
@@ -21,39 +22,46 @@ ActiveRecord::Schema.define(version: 2018_06_26_152200) do
     t.string "zip_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_addresses_on_user_id"
+    t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
   end
 
   create_table "awards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "user_id"
+    t.string "awardable_type"
+    t.bigint "awardable_id"
+    t.integer "starting_year"
+    t.integer "ending_year"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_awards_on_user_id"
+    t.index ["awardable_type", "awardable_id"], name: "index_awards_on_awardable_type_and_awardable_id"
   end
 
   create_table "email_addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "email"
+    t.string "emailable_type"
+    t.bigint "emailable_id"
+    t.string "email_address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_email_addresses_on_user_id"
+    t.index ["emailable_type", "emailable_id"], name: "index_email_addresses_on_emailable_type_and_emailable_id"
   end
 
   create_table "enrollments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "university_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["university_id"], name: "index_enrollments_on_university_id"
     t.index ["user_id"], name: "index_enrollments_on_user_id"
   end
 
   create_table "phones", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "user_id"
+    t.string "phoneable_type"
+    t.bigint "phoneable_id"
     t.string "number"
     t.integer "number_types"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_phones_on_user_id"
+    t.index ["phoneable_type", "phoneable_id"], name: "index_phones_on_phoneable_type_and_phoneable_id"
   end
 
   create_table "pictures", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -80,11 +88,12 @@ ActiveRecord::Schema.define(version: 2018_06_26_152200) do
   end
 
   create_table "publications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "user_id"
+    t.string "publishable_type"
+    t.bigint "publishable_id"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_publications_on_user_id"
+    t.index ["publishable_type", "publishable_id"], name: "index_publications_on_publishable_type_and_publishable_id"
   end
 
   create_table "sessions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -106,9 +115,11 @@ ActiveRecord::Schema.define(version: 2018_06_26_152200) do
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "wvu_username", limit: 30
+    t.string "prefix"
     t.string "last_name"
     t.string "first_name"
     t.string "middle_name"
+    t.string "suffix"
     t.integer "role"
     t.integer "status"
     t.boolean "visible", default: false
@@ -117,11 +128,12 @@ ActiveRecord::Schema.define(version: 2018_06_26_152200) do
   end
 
   create_table "websites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "user_id"
+    t.string "webable_type"
+    t.bigint "webable_id"
     t.string "website_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_websites_on_user_id"
+    t.index ["webable_type", "webable_id"], name: "index_websites_on_webable_type_and_webable_id"
   end
 
 end

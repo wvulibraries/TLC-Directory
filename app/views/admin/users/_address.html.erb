@@ -1,10 +1,6 @@
 <fieldset class="address">
   <legend> Address </legend>
 
-  <div class="field">
-    <%= form.hidden_field :user_id %>
-  </div>
-
   <div class="field full">
     <%= form.label :street_address_1, "Street Address", class: 'required' %>
     <%= form.text_field :street_address_1, placeholder:'124 Fake Street' %>

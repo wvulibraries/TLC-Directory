@@ -9,9 +9,9 @@ function onClickRemove(currentItem) {
     var children = currentItem.parentNode.childNodes;
     children.forEach(function(item) {
       if ('name' in item) {
-        if (item.type == 'text') {
-          //Replace 0 with milliseconds
-          item.value = '';
+        if (item.type == 'hidden' && item.name.includes('_destroy') ) {
+          //set _destroy to 1
+          item.value = '1';
       }}
     });
   }

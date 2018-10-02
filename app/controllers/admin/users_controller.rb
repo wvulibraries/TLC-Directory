@@ -8,20 +8,16 @@ class Admin::UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.order(:last_name)
   end
 
   # GET /users/1
   # GET /users/1.json
-  def show
-    @email_addresses = EmailAddress.where(user_id: @user.id)
-    @addresses = Address.where(user_id: @user.id)
-  end
+  def show; end
 
   # GET /users/new
   def new
     @user = User.new
-    @user.universities.new
   end
 
   # GET /users/1/edit
@@ -34,13 +30,9 @@ class Admin::UsersController < ApplicationController
     @user.assign_profile_params profile_params unless profile_params.nil?
     @user.assign_picture_params picture_params unless picture_params.nil?
 
-    # add university from drop down to prevent duplicates we check if there is already an association
-    #@user.universities << University.find(university_params[:university_id]) unless user.universities.exists?(university_params[:university_id])
     respond_to do |format|
       if @user.save
-        # format.html { redirect_to @user, notice: 'User was successfully created.' }
-        # format.json { render :show, status: :created, location: @user }
-        format.html { redirect_to new_optional_item_path(user_id: @user.id), notice: 'User was successfully created.' }
+        format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -57,9 +49,7 @@ class Admin::UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update user_params
-        # format.html { redirect_to @user, notice: 'User was successfully created.' }
-        # format.json { render :show, status: :created, location: @user }
-        format.html { redirect_to edit_optional_item_path(user_id: @user.id), notice: 'User was successfully Updated.' }
+        format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -92,13 +82,23 @@ class Admin::UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:wvu_username,
-                                 :last_name,
-                                 :first_name,
-                                 :middle_name,
-                                 :status,
-                                 :role,
-                                 :visible)
+    params.require(:user)
+          .permit(:prefix,
+                  :suffix,
+                  :first_name,
+                  :middle_name,
+                  :last_name,
+                  :wvu_username,
+                  :status,
+                  :role,
+                  :visible,
+                  university_ids: [],
+                  addresses_attributes: %i[id street_address_1 street_address_2 city state zip_code _destroy],
+                  awards_attributes: %i[id starting_year ending_year description _destroy],
+                  email_addresses_attributes: %i[id email_address _destroy],
+                  phones_attributes: %i[id number number_types _destroy],
+                  publications_attributes: %i[id description _destroy],
+                  websites_attributes: %i[id website_url _destroy])
   end
 
   def profile_params
@@ -109,9 +109,9 @@ class Admin::UsersController < ApplicationController
   #   params.require(:user).require(:universities).permit(:university_id)
   # end
 
-  def universities_params
-    params.require(:user).require(:universities).permit(:user_id, universities_attributes: %i[id name])
-  end
+  # def universities_params
+  #   params.require(:user).require(:universities).permit(:user_id, universities_attributes: %i[id name])
+  # end
 
   def picture_params
     return unless params.fetch(:user, {}).fetch(:imageable, false)

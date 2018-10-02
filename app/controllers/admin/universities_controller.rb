@@ -8,9 +8,6 @@ class Admin::UniversitiesController < ApplicationController
   # GET /universities.json
   def index
     @universities = University.order('name asc').all
-    respond_to do |format|
-      format.json { render json: @universities.as_json }
-    end
   end
 
   # GET /universities/1

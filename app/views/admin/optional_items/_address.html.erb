@@ -5,6 +5,7 @@
   <%= address.text_field :city %>
   <%= address.text_field :state %>
   <%= address.text_field :zip_code %>
+  <%= address.hidden_field :_destroy %>
   <% if count < @user.addresses.count %>
     <input id="button" type="button" name="button" value="-" onClick="Javascript:onClickRemove(this)">
   <% else %>

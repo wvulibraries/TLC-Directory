@@ -5,8 +5,7 @@ class Registration
   attr_accessor(
     :first_name,
     :last_name,
-    :middle_name,
-    
+    :middle_name
   )
 
   validates :first_name, presence: true

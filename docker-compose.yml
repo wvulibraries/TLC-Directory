@@ -14,6 +14,8 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
+    tty: true
+    stdin_open: true
     container_name: tlcdirectory
     restart: always
     command: bundle exec rails s -p 3000 -b '0.0.0.0'

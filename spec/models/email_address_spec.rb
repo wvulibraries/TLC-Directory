@@ -1,12 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe EmailAddress, type: :model do
-  it { should belong_to(:user) }
+  let(:email_address) { FactoryBot.create :email_address_user_association }
 
-  it "has a valid factory" do
-    user = FactoryBot.create(:user)
-    email = FactoryBot.create(:email_address, user: user)
-    expect(email).to be_valid
-    expect(email).to be_persisted
+  it { should belong_to(:emailable) }
+
+  context 'validations' do
+    it { should validate_length_of(:email_address).is_at_most(50) }
+  end
+
+  context 'valid object' do
+    it 'expects address to be valid' do
+      expect(email_address).to be_valid
+    end
   end
 end

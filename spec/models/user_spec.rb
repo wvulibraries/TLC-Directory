@@ -70,6 +70,11 @@ RSpec.describe User, type: :model do
   # it 'If Admin Can add Universities w/o attaching to user or self' do
   # end
 
+  it 'Has Many Enrollments' do
+    expect(user).to have_many(:enrollments)
+    expect(user.enrollments.count).to eq(0)
+  end
+
   it 'Has Many Universities' do
     expect(user).to have_many(:universities)
   end

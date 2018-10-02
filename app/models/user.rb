@@ -3,14 +3,11 @@
 # AUTHORS : Tracy McCormick
 # Description:
 class User < ApplicationRecord
-  # all the basic validations for this new record to be inserted
-  validates :wvu_username, presence: true,
-                           length: { within: 7..70 },
-                           uniqueness: true
-  validates :first_name, presence: true,
-                         length: { maximum: 25 }
-  validates :last_name, presence: true,
-                        length: { maximum: 50 }
+  # validation
+  validates :first_name, presence: true, length: { within: 2..70 }
+  validates :last_name, presence: true, length: { within: 2..70 }
+  validates :wvu_username, presence: true, length: { within: 7..70 }
+
   validates :status, presence: true
   validates :visible, inclusion: { in: [true, false] }
 
@@ -18,9 +15,8 @@ class User < ApplicationRecord
   enum status: %i[active disabled]
   enum role: %i[user editor admin]
 
-
   has_one :picture, as: :imageable, dependent: :destroy
-  accepts_nested_attributes_for :picture
+  accepts_nested_attributes_for :picture, allow_destroy: true
   before_create :create_picture
 
   # profile
@@ -28,26 +24,28 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :profile
   before_create :create_profile
 
-  has_many :awards, dependent: :destroy
-  accepts_nested_attributes_for :awards
+  has_many :awards, as: :awardable, dependent: :destroy
+  accepts_nested_attributes_for :awards, allow_destroy: true
 
-  has_many :addresses, dependent: :destroy
-  accepts_nested_attributes_for :addresses
+  has_many :addresses, as: :addressable, dependent: :destroy
+  accepts_nested_attributes_for :addresses, allow_destroy: true
 
-  has_many :email_addresses, dependent: :destroy
-  accepts_nested_attributes_for :email_addresses
+  has_many :email_addresses, as: :emailable, dependent: :destroy
+  accepts_nested_attributes_for :email_addresses, allow_destroy: true
 
-  has_many :phones, dependent: :destroy
-  accepts_nested_attributes_for :phones
+  has_many :phones, as: :phoneable, dependent: :destroy
+  accepts_nested_attributes_for :phones, allow_destroy: true
 
-  has_many :publications, dependent: :destroy
-  accepts_nested_attributes_for :publications
+  has_many :publications, as: :publishable, dependent: :destroy
+  accepts_nested_attributes_for :publications, allow_destroy: true
 
-  has_many :websites, dependent: :destroy
+  has_many :websites, as: :webable, dependent: :destroy
   accepts_nested_attributes_for :websites
 
   has_many :enrollments
+  accepts_nested_attributes_for :enrollments, allow_destroy: true
   has_many :universities, -> { distinct }, through: :enrollments
+  accepts_nested_attributes_for :universities
 
   after_initialize do
     if new_record?
@@ -80,10 +78,6 @@ class User < ApplicationRecord
     @picture_params = params
   end
 
-  def assign_university_params(params)
-    @university_params = params
-  end
-
   private
 
   def create_profile
@@ -94,7 +88,4 @@ class User < ApplicationRecord
     build_picture(@picture_params)
   end
 
-  def create_university
-    build_university(@university_params)
-  end
 end

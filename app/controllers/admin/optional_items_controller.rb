@@ -7,6 +7,7 @@ class Admin::OptionalItemsController < ApplicationController
   before_action :find_user, only: %i[index new edit]
   before_action :create_empty_fields, only: %i[new edit]
   before_action :address_params,
+                :phone_params,
                 :publication_params,
                 :website_params,
                 only: %i[show update destroy]
@@ -105,7 +106,8 @@ class Admin::OptionalItemsController < ApplicationController
   end
 
   def address_params
-    params.require(:user).permit(:user_id, addresses_attributes: %i[id street_address_1 street_address_2 city state zip_code])
+    params.require(:user)
+          .permit(:user_id, addresses_attributes: %i[id street_address_1 street_address_2 city state zip_code _destroy])
   end
 
   def award_params
@@ -117,7 +119,7 @@ class Admin::OptionalItemsController < ApplicationController
   end
 
   def phone_params
-    params.require(:user).permit(:user_id, phones_attributes: %i[id number number_type])
+    params.require(:user).permit(:user_id, phones_attributes: %i[id number number_types _destroy])
   end
 
   def publication_params
