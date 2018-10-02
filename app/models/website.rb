@@ -5,5 +5,5 @@ class Website < ApplicationRecord
   # validation
   validates :website_url,
             presence: true,
-            length: { within: 10..30 }
+            length: { within: 10..50 }
 end
