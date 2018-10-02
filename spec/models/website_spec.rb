@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Website, type: :model do
+  let(:website) { FactoryBot.create :website_user_association }
+
   it { should belong_to(:webable) }
 
   context 'validations' do
@@ -10,7 +12,7 @@ RSpec.describe Website, type: :model do
   end
 
   context 'valid object' do
-    it 'expects website to be valid' do
+    it 'expects phone to be valid' do
       expect(website).to be_valid
     end
   end
