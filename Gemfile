@@ -17,8 +17,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'paperclip', '~> 6.0.0'
 
-# cas client
-gem 'rubycas-client', :git => 'git://github.com/rubycas/rubycas-client.git'
+# simplecov
+gem 'simplecov'
+gem 'simplecov-console'
 
 # frontend
 gem 'font-awesome-sass'
