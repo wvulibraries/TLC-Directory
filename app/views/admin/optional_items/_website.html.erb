@@ -1,9 +1,0 @@
-<div id="website<%= count %>">
-  <%= website.hidden_field :id, id: 'id' %>
-  <%= website.text_field :website_url, id: 'website_url' %>
-  <% if count < @user.websites.count %>
-    <input id="button" type="button" name="button" value="-" onClick="Javascript:onClickRemove(this)">
-  <% else %>
-    <input id="button" type="button" name="button" value="+" onClick="Javascript:addField(this)">
-  <% end %>
-</div>

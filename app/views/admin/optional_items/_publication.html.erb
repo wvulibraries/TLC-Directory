@@ -1,9 +1,0 @@
-<div id="publication<%= count %>">
-  <%= publication.hidden_field :id, id: 'id' %>
-  <%= publication.text_field :description %>
-  <% if count < @user.publications.count %>
-    <input id="button" type="button" name="button" value="-" onClick="Javascript:onClickRemove(this)">
-  <% else %>
-    <input id="button" type="button" name="button" value="+" onClick="Javascript:addField(this)">
-  <% end %>
-</div>

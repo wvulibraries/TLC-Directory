@@ -1,1 +1,1 @@
-json.array! @universities, partial: 'email_addresses/email_address', as: :email_address
+json.array! @universities, partial: 'universities/university', as: :university

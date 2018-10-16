@@ -1,9 +1,0 @@
-<div id="email<%= count %>">
-  <%= email_address.hidden_field :id, id: 'id' %>
-  <%= email_address.text_field :email_address, id: 'email' %>
-  <% if count < @user.email_addresses.count %>
-    <input id="button" type="button" name="button" value="-" onClick="Javascript:onClickRemove(this)">
-  <% else %>
-    <input id="button" type="button" name="button" value="+" onClick="Javascript:addField(this)">
-  <% end %>
-</div>
