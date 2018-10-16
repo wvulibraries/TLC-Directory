@@ -92,6 +92,19 @@
           </ul>
         </li>
 
+        <li>
+          <strong> Website(s): </strong>
+          <ul>
+          <% @user.websites.each do |website| %>
+            <li>
+              <a href="<%= website.url %>">
+                <%= website.url %>
+              </a>
+            </li>
+          <% end %>
+          </ul>
+        </li>
+
       </ul>
       <div class="micro-text">
         Created at <%= @user.created_at.strftime("%B %d, %Y at %I:%M%p") %> <br/> Updated at <%= @user.updated_at.strftime("%B %d, %Y at %I:%M%p")%>

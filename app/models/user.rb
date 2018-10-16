@@ -40,7 +40,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :publications, allow_destroy: true
 
   has_many :websites, as: :webable, dependent: :destroy
-  accepts_nested_attributes_for :websites
+  accepts_nested_attributes_for :websites, allow_destroy: true
 
   has_many :enrollments
   accepts_nested_attributes_for :enrollments, allow_destroy: true

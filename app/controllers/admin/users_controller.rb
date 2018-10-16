@@ -98,20 +98,12 @@ class Admin::UsersController < ApplicationController
                   email_addresses_attributes: %i[id email_address _destroy],
                   phones_attributes: %i[id number number_types _destroy],
                   publications_attributes: %i[id description _destroy],
-                  websites_attributes: %i[id website_url _destroy])
+                  websites_attributes: %i[id url _destroy])
   end
 
   def profile_params
     params.require(:profile).permit(:title, :department, :biography, :research_interests)
   end
-
-  # def university_params
-  #   params.require(:user).require(:universities).permit(:university_id)
-  # end
-
-  # def universities_params
-  #   params.require(:user).require(:universities).permit(:user_id, universities_attributes: %i[id name])
-  # end
 
   def picture_params
     return unless params.fetch(:user, {}).fetch(:imageable, false)
