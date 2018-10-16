@@ -9,19 +9,19 @@ module UsersHelper
   end
 
   def hasawards?(user)
-    user.awards != nil
+    user.awards.all.count != 0
   end
 
   def hasaddresses?(user)
-    user.addresses != nil
+    user.addresses.all.count != 0
   end
 
   def hasemailaddresses?(user)
-    user.email_addresses != nil
+    user.email_addresses.all.count != 0
   end
 
   def hasphones?(user)
-    user.phones != nil
+    user.phones.all.count != 0
   end
 
   def hasprofile?(user)
@@ -29,15 +29,19 @@ module UsersHelper
   end
 
   def haspublications?(user)
-    user.publications != nil
+    user.publications.all.count != 0
   end
 
   def hasenrollments?(user)
-    user.enrollments != nil
+    user.enrollments.all.count != 0
   end
 
   def haswebsites?(user)
-    user.phones != nil
+    user.websites.all.count != 0
+  end
+  
+  def hasuniversities?(user)
+    user.universities.all.count != 0
   end
 
 end

@@ -91,8 +91,10 @@
               <div name='phones'>
                 <h4>Phone(s):</h4>
                 <% @user_profile.phones.each do |phone| %>
-                    <%= phone.phone_number %>
-                    <%= phone.phone_type %>
+                    <a href="tel:<%= phone.number %>">
+                      <%= phone.number %>
+                    </a>
+                    <%= phone.number_types %>
                 <% end %>
               </div>
             <% end %>
@@ -110,7 +112,9 @@
               <div name='websites'>
                 <h4>website(s):</h4>
                 <% @user_profile.websites.each do |website| %>
-                    <%= website.website_url %>
+                    <a href="<%= website.url %>">
+                      <%= website.url %>
+                    </a>
                 <% end %>
               </div>
             <% end %>
