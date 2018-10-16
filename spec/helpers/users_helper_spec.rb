@@ -13,8 +13,11 @@ RSpec.describe UsersHelper, type: :helper do
     expect(isadmin?(user)).to eq(true)
   end
   
-  it 'validates user has no picture' do
-    expect(haspicture?(user)).to eq(false)    
+  it 'validates user has picture' do
+    # should always be true if user hasn't 
+    # uploaded picture a basic placeholder
+    # image is used
+    expect(haspicture?(user)).to eq(true)    
   end
   
   it 'validates user has no awards' do
@@ -33,8 +36,10 @@ RSpec.describe UsersHelper, type: :helper do
     expect(hasphones?(user)).to eq(false)    
   end
 
-  it 'validates user has no profile' do
-    expect(hasprofile?(user)).to eq(false)    
+  it 'validates user has profile' do
+    # all users are created with a profile 
+    # this should always be true
+    expect(hasprofile?(user)).to eq(true)    
   end
 
   it 'validates user has no publications' do
