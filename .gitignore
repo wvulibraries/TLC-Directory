@@ -13,6 +13,7 @@
 /mysql
 /public/system
 /log
+/search_data
 
 # Used by dotenv library to load environment variables.
 # .env
