@@ -1,0 +1,40 @@
+
+<% content_for :title, "Search Results :: #{params[:query]}" %>
+
+<div class="wrapper result-search-wrapper">
+  <div class="wvu-container">
+    <div class="results-search-box">
+      <form action="/search">          
+        <label for="search" class="visually-hidden"> 
+          WVU Library Directory Search
+        </label>
+        
+        <input type="search" name="query" title="Search Query" placeholder="Search TLC Directory... " id="search" class="search-field"
+          value="<%= params[:query] %>"
+        />
+        
+        <button class="search-button button">
+            <span class="fa fa-search"></span> 
+          <span class="visually-hidden"> Search </span>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="wvu-container search-results-container">
+  <!-- Search Information -->
+  <div class="search-context">
+    <div class="micro-text"> Search found <%= @results.count %> results for the keywords "<%= @search_term %>" </div>
+  </div>
+
+  <div class="search-filters">
+    <!-- TO DO ADD FILTERS -->
+  </div>
+
+  <div class="search-results">
+    <% @results.each do |result| %>
+      <%= render partial: "result_view", locals: {result: result} %>
+    <% end %>
+  </div>
+</div>

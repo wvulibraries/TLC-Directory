@@ -18,8 +18,14 @@ RSpec.describe User, type: :model do
   it { should have_many(:enrollments) }
   it { should have_many(:universities).through(:enrollments) }
 
-  it 'has a valid factory' do
+  it 'can add picture to user' do
     user.picture = FactoryBot.create(:picture)
+    expect(user).to be_valid
+    expect(user).to be_persisted
+  end
+
+  it 'can add document to user' do
+    user.document = FactoryBot.create(:document)
     expect(user).to be_valid
     expect(user).to be_persisted
   end

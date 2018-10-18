@@ -88,6 +88,14 @@
         </div>
 
       <% end %>
+      
+      <!-- CV Upload -->
+      <div class="field one-fourth last">
+        <%= f.label 'CV Upload', class: 'required' %>
+        <%= f.fields_for :documentable do |document_upload| %>
+          <%= document_upload.file_field :document, class: "form-control"  %>
+        <% end %>
+      </div>
 
     </div>
 

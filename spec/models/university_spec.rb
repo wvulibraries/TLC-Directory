@@ -8,5 +8,4 @@ RSpec.describe University, type: :model do
     expect(university).to be_valid
     expect(university).to be_persisted
   end
-
 end

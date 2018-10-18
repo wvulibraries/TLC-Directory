@@ -14,7 +14,15 @@ gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 
+# loads rails apps faster 
 gem 'bootsnap', '>= 1.1.0', require: false
+
+# Application Specific 
+# =====================================================================================
+
+gem 'sanitize'
+
+# used for image uploads
 gem 'paperclip', '~> 6.0.0'
 
 # simplecov
@@ -24,6 +32,10 @@ gem 'simplecov-console'
 # frontend
 gem 'font-awesome-sass'
 gem 'select2-rails'
+
+# searching / indexing for speeds / pagination for elegance
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 
 group :development, :test do
   # RSpec & testing gems!

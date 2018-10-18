@@ -10,7 +10,7 @@ class Picture < ApplicationRecord
     path: ":rails_root/public/system/:attachment/:id/:style/:filename",
     url: "/system/:attachment/:id/:style/:filename"
 
-  validates_attachment :image, presence: true,
+  validates_attachment :image,
                     content_type: { content_type: %w(image/jpeg image/jpg image/png) },
                     size: { in: 0..1.megabytes }
 end

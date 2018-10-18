@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_26_152200) do
+ActiveRecord::Schema.define(version: 2018_10_18_135837) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "addressable_type"
@@ -34,6 +34,18 @@ ActiveRecord::Schema.define(version: 2018_06_26_152200) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["awardable_type", "awardable_id"], name: "index_awards_on_awardable_type_and_awardable_id"
+  end
+
+  create_table "documents", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "document_file_name"
+    t.string "document_content_type"
+    t.integer "document_file_size"
+    t.datetime "document_updated_at"
+    t.string "documentable_type"
+    t.bigint "documentable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["documentable_type", "documentable_id"], name: "index_documents_on_documentable_type_and_documentable_id"
   end
 
   create_table "email_addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|

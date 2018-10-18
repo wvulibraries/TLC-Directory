@@ -109,4 +109,9 @@ class Admin::UsersController < ApplicationController
     return unless params.fetch(:user, {}).fetch(:imageable, false)
     params.require(:user).require(:imageable).permit(:image)
   end
+  
+  def document_params
+    return unless params.fetch(:user, {}).fetch(:documentable, false)
+    params.require(:user).require(:documentable).permit(:document)
+  end
 end

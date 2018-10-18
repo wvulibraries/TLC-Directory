@@ -46,6 +46,11 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :enrollments, allow_destroy: true
   has_many :universities, -> { distinct }, through: :enrollments
   accepts_nested_attributes_for :universities
+  
+  # attach uploaded cv
+  has_one :document, as: :documentable, dependent: :destroy
+  accepts_nested_attributes_for :document, allow_destroy: true
+  before_create :create_document
 
   after_initialize do
     if new_record?
@@ -64,20 +69,6 @@ class User < ApplicationRecord
     [first_name, middle_name, last_name].join(' ')
   end
 
-  def name
-    "#{first_name} #{last_name}"
-    # Or: first_name + ' ' + last_name
-    # Or: [first_name, last_name.join(' ')]
-  end
-
-  def assign_profile_params(params)
-    @profile_params = params
-  end
-
-  def assign_picture_params(params)
-    @picture_params = params
-  end
-
   private
 
   def create_profile
@@ -88,4 +79,7 @@ class User < ApplicationRecord
     build_picture(@picture_params)
   end
 
+  def create_document
+    build_document(@document_params)
+  end
 end
