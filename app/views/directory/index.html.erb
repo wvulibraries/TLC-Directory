@@ -9,7 +9,7 @@
                <%= image_tag(user_profile.picture.image.url(:medium), alt: "Profile Picture", title: "Profile Picture") %>
              </div>
              <div class="directory__individual-info">
-               <h2><%= link_to user_profile.name, show_user_profile_path(user_profile.id) %></h2>
+               <h2><%= link_to user_profile.display_name, show_user_profile_path(user_profile.id) %></h2>
              </div>
           </div>
         <% end %>
