@@ -54,8 +54,4 @@ RSpec.describe UsersHelper, type: :helper do
     expect(haswebsites?(user)).to eq(false)    
   end
 
-  it 'validates user has no universities' do
-    expect(hasuniversities?(user)).to eq(false)    
-  end
-
 end

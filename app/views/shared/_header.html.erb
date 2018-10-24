@@ -1,12 +1,19 @@
 <!-- Header -->
-<header class="wvu-masthead">
-  <div class="wvu-masthead__container">
-    <a class="wvu-masthead__logo header-logo" href="/">
-      <span class="wvu-masthead__title"> TLC Directory </span>
+<section class="wvu-header mobile wvubottom" role="banner" aria-label="wvu header for all university web pages">
+    <a href="#" id="wvutoggle" class="wvu-masthead__logo wvu-masthead__logo--w-signature">
+        <%= image_tag("wvulogo.svg", alt: "WVU Libraries") %>
+        <span class="fa fa-chevron-down"></span>
+        <span class="fa fa-chevron-up"></span>
     </a>
-    <div class="button-container">
-      <%= link_to "Public", "/", :class=>"button button--pms-629-c" %>
-      <%= link_to "Logout", "/logout", :class=>"button button--wvu-gold" %>
+</section>
+<section class="wvu-header tablet wvubottom">
+    <div class="wrap">
+        <a href="https://lib.wvu.edu/" class="wvu-header-logo wvu-masthead__logo wvu-masthead__logo--w-signature">
+            <span class="wvu-masthead-title wvu-masthead__title--w-signature">Libraries</span>
+        </a>
+        <div class="button-container">
+          <%= link_to "Public", "/", :class=>"button button--pms-629-c" %>
+          <%= link_to "Logout", "/logout", :class=>"button button--wvu-gold" %>
+        </div>
     </div>
-  </div>
-</header>
+</section>

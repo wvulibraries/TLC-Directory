@@ -1,19 +1,55 @@
-<div class="wvu-main-content">
-  <div class="wrap content-wrapper">
-    <div class="col-3 col-9 wvu-main-content-right">
-      <tbody>
-        <% @user_profiles.each do |user_profile| %>
-          <div class="directory">
-             <!-- Show Profile picture -->
-             <div class="directory__individual-photo">
-               <%= image_tag(user_profile.picture.image.url(:medium), alt: "Profile Picture", title: "Profile Picture") %>
-             </div>
-             <div class="directory__individual-info">
-               <h2><%= link_to user_profile.display_name, show_user_profile_path(user_profile.id) %></h2>
-             </div>
-          </div>
-        <% end %>
-      </tbody>
-    </div>
+<div class="col-side">
+  
+  <div class="refine-side-search">
+    <!-- Directory Search -->
+    <%= form_tag(directory_path, :method => "get", id: "search-form") do %>
+        <%= select_tag(:categories, options_for_select([['All Categories', 1], ['Name', 2], ['Department', 3]]))%>
+        <%= text_field_tag :search, params[:search], placeholder: "Search the Directory ..." %>
+        <button class="search-button button" type="submit"><span class="fa fa-search"></span></button>
+    <% end %>      
   </div>
+  
+  <h2>Refine Your Search:</h2>
 </div>
+<div class="col-main">
+  <% @user_profiles.each do |user_profile| %>
+    <div class="profile-box">
+         <!-- Show Profile picture with caption-->     
+         <div class="col-container">
+           
+            <div class="col-side">
+                <div class="profile-picture">
+                   <%= image_tag(user_profile.picture.image.url(:original), alt: "Profile Picture", title: "Profile Picture") %>
+                </div>
+                
+                <div class="photo-caption">
+                  <%= user_profile.first_name %>'s Profile
+                </div> 
+            </div>
+           
+            <div class="col-main">
+               <h2><%= link_to user_profile.display_name, show_user_profile_path(user_profile.id) %></h2>
+               <% unless user_profile.profile.title.nil? || user_profile.profile.title.empty? %>
+                <div class="micro"> <%= user_profile.profile.title %> </div>
+               <% end %>
+               <% unless user_profile.profile.department.nil? || user_profile.profile.department.empty? %>
+                <div class="micro"> <%= user_profile.profile.department %> </div>
+               <% end %>        
+               <% unless user_profile.profile.research_interests.nil? || user_profile.profile.research_interests.empty? %>
+                <div class="micro"> 
+                  Research Interests:
+                </div>
+                <div class="micro"> 
+                  <%= user_profile.profile.research_interests %> 
+                </div>                    
+               <% end %>                                     
+            </div>
+            
+         </div>
+    </div>        
+  <% end %>
+</div>    
+
+
+
+

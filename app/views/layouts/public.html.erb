@@ -7,27 +7,21 @@
   </head>
 
   <body>
-    <!-- Skip to Navigation -->
-    <a class="wvu-skip-nav" href="#main">Skip to main content</a>
-
-    <%= render(:partial => 'shared/public_header') %>
+    <%= render(:partial => 'shared/wvu_header') %>
     <%= render(:partial => 'shared/navigation') %>
     <%= render(:partial => 'shared/public_banner') %>
 
     <!-- Main -->
-    <main id="main" class="backend">
-      <div class="wvu-container">
+    <div id="main-container" class="home-container container">
+        
         <!-- Flash -->
         <%= render "utilities/alerts" %>
 
         <!-- Yield -->
-        <div class="main-content">
-          <%= yield %>
-        </div>
-      </div>
-    </main>
+        <%= yield %>
+    </div>
 
-    <%= render(:partial => 'shared/public_footer') %>
+    <%= render(:partial => 'shared/footer') %>
 
   </body>
 </html>

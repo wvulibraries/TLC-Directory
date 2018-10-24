@@ -1,0 +1,116 @@
+/*********************************************************************
+    480px or less
+**********************************************************************/
+.wvrhc-header {
+	background: $gray;
+	padding: 0;
+	overflow: hidden;
+	#wvrhctoggle {
+		box-sizing: content-box;
+		text-align: left;
+		padding: 15px 5%;
+		width: 90%;
+		border-bottom: 2px solid darken( $gray, 10% );
+		.fa {
+			float:right;
+		}
+	}
+	.list2 {
+		height: auto; 
+		width: 100%;
+		overflow: hidden;
+		list-style-type: none;
+		li {
+			a {
+				font-size: 0.85em;
+				color: $primary-blue;
+				font-weight: 600;
+				border-bottom-width: 2px;
+				border-bottom-style: solid;
+				border-bottom-color: darken( $gray, 10% );
+				border-top-width: 1px;
+				border-top-style: solid;
+				border-top-color: lighten( $gray, 10% );
+				border-right: 1px solid lighten( $gray, 10% );
+				border-left: 2px solid darken( $gray, 10% );
+				text-decoration: none;
+				padding-top: 10px;
+				padding-bottom: 15px;
+				width: 50%;
+				display: inline-block;
+				float:left;
+				box-sizing: border-box;
+			}
+		}			
+		li:nth-last-child(1) a {
+			color: $accent-red;
+		}
+	}
+	.wvrhcTitle {
+		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; 
+		font-size: 16px;
+		width:100%;
+		float:left;
+		text-transform: uppercase;
+		color: $primary-blue;
+		text-shadow: 1px 2px #fff;
+		font-weight:600;
+		text-decoration: none;
+	}
+	.wvrhcNav {
+		font-size: 1em;
+		width:100%;
+		float:right;
+		list-style-type: none;
+		font-size: 12px;
+		padding-top: 10px;
+		li {
+			display:inline-block;
+			margin: 15px 0.5em 0 0.5em;
+			a {
+				color: $primary-blue;
+				text-decoration: none;
+				font-weight: 600;
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+}
+
+
+/*********************************************************************
+	768px to 1024px
+**********************************************************************/
+@media screen and (min-width: 768px) {
+	.wvrhc-header {
+		padding: 20px 0;
+		border-bottom: none;
+		.wvrhcNav {		
+			padding-top: 0;
+		}
+	}
+}	
+
+/*********************************************************************
+	1024px and up
+**********************************************************************/
+@media screen and (min-width: 1024px) {
+	.wvrhc-header {
+		padding: 20px 0px 20px 60px;
+		.wvrhcTitle {
+			width:40%;
+			text-align: left;
+			border-bottom: none;
+		}
+		.wvrhcNav {
+			width:60%;
+			text-align: right;
+			border-top: none;	
+			li {
+				margin: 0.25em 0.5em 0 0.5em;
+			}		
+		}
+	}
+}

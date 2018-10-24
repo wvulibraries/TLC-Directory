@@ -11,9 +11,6 @@
 </head>
 
 <body>
-  <!-- Skip to Navigation -->
-  <a class="wvu-skip-nav" href="#main">Skip to main content</a>
-
   <!-- Header -->
   <%= render(:partial => 'shared/header') %>
 
@@ -22,22 +19,25 @@
 
   <!-- Main Banner -->
   <%= render(:partial => 'shared/admin_banner') %>
-
+  
   <!-- Main -->
-  <main id="main" class="backend">
-    <div class="wvu-container">
+  <div id="main-container" class="home-container container">
+      
       <!-- Flash -->
       <%= render "utilities/alerts" %>
-
-      <!-- Admin Menu -->
-      <%= render(:partial => 'shared/admin_navigation') %>
-
-      <!-- Yield -->
-      <div class="main-content">
-        <%= yield %>
+      
+      <div class="col-container">
+        <div class="col-side">
+          <!-- Admin Menu -->
+          <%= render(:partial => 'shared/admin_navigation') %>
+        </div>
+        <div class="col-main">
+          <!-- Yield -->
+          <%= yield %>
+        </div>
       </div>
-    </div>
-  </main>
+
+  </div>
 
   <!-- Footers -->
   <%= render(:partial => 'shared/builtby_footer') %>

@@ -119,12 +119,6 @@ ActiveRecord::Schema.define(version: 2018_10_18_135837) do
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
   end
 
-  create_table "universities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "wvu_username", limit: 30
     t.string "prefix"

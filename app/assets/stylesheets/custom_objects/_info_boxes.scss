@@ -1,7 +1,16 @@
 .info-boxes {
-  border: 1px solid grey;
+  border-style: solid;
+  border-width: thin;
+  border-color: #E0E0E0;
+  
   margin: 10px;
   text-align: center;
+  font-size: 12px;
+  
+  h2 {
+    color: black;
+    font-weight: bold;
+  }
 
   ul {
     list-style-type: none;

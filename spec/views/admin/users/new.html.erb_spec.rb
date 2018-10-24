@@ -3,12 +3,12 @@ require 'rails_helper'
 RSpec.describe "admin/users/new", type: :view do
   before(:each) do
     assign(:user, User.new(
-      :wvu_username => Faker::Internet.user_name,
-      :first_name => Faker::Name.first_name,
-      :last_name => Faker::Name.last_name,
-      :status => :disabled,
-      :role => :user,
-      :visible => false
+      wvu_username: Faker::Internet.user_name,
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      status: :disabled,
+      role: :user,
+      visible: false
     ))
   end
 

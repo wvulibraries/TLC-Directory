@@ -1,0 +1,48 @@
+.profile-box{
+  width: 100%;
+  padding: 10px;
+  background-color:#FAFAFA; 
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-style: solid;
+  border-width: thin;
+  border-color: #E0E0E0;
+  
+  .profile-picture {
+    margin: auto;
+    width: 150px;
+    
+    position:relative;   
+          
+    img {
+      border-radius: 50%;
+      border-style: solid;
+      border-width: medium;
+      border-color: $accent-blue2;
+      vertical-align: middle;
+      
+      height: 150px;
+      width: 150px;
+      object-fit: cover;
+      object-position: 75% 25%;
+    }   
+  }
+  
+  .photo-caption {
+    margin: auto;
+    width: 200px;
+    
+    position:relative;
+    bottom:20px;
+    color: white;
+    background-color:#287EC7;
+    padding: 5px;
+    border-style: solid;
+    border-width: thin;
+    border-color: $accent-blue2;  
+    
+    text-align: center;   
+  }     
+  
+}
+

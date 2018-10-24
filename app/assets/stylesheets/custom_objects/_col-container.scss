@@ -1,0 +1,54 @@
+* {
+    box-sizing: border-box;
+}
+
+.col-container {
+    display: table;
+    width: 100%;
+}
+.col {
+    display: table-cell;
+    padding: 20px;
+}
+
+.col-side {
+    display: table-cell;
+    padding: 20px;
+    width: 30%;
+}
+
+.col-main {
+    display: table-cell;
+    padding: 10px 30px 10px 30px;
+    width: 70%;
+    text-align: left;
+    vertical-align: top;
+    
+    a:-webkit-any-link {
+      text-decoration: none;
+      color: $accent-blue2;
+    }
+    
+    h2 {
+      color: black;
+      font-size: 18px;
+      line-height: 1.5;
+      text-transform: uppercase;
+    }
+          
+    .micro {
+      display: table;
+      padding:unset;
+      letter-spacing:1px; 
+      font-weight:900; 
+      color:#5f5f5f; 
+      font-size:.75em;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .col, .col-side, .col-main { 
+        display: block;
+        width: 100%;
+    } 
+}

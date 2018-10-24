@@ -1,0 +1,71 @@
+.modalDialog {
+	display: initial;
+	position: fixed;
+	font-family: Arial, Helvetica, sans-serif;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0,0,0,0.8);
+	z-index: 4;
+	-webkit-transition: opacity 400ms ease-in;
+	-moz-transition: opacity 400ms ease-in;
+	transition: opacity 400ms ease-in;
+	opacity:1;
+	pointer-events: auto;
+	.fa-long-arrow-down {
+		font-size:3em;
+		color: #777;
+	}
+}
+.modalDialog > div {
+	width: 80%;
+	max-width: 260px;
+	position: fixed;
+	bottom: 75px;
+	right: 0;
+	left: 0;
+	margin: 110px auto 0 auto;
+	padding: 5px 20px 13px 20px;
+	border-radius: 10px;
+	background: #fff;
+	background: -moz-linear-gradient(#fff, #999);
+	background: -webkit-linear-gradient(#fff, #999);
+	background: -o-linear-gradient(#fff, #999);
+}
+.close {
+	color: $neutral-wgray1;
+	line-height: 25px;
+	position: absolute;
+	right: 8px;
+	text-align: center;
+	top: 6px;
+	width: 24px;
+	text-decoration: none;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+	&:hover {
+		background: $accent-red;
+		color: #fff;
+	}
+}
+.modal-legend {
+	list-style-type: none;
+	text-align: left;
+	padding: 0;
+	width: 90%;
+	margin: 0 5% 10px 5%;
+	.fa {
+		padding-right: 10px;
+	}
+}
+
+/*********************************************************************
+	768px to 1024px
+**********************************************************************/
+@media screen and (min-width: 768px) {
+	.modalDialog {
+		display: none;
+	}
+}	

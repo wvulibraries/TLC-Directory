@@ -3,7 +3,6 @@ class Admin::UsersController < ApplicationController
   layout 'admin'
 
   before_action :set_user, only: %i[show edit update destroy]
-  before_action :create_empty_fields, only: %i[edit]
 
   # GET /users
   # GET /users.json
@@ -27,7 +26,7 @@ class Admin::UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new user_params
-    @user.assign_profile_params profile_params unless profile_params.nil?
+    # @user.assign_profile_params profile_params unless profile_params.nil?
     @user.assign_picture_params picture_params unless picture_params.nil?
 
     respond_to do |format|
@@ -76,10 +75,6 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def create_empty_fields
-    @user.universities.new
-  end
-
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
     params.require(:user)
@@ -92,7 +87,6 @@ class Admin::UsersController < ApplicationController
                   :status,
                   :role,
                   :visible,
-                  university_ids: [],
                   addresses_attributes: %i[id street_address_1 street_address_2 city state zip_code _destroy],
                   awards_attributes: %i[id starting_year ending_year description _destroy],
                   email_addresses_attributes: %i[id email_address _destroy],

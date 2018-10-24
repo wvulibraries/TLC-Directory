@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:user) { FactoryBot.create(:user) }
-  let(:university) { FactoryBot.create(:university) }
 
   it { should validate_presence_of(:wvu_username) }
   it { should validate_presence_of(:last_name) }
@@ -15,8 +14,6 @@ RSpec.describe User, type: :model do
   it { should have_many(:phones) }
   it { should have_many(:publications) }
   it { should have_many(:websites) }
-  it { should have_many(:enrollments) }
-  it { should have_many(:universities).through(:enrollments) }
 
   it 'can add picture to user' do
     user.picture = FactoryBot.create(:picture)
@@ -65,47 +62,5 @@ RSpec.describe User, type: :model do
   it 'user has no profile picture' do
     expect(user.picture.image_file_name).to eq(nil)
   end
-
-  it 'When the user does not have any universities' do
-    expect(user.universities.count).to eq(0)
-  end
-
-  # it 'User Can Add a New University' do
-  # end
-
-  # it 'If Admin Can add Universities w/o attaching to user or self' do
-  # end
-
-  it 'Has Many Enrollments' do
-    expect(user).to have_many(:enrollments)
-    expect(user.enrollments.count).to eq(0)
-  end
-
-  it 'Has Many Universities' do
-    expect(user).to have_many(:universities)
-  end
-
-  it 'Can add existing university' do
-    user.universities << university
-    expect(user.universities.count).to eq(1)
-  end
-
-  it 'Can delete existing university from collection' do
-    user.universities << university
-    user.universities.delete(university)
-    expect(user.universities.count).to eq(0)
-  end
-
-  it 'Should allow user to have multiple universities' do
-    user.universities << university
-    user.universities << FactoryBot.create(:university)
-    expect(user.universities.count).to eq(2)
-  end
-
-  it 'Should not be able to add same university multiple times' do
-    user.universities << university
-    expect { user.universities << university }.to raise_error(ActiveRecord::RecordInvalid,'Validation failed: University has already been taken')
-  end
-
 
 end

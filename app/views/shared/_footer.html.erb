@@ -1,4 +1,4 @@
-<footer role="contentinfo">
+<footer id="footer" role="contentinfo">
     <div class="wrap">
         <div class="school-footer">
             <p><a href="https://lib.wvu.edu" class="footerTitle">WVU <strong>Libraries</strong></a><br>
@@ -10,7 +10,7 @@
             <em>&copy; West Virginia University. <span class="disclaimer">West Virginia University is an Equal Opportunity/Affirmative Action Institution.</span></em></p>
         </div>
         <div class="wvu-footer">
-            <ul class="wvuFooterSites">
+            <ul class="wvuFooterSites" role="navigation">
                 <nobr>
                     <li><a href="http://www.wvu.edu/SiteIndex/">A-Z Site Index</a></li>
                     <li><a href="http://www.wvu.edu/CampusMap/">Campus Map</a></li>
@@ -31,12 +31,17 @@
             <div style="clear:both;"></div>
             <ul class="wvuFooterSocial">
                 <li>
-                    <a class="socmedia" target="_blank" href="https://www.facebook.com/WVULibraries">
+                    <a class="socmedia" target="_blank" href="http://www.facebook.com/WVULibraries">
                         <%= image_tag("facebook.png", alt: "Facebook", title: "Facebook") %>
                     </a>
                 </li>
                 <li>
-                    <a class="socmedia" href="https://www.instagram.com/wvulibraries/" target="_blank">
+                    <a class="socmedia" href="https://plus.google.com/100326194366145492876" rel="publisher" target="_blank">
+                        <%= image_tag("google.png", alt: "Google+", title: "Google+") %>
+                    </a>
+                </li>
+                <li>
+                    <a class="socmedia" href="http://instagram.com/wvulibraries/" target="_blank">
                         <%= image_tag("instagram.png", alt: "Instagram", title: "Instagram") %>
                     </a>
                 </li>

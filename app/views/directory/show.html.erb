@@ -1,120 +1,101 @@
-<div class="wvu-main-content">
+<div class="col-side">
+  <!-- Show Profile picture -->
+  <div class="profile-image">
+    <%= image_tag(@user_profile.picture.image.url(:medium), alt: "Profile Picture", title: "Profile Picture") %>
+  </div>  
+</div>
 
-  <div class="wrap content-wrapper">
+<div class="col-main">
+    <h2><%= @user_profile.display_name %></h2>
 
-    <div class="col-4 col-s-12 side-content-left">
-         <h3>Refine Your Search:</h3>
-    </div>
 
-    <div class="col-8 sol-s-12 wvu-main-content-right">
-      <tbody>
-          <div class="profile-wrapper">
-             <h2><%= @user_profile.display_name %></h2>
 
-             <!-- Show Profile picture -->
-             <div class="profile-image">
-               <%= image_tag(@user_profile.picture.image.url(:medium), alt: "Profile Picture", title: "Profile Picture") %>
-               <figcaption><%= @user_profile.first_name %>'s Profile</figcaption>
-             </div>
+    <% if hasprofile?(@user_profile) %>
+         <div>
+           <h4>Title:</h4>
+           <%= @user_profile.profile.title %>
+         </div>
 
-             <% if hasprofile?(@user_profile) %>
-                  <div>
-                    <h4>Title:</h4>
-                    <%= @user_profile.profile.title %>
-                  </div>
+         <div>
+           <h4>Department:</h4>
+           <%= @user_profile.profile.department %>
+         </div>
 
-                  <div>
-                    <h4>Department:</h4>
-                    <%= @user_profile.profile.department %>
-                  </div>
+         <div>
+           <h4>Biography:</h4>
+           <%= @user_profile.profile.biography %>
+         </div>
 
-                  <div>
-                    <h4>Biography:</h4>
-                    <%= @user_profile.profile.biography %>
-                  </div>
+         <div>
+           <h4>Research Interests:</h4>
+           <%= @user_profile.profile.research_interests %>
+         </div>
+    <% end %>
 
-                  <div>
-                    <h4>Research Interests:</h4>
-                    <%= @user_profile.profile.research_interests %>
-                  </div>
-             <% end %>
+   <% if hasawards?(@user_profile) %>
+     <div name='awards'>
+       <h4>Award(s):</h4>
+       <% @user_profile.awards.each do |award| %>
+           <%= award.description %>
+       <% end %>
+     </div>
+   <% end %>
 
-             <% if hasuniversities?(@user_profile) %>
-               <div name='universities'>
-                 <h4>University(s):</h4>
-                 <% @user_profile.universities.each do |university| %>
-                     <%= university.name %>
-                 <% end %>
-               </div>
-             <% end %>
+   <% if hasaddresses?(@user_profile) %>
+     <div name='addresses'>
+       <h4>Address(es):</h4>
+       <% @user_profile.addresses.each do |address| %>
+         <ul>
+            <li><strong>Street Address 1: </strong><%= address.street_address_1 %></li>
+            <li><strong>Street Address 2: </strong><%= address.street_address_2 %></li>
+            <li><strong>City: </strong><%= address.city %></li>
+            <li><strong>State: </strong><%= address.state %></li>
+            <li><strong>Zip Code: </strong><%= address.zip_code %></li>
+         </ul>
+       <% end %>
+     </div>
+   <% end %>
 
-            <% if hasawards?(@user_profile) %>
-              <div name='awards'>
-                <h4>Award(s):</h4>
-                <% @user_profile.awards.each do |award| %>
-                    <%= award.description %>
-                <% end %>
-              </div>
-            <% end %>
+   <% if hasemailaddresses?(@user_profile) %>
+     <div name='email_addresses'>
+       <h4>Email Address(es):</h4>
+       <% @user_profile.email_addresses.each do |email_address| %>
+           <%= email_address.email %>
+       <% end %>
+     </div>
+   <% end %>
 
-            <% if hasaddresses?(@user_profile) %>
-              <div name='addresses'>
-                <h4>Address(es):</h4>
-                <% @user_profile.addresses.each do |address| %>
-                  <ul>
-                     <li><strong>Street Address 1: </strong><%= address.street_address_1 %></li>
-                     <li><strong>Street Address 2: </strong><%= address.street_address_2 %></li>
-                     <li><strong>City: </strong><%= address.city %></li>
-                     <li><strong>State: </strong><%= address.state %></li>
-                     <li><strong>Zip Code: </strong><%= address.zip_code %></li>
-                  </ul>
-                <% end %>
-              </div>
-            <% end %>
+   <% if hasphones?(@user_profile) %>
+     <div name='phones'>
+       <h4>Phone(s):</h4>
+       <% @user_profile.phones.each do |phone| %>
+           <a href="tel:<%= phone.number %>">
+             <%= phone.number %>
+           </a>
+           <%= phone.number_types %>
+       <% end %>
+     </div>
+   <% end %>
 
-            <% if hasemailaddresses?(@user_profile) %>
-              <div name='email_addresses'>
-                <h4>Email Address(es):</h4>
-                <% @user_profile.email_addresses.each do |email_address| %>
-                    <%= email_address.email %>
-                <% end %>
-              </div>
-            <% end %>
+   <% if haspublications?(@user_profile) %>
+     <div name='publications'>
+       <h4>Publications(s):</h4>
+       <% @user_profile.publications.each do |publication| %>
+           <%= publication.description %>
+       <% end %>
+     </div>
+   <% end %>
 
-            <% if hasphones?(@user_profile) %>
-              <div name='phones'>
-                <h4>Phone(s):</h4>
-                <% @user_profile.phones.each do |phone| %>
-                    <a href="tel:<%= phone.number %>">
-                      <%= phone.number %>
-                    </a>
-                    <%= phone.number_types %>
-                <% end %>
-              </div>
-            <% end %>
+   <% if haswebsites?(@user_profile) %>
+     <div name='websites'>
+       <h4>website(s):</h4>
+       <% @user_profile.websites.each do |website| %>
+           <a href="<%= website.url %>">
+             <%= website.url %>
+           </a>
+       <% end %>
+     </div>
+   <% end %>
 
-            <% if haspublications?(@user_profile) %>
-              <div name='publications'>
-                <h4>Publications(s):</h4>
-                <% @user_profile.publications.each do |publication| %>
-                    <%= publication.description %>
-                <% end %>
-              </div>
-            <% end %>
-
-            <% if haswebsites?(@user_profile) %>
-              <div name='websites'>
-                <h4>website(s):</h4>
-                <% @user_profile.websites.each do |website| %>
-                    <a href="<%= website.url %>">
-                      <%= website.url %>
-                    </a>
-                <% end %>
-              </div>
-            <% end %>
-
-          </div>
-      </tbody>
-    </div>
   </div>
 </div>

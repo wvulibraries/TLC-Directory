@@ -43,16 +43,6 @@
         </div>
       </div>
 
-      <!-- Enrollments -->
-      <div class="field one-fourth last">
-        <%= f.label :enrollments, class:'select-label' %>
-        <div class="select-style">
-          <%= f.collection_select(:university_ids, University.all, :id, :name,
-                              {include_blank: false, :include_hidden => false, :selected => @user.enrollments.map(&:university_id)},
-                              {:multiple => true}) %>
-        </div>
-      </div>
-
       <!-- Profile Image -->
       <div class="field one-fourth last">
         <%= f.label 'Profile Picture', class: 'required' %>

@@ -8,12 +8,12 @@
 //= require jquery
 //= require jquery_ujs
 
-// Select2 Components
-// ----------------------------------------------------------------
-//= require select2-full
-//= require plugins/university_list.js
-
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+// Interface Components
+// ----------------------------------------------------------------
+//= require multi-select
+//= require plugins/mult_select_attach.js
