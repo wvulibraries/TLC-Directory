@@ -24,7 +24,6 @@ gem 'sanitize'
 
 # interface items
 gem 'paperclip', '~> 6.0.0'
-gem 'multi-select-rails'
 
 # cas client
 gem 'rack-cas', '~> 0.16.0'

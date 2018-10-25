@@ -13,7 +13,4 @@
 //= require turbolinks
 //= require_tree .
 
-// Interface Components
-// ----------------------------------------------------------------
-//= require multi-select
-//= require plugins/mult_select_attach.js
+
