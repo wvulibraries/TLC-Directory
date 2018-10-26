@@ -20,15 +20,17 @@
     <%= render(:partial => 'shared/public_banner') %>
 
     <!-- Main -->
-    <main id="main" class="backend">
-      <div class="wvu-container">
+    <div id="main-container" class="home-container container">
+        
         <!-- Flash -->
         <%= render "utilities/alerts" %>
+        
+        <div class="col-container">
+          <!-- Yield -->
+          <%= yield %>
+        </div>
 
-        <!-- Yield -->
-        <%= yield %>
-      </div>
-    </main>
+    </div>
 
     <!-- Footers -->
     <%= render(:partial => 'shared/footer') %>

@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 2018_10_18_135837) do
 
   create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id"
+    t.string "college"
     t.string "department"
     t.string "title"
     t.text "biography"

@@ -68,6 +68,18 @@ class User < ApplicationRecord
   def display_name
     [first_name, middle_name, last_name].join(' ')
   end
+  
+  def assign_profile_params(params)
+    @profile_params = params
+  end
+
+  def assign_picture_params(params)
+    @picture_params = params
+  end
+  
+  def assign_document_params(params)
+    @document_params = params
+  end
 
   private
 
