@@ -10,11 +10,6 @@ branches:
     - master
 notifications:
   - false
-script:
-  - bundle install
-  - bundle exec rake db:schema:load
-  - bundle exec rake db:migrate --trace
-  - bundle exec rspec
 before_script:
   - mysql -e 'create database tlcdirectory_test'
   - "cp ./.travis.database.yml ./config/database.yml"
@@ -22,5 +17,10 @@ before_script:
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
   - gem install bundler  
+  - bundle install    
+script:
+  - bundle exec rake db:schema:load
+  - bundle exec rake db:migrate --trace
+  - bundle exec rspec
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
