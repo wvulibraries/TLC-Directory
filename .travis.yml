@@ -1,5 +1,7 @@
+dist: trusty
 language: ruby
-rvm: 2.4.4
+rvm:
+ - 2.5.1
 env:
   global:
     - RAILS_ENV=test

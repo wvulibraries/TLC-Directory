@@ -8,8 +8,6 @@
 <div class="col-main">
     <h2><%= @user_profile.display_name %></h2>
 
-
-
     <% if hasprofile?(@user_profile) %>
          <div>
            <h4>Title:</h4>
@@ -96,6 +94,11 @@
        <% end %>
      </div>
    <% end %>
-
+   
+   <% if hascv?(@user_profile) %>
+     <div class="attached-cv">
+       <%= link_to "Download CV", @user_profile.document.document.url(:original, false) %>
+     </div>  
+    <% end %>
   </div>
 </div>

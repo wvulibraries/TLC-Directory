@@ -43,5 +43,9 @@ module UsersHelper
   def hasuniversities?(user)
     user.universities.all.count != 0
   end
+  
+  def hascv?(user)
+    user.document != nil
+  end
 
 end
