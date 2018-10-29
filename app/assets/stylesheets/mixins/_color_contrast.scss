@@ -1,0 +1,19 @@
+// Color Contrast Helper
+// https://24ways.org/2010/calculating-color-contrast
+@mixin determine-text-color($background) {
+  $r: red($background);
+  $g: green($background);
+  $b: blue($background);
+  
+  // YIQ should give you a value of 256 
+  $yiq: (($r*299) + ($g*587) + ($b*114))/1000;
+
+  // 50% passing would be 128 
+  // better contrast for AAA passing would be 64 
+  @if ($yiq >= 128) {
+    color: #000;
+  }
+  @else {
+    color: #fff;
+  }
+}

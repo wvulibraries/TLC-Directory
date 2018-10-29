@@ -1,0 +1,177 @@
+html { font-size: 16px; }
+
+// Set Helvetica as the default font
+body { font-family: $base-font-family; }
+
+.helvetica-neue-light { font-family: $helvetica-neue-font-stack; font-weight: normal; line-height: 1em;
+  .fonts-loaded & { font-family: $helvetica-neue-light; }
+}
+
+// NOTE: You must include the fonts.com script for the Iowan web font to use Iowan as you see here.
+.iowan-old-style { font-family: $iowan-old-style; font-weight: normal; line-height: $wvu-traditional-audience-line-height; }
+.iowan-old-style-italic { font-family: $iowan-old-style-italic; font-weight: normal; line-height: $wvu-traditional-audience-line-height; }
+
+h2, .wvu-h2,
+h3, .wvu-h3,
+h4, .wvu-h4,
+h5, .wvu-h5,
+h6, .wvu-h6 {
+  color: $pms-432-c;
+  clear: both;
+  margin-bottom: 1em;
+}
+
+h1, .wvu-h1 { font-size: 3em; line-height: 1.08333333em; width: 100%; margin-top: 0; margin-bottom: .5em; color: $pms-432-c;
+  @include mq($bp-large) { font-size: 4em; }
+}
+
+.wvu-shout { font-size: 3em; line-height: $wvu-shout-line-height; font-family: $wvu-shout-fallback; text-transform: uppercase; font-weight: normal;
+  .fonts-loaded & { font-family: $wvu-shout; }
+  @include mq($bp-large) { font-size: 8.2em; }
+}
+
+.wvu-shout--medium-shout {
+  @include mq($bp-medium) { font-size: 4.5em; }
+}
+
+.wvu-shout--long-shout { font-size: 2em;
+  @include mq($bp-medium) { font-size: 3em; }
+}
+
+.wvu-shout--wvu-gold { color: $wvu-gold; }
+.wvu-shout--wvu-blue { color: $wvu-blue; }
+.wvu-shout--white { color: #fff; }
+
+@mixin wvu-shout {
+  line-height: $wvu-shout-line-height; font-family: $wvu-shout-fallback; text-transform: uppercase; font-weight: normal;
+  .fonts-loaded & { font-family: $wvu-shout; }
+}
+
+@mixin wvu-subhead {
+  line-height: $helvetica-neue-bold-line-height; font-weight: bold; text-transform: none;
+}
+
+@mixin wvu-traditional-audience {
+  line-height: $wvu-traditional-audience-line-height; font-family: $wvu-traditional-audience; font-weight: normal; text-transform: none;
+}
+
+h2, .wvu-h2 { font-size: 2.4em; line-height: 1.08333333em; }
+
+.wvu-lede { font-size: 2.4em; font-family: $helvetica-neue-font-stack; line-height: 1.08333333em; margin-bottom: 2em; margin-top: 1.5em;
+  .fonts-loaded & { font-family: $helvetica-neue-light; }
+}
+
+p + .wvu-lede { margin-top: .5em; }
+
+.wvu-lede-small { font-size: 1.4em; font-family: $helvetica-neue-font-stack; line-height: 1.5em; margin-bottom: 1em;
+  .fonts-loaded & { font-family: $helvetica-neue-light; }
+}
+
+p + .wvu-lede-small { margin-top: 1em; }
+
+p + h2, .wvu-h2, table + h2, .wvu-h2, blockquote + h2, .wvu-h2, fieldset + h2, .wvu-h2 { margin-top: 1em; }
+
+.wvu-lede--margin-bottom-zero { margin-bottom: 0; }
+
+h3, .wvu-h3 { font-size: 1.75em; }
+h4, .wvu-h4 { font-size: 1.5em; }
+h5, .wvu-h5 { font-size: 1.2em; }
+h3, .wvu-h3, h4, .wvu-h4, h5, .wvu-h5, h6, .wvu-h6 { margin-bottom: 18px; }
+h4, .wvu-h4, h5, .wvu-h5, h6, .wvu-h6 { color: $black; margin-bottom: 18px; }
+h3, .wvu-h3, h4, .wvu-h4, h5, .wvu-h5 { line-height: 1.15; }
+p, li, blockquote, h1, h2, h3, h4, h5, h6, pre, a { max-width: $wvu-typography-line-length; }
+
+blockquote, .wvu-blockquote {
+  border-left: 2px solid $base-border-color;
+  color: $base-font-color;
+  margin: $base-spacing 0;
+  padding-left: $base-spacing / 2;
+}
+
+ul, ol { margin-bottom: 18px; }
+
+@mixin wvu-typography-anchor-tag  {
+  a { color: $wvu-base-link-color; text-decoration: underline;
+    &:visited { color: $wvu-visited-link-color; text-decoration: none; }
+    &:active { text-decoration: none; }
+    &:hover { color: $wvu-hover-link-color; text-decoration: underline; }
+  } //a
+} //@wvu-typography-anchor-tag
+
+// This if statement assumes = true, unless variable is explicitly set to `false`.
+@if $wvu-use-typography-anchor {
+  @include wvu-typography-anchor-tag;
+} //@if
+
+ul { list-style-type: disc; padding-left: 1.5em; }
+ul ul { list-style-type: circle; margin-bottom: 0; }
+ul li, ol li { line-height: 1.4; margin: 10px 0; }
+ol { list-style-type: decimal; padding-left: 1.5em; }
+ol ol { list-style-type: lower-alpha; margin-bottom: 0; }
+acronym, abbr { font-variant: small-caps; }
+ins { text-decoration: underline; }
+p, dl, hr, h1, h2, h3, h4, h5, h6, ol, ul, pre, table, address, fieldset, blockquote { vertical-align: baseline; }
+h6, .wvu-h6, .wvu-sidebar { font-size: 1em; line-height: 1.5; margin-bottom: 18px; }
+ul li, .wvu-sidebar li { line-height: 1.4; }
+em, i, cite, q { font-style: italic; }
+
+ul,
+ol {
+
+  &%default-ul {
+    list-style-type: disc;
+    margin-bottom: $base-spacing / 2;
+    padding-left: $base-spacing;
+  }
+
+  &%default-ol {
+    list-style-type: decimal;
+    margin-bottom: $base-spacing / 2;
+    padding-left: $base-spacing;
+  }
+}
+
+dl {
+  margin-bottom: $base-spacing / 2;
+
+  dt {
+    font-weight: bold;
+    margin-top: $base-spacing / 2;
+  }
+
+  dd {
+    margin: 0;
+  }
+}
+
+code, kbd, pre, samp { margin-right: 2px; margin-left: 1px; padding: 2px 5px; background-color: #eee; font-size: .95em;
+  color: #000; border-radius: 3px; font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+} //code
+
+// Commonly used typographic styles
+// ----------------------------------------------
+
+.wvu-text--center {
+  text-align: center;
+}
+
+.wvu-text--micro {
+  font-size: .8em;
+}
+
+.wvu-text--indent,
+address {
+  margin-left: 1.5em;
+}
+
+.wvu-text--white {
+  color: #fff;
+}
+
+.wvu-text__max-width--small {
+  max-width: 25em;
+}
+
+.wvu-text--uppercase {
+  text-transform: uppercase;
+}

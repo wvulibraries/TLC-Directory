@@ -123,10 +123,6 @@
             <%= f.select :status, options_for_select(User.statuses.keys.to_a, selected: f.object.status), include_blank: "Select a Status" %>
         </div>
       </div>
-
-      <div class="micro-text">
-        <%= t('notes.user_status') %>
-      </div>
     </div>
   </fieldset>
 

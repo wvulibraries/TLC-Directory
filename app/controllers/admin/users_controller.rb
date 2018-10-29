@@ -28,7 +28,7 @@ class Admin::UsersController < ApplicationController
     @user = User.new user_params
     @user.assign_profile_params profile_params unless profile_params.nil?    
     @user.assign_picture_params picture_params unless picture_params.nil?
-    @user.assign_document_params picture_params unless document_params.nil?
+    @user.assign_document_params document_params unless document_params.nil?
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }

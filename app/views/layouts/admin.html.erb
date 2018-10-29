@@ -12,7 +12,7 @@
 
 <body>
   <!-- Header -->
-  <%= render(:partial => 'shared/header') %>
+  <%= render(:partial => 'shared/admin_header') %>
 
   <!-- Navigation -->
   <%= render(:partial => 'shared/navigation') %>
@@ -21,23 +21,20 @@
   <%= render(:partial => 'shared/admin_banner') %>
   
   <!-- Main -->
-  <div id="main-container" class="home-container container">
-      
+  <main id="main" class="backend">
+    <div class="wvu-container"> 
       <!-- Flash -->
       <%= render "utilities/alerts" %>
-      
-      <div class="col-container">
-        <div class="col-side">
-          <!-- Admin Menu -->
-          <%= render(:partial => 'shared/admin_navigation') %>
-        </div>
-        <div class="col-main">
-          <!-- Yield -->
-          <%= yield %>
-        </div>
-      </div>
 
-  </div>
+      <!-- Admin Menu -->
+      <%= render(:partial => 'shared/admin_navigation') %>
+
+      <!-- Yield -->
+      <div class="main-content">
+        <%= yield %>
+      </div>
+    </div>
+  </main>
 
   <!-- Footers -->
   <%= render(:partial => 'shared/builtby_footer') %>

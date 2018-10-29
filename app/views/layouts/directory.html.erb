@@ -2,27 +2,30 @@
 <html>
   <head>
     <title><%= page_title('Directory | Scholarship of Teaching & Learning') %></title>
-    <%= stylesheet_link_tag 'application', :media => 'all', 'data-turbolinks-track': 'reload' %>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= yield :head %>
   </head>
 
   <body>
-    <%= render(:partial => 'shared/wvu_header') %>
+    <%= render(:partial => 'shared/header') %>
     <%= render(:partial => 'shared/navigation') %>
     <%= render(:partial => 'shared/directory_banner') %>
-
+    
     <!-- Main -->
-    <div id="main-container" class="home-container container">
-        
+    <main id="main" class="frontend">
+      <div class="wvu-container"> 
         <!-- Flash -->
         <%= render "utilities/alerts" %>
         
-        <div class="col-container">
-          <!-- Yield -->
+        <!-- Yield -->
+        <div class="app-main-content">
           <%= yield %>
         </div>
-
-    </div>
+      </div>
+    </main>
     
     <%= render(:partial => 'shared/footer') %>
       

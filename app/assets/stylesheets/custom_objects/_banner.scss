@@ -1,16 +1,12 @@
 .banner {
-  padding-left: 40px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  @include span-columns(12);
   
-  overflow: hidden;
-  background-color: $primary-orange;
-
-  * {
-    box-sizing: border-box;
-    margin: auto;
-    width: 100%;
-  }
+  padding-left: 40px;
+  padding-right: 40px;
+  
+  font-size: 10px;
+  
+  background-color: $gold;
 
   h2 { 
     text-shadow: 2px 2px $neutral-black;

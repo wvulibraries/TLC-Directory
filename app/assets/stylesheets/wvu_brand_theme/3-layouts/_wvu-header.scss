@@ -1,0 +1,12 @@
+.wvu-header__container {
+  @include outer-container();
+}
+
+.wvu-header__title {
+  @include mq($bp-medium) {
+    @include span-columns(7.5);
+  }
+  @include mq($bp-large) {
+    @include span-columns(8.5);
+  }
+}

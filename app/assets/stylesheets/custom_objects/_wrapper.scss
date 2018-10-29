@@ -1,0 +1,34 @@
+.wrapper {
+    width:100%;
+    margin-left: auto;
+    margin-right: auto;
+    clear:left;
+    @include clearfix;
+}
+
+.container {
+    @include outer-container; 
+    @include clearfix;
+}
+
+main, header, footer, div {
+  @include clearfix;
+}
+
+main { clear:left; }
+
+.text-right {
+  text-align: right !important;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.pull-left {
+  float: left !important;
+}
+
+.pull-right {
+  float:right !important;
+}

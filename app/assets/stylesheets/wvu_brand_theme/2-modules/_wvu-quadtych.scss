@@ -1,0 +1,15 @@
+.wvu-quadtych {
+  @include pms-429-c-background();
+
+  h2 {
+    font-size: 2em;
+    margin: 0.5em 0;
+  }
+  p {
+    padding-bottom: 1em;
+  }
+}
+
+.wvu-quadtych__container {
+  padding: $wvu-container-padding;
+}

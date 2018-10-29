@@ -1,0 +1,13 @@
+.wvu-landing-page-header__container {
+  @include outer-container();
+}
+
+.wvu-landing-page-header {
+  h1 {
+    @include mq($bp-medium) { @include span-columns(6); }
+  }
+}
+
+.wvu-landing-page-header__intro {
+  @include mq($bp-medium) { @include span-columns(6); }
+}

@@ -1,0 +1,119 @@
+table {
+  border: $border;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+
+table tr {
+  border: $border;
+  &:nth-of-type(even) { 
+    background:rgba(#ccc, .1); 
+  }
+}
+
+table thead { 
+  padding:1em;
+  background:rgba(#ccc, .2); 
+}
+
+
+thead th,
+table th,
+table td {
+  text-align: center;
+  padding:.5em;
+  border: $border;
+}
+
+thead th, table th { 
+  border-color:darken($border-color, 10%);
+  border-bottom:2px solid darken($border-color, 10%);
+  // &:last-of-type { 
+  //   border-right:$border;
+  // }
+}
+
+table th {
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+  
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+    &:nth-of-type(even) { 
+      background:unset;
+    }
+  }
+  
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  
+  table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
+
+// TABLE SORTER 
+
+.tablesorter-header { 
+  .fas { display: none; }
+  
+  &.tablesorter-headerUnSorted { 
+    .fa-sort{ display: inline-block; }
+  }
+  &.tablesorter-headerDesc{ 
+    .fa-sort-alpha-up{ display: inline-block; }
+  }
+  &.tablesorter-headerAsc {
+    .fa-sort-alpha-down{ display: inline-block; }
+  }
+} 
+
+.tablesorter-header-inner {
+  padding:1em;
+}

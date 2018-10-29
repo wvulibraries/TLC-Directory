@@ -1,0 +1,25 @@
+.wvu-hero__container { @include outer-container(); }
+
+@mixin has-small-hero {
+  @if $has-small-photo == true {
+    .wvu-hero__copy {
+      @include mq($bp-medium) { @include span-columns(4); }
+      @include mq($bp-large) { @include span-columns(5); }
+    }
+    .wvu-hero__photo {
+      @include mq($bp-medium) { @include span-columns(8); }
+      @include mq($bp-large) { @include span-columns(7); }
+    }
+  }
+}
+
+@include has-small-hero();
+
+.wvu-hero--small-photo .wvu-hero__copy {
+  @include mq($bp-medium) { @include span-columns(4); }
+  @include mq($bp-large) { @include span-columns(5); }
+}
+.wvu-hero--small-photo .wvu-hero__photo {
+  @include mq($bp-medium) { @include span-columns(8); }
+  @include mq($bp-large) { @include span-columns(7); }
+}

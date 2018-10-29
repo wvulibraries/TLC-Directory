@@ -1,0 +1,12 @@
+.wvu-calendar--flex { padding-left: 0;
+  li { padding-right: 1em; }
+  @include mq($bp-medium) {
+    display: flex;
+    align-items: stretch;
+    flex-flow: row wrap;
+    li {
+      width: 33%;
+      padding: 0 1em 1em 0;
+    }
+  }
+}

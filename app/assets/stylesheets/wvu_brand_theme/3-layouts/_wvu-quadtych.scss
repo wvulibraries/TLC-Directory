@@ -1,0 +1,8 @@
+.wvu-quadtych { width: 100%;
+  .wvu-quadtych__container { @include outer-container(); }
+  .wvu-quadtych__quad {
+    @include mq($bp-medium) {
+      @include span-columns(3);
+    }
+  }
+}

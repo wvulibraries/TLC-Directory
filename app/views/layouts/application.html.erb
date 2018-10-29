@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title> <%= yield :title %> :: Library TLC Directory :: WVU </title>
+    <title> <%= yield :title %> :: TLC Directory :: WVU </title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -11,7 +11,7 @@
 
   <body>
     <!-- Header -->
-    <%= render(:partial => 'shared/wvu_header') %>
+    <%= render(:partial => 'shared/header') %>
 
     <!-- Navigation -->
     <%= render(:partial => 'shared/navigation') %>
@@ -20,17 +20,17 @@
     <%= render(:partial => 'shared/public_banner') %>
 
     <!-- Main -->
-    <div id="main-container" class="home-container container">
-        
+    <main id="main" class="frontend">
+      <div class="wvu-container"> 
         <!-- Flash -->
         <%= render "utilities/alerts" %>
         
-        <div class="col-container">
-          <!-- Yield -->
+        <!-- Yield -->
+        <div class="app-main-content">
           <%= yield %>
         </div>
-
-    </div>
+      </div>
+    </main>
 
     <!-- Footers -->
     <%= render(:partial => 'shared/footer') %>

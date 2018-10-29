@@ -6,7 +6,8 @@
         <%= image_tag @user.picture.image.url(:medium), alt: "users profile image" %>
       <% end %>
     </div>
-      <div class="text-attributes">
+    
+    <div class="text-attributes">
       <ul>
 
         <li>
@@ -97,6 +98,7 @@
         </li>
 
       </ul>
+      
       <div class="micro-text">
         Created at <%= @user.created_at.strftime("%B %d, %Y at %I:%M%p") %> <br/> Updated at <%= @user.updated_at.strftime("%B %d, %Y at %I:%M%p")%>
       </div>

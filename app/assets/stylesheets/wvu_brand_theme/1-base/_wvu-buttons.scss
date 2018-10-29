@@ -1,0 +1,240 @@
+// Buttons
+//==================================================
+
+$base-border-radius: 3px !default;
+$hover-button-color: $wvu-blue;
+
+%button {
+  -webkit-font-smoothing: antialiased;
+  background-color: $base-button-color;
+  border-radius: $base-border-radius;
+  color: white;
+  display: inline-block;
+  font-size: $base-font-size;
+  font-weight: bold;
+  line-height: 1;
+  padding: .75em 1em;
+  text-decoration: none;
+
+  &:hover {
+    background-color: $hover-button-color;
+    color: white;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: .5;
+  }
+}
+
+
+.button,
+input[type="submit"] {
+  @extend %button;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+
+.button {
+  -webkit-font-smoothing: antialiased;
+  border-radius: $base-border-radius;
+  background: transparent;
+  color: $black;
+  display: inline-block;
+  border: 2px solid $black;
+  margin-bottom: .5em;
+  font-weight: bold;
+  line-height: 1;
+  padding: .75em;
+  text-decoration: none;
+
+  &:visited { color: black; }
+
+  &:hover {
+    background-color: $hover-button-color;
+    color: white;
+    text-decoration: none;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: .5;
+  }
+}
+
+.button--white {
+  color: white;
+  border: 2px solid white;
+  &:visited { color: white; }
+  &:hover {
+    background-color: white;
+    color: $wvu-blue;
+  }
+
+}
+
+.button--small {
+  font-size: .9em;
+  padding: .35em .45em;
+}
+
+.button--big {
+  font-size: 1.5em;
+}
+
+
+.button--wvu-gold { color: $wvu-gold; border: 2px solid $wvu-gold;
+  &:visited { color: $wvu-gold; }
+  &:hover { background: $wvu-gold; color: $black; border: 2px solid $wvu-gold}
+}
+.button--wvu-blue { color: $wvu-blue; border: 2px solid $wvu-blue;
+  &:visited { color: $wvu-blue; }
+  &:hover { background: $wvu-blue; color: white; }
+}
+.button--black { color: $black; border: 2px solid $black;
+  &:visited { color: $black; }
+  &:hover { background: $black; color: white; }
+}
+.button--pms-432-c { color: $pms-432-c; border: 2px solid $pms-432-c;
+  &:visited { color: $pms-432-c; }
+  &:hover { background: $pms-432-c; color: white; }
+}
+.button--pms-429-c { color: $pms-429-c; border: 2px solid $pms-429-c;
+  &:visited { color: $pms-429-c; }
+  &:hover { background: $pms-429-c; color: $black; }
+}
+.button--pms-warm-gray-11 { color: $pms-warm-gray-11; border: 2px solid $pms-warm-gray-11;
+  &:visited { color: $pms-warm-gray-11; }
+  &:hover { background: $pms-warm-gray-11; color: white; }
+}
+.button--pms-warm-gray-7 { color: $pms-warm-gray-7; border: 2px solid $pms-warm-gray-7;
+  &:visited { color: $pms-warm-gray-7; }
+  &:hover { background: $pms-warm-gray-7; color: white; }
+}
+.button--pms-warm-gray-3 { color: $pms-warm-gray-3; border: 2px solid $pms-warm-gray-3;
+  &:visited { color: $pms-warm-gray-3; }
+  &:hover { background: $pms-warm-gray-3; color: $black; }
+}
+.button--pms-286-c { color: $pms-286-c; border: 2px solid $pms-286-c;
+  &:visited { color: $pms-286-c; }
+  &:hover { background: $pms-286-c; color: white; }
+}
+.button--pms-300-c { color: $pms-300-c; border: 2px solid $pms-300-c;
+  &:visited { color: $pms-300-c; }
+  &:hover { background: $pms-300-c; color: white; }
+}
+.button--pms-629-c { color: $pms-629-c; border: 2px solid $pms-629-c;
+  &:visited { color: $pms-629-c; }
+  &:hover { background: $pms-629-c; color: white; }
+}
+.button--pms-7554-c { color: $pms-7554-c; border: 2px solid $pms-7554-c;
+  &:visited { color: $pms-7554-c; }
+  &:hover { background: $pms-7554-c; color: white; }
+}
+.button--pms-7557-c { color: $pms-7557-c; border: 2px solid $pms-7557-c;
+  &:visited { color: $pms-7557-c; }
+  &:hover { background: $pms-7557-c; color: white; }
+}
+.button--pms-144-c { color: $pms-144-c; border: 2px solid $pms-144-c;
+  &:visited { color: $pms-144-c; }
+  &:hover { background: $pms-144-c; color: $black; }
+}
+.button--pms-7476-c { color: $pms-7476-c; border: 2px solid $pms-7476-c;
+  &:visited { color: $pms-7476-c; }
+  &:hover { background: $pms-7476-c; color: white; }
+}
+.button--pms-5625-c { color: $pms-5625-c; border: 2px solid $pms-5625-c;
+  &:visited { color: $pms-5625-c; }
+  &:hover { background: $pms-5625-c; color: white; }
+}
+.button--pms-558-c { color: $pms-558-c; border: 2px solid $pms-558-c;
+  &:visited { color: $pms-558-c; }
+  &:hover { background: $pms-558-c; color: $black; }
+}
+.button--pms-180-c { color: $pms-180-c; border: 2px solid $pms-180-c;
+  &:visited { color: $pms-180-c; }
+  &:hover { background: $pms-180-c; color: white; }
+}
+.button--pms-166-c { color: $pms-166-c; border: 2px solid $pms-166-c;
+  &:visited { color: $pms-166-c; }
+  &:hover { background: $pms-166-c; color: white; }
+}
+
+
+.button--wvu-gold-fill { background: $wvu-gold; border: 2px solid $wvu-gold;
+  &:hover { background: $wvu-blue; color: white; border: 2px solid $wvu-blue}
+}
+.button--wvu-blue-fill { background: $wvu-blue; border: 2px solid $wvu-blue; color: white;
+  &:visited { color: white; }
+  &:hover { background: transparent; color: $wvu-blue; border: 2px solid $wvu-blue}
+}
+.button--black-fill { background: $black; border: 2px solid $black; color: white;
+  &:visited { color: white; }
+  &:hover { background: transparent; color: $black; border: 2px solid $black}
+}
+.button--pms-432-c-fill { background: $pms-432-c; border: 2px solid $pms-432-c; color: white;
+  &:visited { color: white; }
+  &:hover { background: transparent; color: $pms-432-c; border: 2px solid $pms-432-c}
+}
+.button--pms-429-c-fill { background: $pms-429-c; border: 2px solid $pms-429-c;
+  &:hover { background: transparent; color: $pms-429-c; border: 2px solid $pms-429-c}
+}
+.button--pms-warm-gray-11-fill { background: $pms-warm-gray-11; border: 2px solid $pms-warm-gray-11; color: white;
+  &:visited { color: white; }
+  &:hover { background: transparent; color: $pms-warm-gray-11; border: 2px solid $pms-warm-gray-11}
+}
+.button--pms-warm-gray-7-fill { background: $pms-warm-gray-7; border: 2px solid $pms-warm-gray-7; color: white;
+  &:visited { color: white; }
+  &:hover { background: transparent; color: $pms-warm-gray-7; border: 2px solid $pms-warm-gray-7}
+}
+.button--pms-warm-gray-3-fill { background: $pms-warm-gray-3; border: 2px solid $pms-warm-gray-3;
+  &:hover { background: transparent; color: $pms-warm-gray-3; border: 2px solid $pms-warm-gray-3}
+}
+.button--pms-286-c-fill { background: $pms-286-c; border: 2px solid $pms-286-c; color: white;
+  &:visited { color: white; }
+  &:hover { background: transparent; color: $pms-286-c; border: 2px solid $pms-286-c}
+}
+.button--pms-300-c-fill { background: $pms-300-c; border: 2px solid $pms-300-c; color: white;
+  &:visited { color: white; }
+  &:hover { background: transparent; color: $pms-300-c; border: 2px solid $pms-300-c}
+}
+.button--pms-629-c-fill { background: $pms-629-c; border: 2px solid $pms-629-c;
+  &:hover { background: transparent; color: $pms-629-c; border: 2px solid $pms-629-c}
+}
+.button--pms-7554-c-fill { background: $pms-7554-c; border: 2px solid $pms-7554-c; color: white;
+  &:visited { color: white; }
+  &:hover { background: transparent; color: $pms-7554-c; border: 2px solid $pms-7554-c}
+}
+.button--pms-7557-c-fill { background: $pms-7557-c; border: 2px solid $pms-7557-c; color: white;
+  &:visited { color: white; }
+  &:hover { background: transparent; color: $pms-7557-c; border: 2px solid $pms-7557-c}
+}
+.button--pms-144-c-fill { background: $pms-144-c; border: 2px solid $pms-144-c;
+  &:hover { background: transparent; color: $pms-144-c; border: 2px solid $pms-144-c}
+}
+.button--pms-7476-c-fill { background: $pms-7476-c; border: 2px solid $pms-7476-c; color: white;
+  &:visited { color: white; }
+  &:hover { background: transparent; color: $pms-7476-c; border: 2px solid $pms-7476-c}
+}
+.button--pms-5625-c-fill { background: $pms-5625-c; border: 2px solid $pms-5625-c; color: white;
+  &:visited { color: white; }
+  &:hover { background: transparent; color: $pms-5625-c; border: 2px solid $pms-5625-c}
+}
+.button--pms-558-c-fill { background: $pms-558-c; border: 2px solid $pms-558-c;
+  &:hover { background: transparent; color: $pms-558-c; border: 2px solid $pms-558-c}
+}
+.button--pms-180-c-fill { background: $pms-180-c; border: 2px solid $pms-180-c; color: white;
+  &:visited { color: white; }
+  &:hover { background: transparent; color: $pms-180-c; border: 2px solid $pms-180-c}
+}
+.button--pms-166-c-fill { background: $pms-166-c; border: 2px solid $pms-166-c; color: white;
+  &:visited { color: white; }
+  &:hover { background: transparent; color: $pms-166-c; border: 2px solid $pms-166-c}
+}
+.button--pms-115-c-fill { background: $pms-115-c; border: 2px solid $pms-115-c;
+  &:hover { background: $black; color: $pms-115-c; border: 2px solid $pms-115-c}
+}

@@ -1,0 +1,47 @@
+$modal-close-color: red;
+$modal-close-color-hover: darken(red, 10%);
+$modal-bg-color: #fff;
+$modal-window-bg-color: rgba(#000,.8);
+$modal-border-radius: 3px;
+
+.modal {
+     display:none;
+     position:fixed;
+    z-index:9999;
+     top:0;
+     left:0;
+     width:100%;
+     height:100%;
+     background: $modal-window-bg-color;
+
+    .modal-wrapper {
+        display:block;
+        position:absolute;
+        top:25%;
+        right:25%;
+        width:50%;
+        padding:2em;
+        background:$modal-bg-color;
+        border-radius:$modal-border-radius;
+    }
+
+    .close-modal {
+        display:block;
+        font-size:1.25em;
+        text-align:center;
+        position:absolute;
+        top:.25em;
+        right:.25em;
+        cursor:pointer;
+        color:$modal-close-color;
+
+        &:hover,&:active,&:visited {
+            color: $modal-close-color-hover;
+        }
+    }
+
+    .modal-body {
+        max-height:400px;
+        overflow:auto;
+    }
+}

@@ -1,0 +1,14 @@
+.wvu-social-media-icons {
+  @include black-background();
+  ul { list-style-type: none; margin-bottom: 0; padding-left: 0;
+    li { float: left; width: 3em; margin-right: 5px; }
+  }
+}
+.wvu-social-media-icons__container {
+  padding: $wvu-container-padding;
+  padding-left: 1em;
+  padding-right: 1em;
+  @include mq($bp-medium) {
+    padding: $wvu-container-padding;
+  }
+}

@@ -1,0 +1,28 @@
+// Intro panels
+//==================================================
+// Styles for Intro panels
+
+.intro { background: #333; margin-bottom: 36px; color: #fff;
+  @include mq($bp-medium) {
+    max-height: 480px;
+    overflow: hidden;
+  }
+}
+
+.wvu-tabs {
+  ul { list-style-type: none; padding-left: 0; padding-top: 10px;
+
+    li { font-size: 0.8em; padding: 0 1em; border-right: 1px solid #eee; float: left; width: 33.33333%;
+      &:last-child { border-right: 0; }
+      h2 { font-size: 1.25em; margin-bottom: 0.5em; margin-top: 0; }
+      @include mq($bp-large) { font-size: 0.8em; padding: 1em 0; width: 100%; border-bottom: 1px solid #eee; border-right: 0; clear: both;
+        h2 { font-size: 1.75em; }
+      }
+      a { width: 100%; display: block; float: left; border: 0; }
+    }
+  }
+}
+
+.wvu-tabs__content { float: left; width: 100%;
+  img { min-width: 100%; }
+}

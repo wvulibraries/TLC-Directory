@@ -45,7 +45,7 @@ module UsersHelper
   end
   
   def hascv?(user)
-    user.document != nil
+    user.document.document_file_size != nil
   end
 
 end

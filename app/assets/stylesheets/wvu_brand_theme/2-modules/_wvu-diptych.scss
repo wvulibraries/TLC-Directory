@@ -1,0 +1,21 @@
+@import 'wvu-spotlight';
+
+.wvu-diptych { width: 100%;
+  @include pms-429-c-background();
+  h2 {
+    margin: 0 0 0.5em 0;
+  }
+  p {
+    padding-bottom: 1em;
+    font-size: 0.8em;
+  }
+}
+
+.wvu-diptych__container {
+  padding: $wvu-container-padding;
+  padding-left: 1em;
+  padding-right: 1em;
+  @include mq($bp-medium) {
+    padding: $wvu-container-padding;
+  }
+}

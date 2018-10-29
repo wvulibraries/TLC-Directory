@@ -1,0 +1,21 @@
+// Blog Styles
+//==================================================
+// Styles for the blog index and blog article templates.
+
+// Blog Articles
+.wvu-article { float: left; width: 100%; padding-top: 20px; padding-bottom: 20px; border-bottom: 1px solid $pms-warm-gray-3;
+  &:first-child, .blog_article & { padding-top: 0; }
+} //.wvu-article
+.wvu-article--individual { border-bottom: 0; } // Remove stuff for individual articles
+.wvu-article__title { margin-bottom: 20px; }
+.wvu-article__meta { font-size: .8em; margin-top: 0; margin-bottom: 0; }
+
+// Older/newer articles buttons
+.wvu-pagination { float: left; padding-top: 10px; padding-left: 0; list-style-type: none; }
+.wvu-pagination__older, .wvu-pagination__newer { display: inline; float: left; margin-right: 3px; }
+.wvu-pagination__older { margin-right: 10px;
+  &:after { content: '|'; margin-left: 8px; }
+} //.wvu-pagination__older
+.wvu-pagination__disabled {
+  a, a:hover { cursor: not-allowed; text-decoration: none; }
+} //.wvu-pagination__disabled

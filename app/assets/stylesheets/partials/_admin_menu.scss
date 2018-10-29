@@ -1,15 +1,11 @@
 #menu  {
   padding:0;
   margin:0;
-  //@include span-columns(12);
+  @include span-columns(12);
 
-  //@include media(720px){
-    //@include span-columns(3);
-  //}
-  
-  // @media only screen and (max-width: 720px) {
-  // 
-  // }
+  @include media(720px){
+    @include span-columns(3);
+  }
 
   ul {
     margin: 0;

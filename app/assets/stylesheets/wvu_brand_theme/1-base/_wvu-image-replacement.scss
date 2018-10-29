@@ -1,0 +1,43 @@
+// image replacement mixins
+// https://github.com/michsch/compass-mixins
+//
+// overview: http://css-tricks.com/css-image-replacement/
+// CSS Image Replacement Museum: http://css-tricks.com/examples/ImageReplacement/
+
+// image replacement from HTML5 boilerplate (2012)
+// https://github.com/h5bp/html5-boilerplate/blob/master/css/main.css
+@mixin image-replace-h5bp($image: null, $display: null, $reset-border-background: true) {
+  overflow: hidden;
+  // IE 6/7 fallback
+  *text-indent: -9999px;
+
+  &:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 100%;
+  }
+
+  @if $reset-border-background == true {
+    border: 0;
+    background-color: transparent;
+  }
+  @if $image != null {
+    @include image-and-dimensions($image, $display);
+  } @else if $display != null {
+    display: $display;
+  }
+}
+
+// set background image and dimensions, used by image-replace-h5bp mixin
+@mixin image-and-dimensions($image, $display: null) {
+  @if $display != null {
+    display: $display;
+  }
+  background: transparent image-url("#{$image}") no-repeat;
+  @include image-dimensions($image);
+}
+
+// Usage example:
+// .test { @include image-replace-h5bp; }
+// Note: You can customize the $image, $display, and $reset-border-background variables if necessary
