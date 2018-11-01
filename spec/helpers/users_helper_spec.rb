@@ -46,10 +46,6 @@ RSpec.describe UsersHelper, type: :helper do
     expect(haspublications?(user)).to eq(false)    
   end
 
-  it 'validates user has no enrollments' do
-    expect(hasenrollments?(user)).to eq(false)    
-  end
-
   it 'validates user has no websites' do
     expect(haswebsites?(user)).to eq(false)    
   end
