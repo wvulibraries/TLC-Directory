@@ -1,4 +1,3 @@
-require "paperclip/matchers"
 require 'simplecov'
 require 'simplecov-console'
 
@@ -88,5 +87,4 @@ RSpec.configure do |config|
   config.shared_context_metadata_behavior = :apply_to_host_groups
   config.default_formatter = 'doc'
   config.order = :random
-  config.include Paperclip::Shoulda::Matchers
 end
