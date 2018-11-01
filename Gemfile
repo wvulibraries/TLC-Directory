@@ -23,7 +23,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'sanitize'
 
 # interface items
-gem 'paperclip', '~> 6.0.0'
+gem 'carrierwave', '~> 1.0'
+gem 'mini_magick'
 
 # cas client
 gem 'rack-cas', '~> 0.16.0'
@@ -48,6 +49,8 @@ group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15', '< 4.0'
   gem 'selenium-webdriver'
+  
+  gem 'elasticsearch-extensions'
   
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
@@ -75,6 +78,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  # performance helper
+  gem 'bullet' # helps to eliminate N+1 Queries   
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
