@@ -13,12 +13,12 @@ RSpec.describe UsersHelper, type: :helper do
     expect(isadmin?(user)).to eq(true)
   end
   
-  it 'validates user has picture' do
-    # should always be true if user hasn't 
-    # uploaded picture a basic placeholder
-    # image is used
-    expect(haspicture?(user)).to eq(true)    
-  end
+  # it 'validates user has picture' do
+  #   # should always be true if user hasn't 
+  #   # uploaded picture a basic placeholder
+  #   # image is used
+  #   expect(haspicture?(user)).to eq(true)    
+  # end
   
   it 'validates user has no awards' do
     expect(hasawards?(user)).to eq(false)    
