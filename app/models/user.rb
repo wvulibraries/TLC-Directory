@@ -15,10 +15,6 @@ class User < ApplicationRecord
   enum status: %i[active disabled]
   enum role: %i[user editor admin]
 
-  has_one :picture, as: :imageable, dependent: :destroy
-  accepts_nested_attributes_for :picture, allow_destroy: true
-  before_create :create_picture
-
   # profile
   has_one :profile, dependent: :destroy
   accepts_nested_attributes_for :profile
@@ -42,16 +38,6 @@ class User < ApplicationRecord
   has_many :websites, as: :webable, dependent: :destroy
   accepts_nested_attributes_for :websites, allow_destroy: true
 
-  has_many :enrollments
-  accepts_nested_attributes_for :enrollments, allow_destroy: true
-  has_many :universities, -> { distinct }, through: :enrollments
-  accepts_nested_attributes_for :universities
-  
-  # attach uploaded cv
-  has_one :document, as: :documentable, dependent: :destroy
-  accepts_nested_attributes_for :document, allow_destroy: true
-  before_create :create_document
-
   after_initialize do
     if new_record?
       # values will be available for new record forms.
@@ -73,25 +59,9 @@ class User < ApplicationRecord
     @profile_params = params
   end
 
-  def assign_picture_params(params)
-    @picture_params = params
-  end
-  
-  def assign_document_params(params)
-    @document_params = params
-  end
-
   private
 
   def create_profile
     build_profile(@profile_params)
-  end
-
-  def create_picture
-    build_picture(@picture_params)
-  end
-
-  def create_document
-    build_document(@document_params)
   end
 end

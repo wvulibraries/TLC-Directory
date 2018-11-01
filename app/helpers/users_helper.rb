@@ -4,9 +4,9 @@ module UsersHelper
     user.role == 'admin'
   end
 
-  def haspicture?(user)
-    user.picture != nil
-  end
+  # def haspicture?(user)
+  #   user.picture != nil
+  # end
 
   def hasawards?(user)
     user.awards.all.count != 0
@@ -44,8 +44,8 @@ module UsersHelper
     user.universities.all.count != 0
   end
   
-  def hascv?(user)
-    user.document.document_file_size != nil
-  end
+  # def hascv?(user)
+  #   user.document.document_file_size != nil
+  # end
 
 end

@@ -1,7 +1,7 @@
 <div class="col-side">
   <!-- Show Profile picture -->
   <div class="profile-image">
-    <%= image_tag(@user_profile.picture.image.url(:medium), alt: "Profile Picture", title: "Profile Picture") %>
+
   </div>  
 </div>
 
@@ -95,10 +95,4 @@
      </div>
    <% end %>
    
-   <% if hascv?(@user_profile) %>
-     <div class="attached-cv">
-       <%= link_to "Download CV", @user_profile.document.document.url(:original, false) %>
-     </div>  
-    <% end %>
-  </div>
 </div>

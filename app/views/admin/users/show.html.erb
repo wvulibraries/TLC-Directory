@@ -1,11 +1,6 @@
 <h2> Showing <%= @user.display_name %> </h2>
 
 <div class="show-action">
-    <div class="image">
-      <% if haspicture?(@user) %>
-        <%= image_tag @user.picture.image.url(:medium), alt: "users profile image" %>
-      <% end %>
-    </div>
     
     <div class="text-attributes">
       <ul>
