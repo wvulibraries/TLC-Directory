@@ -15,7 +15,7 @@ class User < ApplicationRecord
   validates :visible, inclusion: { in: [true, false] }
 
   # enums
-  enum status: %i[active disabled]
+  enum status: %i[disabled enabled]
   enum role: %i[user editor admin]
 
   after_initialize do
@@ -32,7 +32,11 @@ class User < ApplicationRecord
 
   # custom methods
   def display_name
-    [first_name, middle_name, last_name].join(' ')
+    if preferred_name.blank?
+      [first_name, middle_name, last_name].join(' ')
+    else
+      [preferred_name, middle_name, last_name].join(' ')
+    end
   end
   
   # name

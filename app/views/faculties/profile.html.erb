@@ -25,13 +25,6 @@
       </div>
       <% end %>
 
-      <h4> Department(s) </h4>
-      <div class="departments">
-        <% @faculty.departments.each do |dept| %>
-          <%= dept.name %> - <%= dept.building.name %>
-        <% end %>
-      </div>
-
       <h4> Contact </h4>
       <div class="contact">
         <% if @faculty.addresses.present? %>

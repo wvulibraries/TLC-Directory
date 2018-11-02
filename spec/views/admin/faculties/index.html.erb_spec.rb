@@ -15,10 +15,10 @@ RSpec.describe "admin/faculties/index", type: :view do
     ])
   end
 
-  # it 'renders a list of faculties' do
-  #   render
-  #   assert_select 'tr>td', text: 'Username'.to_s, count: 1
-  #   assert_select 'tr>td', text: 'Last Name'.to_s, count: 1
-  #   assert_select 'tr>td', text: 'First Name'.to_s, count: 1
-  # end
+  it 'renders a list of faculties' do
+    render
+    assert_select 'tr>td', text: 'Username'.to_s, count: 1
+    assert_select 'tr>td', text: 'Last Name'.to_s, count: 1
+    assert_select 'tr>td', text: 'First Name'.to_s, count: 1
+  end
 end

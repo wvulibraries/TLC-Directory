@@ -13,37 +13,34 @@
 </div>
 
 <div class="col-main">
-  <% @user_profiles.each do |user_profile| %>
+  <% @faculty_profiles.each do |faculty_profile| %>
     <div class="profile-box">
          <!-- Show Profile picture with caption-->     
-         <div class="col-container">
-           
-            <div class="col-side">
-
-                
+         <div class="col-container">         
+            <div class="col-side">      
                 <div class="photo-caption">
-                  <%= user_profile.first_name %>'s Profile
+                  <%= faculty_profile.first_name %>'s Profile
                 </div> 
             </div>
            
             <div class="col-main">
-               <h2><%= link_to user_profile.display_name, show_user_profile_path(user_profile.id) %></h2>
-               <% unless user_profile.profile.title.nil? || user_profile.profile.title.empty? %>
-                <div class="micro"> <%= user_profile.profile.title %> </div>
+               <h2><%= link_to faculty_profile.display_name, faculties_profile_path(faculty_profile.id) %></h2>
+               <% unless faculty_profile.title.nil? || faculty_profile.title.empty? %>
+                <div class="micro"> <%= faculty_profile.title %> </div>
                <% end %>
-               <% unless user_profile.profile.college.nil? || user_profile.profile.college.empty? %>
-                <div class="micro"> <%= user_profile.profile.college %> </div>
+               <% unless faculty_profile.college.nil? || faculty_profile.college.empty? %>
+                <div class="micro"> <%= faculty_profile.college %> </div>
                <% end %>                     
-               <% unless user_profile.profile.department.nil? || user_profile.profile.department.empty? %>
-                <div class="micro"> <%= user_profile.profile.department %> </div>
+               <% unless faculty_profile.department.nil? || faculty_profile.department.empty? %>
+                <div class="micro"> <%= faculty_profile.department %> </div>
                <% end %>        
-               <% unless user_profile.profile.research_interests.nil? || user_profile.profile.research_interests.empty? %>
+               <% unless faculty_profile.research_interests.nil? || faculty_profile.research_interests.empty? %>
                 <br>
                 <div class="micro"> 
                   Research Interests:
                 </div>
                 <div class="micro2"> 
-                  <%= user_profile.profile.research_interests %> 
+                  <%= faculty_profile.research_interests %> 
                 </div>                    
                <% end %>                                     
             </div>
