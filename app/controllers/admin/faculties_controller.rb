@@ -40,7 +40,6 @@ class Admin::FacultiesController < ApplicationController
   # PATCH/PUT /faculties/1
   # PATCH/PUT /faculties/1.json
   def update
-    # @faculty.profile.update profile_params unless profile_params.nil?
     respond_to do |format|
       if @faculty.update faculty_params
         format.html { redirect_to @faculty, notice: 'Faculty was successfully updated.' }

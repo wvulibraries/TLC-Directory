@@ -4,7 +4,7 @@ RSpec.describe Faculty, type: :model do
   let(:faculty) { FactoryBot.create(:faculty) }
 
   # it { should validate_presence_of(:college) }
-  # it { should validate_presence_of(:department) }
+  # it { should validate_presence_of(:department)  }
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:biography) }  
   it { should validate_presence_of(:research_interests) } 
