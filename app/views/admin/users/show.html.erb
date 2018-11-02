@@ -24,6 +24,12 @@
           <strong> WVU Username: </strong>
           <%= @user.wvu_username %>
         </li>
+        
+        <li>
+          <strong> Email Address: </strong>
+          <%= @user.email %>
+        </li>
+                
 
         <li>
           <strong> Role: </strong>
@@ -36,60 +42,8 @@
         </li>
 
         <li>
-          <strong> Address(es): </strong>
-          <ul>
-          <% @user.addresses.each do |address| %>
-            <li> <%= address.human_readable %> </li>
-          <% end %>
-          </ul>
-        </li>
-
-        <li>
-          <strong> Award(s): </strong>
-          <ul>
-          <% @user.awards.each do |award| %>
-            <li> <%= award.description %> </li>
-          <% end %>
-          </ul>
-        </li>
-
-        <li>
-          <strong> Email Address(es): </strong>
-          <ul>
-          <% @user.email_addresses.each do |email| %>
-            <li>
-              <a href="mailto:<%= email.email_address %>">
-                <%= email.email_address %>
-              </a>
-            </li>
-          <% end %>
-          </ul>
-        </li>
-
-        <li>
-          <strong> Phone(s): </strong>
-          <ul>
-          <% @user.phones.each do |phone| %>
-            <li>
-              <a href="tel:<%= phone.number %>">
-                <%= phone.number %>
-              </a>
-            </li>
-          <% end %>
-          </ul>
-        </li>
-
-        <li>
-          <strong> Website(s): </strong>
-          <ul>
-          <% @user.websites.each do |website| %>
-            <li>
-              <a href="<%= website.url %>">
-                <%= website.url %>
-              </a>
-            </li>
-          <% end %>
-          </ul>
+          <strong> Visible: </strong>
+          <%= @user.visible %>
         </li>
 
       </ul>

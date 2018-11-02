@@ -55,18 +55,6 @@ ActiveRecord::Schema.define(version: 2018_05_30_102800) do
     t.index ["phoneable_type", "phoneable_id"], name: "index_phones_on_phoneable_type_and_phoneable_id"
   end
 
-  create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "college"
-    t.string "department"
-    t.string "title"
-    t.text "biography"
-    t.text "research_interests"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_profiles_on_user_id"
-  end
-
   create_table "publications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "publishable_type"
     t.bigint "publishable_id"
@@ -77,17 +65,26 @@ ActiveRecord::Schema.define(version: 2018_05_30_102800) do
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "wvu_username", limit: 30
+    t.string "preferred_name"
     t.string "prefix"
     t.string "last_name"
     t.string "first_name"
     t.string "middle_name"
     t.string "suffix"
+    t.string "email"
+    t.string "wvu_username", limit: 30
     t.integer "role"
     t.integer "status"
     t.boolean "visible", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "college"
+    t.string "department"
+    t.string "title"
+    t.text "biography"
+    t.string "research_interests"
+    t.string "image"
+    t.string "resume"
   end
 
   create_table "websites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|

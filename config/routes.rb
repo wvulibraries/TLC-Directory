@@ -32,6 +32,15 @@ Rails.application.routes.draw do
   # auth
   get '/login', to: 'application#login', as: 'login'
   get '/logout', to: 'application#logout', as: 'logout'
+  
+  # faculties
+  get 'faculties',
+      to: 'faculties#list',
+      as: 'faculties_list'
+
+  get '/faculties/:id',
+      to: 'faculties#profile',
+      as: 'faculties_profile'
 
   # root
   # root 'public#index'
@@ -39,14 +48,13 @@ Rails.application.routes.draw do
 
   # admin
   get '/admin', to: 'admin#index'
-  # get '/admin/logout', to: 'admin#logout'
 
   # forces the controllers to use the admin name space
   # this is going to allow for the addition of a function to restrict access
   # resources generates all routes for crud of libraries, departments, users, etc.
 
   scope '/admin' do
-    resources :users, module: 'admin'
+    resources :users, :faculties, module: 'admin'
   end
 
   get '/directory', to: 'directory#index'
@@ -56,6 +64,7 @@ Rails.application.routes.draw do
 
   # admin namespaces for crud tasks
   namespace :admin do
-    resources :users
+    resources :users,
+              :faculties
   end
 end

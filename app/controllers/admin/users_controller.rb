@@ -26,7 +26,7 @@ class Admin::UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new user_params
-    @user.assign_profile_params profile_params unless profile_params.nil?    
+    # @user.assign_profile_params profile_params unless profile_params.nil?    
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
@@ -41,7 +41,7 @@ class Admin::UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    @user.profile.update profile_params unless profile_params.nil?
+    # @user.profile.update profile_params unless profile_params.nil?
     respond_to do |format|
       if @user.update user_params
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
@@ -80,18 +80,9 @@ class Admin::UsersController < ApplicationController
                   :middle_name,
                   :last_name,
                   :wvu_username,
+                  :email,
                   :status,
                   :role,
-                  :visible,
-                  addresses_attributes: %i[id street_address_1 street_address_2 city state zip_code _destroy],
-                  awards_attributes: %i[id starting_year ending_year description _destroy],
-                  email_addresses_attributes: %i[id email_address _destroy],
-                  phones_attributes: %i[id number number_types _destroy],
-                  publications_attributes: %i[id description _destroy],
-                  websites_attributes: %i[id url _destroy])
-  end
-
-  def profile_params
-    params.require(:profile).permit(:title, :college, :department, :biography, :research_interests)
+                  :visible)
   end
 end

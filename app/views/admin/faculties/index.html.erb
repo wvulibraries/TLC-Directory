@@ -1,0 +1,36 @@
+<h2>Faculty</h2>
+
+<tbody>
+
+  <table>
+    <thead>
+      <tr>
+        <th>WVU Username</th>
+        <th>Last name</th>
+        <th>First name</th>
+        <th>Middle name</th>
+        <th>Status</th>
+        <th>Role</th>
+        <th>Visible</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @faculties.each do |faculty| %>
+        <tr>
+          <td><%= faculty.wvu_username %></td>
+          <td><%= faculty.last_name %></td>
+          <td><%= faculty.first_name %></td>
+          <td><%= faculty.middle_name %></td>
+          <td><%= faculty.status %></td>
+          <td><%= faculty.role %></td>
+          <td><%= faculty.visible %></td>
+          <td><%= link_to 'Show', admin_faculty_path(faculty) %></td>
+          <td><%= link_to 'Edit', edit_admin_faculty_path(faculty) %></td>
+          <td><%= link_to 'Destroy', admin_faculty_path(faculty), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</tbody>

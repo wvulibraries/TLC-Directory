@@ -42,54 +42,17 @@
           <%= f.select :suffix, options_for_select(name_suffixes, selected: user.suffix ), include_blank: "Select a Suffix" %>
         </div>
       </div>
-
-      <!-- Profile Image -->
-      <div class="field one-fourth last">
-        <%= f.label 'Profile Picture', class: 'required' %>
-        <%= f.fields_for :imageable do |image_upload| %>
-          <%= image_upload.file_field :image, class: "form-control"  %>
-        <% end %>
-      </div>
-
-      <%= fields_for :profile, @user.profile do |profile_fields| %>
-        <div class="field">
-          <%= profile_fields.label :title %>
-          <%= profile_fields.text_field :title %>
-        </div>
-        
-        <div class="field">
-          <%= profile_fields.label :college %>
-          <%= profile_fields.text_field :college %>
-        </div>      
-
-        <div class="field">
-          <%= profile_fields.label :department %>
-          <%= profile_fields.text_field :department %>
-        </div>
-
-        <div class="field">
-          <%= profile_fields.label :biography %>
-          <%= profile_fields.text_field :biography %>
-        </div>
-
-        <div class="field">
-          <%= profile_fields.label :research_interests %>
-          <%= profile_fields.text_field :research_interests %>
-        </div>
-
-        <div class="field">
-          <%= f.label :visible, 'Show User Profile', class:'required' %>
-          <%= f.check_box :visible %>
-        </div>
-
-      <% end %>
       
-      <!-- CV Upload -->
       <div class="field one-fourth last">
-        <%= f.label 'CV Upload', class: 'required' %>
-        <%= f.fields_for :documentable do |document_upload| %>
-          <%= document_upload.file_field :document, class: "form-control"  %>
-        <% end %>
+        <%= f.label :email, class:'select-label' %>
+        <div class="select-style">
+          <%= f.text_field :email, placeholder: "username@mail.wvu.edu" %>
+        </div>
+      </div>      
+      
+      <div class="field">
+        <%= f.label :visible, 'Show User Profile', class:'required' %>
+        <%= f.check_box :visible %>
       </div>
 
     </div>
@@ -125,42 +88,6 @@
       </div>
     </div>
   </fieldset>
-
-  <!-- Addresses -->
-  <%= f.fields_for :addresses do |form| %>
-    <%= render "address", form: form %>
-  <% end %>
-  <%= link_to_add_fields "Add Address", f, :addresses %>
-
-  <!-- Awards -->
-  <%= f.fields_for :awards do |form| %>
-    <%= render "award", form: form %>
-  <% end %>
-  <%= link_to_add_fields "Add Award", f, :awards %>
-
-  <!-- Email Addresses -->
-  <%= f.fields_for :email_addresses do |form| %>
-    <%= render "email_address", form: form %>
-  <% end %>
-  <%= link_to_add_fields "Add Email Address", f, :email_addresses %>
-
-  <!-- Phones -->
-  <%= f.fields_for :phones do |form| %>
-    <%= render "phone", form: form %>
-  <% end %>
-  <%= link_to_add_fields "Add Phones", f, :phones %>
-
-  <!-- Publications -->
-  <%= f.fields_for :publications do |form| %>
-    <%= render "publication", form: form %>
-  <% end %>
-  <%= link_to_add_fields "Add Publication", f, :publications %>
-
-  <!-- Websites -->
-  <%= f.fields_for :websites do |form| %>
-    <%= render "website", form: form %>
-  <% end %>
-  <%= link_to_add_fields "Add Website", f, :websites %>
 
   <div class="actions">
     <%= link_to 'Cancel', admin_users_path, class: 'cancel-button' %>

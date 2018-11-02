@@ -6,6 +6,7 @@ RSpec.describe "admin/users/new", type: :view do
       wvu_username: Faker::Internet.user_name,
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
+      email: "#{Faker::Internet.user_name(7..36)}@mail.wvu.edu",
       status: :disabled,
       role: :user,
       visible: false

@@ -6,7 +6,10 @@ class User < ApplicationRecord
   # validation
   validates :first_name, presence: true, length: { within: 2..70 }
   validates :last_name, presence: true, length: { within: 2..70 }
-  validates :wvu_username, presence: true, length: { within: 7..70 }
+  validates :wvu_username, presence: true, length: { within: 4..70 }
+  
+  validates :email, presence: true
+  validate :valid_email
 
   validates :status, presence: true
   validates :visible, inclusion: { in: [true, false] }
@@ -14,29 +17,6 @@ class User < ApplicationRecord
   # enums
   enum status: %i[active disabled]
   enum role: %i[user editor admin]
-
-  # profile
-  has_one :profile, dependent: :destroy
-  accepts_nested_attributes_for :profile
-  before_create :create_profile
-
-  has_many :awards, as: :awardable, dependent: :destroy
-  accepts_nested_attributes_for :awards, allow_destroy: true
-
-  has_many :addresses, as: :addressable, dependent: :destroy
-  accepts_nested_attributes_for :addresses, allow_destroy: true
-
-  has_many :email_addresses, as: :emailable, dependent: :destroy
-  accepts_nested_attributes_for :email_addresses, allow_destroy: true
-
-  has_many :phones, as: :phoneable, dependent: :destroy
-  accepts_nested_attributes_for :phones, allow_destroy: true
-
-  has_many :publications, as: :publishable, dependent: :destroy
-  accepts_nested_attributes_for :publications, allow_destroy: true
-
-  has_many :websites, as: :webable, dependent: :destroy
-  accepts_nested_attributes_for :websites, allow_destroy: true
 
   after_initialize do
     if new_record?
@@ -55,13 +35,30 @@ class User < ApplicationRecord
     [first_name, middle_name, last_name].join(' ')
   end
   
-  def assign_profile_params(params)
-    @profile_params = params
+  # name
+  def name
+    if preferred_name.blank?
+      [first_name, last_name].join(' ')
+    else
+      [preferred_name, last_name].join(' ')
+    end
+  end
+  
+  def admin?
+    role == 'admin' && status? == true
   end
 
-  private
+  def status?
+    status == 'enabled'
+  end
+  
+  def visible?
+    status? == true && visible
+  end
 
-  def create_profile
-    build_profile(@profile_params)
+  # custom validations
+  def valid_email
+    email_regex = !!(email =~ /^[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.edu/i)
+    errors.add :email, 'must be a valid WVU email.' unless email_regex
   end
 end

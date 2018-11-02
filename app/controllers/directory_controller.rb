@@ -4,15 +4,15 @@ class DirectoryController < ApplicationController
   before_action :profile_params, only: [:show]
 
   def index
-    @user_profiles = User.all.show.sorted
+    @user_profiles = Faculty.all.show.sorted
   end
 
   def list
-    @users = User.where(visible: true).order(:name)
+    @users = Faculty.where(visible: true).order(:name)
   end
 
   def show
-    @user_profile = User.find(profile_params[:user_id])
+    @user_profile = Faculty.find(profile_params[:user_id])
   end
 
   private

@@ -1,0 +1,70 @@
+<h2 class="visually-hidden"> <%= content_for :title, "#{@faculty.display_name.titlecase}" %> </h2>
+
+<div class="faculty-card">
+
+    <div class="profile-banner">
+      <img src="<%= @faculty.image %>" alt="Picture of <%= @faculty.display_name %>"/>
+    </div>
+
+    <div class="profile-text">
+      <div class="name-title wvu-h4" id="profile_name"> 
+        <a href="faculty/<%= @faculty.id %>">
+          <%= @faculty.display_name %> 
+        </a>
+      </div>
+
+      <div class="title">
+        <% unless @faculty.title.nil? || @faculty.title.empty? %>
+          <div class="micro"> <%= @faculty.title %> </div>
+        <% end %>
+      </div>
+
+      <% if @faculty.biography.present? %>
+      <div class="biography">
+        <p> <%= @faculty.biography %> </p>
+      </div>
+      <% end %>
+
+      <h4> Department(s) </h4>
+      <div class="departments">
+        <% @faculty.departments.each do |dept| %>
+          <%= dept.name %> - <%= dept.building.name %>
+        <% end %>
+      </div>
+
+      <h4> Contact </h4>
+      <div class="contact">
+        <% if @faculty.addresses.present? %>
+        <div class="addresses">  
+          <% @faculty.addresses.each do |addrress| %>
+            <div class="address-item">
+              <span class="fas fa-address-card"></span>
+              <%= address.human_readable %>
+            </div>
+          <% end %>
+        </div>
+        <% end %>
+
+        <% if @faculty.phones.present? %>
+        <div class="phones">  
+          <% @faculty.phones.each do |phone| %>
+            <div class="phone-item">
+              <span class="<%= phone_icon_class(phone) %>"></span>
+              <a class="wvu-profiles-index__phone" href="tel:<%= phone.number %>"><%= phone.number %></a>
+              <span class="micro"> (<%= phone.number_types.capitalize %>) </span>
+            </div>
+          <% end %>
+        </div>
+        <% end %>
+
+        <div class="email">
+          <span class="fas fa-envelope"></span>
+          <a href="mailto:<%= @faculty.email %>">
+            <%= @faculty.email %>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+</div>

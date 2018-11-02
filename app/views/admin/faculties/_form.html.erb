@@ -1,0 +1,159 @@
+<%= form_for [:admin, faculty], html: { multipart: true } do |f| %>
+  <% if faculty.errors.any? %>
+    <div id="error_explanation">
+      <h3><%= pluralize(faculty.errors.count, "Error") %> </h3>
+      <p> The following prohibited this user from being saved: </p>
+      <ul>
+      <% faculty.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+    <legend> Profile Information </legend>
+    <div class="row">
+      <div class="field one-fourth">
+        <%= f.label :prefix, class:'select-label' %>
+        <div class="select-style">
+          <%= f.select :prefix, options_for_select(name_prefixes, selected: faculty.prefix ), include_blank: "Select a Prefix" %>
+        </div>
+      </div>
+
+      <div class="field three-fourth last">
+        <%= f.label :first_name, class: 'required' %>
+        <%= f.text_field :first_name, placeholder: "Joanna" %>
+      </div>
+
+      <div class="field two-fourth last">
+        <%= f.label :middle_name, class: 'required' %>
+        <%= f.text_field :middle_name, placeholder: "Q. (Quinn)" %>
+      </div>
+
+      <div class="field three-fourth">
+        <%= f.label :last_name, class: 'required' %>
+        <%= f.text_field :last_name, placeholder: "Smith" %>
+      </div>
+
+      <div class="field one-fourth last">
+        <%= f.label :suffix, class:'select-label' %>
+        <div class="select-style">
+          <%= f.select :suffix, options_for_select(name_suffixes, selected: faculty.suffix ), include_blank: "Select a Suffix" %>
+        </div>
+      </div>
+
+      <!-- Profile Image -->
+      <div class="field one-fourth last">
+        <%= f.label 'Profile Picture', class: 'required' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+      </div>
+      
+      <div class="field">
+        <%= f.label :college %>
+        <%= f.text_field :college %>
+      </div>      
+
+      <div class="field">
+        <%= f.label :department %>
+        <%= f.text_field :department %>
+      </div>
+
+      <div class="field">
+        <%= f.label :biography %>
+        <%= f.text_field :biography %>
+      </div>
+
+      <div class="field">
+        <%= f.label :research_interests %>
+        <%= f.text_field :research_interests %>
+      </div>
+
+      <div class="field">
+        <%= f.label :visible, 'Show Faculty Profile', class:'required' %>
+        <%= f.check_box :visible %>
+      </div>
+
+      <!-- CV Upload -->
+      <div class="field one-fourth last">
+        <%= f.label 'CV Upload', class: 'required' %>
+      </div>
+
+    </div>
+
+  </fieldset>
+
+  <fieldset>
+    <legend> WVU Profile Information </legend>
+     <div class="row">
+      <div class="field half">
+        <%= f.label :wvu_username, class: 'required' %>
+        <%= f.text_field :wvu_username, placeholder: "jqsmith001" %>
+      </div>
+      
+      <div class="field half">
+        <%= f.label :email, class: 'required' %>
+        <%= f.text_field :email, placeholder: "jqsmith001@mail.wvu.edu" %>
+      </div>      
+    </div>
+
+  </fieldset>
+
+  <fieldset>
+    <legend> Application Access Information </legend>
+    <div class="row">
+      <div class="field half">
+        <%= f.label :role, 'User Role', class:'required' %>
+        <div class="select-style">
+            <%= f.select :role, options_for_select(Faculty.roles.keys.to_a, selected: f.object.role), include_blank: "Select a Role" %>
+        </div>
+      </div>
+
+      <div class="field half last">
+       <%= f.label :status, 'User Status', class:'required' %>
+        <div class="select-style">
+            <%= f.select :status, options_for_select(Faculty.statuses.keys.to_a, selected: f.object.status), include_blank: "Select a Status" %>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+
+  <!-- Addresses -->
+  <%= f.fields_for :addresses do |form| %>
+    <%= render "address", form: form %>
+  <% end %>
+  <%= link_to_add_fields "Add Address", f, :addresses %>
+
+  <!-- Awards -->
+  <%= f.fields_for :awards do |form| %>
+    <%= render "award", form: form %>
+  <% end %>
+  <%= link_to_add_fields "Add Award", f, :awards %>
+
+  <!-- Phones -->
+  <%= f.fields_for :phones do |form| %>
+    <%= render "phone", form: form %>
+  <% end %>
+  <%= link_to_add_fields "Add Phones", f, :phones %>
+
+  <!-- Publications -->
+  <%= f.fields_for :publications do |form| %>
+    <%= render "publication", form: form %>
+  <% end %>
+  <%= link_to_add_fields "Add Publication", f, :publications %>
+
+  <!-- Websites -->
+  <%= f.fields_for :websites do |form| %>
+    <%= render "website", form: form %>
+  <% end %>
+  <%= link_to_add_fields "Add Website", f, :websites %>
+
+  <div class="actions">
+    <%= link_to 'Cancel', admin_faculties_path, class: 'cancel-button' %>
+    <%= f.submit 'Submit', class: 'submit-button' %>
+  </div>
+<% end %>

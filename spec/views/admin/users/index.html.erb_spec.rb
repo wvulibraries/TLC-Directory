@@ -7,6 +7,7 @@ RSpec.describe "admin/users/index", type: :view do
         wvu_username: 'Username',
         last_name: 'Last Name',
         first_name: 'First Name',
+        email: 'Username@mail.wvu.edu',
         role: :user,
         visible: false,
         status: :disabled
