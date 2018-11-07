@@ -8,27 +8,25 @@
 <div class="col-main">
     <h2><%= @user_profile.display_name %></h2>
 
-    <% if hasprofile?(@user_profile) %>
-         <div>
-           <h4>Title:</h4>
-           <%= @user_profile.profile.title %>
-         </div>
+   <div>
+     <h4>Title:</h4>
+     <%= @user_profile.profile.title %>
+   </div>
 
-         <div>
-           <h4>Department:</h4>
-           <%= @user_profile.profile.department %>
-         </div>
+   <div>
+     <h4>Department:</h4>
+     <%= @user_profile.profile.department %>
+   </div>
 
-         <div>
-           <h4>Biography:</h4>
-           <%= @user_profile.profile.biography %>
-         </div>
+   <div>
+     <h4>Biography:</h4>
+     <%= @user_profile.profile.biography %>
+   </div>
 
-         <div>
-           <h4>Research Interests:</h4>
-           <%= @user_profile.profile.research_interests %>
-         </div>
-    <% end %>
+   <div>
+     <h4>Research Interests:</h4>
+     <%= @user_profile.profile.research_interests %>
+   </div>
 
    <% if hasawards?(@user_profile) %>
      <div name='awards'>

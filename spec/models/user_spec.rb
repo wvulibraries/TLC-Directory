@@ -109,20 +109,20 @@ RSpec.describe User, type: :model do
   end
 
   context '.admin?' do
-    # it 'should true user is an admin because user is an admin and enabled' do
-    #   user.role = 1
-    #   user.status = 1
-    #   expect(user.role).to eq 'admin'
-    #   expect(user.admin?).to eq true
-    # end
+    it 'should true user is an admin because user is an admin and enabled' do
+      user.role = 2
+      user.status = 1
+      expect(user.role).to eq 'admin'
+      expect(user.admin?).to eq true
+    end
 
-    # it 'should return false user is not an admin' do
-    #   user.role = 0
-    #   user.status = 1
-    #   expect(user.role).to eq 'basic'
-    #   expect(user.status).to eq 'enabled'
-    #   expect(user.admin?).to eq false
-    # end
+    it 'should return false user is not an admin' do
+      user.role = 0
+      user.status = 1
+      expect(user.role).to eq 'user'
+      expect(user.status).to eq 'enabled'
+      expect(user.admin?).to eq false
+    end
 
     it 'should return false because the user is not active' do
       user.role = 1
