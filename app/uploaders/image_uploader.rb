@@ -23,7 +23,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
   
   def filename
-     @name = "#{file.basename}_#{Time.now.to_i}.#{file.extension}" if original_filename.present?
+     @name ||= "#{file.basename}_#{Time.now.to_i}.#{file.extension}" if original_filename.present?
   end
 
   # Process files as they are uploaded:

@@ -10,7 +10,7 @@ namespace :search_index do
   desc 'Properly Index Faculties'
   task faculty: :environment do
     puts "Indexing Faculties"
-    Employee.import force: true
+    Faculty.import force: true
     disabled = Faculty.where(status: 'disabled')
     disabled.each { |e| e.__elasticsearch__.delete_document }
   end

@@ -3,6 +3,17 @@ require 'simplecov-console'
 ENV['RAILS_ENV'] ||= 'test'
 
 RSpec.configure do |config|
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
+
   # clear uploads after tests are complete
   config.after(:each) do
     if Rails.env.test?
@@ -32,5 +43,5 @@ SimpleCov.start do
   add_filter %r{^/bin/}
   add_filter %r{^/config/}
   add_filter %r{^/app/helpers/}
-  # add_filter 'app/controllers/concerns/authenticatable.rb'
+  add_filter 'app/controllers/concerns/authenticatable.rb'
 end

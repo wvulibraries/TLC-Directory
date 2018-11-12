@@ -65,7 +65,7 @@ class Faculty < User
   # -----------------------------------------------------
   # @author David J. Davis, Tracy A. McCormick
   # @description indexed json, this will help with search rankings.
-  # rake environment elasticsearch:import:model CLASS='Employee' SCOPE="visible" FORCE=y
+  # rake environment elasticsearch:import:model CLASS='Faculty' SCOPE="visible" FORCE=y
   def as_indexed_json(_options)
     as_json(
       methods: [:display_name],

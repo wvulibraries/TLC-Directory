@@ -12,6 +12,9 @@ branches:
     - master
 notifications:
   - false
+services:
+  - mysql
+  - elasticsearch  
 before_script:
   - mysql -e 'create database tlcdirectory_test'
   - "cp ./.travis.database.yml ./config/database.yml"

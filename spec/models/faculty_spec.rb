@@ -117,9 +117,14 @@ RSpec.describe Faculty, type: :model do
   end
 
   describe 'elasticsearch' do
+    # it 'should be indexed' do
+    #    expect(Faculty.__elasticsearch__.index_exists?).to be_truthy
+    # end
+
     before do
       faculty # instantiate faculty
     end
+    
     context 'determining indexes' do
       it 'should be indexed' do
         name = faculty.first_name
@@ -127,6 +132,7 @@ RSpec.describe Faculty, type: :model do
         expect(Faculty.search(name).records.length).to eq(1)
       end
     end
+    
   end
 
   describe 'conditional elasticsearch indexing using callbacks' do

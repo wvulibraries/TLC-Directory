@@ -50,8 +50,11 @@ group :test do
   gem 'capybara', '>= 2.15', '< 4.0'
   gem 'selenium-webdriver'
   
-  gem 'elasticsearch-extensions'
+  # Clean Database between tests
+  gem 'database_cleaner'
   
+  # Programmatically start and stop ES for tests
+  gem 'elasticsearch-extensions'  
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
 end  
