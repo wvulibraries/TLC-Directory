@@ -13,8 +13,18 @@ FactoryBot.define do
     college { Faker::University.name }
     department { Faker::Company.industry  }
     title { Faker::Job.title }
-    biography { Faker::Lorem.paragraph(rand(5...10)) }
+    biography { Faker::Lorem.paragraph(rand(1...5)) }
     research_interests { Faker::Lorem.sentence }
+    
+    factory :non_admin_cas do
+      wvu_username { 'johntest' }
+      role { 0 }
+    end
+
+    factory :admin_cas do
+      wvu_username { 'johntest' }
+      role { 1 }
+    end    
     
     factory :faculty_faker do
       status { rand(0..1) }

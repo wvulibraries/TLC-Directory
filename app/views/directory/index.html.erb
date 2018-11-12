@@ -17,14 +17,18 @@
     <div class="profile-box">
          <!-- Show Profile picture with caption-->     
          <div class="col-container">         
-            <div class="col-side">      
+            <div class="col-side">
+                <div class="profile-picture">
+                   <%= image_tag(faculty_profile.image.url, alt: "Faculty Profile Picture", title: "Faculty Profile Picture") %>
+                </div>
+                
                 <div class="photo-caption">
                   <%= faculty_profile.first_name %>'s Profile
                 </div> 
             </div>
            
             <div class="col-main">
-               <h2><%= link_to faculty_profile.display_name, faculties_profile_path(faculty_profile.id) %></h2>
+               <h2><%= link_to faculty_profile.display_name, directory_show_path(faculty_profile.id) %></h2>
                <% unless faculty_profile.title.nil? || faculty_profile.title.empty? %>
                 <div class="micro"> <%= faculty_profile.title %> </div>
                <% end %>

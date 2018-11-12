@@ -2,7 +2,8 @@
 #
 # @description: A sub class of the user model uses single table inheritance to
 # determine type of profile and add extra details to user model
-# @author David J. Davis, Tracy A. McCormick
+# @author David J. Davis
+# @author Tracy A. McCormick
 # @data_model
 # @since 0.0.1
 class Faculty < User
@@ -40,15 +41,15 @@ class Faculty < User
   accepts_nested_attributes_for :websites, allow_destroy: true
 
   # concerns
-  # include Imageable
-  # include Searchable
+  include Imageable
+  include Searchable
 
   # scopes
   scope :visible, -> { where(status: 'enabled') }
   scope :order_name, -> { order(:last_name, :first_name) }
 
   # Resume / CV Option
-  # mount_uploader :resume, ResumeUploader
+  mount_uploader :resume, ResumeUploader
 
   # resume?
   # -----------------------------------------------------
@@ -56,25 +57,25 @@ class Faculty < User
   # @description looks to see if the user has a resume or cv attached
   # will return true if there is a file, false if no file
   # @return boolean
-  # def resume?
-  #   !resume.file.nil?
-  # end
+  def resume?
+    !resume.file.nil?
+  end
 
   # Elastic Search Settings
   # -----------------------------------------------------
   # @author David J. Davis, Tracy A. McCormick
   # @description indexed json, this will help with search rankings.
   # rake environment elasticsearch:import:model CLASS='Employee' SCOPE="visible" FORCE=y
-  # def as_indexed_json(_options)
-  #   as_json(
-  #     methods: [:display_name],
-  #     only: [:id, :first_name, :last_name, :preferred_name, :display_name, :title, :college, :department, :research_interests, :biography, :image],
-  #     include: {
-  #       # departments: { methods: [:building_name],
-  #       #                only: %i[name building_name] },
-  #       # subjects: { only: :name },
-  #       phones: { only: :number }
-  #     }
-  #   )
-  # end
+  def as_indexed_json(_options)
+    as_json(
+      methods: [:display_name],
+      only: [:id, :first_name, :last_name, :preferred_name, :display_name, :title, :college, :department, :research_interests, :biography, :image],
+      include: {
+        # departments: { methods: [:building_name],
+        #                only: %i[name building_name] },
+        # subjects: { only: :name },
+        phones: { only: :number }
+      }
+    )
+  end
 end

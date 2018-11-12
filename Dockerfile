@@ -22,8 +22,8 @@ RUN \
     && gem install rails \
     && mkdir -p /home/tlcdirectory
 
-ENV RAILS_ENV development
-ENV RACK_ENV development
+#ENV RAILS_ENV development
+#ENV RACK_ENV development
 
 WORKDIR /home/tlcdirectory
 ADD . /home/tlcdirectory

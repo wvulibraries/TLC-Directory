@@ -1,44 +1,24 @@
-# Rails.application.routes.draw do
-#   # home index
-#   root to: 'application#home'
-#   get '/home', to: 'application#home', as: 'home'
-#
-#   # auth
-#   get '/login', to: 'application#login', as: 'login'
-#   get '/logout', to: 'application#logout', as: 'logout'
-#
-#   # public
-#   get '/directory', to: 'directory#list', as: 'directory_list'
-#   get '/directory/show/:user_id', to: 'directory#show', as: 'show_user_profile'
-#
-#   # admin
-#   get '/admin', to: 'admin#home', as: 'admin_home'
-#
-#   get '/directory', to: 'directory#index'
-#   resources :directory, only: [:index, :show]
-#
-#   # admin namespaces for crud tasks
-#   namespace :admin do
-#     resources :users, :optional_items, :email_addresses, :universities
-#   end
-# end
-
-
 Rails.application.routes.draw do
   # home index
   root to: 'application#home'
-  get '/home', to: 'application#home', as: 'home'
+  get '/home', 
+      to: 'application#home', 
+      as: 'home'
 
   # auth
-  get '/login', to: 'application#login', as: 'login'
-  get '/logout', to: 'application#logout', as: 'logout'
+  get '/login', 
+      to: 'application#login', 
+      as: 'login'
+  get '/logout', 
+      to: 'application#logout', 
+      as: 'logout'
   
   # faculties
   get 'faculties',
       to: 'faculties#list',
       as: 'faculties_list'
 
-  get '/faculties/:id',
+  get 'faculties/:id',
       to: 'faculties#profile',
       as: 'faculties_profile'
 
@@ -58,9 +38,20 @@ Rails.application.routes.draw do
   end
 
   get '/directory', to: 'directory#index'
-  resources :directory, only: %i[index show]
+  #resources :directory, only: %i[index show]
+  
+  get 'directory',
+      to: 'directory#list',
+      as: 'directory_list'
 
-  get '/directory/show/:user_id', to: 'directory#show', as: 'show_user_profile'
+  get '/directory/:id', 
+      to: 'directory#show', 
+      as: 'directory_show'
+      
+  # search
+  get '/search',
+      to: 'search#index',
+      as: 'search_index'
 
   # admin namespaces for crud tasks
   namespace :admin do

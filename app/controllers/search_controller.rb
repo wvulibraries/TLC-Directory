@@ -1,10 +1,10 @@
-class SearchController < ApplicationController
-  layout 'public'
+cclass SearchController < ApplicationController
+  layout 'splash'
   def index
     @search_term = Sanitize.fragment params[:query]
     @results = Elasticsearch::Model.search(
       @search_term,
-      [User],
+      [Faculty],
       size: 1000
     ).results
   end

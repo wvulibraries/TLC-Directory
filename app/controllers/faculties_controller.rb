@@ -11,4 +11,5 @@ class FacultiesController < ApplicationController
                         .order(:last_name, :first_name)
                         .first
   end
+
 end

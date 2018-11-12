@@ -1,3 +1,6 @@
+# @author Tracy A. McCormick
+# @data_model
+# @since 0.0.1
 class Award < ApplicationRecord
   # association
   belongs_to :awardable, polymorphic: true

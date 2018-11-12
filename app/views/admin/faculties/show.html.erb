@@ -1,7 +1,10 @@
 <h2> Showing <%= @faculty.display_name %> </h2>
 
 <div class="show-action">
-    
+    <div class="image">
+      <img src="<%= @faculty.image.small %>" alt="faculty profile image"/>
+    </div>
+        
     <div class="text-attributes">
       <ul>
 

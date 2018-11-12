@@ -1,4 +1,6 @@
-# app/models/registration.rb
+# @author Tracy A. McCormick
+# @data_model
+# @since 0.0.1
 class Registration
   include ActiveModel::Model
 

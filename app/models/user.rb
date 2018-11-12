@@ -1,7 +1,7 @@
-# User Class
-# ==================================================
-# AUTHORS : Tracy McCormick
-# Description:
+# @author David J. Davis
+# @author Tracy A. McCormick
+# @data_model
+# @since 0.0.1
 class User < ApplicationRecord
   # validation
   validates :first_name, presence: true, length: { within: 2..70 }

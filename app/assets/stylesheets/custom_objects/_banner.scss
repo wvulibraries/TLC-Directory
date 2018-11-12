@@ -1,17 +1,21 @@
-.banner {
-  @include span-columns(12);
+  .banner__container {
+    background-color: $gold;
+  }  
   
-  padding-left: 40px;
-  padding-right: 40px;
-  
-  font-size: 10px;
-  
-  background-color: $gold;
-
-  h2 { 
-    text-shadow: 2px 2px $neutral-black;
-    text-transform: uppercase;
-    color: white; 
-    text-align: left; 
+  .banner__wrapper { 
+    @include outer-container(); 
   }
-}
+
+  .banner__text {
+    @include span-columns(9);
+    padding: 20px;
+    
+    font-size: 10px;
+
+    h2 { 
+      text-shadow: 2px 2px $neutral-black;
+      text-transform: uppercase;
+      color: white; 
+      text-align: left; 
+    }
+  }   

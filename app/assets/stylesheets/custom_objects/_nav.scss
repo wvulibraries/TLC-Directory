@@ -1,18 +1,19 @@
-/* The navbar container */
-.main-nav  { 
-    @include span-columns(12);
-    background-color: $neutral-black;
-    
-    padding-top: 10px;
-    padding-bottom: 10px;      
-    
+.nav__container {
+  background-color: $neutral-black;
+}  
+
+.nav__wrapper { 
+  @include outer-container();
+}
+
+.nav__main  { 
     font-size: 10px; 
-    
+
     ul {
         display: table;
         margin: 0 auto;
     }
-    
+
     li a {
         display: block;
         color: white;
@@ -21,101 +22,35 @@
         padding-left: 10px;
         text-decoration: none;
     }
-    
+
     a:hover {
        background-color: #ddd;
        color: black;
-    }          
+    } 
     
     /* layout when screen is 720px or above */
-    @include media(720px){ 
-      @include span-columns(12);
+    @include mq($bp-small){ 
       @include omega(); 
-      
-      padding-left: 20px;
-      padding-right: 40px;      
-      
+
       ul {
           display :block;
           list-style-type: none;
           overflow: hidden;
       }      
-      
+
       li {
           float: left;
           border-right:1px solid #bbb;
       }
-      
+
       li:nth-last-child(2) {
           border-right: none;  
       }
-      
+
       li:last-child {
           border-right: none;
           float: right;
       }
-    
-    }
-  }
 
-// /* The navbar container */
-// .main-nav {
-//    overflow: hidden;
-//    background-color: $neutral-black;
-// 
-//    // spacing for left gutter
-//    padding-left: 40px;
-//    padding-right: 40px;
-// 
-//    font-size: 10px; 
-// }
-// 
-// /* Navbar links */
-// .main-nav ul {
-//     list-style-type: none;
-//     overflow: hidden;
-// }
-// 
-// .main-nav li a {
-//     display: block;
-//     color: white;
-//     text-align: center;
-//     padding-right: 10px;
-//     padding-left: 10px;
-//     text-decoration: none;
-// }
-// 
-// .main-nav li {
-//     float: left;
-//     border-right:1px solid #bbb;
-// }
-// 
-// .main-nav li:nth-last-child(2) {
-//     border-right: none;  
-// }
-// 
-// .main-nav li:last-child {
-//     border-right: none;
-//     float: right;
-// }
-// 
-// .main-nav a:hover {
-//    background-color: #ddd;
-//    color: black;
-// } 
-// 
-// /* On screens that are 600px wide or less, make the menu links stack on top of each other instead of next to each other */
-// @media screen and (max-width: 600px) {
-//     .main-nav {
-//       background-color: blue;
-//     }
-// 
-//     .main-nav ul {
-//       display: none;        
-//     }  
-// 
-//     .main-nav li a {
-//        float: none;
-//        width: 100%;
-//     }
-// } 
+    }        
+}

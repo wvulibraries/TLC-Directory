@@ -6,5 +6,5 @@ class ApplicationController < ActionController::Base
   layout 'application'
 
   # concerns
-  #include Authenticatable
+  include Authenticatable
 end

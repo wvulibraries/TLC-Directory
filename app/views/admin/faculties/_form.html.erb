@@ -2,7 +2,7 @@
   <% if faculty.errors.any? %>
     <div id="error_explanation">
       <h3><%= pluralize(faculty.errors.count, "Error") %> </h3>
-      <p> The following prohibited this user from being saved: </p>
+      <p> The following prohibited this faculty from being saved: </p>
       <ul>
       <% faculty.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -42,49 +42,40 @@
           <%= f.select :suffix, options_for_select(name_suffixes, selected: faculty.suffix ), include_blank: "Select a Suffix" %>
         </div>
       </div>
-
-      <!-- Profile Image -->
-      <div class="field one-fourth last">
-        <%= f.label 'Profile Picture', class: 'required' %>
-      </div>
-
-      <div class="field">
-        <%= f.label :title %>
-        <%= f.text_field :title %>
-      </div>
-      
-      <div class="field">
-        <%= f.label :college %>
-        <%= f.text_field :college %>
-      </div>      
-
-      <div class="field">
-        <%= f.label :department %>
-        <%= f.text_field :department %>
-      </div>
-
-      <div class="field">
-        <%= f.label :biography %>
-        <%= f.text_field :biography %>
-      </div>
-
-      <div class="field">
-        <%= f.label :research_interests %>
-        <%= f.text_field :research_interests %>
-      </div>
-
-      <div class="field">
-        <%= f.label :visible, 'Show Faculty Profile', class:'required' %>
-        <%= f.check_box :visible %>
-      </div>
-
-      <!-- CV Upload -->
-      <div class="field one-fourth last">
-        <%= f.label 'CV Upload', class: 'required' %>
-      </div>
-
+  </fieldset>
+  
+  <fieldset> 
+    <legend> File Uploads </legend>
+    <div class="field full">
+      <%= image_tag faculty.image_url, { class:'preview-image' } if faculty.image? %>
+      <%= f.label :image, 'Profile Image' %>
+      <%= f.file_field :image %>
+      <% if faculty.image? %>
+        <div class="checkbox-wrapper">
+          <div class="checkbox">
+            <%= f.check_box :remove_image %>
+            <%= f.label :remove_image, 'Remove Image' %>
+          </div>
+        </div>
+      <% end %>
+      <%= f.hidden_field :image_cache %>
     </div>
 
+    <div class="field full">
+      <%= link_to 'View Current CV / Resume', faculty.resume.url, target: :_blank if faculty.resume? %>
+      <%= f.label :resume, 'CV / Resume Upload' %>
+      <%= f.file_field :resume %>
+      <% if faculty.resume? %>
+        <div class="checkbox-wrapper">
+          <div class="checkbox">
+            <%= f.check_box :remove_resume %>
+            <%= f.label :remove_resume, 'Remove Resume' %>
+          </div>
+        </div>
+      <% end %>
+      <%= f.hidden_field :resume_cache %>
+    </div>
+    
   </fieldset>
 
   <fieldset>
@@ -95,12 +86,43 @@
         <%= f.text_field :wvu_username, placeholder: "jqsmith001" %>
       </div>
       
-      <div class="field half">
+      <div class="field half last">
         <%= f.label :email, class: 'required' %>
         <%= f.text_field :email, placeholder: "jqsmith001@mail.wvu.edu" %>
       </div>      
     </div>
+    
+    <div class="row"> 
+      <div class="field half">
+        <%= f.label :title, class: 'required' %>
+        <%= f.text_field :title, placeholder: "Accountant EBO" %>
+      </div>
 
+      <div class="field half">
+        <%= f.label :college%>
+        <%= f.text_field :college, placeholder: "Eberly College of Arts and Sciences" %>
+      </div>
+             
+      <div class="field half">
+        <%= f.label :department%>
+        <%= f.text_field :department, placeholder: "Department of English" %>
+      </div>
+
+      <div class="field full">
+        <%= f.label :research_interests %>
+        <%= f.text_area :research_interests, placeholder: "Scholarly multimedia, digital publishing, editorial pedagogy, multimodal composition, academic literacies, professionalization" %>
+      </div>
+
+      <div class="field half">
+        <%= f.label :visible%>
+        <%= f.check_box :visible %>
+      </div>
+
+      <div class="field full">
+        <%= f.label :biography %>
+        <%= f.text_area :biography, placeholder: "Basic biography of faculty in simple terms for the public." %>
+      </div>
+    </div>
   </fieldset>
 
   <fieldset>
