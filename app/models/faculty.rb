@@ -45,8 +45,8 @@ class Faculty < User
   include Searchable
 
   # scopes
-  scope :visible, -> { where(status: 'enabled') }
-  scope :order_name, -> { order(:last_name, :first_name) }
+  # scope :visible, -> { where(status: 'enabled') }
+  # scope :order_name, -> { order(:last_name, :first_name) }
 
   # Resume / CV Option
   mount_uploader :resume, ResumeUploader

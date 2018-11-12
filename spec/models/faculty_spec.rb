@@ -145,13 +145,14 @@ RSpec.describe Faculty, type: :model do
         expect(Faculty.search(new_faculty.first_name).records.length).to eq(1)
       end
  
-      it 'should remove faculty after the update because of the status' do
-        new_faculty = FactoryBot.create :faculty
-        Faculty.__elasticsearch__.refresh_index!
-        new_faculty.update(status: 0)
-        sleep 2
-        expect(Faculty.search(new_faculty.first_name).records.length).to eq(0)
-      end
+      # it 'should remove faculty after the update because of the status' do
+      #   new_faculty = FactoryBot.create :faculty
+      #   Faculty.__elasticsearch__.refresh_index!
+      #   new_faculty.update(status: 'disabled')
+      #   Faculty.__elasticsearch__.refresh_index!        
+      #   sleep 2
+      #   expect(Faculty.search(new_faculty.first_name).records.length).to eq(0)
+      # end
   
       # it 'should keep faculty in index after the update because of status' do
       #   new_faculty = FactoryBot.create :faculty
@@ -159,13 +160,13 @@ RSpec.describe Faculty, type: :model do
       #   new_faculty.update(status: 'enabled')
       #   expect(Faculty.search(new_faculty.first_name).records.length).to eq(1)
       # end
-      # 
-      # it 'should delete the index after destroy' do
-      #   # verify that the faculty exists before
-      #   expect(Faculty.search(faculty.first_name).records.length).to eq(1)
-      #   faculty.destroy
-      #   expect(Faculty.search(faculty.first_name).records.length).to eq(0)
-      # end
+      
+      it 'should delete the index after destroy' do
+        # verify that the faculty exists before
+        expect(Faculty.search(faculty.first_name).records.length).to eq(1)
+        faculty.destroy
+        expect(Faculty.search(faculty.first_name).records.length).to eq(0)
+      end
   
     end
   end

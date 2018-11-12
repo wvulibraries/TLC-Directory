@@ -40,13 +40,10 @@ module Searchable
   included do
     include Elasticsearch::Model
     after_commit :index_document, if: :persisted?
+
     after_commit on: [:destroy] do
       __elasticsearch__.delete_document
-    end
-    after_commit on: [:update] do
-      __elasticsearch__.update_document
-      __elasticsearch__.delete_document unless status == 'enabled'
-    end    
+    end 
   end
 
   private
