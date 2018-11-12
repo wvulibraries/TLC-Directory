@@ -15,6 +15,7 @@
 /public/uploads
 /log
 /search_data
+/spec/search_data
 
 # Used by dotenv library to load environment variables.
 # .env
