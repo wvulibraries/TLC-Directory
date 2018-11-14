@@ -34,6 +34,11 @@ FactoryBot.define do
     
     factory :faculty_disabled do
       status { 'disabled' }
+    end
+    
+    factory :faculty_visible do
+      status { 'enabled' }
+      visible { true }
     end       
   end
 end

@@ -28,7 +28,7 @@ class Admin::FacultiesController < ApplicationController
     @faculty = Faculty.new faculty_params  
     respond_to do |format|
       if @faculty.save
-        format.html { redirect_to @faculty, notice: 'Faculty was successfully created.' }
+        format.html { redirect_to @faculty, notice: 'Success! Faculty profile was created!' }
         format.json { render :show, status: :created, location: @faculty }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class Admin::FacultiesController < ApplicationController
   def update
     respond_to do |format|
       if @faculty.update faculty_params
-        format.html { redirect_to @faculty, notice: 'Faculty was successfully updated.' }
+        format.html { redirect_to @faculty, notice: 'Success! Faculty profile was edited.' }
         format.json { render :show, status: :created, location: @faculty }
       else
         format.html { render :new }
@@ -56,7 +56,7 @@ class Admin::FacultiesController < ApplicationController
   def destroy
     @faculty.destroy
     respond_to do |format|
-      success_str = 'Faculty was successfully destroyed.'
+      success_str = 'Faculty Removed! The faculty profile was removed, for temporary removal you should change the faculty status.'
       format.html { redirect_to faculties_url, success: success_str }
       format.json { head :no_content }
     end

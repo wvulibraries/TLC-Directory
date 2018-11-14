@@ -9,22 +9,10 @@ Rails.application.routes.draw do
   get '/login', 
       to: 'application#login', 
       as: 'login'
+      
   get '/logout', 
       to: 'application#logout', 
       as: 'logout'
-  
-  # faculties
-  get 'faculties',
-      to: 'faculties#list',
-      as: 'faculties_list'
-
-  get 'faculties/:id',
-      to: 'faculties#profile',
-      as: 'faculties_profile'
-
-  # root
-  # root 'public#index'
-  # resources :registration, only: [:new, :create], module: 'public'
 
   # admin
   get '/admin', to: 'admin#index'
