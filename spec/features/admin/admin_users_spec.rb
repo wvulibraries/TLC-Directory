@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "Admin::User", type: :feature do
   let(:user_existing) { FactoryBot.create(:user) }
+  let(:user) { FactoryBot.attributes_for(:user) }
 
   before(:each) do
     user_existing
