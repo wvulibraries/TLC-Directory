@@ -42,7 +42,7 @@ class Admin::UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update user_params
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user, notice: 'Success! User profile was edited.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -56,7 +56,7 @@ class Admin::UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      success_str = 'User was successfully destroyed.'
+      success_str = 'User Removed! The user profile was removed, for temporary removal you should change the user status.'
       format.html { redirect_to users_url, success: success_str }
       format.json { head :no_content }
     end

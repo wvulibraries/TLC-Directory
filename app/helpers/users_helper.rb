@@ -5,7 +5,10 @@ module UsersHelper
   end
   
   def hasemail?(user)
-    faculty.email != nil
+    user.email != nil
   end
   
+  def hasusername?(user)
+    user.wvu_username != nil
+  end
 end

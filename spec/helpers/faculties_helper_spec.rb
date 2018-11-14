@@ -12,12 +12,12 @@ RSpec.describe FacultiesHelper, type: :helper do
     expect(isadmin?(faculty)).to eq(true)
   end
   
-  # it 'validates faculty has picture' do
-  #   # should always be true if faculty hasn't 
-  #   # uploaded picture a basic placeholder
-  #   # image is used
-  #   expect(haspicture?(faculty)).to eq(true)    
-  # end
+  it 'validates faculty has image' do
+    # should always be true if faculty hasn't 
+    # uploaded picture a basic placeholder
+    # image is used
+    expect(hasimage?(faculty)).to eq(true)    
+  end
   
   it 'validates faculty has no awards' do
     expect(hasawards?(faculty)).to eq(false)    

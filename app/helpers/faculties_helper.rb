@@ -4,9 +4,9 @@ module FacultiesHelper
     faculty.role == 'admin'
   end
 
-  # def haspicture?(faculty)
-  #   faculty.picture != nil
-  # end
+  def hasimage?(faculty)
+    faculty.image != nil
+  end
 
   def hasawards?(faculty)
     faculty.awards.all.count != 0
@@ -14,10 +14,6 @@ module FacultiesHelper
 
   def hasaddresses?(faculty)
     faculty.addresses.all.count != 0
-  end
-
-  def hasemailaddresses?(faculty)
-    faculty.email != nil
   end
 
   def hasphones?(faculty)
@@ -28,20 +24,12 @@ module FacultiesHelper
     faculty.publications.all.count != 0
   end
 
-  def hasenrollments?(faculty)
-    faculty.enrollments.all.count != 0
-  end
-
   def haswebsites?(faculty)
     faculty.websites.all.count != 0
   end
   
-  def hasuniversities?(faculty)
-    faculty.universities.all.count != 0
+  def hascv?(faculty)
+    faculty.resume != nil
   end
-  
-  # def hascv?(faculty)
-  #   faculty.document.document_file_size != nil
-  # end
 
 end

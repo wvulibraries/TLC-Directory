@@ -8,13 +8,32 @@ FactoryBot.define do
     email { "#{Faker::Internet.user_name(7..36)}@mail.wvu.edu" }
     wvu_username { Faker::Internet.user_name(7..36) }    
     role :user
-    status :disabled
-    visible false
+    status :enabled
+    visible false    
+    
+    factory :non_admin_cas do
+      wvu_username { 'johntest' }
+      role { 0 }
+    end
 
+    factory :admin_cas do
+      wvu_username { 'johntest' }
+      role { 1 }
+    end    
+    
     factory :user_faker do
       status { rand(0..1) }
       role { rand(0..2) }
       visible { rand > 0.5 }
+    end    
+    
+    factory :user_disabled do
+      status { 'disabled' }
     end
+    
+    factory :user_visible do
+      status { 'enabled' }
+      visible { true }
+    end       
   end
 end

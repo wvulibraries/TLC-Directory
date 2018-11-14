@@ -1,38 +1,44 @@
-<h2>User's</h2>
+<div class="top-action">
+  <h2> Manage User(s) </h2>
+  <%= link_to 'New User', new_admin_user_path, { class: 'new-button' } %>
+</div>
 
-<tbody>
+<% @users.each do |user| %>
+  <div class="crud-list user-list">
 
-  <table>
-    <thead>
-      <tr>
-        <th>WVU Username</th>
-        <th>Last name</th>
-        <th>First name</th>
-        <th>Middle name</th>
-        <th>Status</th>
-        <th>Role</th>
-        <th>Visible</th>
-        <th>Email</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
+    <div class="text-attributes">
+      <ul>
+        <li> 
+          <strong> Name: </strong> 
+          <%= user.display_name %>
+        </li>
 
-    <tbody>
-      <% @users.each do |user| %>
-        <tr>
-          <td><%= user.wvu_username %></td>
-          <td><%= user.last_name %></td>
-          <td><%= user.first_name %></td>
-          <td><%= user.middle_name %></td>
-          <td><%= user.status %></td>
-          <td><%= user.role %></td>
-          <td><%= user.visible %></td>
-          <td><%= user.email %></td>          
-          <td><%= link_to 'Show', admin_user_path(user) %></td>
-          <td><%= link_to 'Edit', edit_admin_user_path(user) %></td>
-          <td><%= link_to 'Destroy', admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</tbody>
+        <li>
+          <strong> Email: </strong>
+          <%= user.email %>
+        </li>
+
+        <li>
+          <strong> Role: </strong>
+          <%= user.role.capitalize %>
+        </li>
+
+        <li>
+          <strong> Status: </strong>
+          <%= user.status.capitalize %>
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="crud-actions">
+      <%= link_to raw('<span class="fas fa-user-alt"></span>View'), admin_user_path(user), { class: 'show-button' } %>
+      <%= link_to raw('<span class="fa fa-user-edit"></span> Edit'), edit_admin_user_path(user), { class: 'edit-button' } %>
+      <%= link_to raw('<span class="fas fa-user-times"></span> Delete'), admin_user_path(user), method: :delete, class: 'delete-button', data: { confirm: 'Are you sure?' }, title:'delete' %>
+    </div>
+  </div>
+<% end %>
+
+<div class="bottom-action"> 
+  <%= link_to 'New User', new_admin_user_path, { class: 'new-button' } %>
+</div>
