@@ -10,8 +10,8 @@ FactoryBot.define do
     role :user
     status :enabled
     visible false    
-    college { Faker::University.name }
-    department { Faker::Company.industry  }
+    # college { Faker::University.name }
+    # department { Faker::Company.industry  }
     title { Faker::Job.title }
     biography { Faker::Lorem.paragraph(rand(1...5)) }
     research_interests { Faker::Lorem.sentence }

@@ -5,6 +5,7 @@ class CreateAwards < ActiveRecord::Migration[5.2]
       t.integer :starting_year
       t.integer :ending_year
       t.string :description
+      
       t.timestamps
     end
   end

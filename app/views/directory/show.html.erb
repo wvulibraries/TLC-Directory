@@ -15,13 +15,7 @@
         <% unless @faculty.title.nil? || @faculty.title.empty? %>
           <div class="micro"> <%= @faculty.title %> </div>
         <% end %>
-      </div>
-      
-      <div class="college">
-        <% unless @faculty.college.nil? || @faculty.college.empty? %>
-          <div class="micro"> <%= @faculty.college %> </div>
-        <% end %>
-      </div>      
+      </div>     
 
       <% if @faculty.biography.present? %>
       <div class="biography">

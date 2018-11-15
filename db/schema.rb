@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_30_102800) do
+ActiveRecord::Schema.define(version: 2018_11_15_151633) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "addressable_type"
@@ -34,6 +34,38 @@ ActiveRecord::Schema.define(version: 2018_05_30_102800) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["awardable_type", "awardable_id"], name: "index_awards_on_awardable_type_and_awardable_id"
+  end
+
+  create_table "collegeables", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "faculty_id"
+    t.bigint "college_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["college_id"], name: "index_collegeables_on_college_id"
+    t.index ["faculty_id"], name: "index_collegeables_on_faculty_id"
+  end
+
+  create_table "colleges", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "departmentables", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "faculty_id"
+    t.bigint "department_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["department_id"], name: "index_departmentables_on_department_id"
+    t.index ["faculty_id"], name: "index_departmentables_on_faculty_id"
+  end
+
+  create_table "departments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "email_addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -78,8 +110,6 @@ ActiveRecord::Schema.define(version: 2018_05_30_102800) do
     t.boolean "visible", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "college"
-    t.string "department"
     t.string "title"
     t.text "biography"
     t.string "research_interests"

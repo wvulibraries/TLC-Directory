@@ -11,12 +11,6 @@ class Faculty < User
   validates :title,
             presence: true,
             length: { within: 2..70 }
-  
-  validates :college,
-            length: { within: 2..70 }
-
-  validates :department,
-            length: { within: 2..70 }
             
   validates :biography, 
             presence: true,
@@ -27,6 +21,9 @@ class Faculty < User
             length: { maximum: 500 }
             
   # associations
+  has_one :college, as: :collegeable
+  has_one :department, as: :departmentable
+  
   has_many :addresses, as: :addressable, dependent: :destroy
   has_many :awards, as: :awardable, dependent: :destroy
   has_many :phones, as: :phoneable, dependent: :destroy
@@ -69,13 +66,11 @@ class Faculty < User
   def as_indexed_json(_options)
     as_json(
       methods: [:display_name],
-      only: [:id, :first_name, :last_name, :preferred_name, :display_name, :title, :college, :department, :research_interests, :biography, :image],
-      include: {
-        # departments: { methods: [:building_name],
-        #                only: %i[name building_name] },
-        # subjects: { only: :name },
-        phones: { only: :number }
-      }
+      only: [:id, :first_name, :last_name, :preferred_name, :display_name, :title, :research_interests, :biography, :image],
+      # include: {
+      #   colleges: { only: %i[name] },
+      #   departments: { only: %i[name] },
+      # }
     )
   end
 end

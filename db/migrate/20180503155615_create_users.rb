@@ -12,6 +12,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.integer :role, default: :user
       t.integer :status, default: :disabled
       t.boolean :visible, default: false
+      
       t.timestamps
     end
   end

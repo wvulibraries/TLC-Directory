@@ -29,8 +29,8 @@ RSpec.feature "Admin::Faculty", type: :feature do
     fill_in 'Last name', with: faculty[:last_name]
     select('I', from: 'Suffix')
     fill_in 'Wvu username', with: faculty[:wvu_username]
-    fill_in 'College', with: faculty[:college]
-    fill_in 'Department', with: faculty[:department]
+    # fill_in 'College', with: faculty[:college]
+    # fill_in 'Department', with: faculty[:department]
     fill_in 'Email', with: faculty[:email]
     fill_in 'Title', with: faculty[:title]
     # fill_in 'University classification', with: faculty[:university_classification]
@@ -50,8 +50,8 @@ RSpec.feature "Admin::Faculty", type: :feature do
     fill_in 'Last name', with: faculty[:last_name]
     select('I', from: 'Suffix')
     fill_in 'Wvu username', with: ''
-    fill_in 'College', with: faculty[:college]
-    fill_in 'Department', with: faculty[:department]    
+    # fill_in 'College', with: faculty[:college]
+    # fill_in 'Department', with: faculty[:department]    
     fill_in 'Email', with: faculty[:email]
     fill_in 'Title', with: faculty[:title]
     # fill_in 'University classification', with: faculty[:university_classification]

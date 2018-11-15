@@ -32,12 +32,7 @@
                <% unless faculty_profile.title.nil? || faculty_profile.title.empty? %>
                 <div class="micro"> <%= faculty_profile.title %> </div>
                <% end %>
-               <% unless faculty_profile.college.nil? || faculty_profile.college.empty? %>
-                <div class="micro"> <%= faculty_profile.college %> </div>
-               <% end %>                     
-               <% unless faculty_profile.department.nil? || faculty_profile.department.empty? %>
-                <div class="micro"> <%= faculty_profile.department %> </div>
-               <% end %>        
+     
                <% unless faculty_profile.research_interests.nil? || faculty_profile.research_interests.empty? %>
                 <br>
                 <div class="micro"> 
