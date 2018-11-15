@@ -1,0 +1,18 @@
+<h2> Showing <%= @college.name %> </h2>
+
+<div class="show-action">
+    <div class="text-attributes">
+      <ul>
+        <li> 
+          <strong> Name: </strong> 
+          <%= @college.name %>
+        </li>
+      </ul>
+    </div>
+
+    <div class="actions"> 
+      <%= link_to '<span class="fas fa-college"></span> colleges'.html_safe, '/admin/colleges', { class: 'new-button' } %>
+      <%= link_to '<span class="fas fa-edit"></span> Edit'.html_safe, edit_admin_college_path(@college), { class: 'edit-button' } %>
+      <%= link_to '<span class="fas fa-trash"></span> Destroy'.html_safe, admin_college_path(@college), method: :delete, class: 'delete-button', data: { confirm: 'Are you sure?' }, title:'delete' %>
+    </div>
+  </div>

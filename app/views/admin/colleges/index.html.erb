@@ -1,0 +1,28 @@
+<div class="top-action">
+  <h2> Manage Colleges </h2>
+  <%= link_to 'New college', new_admin_college_path, { class: 'new-button' } %>
+</div>
+
+<% @colleges.each do |college| %> 
+
+  <div class="crud-list college-list">
+    <div class="text-attributes">
+      <ul>
+        <li> 
+          <strong> Name: </strong> 
+          <%= college.name %>
+        </li>
+      </ul>
+    </div>
+
+    <div class="crud-actions"> 
+      <%= link_to 'Show', admin_college_path(college), { class: 'show-button' } %>
+      <%= link_to 'Edit', edit_admin_college_path(college), { class: 'edit-button' } %>
+      <%= link_to 'Destroy', admin_college_path(college), method: :delete, class: 'delete-button', data: { confirm: 'Are you sure?' }, title:'delete' %>
+    </div>
+  </div>
+<% end %>
+
+<div class="bottom-action"> 
+  <%= link_to 'New college', new_admin_college_path, { class: 'new-button' } %>
+</div>

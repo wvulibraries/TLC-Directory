@@ -37,7 +37,15 @@ en:
     log_out: "You have been logged out!"
   names:
     prefix: [Atty, Dr, Fr, Gov, Hon, Master, Miss, Mr, Mrs, Ms, Ofc, Pres, Prof, Rev, VP]
-    suffix: [AB, BA, BE, BFA, BS, BSc, BTech, DBA, DC, DD, DDS, DO, DPhil, DVM, EdD, Hons, JD, Jr, LLB, LLM, MA, MBA, MD, ME, MFA, MLA, MS, MSW, PhD, Sr, I, II, III, IV, V]
+    suffix: [AB, BA, BE, BFA, BS, BSc, BTech, DBA, DC, DD, DDS, DO, DPhil, DVM, EdD, Hons, JD, Jr, LLB, LLM, MA, MBA, MD, ME, MFA, MLA, MS, MSW, PhD, Sr, I, II, III, IV, V]  
   address:
     state: [Alabama, Alaska, Arizona, Arkansas, California, Colorado, Connecticut, Delaware, Florida, Georgia, Hawaii, Idaho, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana, Maine, Maryland, Massachusetts, Michigan, Minnesota, Mississippi, Missouri, Montana, Nebraska, Nevada, New Hampshire, New Jersey, New Mexico, New York, North Carolina, North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina, South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, Washington, West Virginia, Wisconsin, Wyoming]
     state_abbr: [AL, AK, AZ, AR, CA, CO, CT, DE, FL, GA, HI, ID, IL, IN, IA, KS, KY, LA, ME, MD, MA, MI, MN, MS, MO, MT, NE, NV, NH, NJ, NM, NY, NC, ND, OH, OK, OR, PA, RI, SC, SD, TN, TX, UT, VT, VA, WA, WV, WI, WY]
+  college:
+    success: "Success! New College was created!"
+    deleted: "College Removed! The college was removed, for temporary removal you should change the college status."
+    edited: "Success! College was edited."
+  faculty:
+    success: "Success! Faculty profile was created!"
+    deleted: "Faculty Removed! The faculty profile was removed, for temporary removal you should change the faculty status."
+    edited: "Success! Faculty profile was edited."    

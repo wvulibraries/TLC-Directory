@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :college do
     name { Faker::University.name }
-    status { 'enabled' }    
+    status { 'enabled' }   
   end
 end

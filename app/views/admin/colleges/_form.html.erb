@@ -1,0 +1,23 @@
+<%= form_for [:admin, college], html: { multipart: true } do |f| %>
+  <% if college.errors.any? %>
+    <div id="error_explanation">
+      <h3><%= pluralize(college.errors.count, "Error") %> </h3> 
+      <p> The following prohibited this college from being saved: </p>
+      <ul>
+      <% college.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name, class: 'required' %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="actions">
+    <%= link_to 'Cancel', admin_colleges_path, class: 'cancel-button' %>
+    <%= f.submit 'Submit', class: 'submit-button' %>
+  </div>
+<% end %>
