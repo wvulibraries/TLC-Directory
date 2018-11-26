@@ -1,0 +1,17 @@
+<% content_for :title, "TLC Colleges List" %>
+
+<h2> TLC Colleges </h2>
+
+<% @colleges.each do |college| %> 
+
+  <div class="display-list">
+    <div class="text-attributes college-card">
+      <h3 id="college_name"> <%= college.name %> </h3>
+      
+      <div class="buttons"> 
+        <a href="/colleges/<%= college.id %>/faculties" class="button" aria-labelledby="college_name"> College Faculty </a>
+        <a href="/colleges/<%= college.id %>" class="button" aria-labelledby="college_name">  College Details </a>
+      </div>
+    </div>
+  </div>
+<% end %>

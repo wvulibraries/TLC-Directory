@@ -15,6 +15,13 @@
     <%= f.label :name, class: 'required' %>
     <%= f.text_field :name %>
   </div>
+  
+  <div class="field half last">
+   <%= f.label :status, 'College Status', class:'required' %>
+    <div class="select-style">
+        <%= f.select :status, options_for_select(College.statuses.keys.to_a, selected: f.object.status), include_blank: "Select a Status" %>
+    </div>
+  </div>
 
   <div class="actions">
     <%= link_to 'Cancel', admin_colleges_path, class: 'cancel-button' %>

@@ -3,7 +3,7 @@ namespace :search_index do
   desc 'Re-index all environments'
   task all: :environment do
     Rake::Task['search_index:faculty'].invoke
-    # Rake::Task['search_index:building'].invoke
+    Rake::Task['search_index:college'].invoke
     # Rake::Task['search_index:department'].invoke
   end
 

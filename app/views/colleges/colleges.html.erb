@@ -1,0 +1,6 @@
+ <%= content_for :title, "#{@college.name.titlecase} Faculties" %> 
+<h2> 
+ <%= "#{@college.name.titlecase} Faculties" %> 
+</h2>
+
+<%= render 'shared/faculties', faculties: @faculties %>

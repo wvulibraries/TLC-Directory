@@ -14,6 +14,19 @@ Rails.application.routes.draw do
       to: 'application#logout', 
       as: 'logout'
 
+  # colleges
+  get '/colleges',
+      to: 'colleges#list',
+      as: 'college_list'
+
+  get '/colleges/:id/faculties',
+      to: 'colleges#faculties',
+      as: 'building_faculties'
+
+  get '/colleges/:id',
+      to: 'colleges#details',
+      as: 'college_details'
+
   # admin
   get '/admin', to: 'admin#index'
 

@@ -78,6 +78,26 @@ RSpec.describe Faculty, type: :model do
         expect(Faculty.search(faculty.first_name).records.length).to eq(1)
       end  
 
+      it 'new faculty that is disabled should not be indexed' do
+        new_faculty = FactoryBot.create :faculty
+        new_faculty.update(status: 'disabled')
+        Faculty.__elasticsearch__.refresh_index!
+        updated_faculty = Faculty.search(new_faculty.first_name)      
+        sleep 2
+        expect(Faculty.search(new_faculty.first_name).records.length).to eq(0)
+      end   
+      
+      it 'updated disabled faculty to enabled' do
+        new_faculty = FactoryBot.create :faculty
+        new_faculty.update(status: 'disabled')
+        Faculty.__elasticsearch__.refresh_index!
+        new_faculty.update(status: 'enabled')
+        Faculty.__elasticsearch__.refresh_index!
+        updated_faculty = Faculty.search(new_faculty.first_name)      
+        sleep 2
+        expect(Faculty.search(new_faculty.first_name).records.length).to eq(1)        
+      end        
+
       it 'update faculty to disabled' do
         new_faculty = FactoryBot.create :faculty
         Faculty.__elasticsearch__.refresh_index!
