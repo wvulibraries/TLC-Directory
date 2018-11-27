@@ -2,11 +2,13 @@ class DirectoryController < ApplicationController
   layout 'directory'
 
   def index
-    @search_term = Sanitize.fragment params[:search]
-    
     if params[:search].nil?
-      @faculty_profiles = Faculty.where(visible: true, status: 1).order(:last_name, :first_name)
+      @faculty_profiles = Faculty.includes(:phones, :addresses)
+                                 .where(visible: true, status: 1)
+                                 .order(:last_name, :first_name)
     else
+      clean_term = params[:search].gsub(%r{\{|\}|\[|\]|\\|\/|\^|\~|\:|\!|\"|\'}, '')
+      @search_term = Sanitize.fragment clean_term
       @faculty_profiles = Elasticsearch::Model.search(
         @search_term,
         [Faculty],
@@ -16,8 +18,8 @@ class DirectoryController < ApplicationController
   end
 
   def show
-    @faculty = Faculty.where(id: params[:id], status: 'enabled')
-                        .order(:last_name, :first_name)
-                        .first
+    @faculty = Faculty.includes(:phones, :addresses)
+                      .where(visible: true, status: 1)
+                      .first
   end
 end

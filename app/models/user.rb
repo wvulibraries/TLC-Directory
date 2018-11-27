@@ -27,7 +27,7 @@ class User < ApplicationRecord
     end
   end
 
-  scope :show, lambda { where(["visible = ? and status = ?", true, "active"])}
+  scope :show, lambda { where(["visible = ? and status = ?", true, "enabled"])}
   scope :sorted, lambda { order("last_name ASC", "first_name ASC") }
 
   # custom methods

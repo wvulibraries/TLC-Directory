@@ -7,6 +7,14 @@
 # @data_model
 # @since 0.0.1
 class Faculty < User
+  self.table_name = :faculty
+  
+  # after_initialize do
+  #   if new_record?
+  #     self.isFaculty = true
+  #   end
+  # end
+  
   # validations
   validates :title,
             presence: true,

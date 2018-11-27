@@ -42,10 +42,25 @@ RSpec.describe Department, type: :model do
     context 'conditional indexes' do
       it 'a new record should be indexed' do
         new_dept = FactoryBot.create :department
-        puts new_dept.inspect
         Department.__elasticsearch__.refresh_index!
         expect(Department.search(new_dept.name).records.length).to eq(1)
       end
+      
+      it 'a new disabled record should not be indexed' do
+        new_dept = FactoryBot.create :department
+        new_dept.update(status: 'disabled')
+        Department.__elasticsearch__.refresh_index!
+        expect(Department.search(new_dept.name).records.length).to eq(0)
+      end      
+      
+      # it 'updated disabled department to enabled' do
+      #   new_dept = FactoryBot.create :department
+      #   # new_dept.update(status: 'disabled')
+      #   Department.__elasticsearch__.refresh_index!
+      #   # new_dept.update(status: 'enabled')
+      #   # sleep 2
+      #   expect(Department.search(new_dept.name).records.length).to eq(1)     
+      # end        
 
       it 'should remove department after the update because of the status' do
         Department.__elasticsearch__.refresh_index!

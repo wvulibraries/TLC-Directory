@@ -91,9 +91,7 @@ RSpec.describe Faculty, type: :model do
         new_faculty = FactoryBot.create :faculty
         new_faculty.update(status: 'disabled')
         Faculty.__elasticsearch__.refresh_index!
-        new_faculty.update(status: 'enabled')
-        Faculty.__elasticsearch__.refresh_index!
-        updated_faculty = Faculty.search(new_faculty.first_name)      
+        new_faculty.update(status: 'enabled') 
         sleep 2
         expect(Faculty.search(new_faculty.first_name).records.length).to eq(1)        
       end        

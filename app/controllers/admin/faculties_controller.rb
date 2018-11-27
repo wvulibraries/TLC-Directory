@@ -7,7 +7,7 @@ class Admin::FacultiesController < ApplicationController
   # GET /faculties
   # GET /faculties.json
   def index
-    @faculties = Faculty.order(:last_name)
+    @faculties = Faculty.where(isFaculty: true).order(:last_name, :first_name)
   end
 
   # GET /faculties/1
@@ -71,7 +71,8 @@ class Admin::FacultiesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def faculty_params
     params.require(:faculty)
-          .permit(:prefix,
+          .permit(:isFaculty,
+                  :prefix,
                   :suffix,
                   :first_name,
                   :middle_name,

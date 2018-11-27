@@ -26,6 +26,16 @@ Rails.application.routes.draw do
   get '/colleges/:id',
       to: 'colleges#details',
       as: 'college_details'
+      
+  # faculties
+  get 'faculties',
+      to: 'faculties#list',
+      as: 'faculties_list'
+
+  get '/faculty/:id',
+      to: 'faculties#profile',
+      as: 'faculties_profile'
+  
 
   # admin
   get '/admin', to: 'admin#index'

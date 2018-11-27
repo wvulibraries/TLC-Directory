@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_15_151633) do
+ActiveRecord::Schema.define(version: 2018_11_27_195002) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "addressable_type"
@@ -77,6 +77,28 @@ ActiveRecord::Schema.define(version: 2018_11_15_151633) do
     t.index ["emailable_type", "emailable_id"], name: "index_email_addresses_on_emailable_type_and_emailable_id"
   end
 
+  create_table "faculty", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "id", default: 0, null: false
+    t.string "preferred_name"
+    t.string "prefix"
+    t.string "last_name"
+    t.string "first_name"
+    t.string "middle_name"
+    t.string "suffix"
+    t.string "email"
+    t.string "wvu_username", limit: 30
+    t.integer "role"
+    t.integer "status"
+    t.boolean "visible", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title"
+    t.text "biography"
+    t.string "research_interests"
+    t.string "image"
+    t.string "resume"
+  end
+
   create_table "phones", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "phoneable_type"
     t.bigint "phoneable_id"
@@ -110,11 +132,6 @@ ActiveRecord::Schema.define(version: 2018_11_15_151633) do
     t.boolean "visible", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "title"
-    t.text "biography"
-    t.string "research_interests"
-    t.string "image"
-    t.string "resume"
   end
 
   create_table "websites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
