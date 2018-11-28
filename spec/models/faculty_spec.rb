@@ -65,70 +65,66 @@ RSpec.describe Faculty, type: :model do
   end
 
   describe 'conditional elasticsearch indexing using callbacks' do
-    # before do
-    #   faculty # instantiate
-    #   Faculty.import(force: true, refresh: true)
-    # end
-    
+    before do
+      faculty # instantiate
+      Faculty.import(force: true, refresh: true)
+    end
+  
     context 'conditional indexes' do
+      
+      it 'a new record should be indexed' do
+        new_faculty = FactoryBot.create :faculty
+        Faculty.__elasticsearch__.refresh_index!
+        expect(Faculty.search(new_faculty.first_name).records.length).to be >= 1
+      end    
+      
+      it 'a new disabled record should not be indexed' do
+        new_faculty = FactoryBot.create :disabled_faculty
+        Faculty.__elasticsearch__.refresh_index!
+        expect(Faculty.search(new_faculty.first_name).records.length).to eq 0  
+      end  
+      
+      # it 'new record set to disabled should not be indexed' do
+      #   new_faculty = FactoryBot.create :faculty
+      #   new_faculty.update(status: 'disabled')
+      #   Faculty.__elasticsearch__.refresh_index!        
+      #   sleep 2 # let the callbacks work
+      #   expect(Faculty.search(new_faculty.first_name).records.length).to eq 0 
+      # end        
 
-      # it 'a new enabled record should be indexed' do
-      #   new_faculty = FactoryBot.create :faculty_visible
+      # it 'update faculty to disabled and then enabled' do
       #   Faculty.__elasticsearch__.refresh_index!
-      #   expect(Faculty.search(faculty.first_name).records.length).to eq(1)
-      # end  
-
-      it 'new faculty that is disabled should not be indexed' do
-        new_faculty = FactoryBot.create :faculty
-        new_faculty.update(status: 'disabled')
-        Faculty.__elasticsearch__.refresh_index!
-        updated_faculty = Faculty.search(new_faculty.first_name)      
-        sleep 2
-        expect(Faculty.search(new_faculty.first_name).records.length).to eq(0)
-      end   
-      
-      it 'updated disabled faculty to enabled' do
-        new_faculty = FactoryBot.create :faculty
-        new_faculty.update(status: 'disabled')
-        Faculty.__elasticsearch__.refresh_index!
-        new_faculty.update(status: 'enabled') 
-        sleep 2
-        expect(Faculty.search(new_faculty.first_name).records.length).to eq(1)        
-      end        
-
-      it 'update faculty to disabled' do
-        new_faculty = FactoryBot.create :faculty
-        Faculty.__elasticsearch__.refresh_index!
-        new_faculty.update(status: 'disabled')
-        Faculty.__elasticsearch__.refresh_index!
-        updated_faculty = Faculty.search(new_faculty.first_name)      
-        sleep 2
-        expect(Faculty.search(new_faculty.first_name).records.length).to eq(0)
-      end   
-      
+      #   faculty.update(status: 'disabled')
+      #   sleep 2 # let the callbacks work
+      #   expect(Faculty.search(faculty.first_name).records.length).to eq 0
+      # 
+      #   Faculty.__elasticsearch__.refresh_index!
+      #   faculty.update(status: 'enabled')
+      #   sleep 2 # let the callbacks work
+      #   expect(Faculty.search(faculty.first_name).records.length).to eq 1                  
+      # end    
+    
       it 'should remove faculty after the update because of the status' do
-        new_faculty = FactoryBot.create :faculty
         Faculty.__elasticsearch__.refresh_index!
-        new_faculty.update(status: 'disabled')
-        Faculty.__elasticsearch__.refresh_index!        
-        sleep 2
-        expect(Faculty.search(new_faculty.first_name).records.length).to eq(0)
-      end
+        faculty.update(status: 'disabled')
+        sleep 2 # let the callbacks work
+        expect(Faculty.search(faculty.first_name).records.length).to eq 0
+      end    
       
       it 'should keep faculty in index after the update because of status' do
-        new_faculty = FactoryBot.create :faculty
         Faculty.__elasticsearch__.refresh_index!
-        new_faculty.update(status: 'enabled')
-        expect(Faculty.search(new_faculty.first_name).records.length).to eq(1)
-      end
+        faculty.update(status: 'enabled')
+        sleep 2 # let the callbacks work
+        expect(Faculty.search(faculty.first_name).records.length).to eq 1
+      end    
       
-      # it 'should delete the index after destroy' do
-      #   # verify that the faculty exists before
-      #   expect(Faculty.search(faculty.first_name).records.length).to eq(1)
-      #   faculty.destroy
-      #   expect(Faculty.search(faculty.first_name).records.length).to eq(0)
-      # end
-  
+      it 'should delete the index after destroy' do
+        # verify that the faculty exists before
+        expect(Faculty.search(faculty.first_name).records.length).to eq(1)
+        faculty.destroy
+        expect(Faculty.search(faculty.first_name).records.length).to eq(0)
+      end
+    
     end
   end
 

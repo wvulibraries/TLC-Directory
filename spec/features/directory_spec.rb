@@ -9,7 +9,7 @@ RSpec.feature "Directory", type: :feature do
   #let(:faculty) { FactoryBot.create(:faculty_seed, departments: [department, department_two]) }
   
   # show a faculty that is set to visible and enabled
-  let(:faculty) { FactoryBot.create(:faculty_visible) }
+  let(:faculty) { FactoryBot.create(:faculty) }
 
   before(:each) do
     # instantiate creations so that each page can see them 
@@ -17,6 +17,7 @@ RSpec.feature "Directory", type: :feature do
     # department
     # department_two
     faculty
+    Faculty.__elasticsearch__.refresh_index!
   end
 
   scenario 'directory list index' do
@@ -24,6 +25,14 @@ RSpec.feature "Directory", type: :feature do
     expect(page).to have_content(faculty.display_name)
     # expect(page).to have_content(department.name)
   end
+  
+  scenario 'directory search' do
+    visit "/"
+    fill_in 'search', with: faculty.first_name
+    find('[name=submit]').click    
+    expect(page).to have_content(faculty.display_name)
+    # expect(page).to have_content(department.name)
+  end  
 
   scenario 'directory profile' do
     visit "/directory/#{faculty.id}"

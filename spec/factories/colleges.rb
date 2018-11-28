@@ -1,13 +1,10 @@
 FactoryBot.define do
   factory :college do
-    name { Faker::University.name } 
+    sequence(:name) { |n| "#{Faker::University.name} #{n}" }
+    status { 'enabled' }
+    
+    factory :disabled_college do
+      status { 'disabled' }
+    end
   end
-  
-  trait :enabled do
-    status { 'enabled' }  
-  end
-  
-  trait :disabled do
-    status { 'disabled' }  
-  end  
 end

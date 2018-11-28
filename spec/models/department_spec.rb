@@ -43,14 +43,18 @@ RSpec.describe Department, type: :model do
       it 'a new record should be indexed' do
         new_dept = FactoryBot.create :department
         Department.__elasticsearch__.refresh_index!
-        expect(Department.search(new_dept.name).records.length).to eq(1)
+        # clean query usually done in controller
+        query = new_dept.name.gsub(%r{\{|\}|\[|\]|\\|\/|\^|\~|\:|\!|\"|\'}, '')
+        expect(Department.search(query).records.length).to eq(1)
       end
       
       it 'a new disabled record should not be indexed' do
         new_dept = FactoryBot.create :department
         new_dept.update(status: 'disabled')
         Department.__elasticsearch__.refresh_index!
-        expect(Department.search(new_dept.name).records.length).to eq(0)
+        # clean query usually done in controller        
+        query = new_dept.name.gsub(%r{\{|\}|\[|\]|\\|\/|\^|\~|\:|\!|\"|\'}, '')
+        expect(Department.search(query).records.length).to eq(0)
       end      
       
       # it 'updated disabled department to enabled' do
@@ -73,12 +77,16 @@ RSpec.describe Department, type: :model do
         Department.__elasticsearch__.refresh_index!
         dept.update(status: 'enabled')
         sleep 2 # let the callbacks work
-        expect(Department.search(dept.name).records.length).to eq 1
+        # clean query usually done in controller        
+        query = dept.name.gsub(%r{\{|\}|\[|\]|\\|\/|\^|\~|\:|\!|\"|\'}, '')
+        expect(Department.search(query).records.length).to eq(1)
       end
 
       it 'should delete the index after destroy' do
+        # clean query usually done in controller        
+        query = dept.name.gsub(%r{\{|\}|\[|\]|\\|\/|\^|\~|\:|\!|\"|\'}, '')        
         # verify that the department exists before
-        expect(Department.search(dept.name).records.length).to eq 1
+        expect(Department.search(query).records.length).to eq 1
         dept.destroy
         expect(Department.search(dept.name).records.length).to eq 0
       end

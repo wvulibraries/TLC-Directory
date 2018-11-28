@@ -71,8 +71,7 @@ class Admin::FacultiesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def faculty_params
     params.require(:faculty)
-          .permit(:isFaculty,
-                  :prefix,
+          .permit(:prefix,
                   :suffix,
                   :first_name,
                   :middle_name,
