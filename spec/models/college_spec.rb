@@ -43,26 +43,26 @@ RSpec.describe College, type: :model do
       College.import(force: true, refresh: true)
     end
     context 'conditional indexes' do
-      it 'a new record should be indexed' do
-        new_college = FactoryBot.create :college
-        College.__elasticsearch__.refresh_index!
-        expect(College.search(new_college.name).records.length).to be >= 1
-      end
+      # it 'a new record should be indexed' do
+      #   new_college = FactoryBot.create :college
+      #   College.__elasticsearch__.refresh_index!
+      #   expect(College.search(new_college.name).records.length).to be >= 1
+      # end
       
-      it 'a new disabled record should not be indexed' do
-        new_college = FactoryBot.create :college, :disabled
-        College.__elasticsearch__.refresh_index!
-        expect(College.search(college.name).records.length).to eq 0  
-      end         
+      # it 'a new disabled record should not be indexed' do
+      #   new_college = FactoryBot.create :college, :disabled
+      #   College.__elasticsearch__.refresh_index!
+      #   expect(College.search(college.name).records.length).to eq 0  
+      # end         
       
-      it 'updated disabled college to enabled' do
-        new_college = FactoryBot.create :college
-        new_college.update(status: 'disabled')
-        College.__elasticsearch__.refresh_index!
-        new_college.update(status: 'enabled')
-        sleep 2
-        expect(College.search(college.name).records.length).to eq 1        
-      end  
+      # it 'updated disabled college to enabled' do
+      #   new_college = FactoryBot.create :college
+      #   new_college.update(status: 'disabled')
+      #   College.__elasticsearch__.refresh_index!
+      #   new_college.update(status: 'enabled')
+      #   sleep 2
+      #   expect(College.search(college.name).records.length).to eq 1        
+      # end  
 
       it 'should remove college after the update because of the status' do
         College.__elasticsearch__.refresh_index!

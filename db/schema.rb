@@ -68,15 +68,6 @@ ActiveRecord::Schema.define(version: 2018_11_27_195002) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "email_addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "emailable_type"
-    t.bigint "emailable_id"
-    t.string "email_address"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["emailable_type", "emailable_id"], name: "index_email_addresses_on_emailable_type_and_emailable_id"
-  end
-
   create_table "faculty", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "id", default: 0, null: false
     t.string "preferred_name"

@@ -28,10 +28,13 @@ class College < ApplicationRecord
   # @description
   # indexed json, this will help with search rankings.
   #
-  # rake environment elasticsearch:import:model CLASS='Building' SCOPE="visible" FORCE=y
+  # rake environment elasticsearch:import:model CLASS='College' SCOPE="visible" FORCE=y
   def as_indexed_json(_options)
     as_json(
       only: [:id, :name],
+      include: {
+        faculties: { only: :name }
+      }
     )
   end  
 end

@@ -7,7 +7,7 @@ class Admin::FacultiesController < ApplicationController
   # GET /faculties
   # GET /faculties.json
   def index
-    @faculties = Faculty.where(isFaculty: true).order(:last_name, :first_name)
+    @faculties = Faculty.order(:last_name, :first_name)
   end
 
   # GET /faculties/1

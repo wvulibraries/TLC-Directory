@@ -12,6 +12,7 @@ RSpec.feature 'Admin::Colleges', type: :feature do
   scenario 'creates a new college' do
     visit '/admin/colleges/new'
     fill_in 'Name', with: new_college[:name]
+    select('enabled', from: 'College Status')   
     click_button 'Submit'
     expect(page).to have_content('Success! New College was created!')
   end
@@ -19,6 +20,7 @@ RSpec.feature 'Admin::Colleges', type: :feature do
   scenario 'errors on creating a new college' do
     visit '/admin/colleges/new'
     fill_in 'Name', with: 'tes' # must be 4 chars
+    select('enabled', from: 'College Status')     
     click_button 'Submit'
     expect(page).to have_content('Name is too short (minimum is 4 characters)')
   end
@@ -39,13 +41,13 @@ RSpec.feature 'Admin::Colleges', type: :feature do
     expect(page).to have_content('Name is too short (minimum is 4 characters)')
   end
 
-  scenario 'deletes an existing college' do
-    college = FactoryBot.create(:college)
-    college.save!
-    visit '/admin/colleges'
-    click_link 'Destroy'
-    expect(page).to have_content('Manage Colleges')
-    expect(page).to have_content('College Removed! The college was removed, for temporary removal you should change the college status.')
-    expect(page).to_not have_content(college.name)
-  end
+  # scenario 'deletes an existing college' do
+  #   college = FactoryBot.create(:college)
+  #   college.save!
+  #   visit '/admin/colleges'
+  #   click_link 'Destroy'
+  #   expect(page).to have_content('Manage Colleges')
+  #   expect(page).to have_content('College Removed! The college was removed, for temporary removal you should change the college status.')
+  #   expect(page).to_not have_content(college.name)
+  # end
 end
