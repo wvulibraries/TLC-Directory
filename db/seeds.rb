@@ -7,8 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Create Users
-User.create(wvu_username: 'djdavis', first_name: 'David', last_name: 'Davis', role: :admin, status: :enabled, visible: false)
-User.create(wvu_username: 'tam0013', first_name: 'Tracy', last_name: 'McCormick', role: :admin, status: :enabled, visible: false)
+User.create(wvu_username: 'djdavis', first_name: 'David', last_name: 'Davis', email: 'djdavis@mail.wvu.edu', role: :admin, status: 'enabled', visible: false)
+User.create(wvu_username: 'tam0013', first_name: 'Tracy', last_name: 'McCormick', email: 'tam0013@mail.wvu.edu', role: :admin, status: 'enabled', visible: false)
 
 # Department.create(name: 'Department of English')
 # Department.create(name: 'WVU Libraries')
@@ -20,14 +20,15 @@ User.create(wvu_username: 'tam0013', first_name: 'Tracy', last_name: 'McCormick'
 # Department.create(name: 'C. Eugene Bennett Department of Chemistry')
 # Department.create(name: 'Department of Biology')
 # 
-# 
-# College.create(name: 'Eberly College of Arts and Sciences')
-# College.create(name: 'College of Education and Human Services')
-# College.create(name: 'College of Physical Activity and Sport Sciences')
-# College.create(name: 'Reed College of Media')
-# College.create(name: 'Statler College of Engineering and Mineral Resources')
-# College.create(name: 'School of Pharmacy')
-# College.create(name: 'College of Business & Economics')
-# College.create(name: 'College of Law')
+
+# Create College's
+College.create(name: 'Eberly College of Arts and Sciences', status: :enabled)
+College.create(name: 'College of Education and Human Services', status: :enabled)
+College.create(name: 'College of Physical Activity and Sport Sciences', status: :enabled)
+College.create(name: 'Reed College of Media', status: :enabled)
+College.create(name: 'Statler College of Engineering and Mineral Resources', status: :enabled)
+College.create(name: 'School of Pharmacy', status: :enabled)
+College.create(name: 'College of Business & Economics', status: :enabled)
+College.create(name: 'College of Law', status: :enabled)
 
 
