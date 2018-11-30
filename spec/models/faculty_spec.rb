@@ -84,24 +84,14 @@ RSpec.describe Faculty, type: :model do
         expect(Faculty.search(new_faculty.first_name).records.length).to eq 0  
       end  
       
-      # it 'new record set to disabled should not be indexed' do
-      #   new_faculty = FactoryBot.create :faculty
-      #   new_faculty.update(status: 'disabled')
-      #   Faculty.__elasticsearch__.refresh_index!        
-      #   sleep 2 # let the callbacks work
-      #   expect(Faculty.search(new_faculty.first_name).records.length).to eq 0 
-      # end        
-
-      # it 'update faculty to disabled and then enabled' do
+      # it 'updated disabled faculty to enabled' do
+      #   new_faculty = FactoryBot.create :disabled_faculty
       #   Faculty.__elasticsearch__.refresh_index!
-      #   faculty.update(status: 'disabled')
-      #   sleep 2 # let the callbacks work
-      #   expect(Faculty.search(faculty.first_name).records.length).to eq 0
-      # 
+      #   expect(Faculty.search(new_faculty.first_name).records.length).to eq 0  
+      #   new_faculty.update(status: 'enabled')      
       #   Faculty.__elasticsearch__.refresh_index!
-      #   faculty.update(status: 'enabled')
-      #   sleep 2 # let the callbacks work
-      #   expect(Faculty.search(faculty.first_name).records.length).to eq 1                  
+      #   sleep 2
+      #   expect(Faculty.search(new_faculty.first_name).records.length).to eq 1                             
       # end    
     
       it 'should remove faculty after the update because of the status' do
