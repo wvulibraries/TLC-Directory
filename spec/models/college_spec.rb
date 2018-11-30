@@ -57,6 +57,8 @@ RSpec.describe College, type: :model do
       
       it 'updated disabled college to enabled' do
         new_college = FactoryBot.create :disabled_college
+        College.__elasticsearch__.refresh_index!        
+        expect(College.search(new_college.name).records.length).to eq 0
         new_college.update(status: 'enabled')      
         College.__elasticsearch__.refresh_index!
         sleep 2

@@ -88,7 +88,7 @@ RSpec.describe Department, type: :model do
         # verify that the department exists before
         expect(Department.search(query).records.length).to eq 1
         dept.destroy
-        expect(Department.search(dept.name).records.length).to eq 0
+        expect(Department.search(query).records.length).to eq 0
       end
     end
   end
