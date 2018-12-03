@@ -10,9 +10,6 @@ RSpec.describe Faculty, type: :model do
     it { should validate_length_of(:title).is_at_least(2) }
     it { should validate_length_of(:title).is_at_most(70) }
 
-    # it { should validate_presence_of(:university_classification) }
-    # it { should validate_length_of(:university_classification).is_at_least(2) }
-    # it { should validate_length_of(:university_classification).is_at_most(70) }
 
     it { should validate_length_of(:biography).is_at_most(500) }
   end
@@ -76,7 +73,16 @@ RSpec.describe Faculty, type: :model do
         new_faculty = FactoryBot.create :faculty
         Faculty.__elasticsearch__.refresh_index!      
         expect(Faculty.search(new_faculty.first_name).records.length).to eq 1                  
-      end    
+      end   
+      
+      it 'create multiple records with same last name' do
+        new_faculty = FactoryBot.create :faculty
+        new_faculty2 = FactoryBot.create :faculty
+        new_faculty2.update(last_name: new_faculty.last_name)
+        
+        Faculty.__elasticsearch__.refresh_index!      
+        expect(Faculty.search(new_faculty.last_name).records.length).to eq 2                  
+      end          
       
       it 'a new disabled record should not be indexed' do
         new_faculty = FactoryBot.create :disabled_faculty
@@ -88,7 +94,6 @@ RSpec.describe Faculty, type: :model do
         new_faculty = FactoryBot.create :faculty
         Faculty.__elasticsearch__.refresh_index!
         new_faculty.update(status: 0)
-        sleep 2
         expect(Faculty.search(new_faculty.first_name).records.length).to eq 0
       end      
       

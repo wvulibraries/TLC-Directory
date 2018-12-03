@@ -25,12 +25,6 @@ FactoryBot.define do
     #   wvu_username { 'johntest' }
     #   role { 1 }
     # end    
-    # 
-    # factory :faculty_faker do
-    #   status { rand(0..1) }
-    #   role { rand(0..2) }
-    #   visible { rand > 0.5 }
-    # end    
         
     factory :disabled_faculty do
       status { 'disabled' }
