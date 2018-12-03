@@ -27,7 +27,7 @@ module Searchable
 
     # delete
     after_commit on: [:destroy] do
-      __elasticsearch__.delete_document
+      __elasticsearch__.delete_document if status == 'enabled'
     end
   end
 end

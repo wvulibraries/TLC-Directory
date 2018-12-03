@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_27_195002) do
+ActiveRecord::Schema.define(version: 2018_11_27_193754) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "addressable_type"
@@ -68,8 +68,7 @@ ActiveRecord::Schema.define(version: 2018_11_27_195002) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "faculty", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "id", default: 0, null: false
+  create_table "faculty", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "preferred_name"
     t.string "prefix"
     t.string "last_name"
@@ -81,13 +80,13 @@ ActiveRecord::Schema.define(version: 2018_11_27_195002) do
     t.integer "role"
     t.integer "status"
     t.boolean "visible", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "title"
     t.text "biography"
     t.string "research_interests"
     t.string "image"
     t.string "resume"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "phones", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|

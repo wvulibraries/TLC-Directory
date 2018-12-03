@@ -86,14 +86,16 @@ RSpec.describe Faculty, type: :model do
       
       it 'a new disabled record should not be indexed' do
         new_faculty = FactoryBot.create :disabled_faculty
+        
         Faculty.__elasticsearch__.refresh_index!
         expect(Faculty.search(new_faculty.first_name).records.length).to eq 0        
       end  
       
       it 'should remove faculty after the update because of the status' do
         new_faculty = FactoryBot.create :faculty
-        Faculty.__elasticsearch__.refresh_index!
         new_faculty.update(status: 0)
+        
+        Faculty.__elasticsearch__.refresh_index!        
         expect(Faculty.search(new_faculty.first_name).records.length).to eq 0
       end      
       
@@ -114,9 +116,6 @@ RSpec.describe Faculty, type: :model do
       end
 
       it 'should delete the index after destroy' do
-        # faculty = FactoryBot.create :faculty
-        # Faculty.__elasticsearch__.refresh_index!
-                
         # verify that the employee exists before
         expect(Faculty.search(faculty.first_name).records.length).to eq(1)
         faculty.destroy
