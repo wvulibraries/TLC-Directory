@@ -74,46 +74,49 @@ RSpec.describe Faculty, type: :model do
       
       it 'a new record should be indexed' do
         new_faculty = FactoryBot.create :faculty
-        Faculty.__elasticsearch__.refresh_index!
-        expect(Faculty.search(new_faculty.first_name).records.length).to be >= 1
+        Faculty.__elasticsearch__.refresh_index!      
+        expect(Faculty.search(new_faculty.first_name).records.length).to eq 1                  
       end    
       
       it 'a new disabled record should not be indexed' do
         new_faculty = FactoryBot.create :disabled_faculty
         Faculty.__elasticsearch__.refresh_index!
-        expect(Faculty.search(new_faculty.first_name).records.length).to eq 0  
+        expect(Faculty.search(new_faculty.first_name).records.length).to eq 0        
       end  
       
-      # it 'updated disabled faculty to enabled' do
-      #   new_faculty = FactoryBot.create :disabled_faculty
-      #   Faculty.__elasticsearch__.refresh_index!
-      #   expect(Faculty.search(new_faculty.first_name).records.length).to eq 0  
-      #   new_faculty.update(status: 'enabled')      
-      #   Faculty.__elasticsearch__.refresh_index!
-      #   sleep 2
-      #   expect(Faculty.search(new_faculty.first_name).records.length).to eq 1                             
-      # end    
-    
       it 'should remove faculty after the update because of the status' do
+        new_faculty = FactoryBot.create :faculty
         Faculty.__elasticsearch__.refresh_index!
-        faculty.update(status: 'disabled')
-        sleep 2 # let the callbacks work
-        expect(Faculty.search(faculty.first_name).records.length).to eq 0
-      end    
+        new_faculty.update(status: 0)
+        sleep 2
+        expect(Faculty.search(new_faculty.first_name).records.length).to eq 0
+      end      
       
       it 'should keep faculty in index after the update because of status' do
-        Faculty.__elasticsearch__.refresh_index!
-        faculty.update(status: 'enabled')
-        sleep 2 # let the callbacks work
-        expect(Faculty.search(faculty.first_name).records.length).to eq 1
-      end    
+        # create an instance of your model
+        new_faculty = FactoryBot.create :faculty
       
+        # refresh the index 
+        Faculty.__elasticsearch__.refresh_index!
+        expect(Faculty.search(new_faculty.first_name).records.length).to eq(1)      
+      
+        # update your model
+        new_faculty.update(status: 1)
+      
+        # refresh the index 
+        Faculty.__elasticsearch__.refresh_index!
+        expect(Faculty.search(new_faculty.first_name).records.length).to eq(1)
+      end
+
       it 'should delete the index after destroy' do
-        # verify that the faculty exists before
+        # faculty = FactoryBot.create :faculty
+        # Faculty.__elasticsearch__.refresh_index!
+                
+        # verify that the employee exists before
         expect(Faculty.search(faculty.first_name).records.length).to eq(1)
         faculty.destroy
         expect(Faculty.search(faculty.first_name).records.length).to eq(0)
-      end
+      end    
     
     end
   end
