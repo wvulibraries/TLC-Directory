@@ -32,7 +32,7 @@ RSpec.describe User, type: :model do
   end
 
   context 'testing enums' do
-    it { should define_enum_for(:status).with(%i[disabled enabled]) }
+    it { should define_enum_for(:status).with(%i[enabled disabled]) }
     it { should define_enum_for(:role).with(%i[user editor admin]) }
   end
 
@@ -64,23 +64,23 @@ RSpec.describe User, type: :model do
 
   context '.admin?' do
     it 'should true user is an admin because user is an admin and enabled' do
-      user.role = 2
-      user.status = 1
+      user.role = 'admin'
+      user.status = 'enabled'
       expect(user.role).to eq 'admin'
       expect(user.admin?).to eq true
     end
 
     it 'should return false user is not an admin' do
-      user.role = 0
-      user.status = 1
+      user.role = 'user'
+      user.status = 'enabled'
       expect(user.role).to eq 'user'
       expect(user.status).to eq 'enabled'
       expect(user.admin?).to eq false
     end
 
     it 'should return false because the user is not active' do
-      user.role = 1
-      user.status = 0
+      user.role = 'user'
+      user.status = 'disabled'
       expect(user.admin?).to eq false
     end
 
@@ -97,12 +97,12 @@ RSpec.describe User, type: :model do
 
   context '.status?' do
     it 'should return true user is enabled' do
-      user.status = 1
+      user.status = 'enabled'
       expect(user.status?).to eq true
     end
 
     it 'should return false user is not an admin' do
-      user.status = 0
+      user.status = 'disabled'
       expect(user.status?).to eq false
     end
 
@@ -115,25 +115,25 @@ RSpec.describe User, type: :model do
   context '.visible?' do
     it 'should return true user is visible' do
       user.visible = true
-      user.status = 1
+      user.status = 'enabled'
       expect(user.visible?).to eq true
     end
 
     it 'should return false user is not visible' do
       user.visible = false
-      user.status = 1      
+      user.status = 'enabled'      
       expect(user.visible?).to eq false
     end
     
     it 'should return true user is enabled' do
       user.visible = true
-      user.status = 1      
+      user.status = 'enabled'     
       expect(user.visible?).to eq true
     end    
     
     it 'should return false user is disabled' do
       user.visible = true
-      user.status = 0      
+      user.status = 'disabled'      
       expect(user.visible?).to eq false
     end    
 

@@ -15,7 +15,7 @@ class User < ApplicationRecord
   validates :visible, inclusion: { in: [true, false] }
 
   # enums
-  enum status: %i[disabled enabled]
+  enum status: %i[enabled disabled]
   enum role: %i[user editor admin]
 
   after_initialize do

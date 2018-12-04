@@ -4,7 +4,7 @@ class DirectoryController < ApplicationController
   def index
     if params[:search].nil?
       @faculty_profiles = Faculty.includes(:phones, :addresses)
-                                 .where(visible: true, status: 1)
+                                 .where(visible: true, status: 'enabled')
                                  .order(:last_name, :first_name)
     else
       clean_term = params[:search].gsub(%r{\{|\}|\[|\]|\\|\/|\^|\~|\:|\!|\"|\'}, '')
@@ -19,7 +19,7 @@ class DirectoryController < ApplicationController
 
   def show
     @faculty = Faculty.includes(:phones, :addresses)
-                      .where(visible: true, status: 1)
+                      .where(visible: true, status: 'enabled')
                       .first
   end
 end

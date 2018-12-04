@@ -30,5 +30,3 @@ College.create(name: 'Statler College of Engineering and Mineral Resources', sta
 College.create(name: 'School of Pharmacy', status: :enabled)
 College.create(name: 'College of Business & Economics', status: :enabled)
 College.create(name: 'College of Law', status: :enabled)
-
-

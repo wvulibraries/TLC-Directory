@@ -93,7 +93,7 @@ RSpec.describe Faculty, type: :model do
       
       it 'should remove faculty after the update because of the status' do
         new_faculty = FactoryBot.create :faculty
-        new_faculty.update(status: 0)
+        new_faculty.update(status: 'disabled')
         
         Faculty.__elasticsearch__.refresh_index!        
         expect(Faculty.search(new_faculty.first_name).records.length).to eq 0
@@ -108,7 +108,7 @@ RSpec.describe Faculty, type: :model do
         expect(Faculty.search(new_faculty.first_name).records.length).to eq(1)      
       
         # update your model
-        new_faculty.update(status: 1)
+        new_faculty.update(status: 'enabled')
       
         # refresh the index 
         Faculty.__elasticsearch__.refresh_index!

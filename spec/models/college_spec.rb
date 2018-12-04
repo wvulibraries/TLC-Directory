@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe College, type: :model do
   let(:college) { FactoryBot.create :college }
+  let(:enabled_college) { FactoryBot.create :enabled_college }
+  let(:disabled_college) { FactoryBot.create :disabled_college }
 
   context 'validations' do
     it { should validate_presence_of(:name) }
@@ -38,52 +40,52 @@ RSpec.describe College, type: :model do
   end
 
   describe 'conditional elasticsearch indexing' do
-    before do
-      college # instantiate
-      College.import(force: true, refresh: true)
-    end
     context 'conditional indexes' do
+      
+      before do
+        College.import(force: true, refresh: true)
+      end
+      
       it 'a new record should be indexed' do
-        new_college = FactoryBot.create :college
-        College.__elasticsearch__.refresh_index!
-        sleep 2        
-        expect(College.search(new_college.name).records.length).to be >= 1
+        enabled_college
+        College.__elasticsearch__.refresh_index!     
+        expect(College.search(enabled_college.name).records.length).to eq 1
       end
       
       it 'a new disabled record should not be indexed' do
-        new_college = FactoryBot.create :disabled_college
-        College.__elasticsearch__.refresh_index!
-        sleep 2 # let the callbacks work       
-        expect(College.search(new_college.name).records.length).to eq 0  
+        disabled_college
+        College.__elasticsearch__.refresh_index!     
+        expect(College.search(disabled_college.name).records.length).to eq 0  
       end         
       
-      # it 'updated disabled college to enabled' do
-      #   new_college = FactoryBot.create :disabled_college
-      #   College.__elasticsearch__.refresh_index!
-      #   sleep 2        
-      #   expect(College.search(new_college.name).records.length).to eq 0     
-      # 
-      #   new_college.update(status: 'enabled')
-      #   College.__elasticsearch__.refresh_index!
-      #   sleep 2
-      #   expect(College.search(new_college.name).records.length).to eq 1     
-      # end    
-
+      it 'updated disabled college to enabled' do
+        disabled_college
+        College.__elasticsearch__.refresh_index!
+        expect(College.search(disabled_college.name).records.length).to eq 0     
+      
+        disabled_college.update(status: 'enabled')
+        College.__elasticsearch__.refresh_index!
+        expect(College.search(disabled_college.name).records.length).to eq 1   
+      end    
+      
       it 'should remove college after the update because of the status' do
+        college # instantiate college        
         college.update(status: 'disabled')        
         College.__elasticsearch__.refresh_index!
-        sleep 2 # let the callbacks work
         expect(College.search(college.name).records.length).to eq 0
       end
-
+      
       it 'should keep college in index after the update because of status' do
+        college # instantiate college        
         college.update(status: 'enabled')        
         College.__elasticsearch__.refresh_index!
-        sleep 2 # let the callbacks work
         expect(College.search(college.name).records.length).to eq 1
       end
-
+      
       it 'should delete the index after destroy' do
+        college # instantiate college  
+        College.__elasticsearch__.refresh_index!
+                     
         # verify that the college exists before
         expect(College.search(college.name).records.length).to eq 1
         college.destroy
