@@ -26,6 +26,19 @@ Rails.application.routes.draw do
   get '/colleges/:id',
       to: 'colleges#details',
       as: 'college_details'
+
+  # departments
+  get 'departments',
+      to: 'department#list',
+      as: 'department_list'
+
+  get 'departments/:id',
+      to: 'department#details',
+      as: 'department_details'
+
+  get 'departments/:id/employees',
+      to: 'department#employees',
+      as: 'department_employees'    
       
   # faculties
   get 'faculties',
@@ -36,7 +49,6 @@ Rails.application.routes.draw do
       to: 'faculties#profile',
       as: 'faculties_profile'
   
-
   # admin
   get '/admin', to: 'admin#index'
 
@@ -45,7 +57,7 @@ Rails.application.routes.draw do
   # resources generates all routes for crud of libraries, departments, users, etc.
 
   scope '/admin' do
-    resources :colleges, :users, :faculties, module: 'admin'
+    resources :colleges, :departments, :faculties, :users,  module: 'admin'
   end
 
   get '/directory', to: 'directory#index'
@@ -67,7 +79,8 @@ Rails.application.routes.draw do
   # admin namespaces for crud tasks
   namespace :admin do
     resources :colleges,
-              :users,
-              :faculties
+              :departments,
+              :faculties,
+              :users
   end
 end

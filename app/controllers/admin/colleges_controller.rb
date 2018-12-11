@@ -2,6 +2,7 @@
 # @author Tracy A. McCormick
 # Sets data for views, sets redirects, sets errors
 class Admin::CollegesController < AdminController
+  
   # before_actions
   before_action :set_college, only: %i[show edit update destroy]
 

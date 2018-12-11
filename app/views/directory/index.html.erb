@@ -3,13 +3,13 @@
   <div class="refine-side-search">
     <!-- Directory Search -->
     <%= form_tag(directory_path, :method => "get", id: "search-form") do %>
-        <%= select_tag(:categories, options_for_select([['All Categories', 1], ['Name', 2], ['Department', 3]]))%>
+        <%= select_tag(:categories, options_for_select([['All Categories', 1], ['Name', 2], ['College', 3], ['Department', 4]]))%>
         <%= text_field_tag :search, params[:search], placeholder: "Search the Directory ..." %>
         <button type="submit"><span class="fa fa-search"></span></button>
     <% end %>      
   </div>
   
-  <h2>Refine Your Search:</h2>
+  <h4>Refine Your Search:</h4>
 </div>
 
 <div class="col-main">

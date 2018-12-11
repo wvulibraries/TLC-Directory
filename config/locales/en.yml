@@ -45,6 +45,10 @@ en:
     success: "Success! New College was created!"
     deleted: "College Removed! The college was removed, for temporary removal you should change the college status."
     edited: "Success! College was edited."
+  department:
+    success: "Success! New Department was created!"
+    deleted: "Department Removed! The department was removed, for temporary removal you should change the department status."
+    edited: "Success! We have edited the department!"  
   faculty:
     success: "Success! Faculty profile was created!"
     deleted: "Faculty Removed! The faculty profile was removed, for temporary removal you should change the faculty status."

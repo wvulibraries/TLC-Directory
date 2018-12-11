@@ -1,0 +1,30 @@
+<%= form_for [:admin, department], html: { multipart: true } do |f| %>
+  <% if department.errors.any? %>
+    <div id="error_explanation">
+      <h3><%= pluralize(department.errors.count, "Error") %> </h3> 
+      <p> The following prohibited this department from being saved: </p>
+      <ul>
+      <% department.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name, class: 'required' %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field half last">
+   <%= f.label :status, 'Department Status', class:'required' %>
+    <div class="select-style">
+        <%= f.select :status, options_for_select(Department.statuses.keys.to_a, selected: f.object.status), include_blank: "Select a Status" %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= link_to 'Cancel', admin_departments_path, class: 'cancel-button' %>
+    <%= f.submit 'Submit', class: 'submit-button' %>
+  </div>
+<% end %>
