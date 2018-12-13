@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.feature "Admin::Faculty", type: :feature do
   # vars for existing 
-  # let(:building) { FactoryBot.create(:building) }
-  # let(:department) { FactoryBot.create(:department_seed, building: building) }
+  let(:college) { FactoryBot.create(:college) }
+  let(:department) { FactoryBot.create(:department) }
   let(:faculty_existing) { FactoryBot.create(:faculty) }
   # vars for creating 
   # let(:address) { FactoryBot.attributes_for(:address) }
@@ -11,8 +11,8 @@ RSpec.feature "Admin::Faculty", type: :feature do
   let(:faculty) { FactoryBot.attributes_for(:faculty) }
 
   before(:each) do
-    # building
-    # department
+    college
+    department
     faculty_existing
   end
 
@@ -29,11 +29,8 @@ RSpec.feature "Admin::Faculty", type: :feature do
     fill_in 'Last name', with: faculty[:last_name]
     select('I', from: 'Suffix')
     fill_in 'Wvu username', with: faculty[:wvu_username]
-    # fill_in 'College', with: faculty[:college]
-    # fill_in 'Department', with: faculty[:department]
     fill_in 'Email', with: faculty[:email]
     fill_in 'Title', with: faculty[:title]
-    # fill_in 'University classification', with: faculty[:university_classification]
     fill_in 'Biography', with: faculty[:biography]
     fill_in 'Research interests', with: faculty[:research_interests]    
     select('user', from: 'User Role')
@@ -50,11 +47,8 @@ RSpec.feature "Admin::Faculty", type: :feature do
     fill_in 'Last name', with: faculty[:last_name]
     select('I', from: 'Suffix')
     fill_in 'Wvu username', with: ''
-    # fill_in 'College', with: faculty[:college]
-    # fill_in 'Department', with: faculty[:department]    
     fill_in 'Email', with: faculty[:email]
     fill_in 'Title', with: faculty[:title]
-    # fill_in 'University classification', with: faculty[:university_classification]
     fill_in 'Biography', with: faculty[:biography]
     fill_in 'Research interests', with: faculty[:research_interests]
     select('user', from: 'User Role')

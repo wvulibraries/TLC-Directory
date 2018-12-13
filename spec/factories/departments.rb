@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :department do
-    sequence(:name) { Faker::Company.industry }
+    sequence(:name) { |n| "#{Faker::Company.industry} #{n}" }
     status { 'enabled' }
-    
+
     factory :disabled_department do
       status { 'disabled' }
     end

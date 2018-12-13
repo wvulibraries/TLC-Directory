@@ -90,14 +90,14 @@ class Admin::FacultiesController < ApplicationController
                   :status,
                   :role,
                   :visible,
-                  # :college, 
-                  # :department, 
                   :research_interests,
                   addresses_attributes: %i[id street_address_1 street_address_2 city state zip_code _destroy],
                   awards_attributes: %i[id starting_year ending_year description _destroy],
                   phones_attributes: %i[id number number_types _destroy],
                   publications_attributes: %i[id description _destroy],
-                  websites_attributes: %i[id url _destroy])
+                  websites_attributes: %i[id url _destroy],
+                  college_ids: [], 
+                  department_ids: []                   
+                )
   end
-
 end

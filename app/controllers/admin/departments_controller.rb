@@ -2,6 +2,8 @@
 # @author David J. Davis
 # Sets data for views, sets redirects, sets errors
 class Admin::DepartmentsController < AdminController
+    # tell rails which view layout to use with this controller
+  layout 'admin'
 
   # before_actions
   before_action :set_department, only: %i[show edit update destroy]

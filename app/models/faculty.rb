@@ -23,8 +23,11 @@ class Faculty < User
             length: { maximum: 500 }
             
   # associations
-  has_one :college, as: :collegeable
-  has_one :department, as: :departmentable
+  has_many :collegeable, dependent: :nullify
+  has_many :colleges, through: :collegeable
+
+  has_many :departmentable, dependent: :nullify
+  has_many :departments, through: :departmentable
   
   has_many :addresses, as: :addressable, dependent: :destroy
   has_many :awards, as: :awardable, dependent: :destroy
@@ -35,6 +38,8 @@ class Faculty < User
   # form logic
   accepts_nested_attributes_for :addresses, allow_destroy: true
   accepts_nested_attributes_for :awards, allow_destroy: true  
+  accepts_nested_attributes_for :colleges
+  accepts_nested_attributes_for :departments
   accepts_nested_attributes_for :phones, allow_destroy: true
   accepts_nested_attributes_for :publications, allow_destroy: true
   accepts_nested_attributes_for :websites, allow_destroy: true

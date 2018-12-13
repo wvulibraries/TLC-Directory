@@ -7,9 +7,9 @@ FactoryBot.define do
     suffix { Faker::Name.suffix }
     email { "#{Faker::Internet.user_name(7..36)}@mail.wvu.edu" }
     wvu_username { Faker::Internet.user_name(7..36) }    
-    role :user
-    status :disabled
-    visible false
+    role { :user }
+    status { :disabled }
+    visible { false }
 
     factory :user_faker do
       status { rand(0..1) }

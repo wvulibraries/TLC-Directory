@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe College, type: :model do
   let(:college) { FactoryBot.create :college }
-  let(:enabled_college) { FactoryBot.create :enabled_college }
+  let(:enabled_college) { FactoryBot.create :college }
   let(:disabled_college) { FactoryBot.create :disabled_college }
 
   context 'validations' do

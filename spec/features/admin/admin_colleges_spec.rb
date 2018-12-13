@@ -25,6 +25,13 @@ RSpec.feature 'Admin::Colleges', type: :feature do
     expect(page).to have_content('Name is too short (minimum is 4 characters)')
   end
 
+    scenario 'user clicks the cancel button goes back to the colleges list' do
+    visit '/admin/colleges/new'
+    click_link 'Cancel'
+    expect(current_path).to  eq('/admin/colleges')
+    expect(page).to have_content('Manage Colleges')
+  end
+
   scenario 'updates an existing college' do
     visit "/admin/colleges/#{college.id}/edit"
     fill_in 'Name', with: 'Changing the Name'

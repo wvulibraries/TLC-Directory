@@ -22,7 +22,7 @@ RSpec.feature 'Admin::Departments', type: :feature do
 
   scenario 'errors on creating a new department' do
     visit '/admin/departments/new'
-    fill_in 'Name', with: 'tes' # must be 4 chars
+    fill_in 'Name', with: 'tes' # must be 5 chars
     select('enabled', from: 'Department Status')     
     click_button 'Submit'
     expect(page).to have_content('Name is too short (minimum is 5 characters)')
@@ -42,9 +42,9 @@ RSpec.feature 'Admin::Departments', type: :feature do
     expect(page).to have_content('Success! We have edited the department!')
   end
 
-  scenario 'errors on edit' do
+  scenario 'errors on editing a department' do
     visit "/admin/departments/#{department.id}/edit"
-    fill_in 'Name', with: 'tes' # must be 4 chars
+    fill_in 'Name', with: 'tes' # must be 5 chars
     click_button 'Submit'
     expect(page).to have_content('The following prohibited this department from being saved:')
     expect(page).to have_content('Name is too short (minimum is 5 characters)')

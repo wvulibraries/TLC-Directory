@@ -11,7 +11,7 @@ class DirectoryController < ApplicationController
       @search_term = Sanitize.fragment clean_term
       @faculty_profiles = Elasticsearch::Model.search(
         @search_term,
-        [Faculty],
+        [College, Department, Faculty],
         size: 1000
       ).results
     end  
@@ -19,7 +19,8 @@ class DirectoryController < ApplicationController
 
   def show
     @faculty = Faculty.includes(:phones, :addresses)
-                      .where(visible: true, status: 'enabled')
-                      .first
+                        .where(id: params[:id], status: 'enabled')
+                        .order(:last_name, :first_name)
+                        .first   
   end
 end

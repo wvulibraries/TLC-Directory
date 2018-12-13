@@ -1,0 +1,13 @@
+<%= content_for :title, "Library Departments" %>
+<h2> Departments </h2>
+
+<% @departments.each do |dept| %>
+  <div class="display-list department-card">
+    <h3 id="department-name"> <%= dept.name %> </h3>
+    
+    <div class="buttons"> 
+      <a href="/directory/departments/<%= dept.id %>/faculties" class="button" aria-labelledby="department-name"> Department Faculties </a>
+      <a href="/directory/departments/<%= dept.id %>/" class="button" aria-labelledby="department-name"> Department Details </a>
+    </div>
+  </div>
+<% end %>

@@ -14,40 +14,15 @@ Rails.application.routes.draw do
       to: 'application#logout', 
       as: 'logout'
 
-  # colleges
-  get '/colleges',
-      to: 'colleges#list',
-      as: 'college_list'
 
-  get '/colleges/:id/faculties',
-      to: 'colleges#faculties',
-      as: 'building_faculties'
-
-  get '/colleges/:id',
-      to: 'colleges#details',
-      as: 'college_details'
-
-  # departments
-  get 'departments',
-      to: 'department#list',
-      as: 'department_list'
-
-  get 'departments/:id',
-      to: 'department#details',
-      as: 'department_details'
-
-  get 'departments/:id/employees',
-      to: 'department#employees',
-      as: 'department_employees'    
-      
   # faculties
-  get 'faculties',
-      to: 'faculties#list',
-      as: 'faculties_list'
+#   get 'faculties',
+#       to: 'faculties#list',
+#       as: 'faculties_list'
 
-  get '/faculty/:id',
-      to: 'faculties#profile',
-      as: 'faculties_profile'
+#   get '/faculty/:id',
+#       to: 'faculties#profile',
+#       as: 'faculties_profile'
   
   # admin
   get '/admin', to: 'admin#index'
@@ -60,22 +35,6 @@ Rails.application.routes.draw do
     resources :colleges, :departments, :faculties, :users,  module: 'admin'
   end
 
-  get '/directory', to: 'directory#index'
-  #resources :directory, only: %i[index show]
-  
-  get 'directory',
-      to: 'directory#list',
-      as: 'directory_list'
-
-  get '/directory/:id', 
-      to: 'directory#show', 
-      as: 'directory_show'
-      
-  # search
-  get '/search',
-      to: 'search#index',
-      as: 'search_index'
-
   # admin namespaces for crud tasks
   namespace :admin do
     resources :colleges,
@@ -83,4 +42,57 @@ Rails.application.routes.draw do
               :faculties,
               :users
   end
+
+  get '/directory', to: 'directory#index'
+
+#   scope '/directory' do
+#     resources :colleges, :departments, module: 'directory'
+#   end
+
+#   namespace :directory  do
+#     #resources :colleges, only: [:index]
+#     resources :departments, only: [:list]
+#   end
+
+  get 'directory',
+      to: 'directory#list',
+      as: 'directory_list'
+
+  get '/directory/faculties/:id', 
+      to: 'directory#show', 
+      as: 'directory_show'
+
+  # colleges
+  get '/directory/colleges',
+      to: 'directory/colleges#list',
+      as: 'directory/colleges_list'
+
+  get '/directory/colleges/:id/faculties',
+      to: 'directory/colleges#faculties',
+      as: 'directory/colleges_faculties'
+
+  get '/directory/colleges/:id',
+      to: 'directory/colleges#details',
+      as: 'directory/college_details'
+
+  # departments
+  get '/directory/departments',
+      to: 'directory/departments#list',
+      as: 'directory/departments_list'
+
+  get '/directory/departments/:id',
+      to: 'directory/departments#details',
+      as: 'directory/department_details'
+
+  get '/directory/departments/:id/faculties',
+      to: 'directory/departments#faculties',
+      as: 'directory/departments_faculties'    
+        
+      
+  # search
+#   get '/search',
+#       to: 'search#index',
+#       as: 'search_index'
+
+
 end

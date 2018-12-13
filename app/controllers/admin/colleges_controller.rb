@@ -2,6 +2,8 @@
 # @author Tracy A. McCormick
 # Sets data for views, sets redirects, sets errors
 class Admin::CollegesController < AdminController
+    # tell rails which view layout to use with this controller
+  layout 'admin'
   
   # before_actions
   before_action :set_college, only: %i[show edit update destroy]
