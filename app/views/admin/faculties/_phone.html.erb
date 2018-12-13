@@ -4,7 +4,7 @@
   <div class="field one-third">
     <%= form.label :number_types, class: 'required' %>
     <div class="select-style">
-      <%= form.select :number_types, options_for_select(Phone.number_types.keys, selected: form.object.number_types), include_blank: "Select a Type" %>
+      <%= form.select :number_types, options_for_select(Phone.number_types.keys, selected: form.object.number_types) %>
     </div>
   </div>
 
