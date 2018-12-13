@@ -38,8 +38,6 @@ class Faculty < User
   # form logic
   accepts_nested_attributes_for :addresses, allow_destroy: true
   accepts_nested_attributes_for :awards, allow_destroy: true  
-  accepts_nested_attributes_for :colleges
-  accepts_nested_attributes_for :departments
   accepts_nested_attributes_for :phones, allow_destroy: true
   accepts_nested_attributes_for :publications, allow_destroy: true
   accepts_nested_attributes_for :websites, allow_destroy: true

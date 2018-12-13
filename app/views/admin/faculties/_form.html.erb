@@ -99,18 +99,13 @@
       </div>
 
       <div class="field">
-        <%= f.label :colleges, 'Colleges' %>
-        <%= f.collection_select :college_ids, College.all, :id, :name %>
-      </div>
-
-      <div class="field">
         <%= f.label :college_ids, 'Colleges' %>
-        <%= f.collection_select :college_ids, College.all, :id, :name %>
+        <%= f.collection_select :college_ids, College.all.order(:name), :id, :name, { include_hidden: false }%>
       </div>
 
       <div class="field">
         <%= f.label :department_ids, 'Departments' %>
-        <%= f.collection_select :department_ids, Department.all, :id, :name %>
+        <%= f.collection_select :department_ids, Department.all.order(:name), :id, :name, { include_hidden: false }%>
       </div>
 
 

@@ -10,16 +10,15 @@
 User.create(wvu_username: 'djdavis', first_name: 'David', last_name: 'Davis', email: 'djdavis@mail.wvu.edu', role: :admin, status: 'enabled', visible: false)
 User.create(wvu_username: 'tam0013', first_name: 'Tracy', last_name: 'McCormick', email: 'tam0013@mail.wvu.edu', role: :admin, status: 'enabled', visible: false)
 
-# Department.create(name: 'Department of English')
-# Department.create(name: 'WVU Libraries')
-# Department.create(name: 'Department of Communication Studies')
-# Department.create(name: 'School of Social Work')
-# Department.create(name: 'Department of Learning Sciences and Human Development')
-# Department.create(name: 'Department of Pharmaceutical Sciences')
-# Department.create(name: 'Department of Physics and Astronomy')
-# Department.create(name: 'C. Eugene Bennett Department of Chemistry')
-# Department.create(name: 'Department of Biology')
-# 
+Department.create(name: 'Department of English', status: :enabled)
+Department.create(name: 'WVU Libraries', status: :enabled)
+Department.create(name: 'Department of Communication Studies', status: :enabled)
+Department.create(name: 'School of Social Work', status: :enabled)
+Department.create(name: 'Department of Learning Sciences and Human Development', status: :enabled)
+Department.create(name: 'Department of Pharmaceutical Sciences', status: :enabled)
+Department.create(name: 'Department of Physics and Astronomy', status: :enabled)
+Department.create(name: 'C. Eugene Bennett Department of Chemistry', status: :enabled)
+Department.create(name: 'Department of Biology', status: :enabled)
 
 # Create College's
 College.create(name: 'Eberly College of Arts and Sciences', status: :enabled)
