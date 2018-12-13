@@ -1,6 +1,6 @@
 class Directory::DepartmentsController < ApplicationController
   def list
-    @departments = Department.order(:name)
+    @departments = Department.visible.order(:name)
   end
 
   def faculties

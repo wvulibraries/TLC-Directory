@@ -1,6 +1,6 @@
 class Directory::CollegesController < ApplicationController
   def list
-    @colleges = College.order(:name)
+    @colleges = College.visible.order(:name)
   end
 
   def faculties
