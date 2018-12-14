@@ -3,7 +3,6 @@
   <div class="refine-side-search">
     <!-- Directory Search -->
     <%= form_tag(directory_path, :method => "get", id: "search-form") do %>
-        <%= select_tag(:categories, options_for_select([['All Categories', 1], ['Name', 2], ['College', 3], ['Department', 4]]))%>
         <%= text_field_tag :search, params[:search], placeholder: "Search the Directory ..." %>
         <button type="submit"><span class="fa fa-search"></span></button>
     <% end %>      
@@ -18,7 +17,7 @@
 </div>
 
 <div class="col-main">
-  <% @faculty_profiles.each do |faculty_profile| %>
+  <% @results.each do |faculty_profile| %>
     <div class="profile-box">
          <!-- Show Profile picture with caption-->     
          <div class="col-container">         
@@ -61,8 +60,5 @@
          </div>
     </div>        
   <% end %>
-</div>    
-
-
-
+</div>
 
