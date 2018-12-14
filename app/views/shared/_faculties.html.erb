@@ -19,16 +19,16 @@
       </div>
 
       <div class="college">
-        <% unless faculty.college_ids.nil? %>
-          <div class="micro"> <%= College.find_by_id!(faculty.college_ids).name %> </div>
+        <% faculty.colleges.each do |college| %>
+          <div class="micro"> <%= college.name %> </div>
         <% end %>
       </div>  
       
       <div class="department">
-        <% unless faculty.department_ids.nil? %>
-          <div class="micro"> <%= Department.find_by_id!(faculty.department_ids).name %> </div>
+        <% faculty.departments.each do |dept| %>
+          <div class="micro"> <%= dept.name %> </div>
         <% end %>
-      </div>      
+      </div>          
 
       <h4> Contact </h4>
       <div class="contact">

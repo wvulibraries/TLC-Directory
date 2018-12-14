@@ -23,10 +23,10 @@ class Faculty < User
             length: { maximum: 500 }
             
   # associations
-  has_one   :collegeable, dependent: :nullify
+  has_many   :collegeable, dependent: :nullify
   has_many  :colleges, through: :collegeable
 
-  has_one  :departmentable, dependent: :nullify
+  has_many  :departmentable, dependent: :nullify
   has_many  :departments, through: :departmentable
   
   has_many :addresses, as: :addressable, dependent: :destroy
