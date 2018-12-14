@@ -15,6 +15,18 @@
         <% unless @faculty.title.nil? || @faculty.title.empty? %>
           <div class="micro"> <%= @faculty.title %> </div>
         <% end %>
+      </div>    
+      
+      <div class="college">
+        <% @faculty.colleges.each do |college| %>
+          <div class="micro"> <%= college.name %> </div>
+        <% end %>
+      </div>  
+      
+      <div class="department">
+        <% @faculty.departments.each do |dept| %>
+          <div class="micro"> <%= dept.name %> </div>
+        <% end %>
       </div>     
 
       <% if @faculty.biography.present? %>
@@ -51,7 +63,7 @@
         <% if hasawards?(@faculty) %>
           <div name='awards'>
             <h4>Award(s):</h4>
-            <% @faculty_profile.awards.each do |award| %>
+            <% @faculty.awards.each do |award| %>
                 <%= award.description %>
             <% end %>
           </div>

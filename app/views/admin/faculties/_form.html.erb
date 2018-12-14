@@ -108,7 +108,6 @@
         <%= f.collection_select :department_ids, Department.all.visible.order(:name), :id, :name, { include_hidden: false, include_blank: true }%>
       </div>
 
-
       <div class="field full">
         <%= f.label :research_interests %>
         <%= f.text_area :research_interests, placeholder: "Scholarly multimedia, digital publishing, editorial pedagogy, multimodal composition, academic literacies, professionalization" %>

@@ -12,11 +12,23 @@
         </a>
       </div>
 
-      <div class="job-title">
+      <div class="title">
         <% unless faculty.title.nil? || faculty.title.empty? %>
           <div class="micro"> <%= faculty.title %> </div>
         <% end %>
       </div>
+
+      <div class="college">
+        <% unless faculty.college_ids.nil? %>
+          <div class="micro"> <%= College.find_by_id!(faculty.college_ids).name %> </div>
+        <% end %>
+      </div>  
+      
+      <div class="department">
+        <% unless faculty.department_ids.nil? %>
+          <div class="micro"> <%= Department.find_by_id!(faculty.department_ids).name %> </div>
+        <% end %>
+      </div>      
 
       <h4> Contact </h4>
       <div class="contact">
