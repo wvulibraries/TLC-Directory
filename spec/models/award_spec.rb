@@ -26,18 +26,18 @@ RSpec.describe Award, type: :model do
     expect(award.ending_year).to equal(Time.current.year)
   end
 
-  it 'Valid Human Readable when all fields are valid' do
-    expect(award.human_readable).to eql(award.starting_year.to_s + ' - ' + award.ending_year.to_s + ' ' + award.description)
+  it 'Valid Display Award when all fields are valid' do
+    expect(award.display_award).to eql(award.starting_year.to_s + ' - ' + award.ending_year.to_s + ' ' + award.description)
   end
 
-  it 'Without a ending year we should only have starting year and description on human readable' do
+  it 'Without a ending year we should only have starting year and description on display award' do
     award.ending_year = nil
-    expect(award.human_readable).to eql(award.starting_year.to_s + ' ' + award.description)
+    expect(award.display_award).to eql(award.starting_year.to_s + ' ' + award.description)
   end
 
-  it 'Without a Starting Year human readable should equal description' do
+  it 'Without a Starting Year display award should equal description' do
     award.starting_year = nil
-    expect(award.human_readable).to eql(award.description)
+    expect(award.display_award).to eql(award.description)
   end
 
 end
