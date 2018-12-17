@@ -15,12 +15,10 @@ class Faculty < User
             length: { within: 2..70 }
             
   validates :biography, 
-            presence: true,
-            length: { maximum: 500 }  
+            presence: true 
                   
   validates :research_interests, 
-            presence: true,
-            length: { maximum: 500 }
+            presence: true
             
   # associations
   has_many   :collegeable, dependent: :nullify

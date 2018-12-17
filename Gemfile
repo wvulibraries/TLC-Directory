@@ -65,7 +65,7 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 3.1'
 
   # For test data generation
-  gem "factory_bot_rails", "~> 4.0"
+  gem 'factory_bot_rails', '~> 4.0'
   
   gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -5,10 +5,14 @@
     <%= form_tag(directory_path, :method => "get", id: "search-form") do %>
         <%= text_field_tag :search, params[:search], placeholder: "Search the Directory ..." %>
         <button type="submit"><span class="fa fa-search"></span></button>
+
+        <h4>Refine Your Search:</h4>
+
+        <%= select_tag "college", options_from_collection_for_select(College.all.visible.order(:name), "id", "name"), prompt: "College"%>
+        <%= select_tag "department", options_from_collection_for_select(Department.all.visible.order(:name), "id", "name"), prompt: "Department"%>
+        
     <% end %>      
   </div>
-  
-  <h4>Refine Your Search:</h4>
 
   <a class="" href="/directory/colleges">Colleges</a>
   <a class="" href="/directory/departments">Departments</a> 
@@ -35,21 +39,27 @@
                <h2><%= link_to faculty_profile.display_name, directory_show_path(faculty_profile.id) %></h2>
 
                <% unless faculty_profile.title.nil? || faculty_profile.title.empty? %>
-                <div class="micro"> <%= faculty_profile.title %> </div>
+                <div class="micro"> 
+                  <strong><%= faculty_profile.title %></strong>
+                </div>
                <% end %>
 
                <% faculty_profile.colleges.each do |college| %>
-                <div class="micro"> <%= college.name %> </div>
+                <div class="micro"> 
+                  <strong><%= college.name %></strong>
+                </div>
                <% end %>
 
                <% faculty_profile.departments.each do |dept| %>
-                <div class="micro"> <%= dept.name %> </div>
+                <div class="micro"> 
+                  <strong><%= dept.name %></strong>
+                </div>
                <% end %>
      
                <% unless faculty_profile.research_interests.nil? || faculty_profile.research_interests.empty? %>
                 <br>
                 <div class="micro"> 
-                  Research Interests:
+                  <strong>Research Interests:</strong>
                 </div>
                 <div class="micro2"> 
                   <%= faculty_profile.research_interests %> 

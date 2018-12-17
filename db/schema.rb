@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_27_193754) do
+ActiveRecord::Schema.define(version: 2018_12_17_143053) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "addressable_type"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2018_11_27_193754) do
     t.bigint "awardable_id"
     t.integer "starting_year"
     t.integer "ending_year"
-    t.string "description"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["awardable_type", "awardable_id"], name: "index_awards_on_awardable_type_and_awardable_id"
@@ -102,7 +102,7 @@ ActiveRecord::Schema.define(version: 2018_11_27_193754) do
   create_table "publications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "publishable_type"
     t.bigint "publishable_id"
-    t.string "description"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["publishable_type", "publishable_id"], name: "index_publications_on_publishable_type_and_publishable_id"
