@@ -35,16 +35,6 @@ describe ImageUploader do
       expect(uploader).to be_format('jpeg')
     end
   end
-  
-  # context 'filename' do
-  #   it 'expects the file to be named with the current timestamp' do
-  #     # get length of the filename to compare
-  #     # we see that sometimes the unix time can
-  #     # make the test fail it if takes too long
-  #     # to run so checking the length is more accurate
-  #     expect(uploader.filename.length).to eq("test_1_#{Time.now.to_i}.jpg".length)
-  #   end
-  # end
 
   context 'coverage report' do
     it 'checks cache folder' do
