@@ -14,7 +14,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # store directory
   def store_dir
-    "#{Rails.root}/public/uploads/#{Rails.env}/#{model.class.to_s.underscore}/"
+    "#{Rails.root}/public/uploads/#{Rails.env}/#{model.class.to_s.underscore}/#{model.id}/"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -22,9 +22,9 @@ class ImageUploader < CarrierWave::Uploader::Base
     '/default/flying-wv.jpg'
   end
   
-  def filename
-     @name ||= "#{file.basename}_#{Time.now.to_i}.#{file.extension}" if original_filename.present?
-  end
+  # def filename
+  #    @name ||= "#{file.basename}_#{Time.now.to_i}.#{file.extension}" if original_filename.present?
+  # end
 
   # Process files as they are uploaded:
   process resize_to_fit: [800, 800]
