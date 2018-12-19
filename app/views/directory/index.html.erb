@@ -44,15 +44,15 @@
                 </div>
                <% end %>
 
-               <% faculty_profile.colleges.each do |college| %>
+               <% if faculty_profile.college.present? %>
                 <div class="micro"> 
-                  <strong><%= college.name %></strong>
+                  <strong><%= faculty_profile.college.name %></strong>
                 </div>
                <% end %>
 
-               <% faculty_profile.departments.each do |dept| %>
+               <% if faculty_profile.department.present? %>
                 <div class="micro"> 
-                  <strong><%= dept.name %></strong>
+                  <strong><%= faculty_profile.department.name %></strong>
                 </div>
                <% end %>
      

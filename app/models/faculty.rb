@@ -19,14 +19,11 @@ class Faculty < User
                   
   validates :research_interests, 
             presence: true
+
+  belongs_to :college
+  belongs_to :department
             
   # associations
-  has_many   :collegeable, dependent: :nullify
-  has_many  :colleges, through: :collegeable
-
-  has_many  :departmentable, dependent: :nullify
-  has_many  :departments, through: :departmentable
-  
   has_many :addresses, as: :addressable, dependent: :destroy
   has_many :awards, as: :awardable, dependent: :destroy
   has_many :phones, as: :phoneable, dependent: :destroy
@@ -39,8 +36,8 @@ class Faculty < User
   accepts_nested_attributes_for :phones, allow_destroy: true
   accepts_nested_attributes_for :publications, allow_destroy: true
   accepts_nested_attributes_for :websites, allow_destroy: true
-  accepts_nested_attributes_for :colleges
-  accepts_nested_attributes_for :departments
+  accepts_nested_attributes_for :college
+  accepts_nested_attributes_for :department
 
   # concerns
   include Imageable
@@ -73,8 +70,8 @@ class Faculty < User
       methods: [:display_name],
       only: [:id, :first_name, :last_name, :preferred_name, :display_name, :title, :research_interests, :biography, :image],
       include: {
-        colleges: { only: %i[name] },
-        departments: { only: %i[name] },
+        college: { only: %i[id name] },
+        department: { only: %i[id name] },
       }
     )
   end

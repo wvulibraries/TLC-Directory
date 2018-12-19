@@ -6,7 +6,7 @@ RSpec.feature "Directory", type: :feature do
   let(:department) { FactoryBot.create(:department) }
 
   # show a faculty that is set to visible and enabled
-  let(:faculty) { FactoryBot.create(:faculty, colleges: [college], departments: [department]) }
+  let(:faculty) { FactoryBot.create(:faculty, college: college, department: department) }
 
 
   before(:each) do

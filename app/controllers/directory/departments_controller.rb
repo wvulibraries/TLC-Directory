@@ -5,10 +5,10 @@ class Directory::DepartmentsController < ApplicationController
 
   def faculties
     @department = Department.find(params[:id])
-    @faculties = Faculty.includes(:departments, :departmentable, :addresses, :phones)
+    @faculties = Faculty.includes(:department, :addresses, :phones)
                          .where(
                            status: 'enabled',
-                           departments: { id: params[:id] }
+                           department: params[:id]
                          )
                          .order(:last_name, :first_name)
   end

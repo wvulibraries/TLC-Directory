@@ -17,6 +17,8 @@ class CreateFacultyTable < ActiveRecord::Migration[5.2]
       t.string :research_interests
       t.string :image
       t.string :resume
+      t.belongs_to :college, index: true
+      t.belongs_to :department, index: true
           
       t.timestamps
     end

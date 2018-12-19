@@ -5,10 +5,10 @@ class Directory::CollegesController < ApplicationController
 
   def faculties
     @college = College.find(params[:id])
-    @faculties = Faculty.includes(:colleges, :collegeable, :addresses, :phones)
+    @faculties = Faculty.includes(:college, :addresses, :phones)
                          .where(
                            status: 'enabled',
-                           colleges: { id: params[:id] }
+                           college: params[:id]
                          )
                          .order(:last_name, :first_name)
   end

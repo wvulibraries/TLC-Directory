@@ -18,17 +18,17 @@
         <% end %>
       </div>
 
-      <div class="college">
-        <% faculty.colleges.each do |college| %>
-          <div class="micro"> <%= college.name %> </div>
-        <% end %>
-      </div>  
-      
-      <div class="department">
-        <% faculty.departments.each do |dept| %>
-          <div class="micro"> <%= dept.name %> </div>
-        <% end %>
-      </div>          
+      <% if faculty.college.present? %>
+        <div class="college">
+          <div class="micro"> <%= faculty.college.name %> </div>
+        </div>  
+      <% end %>
+   
+      <% if faculty.department.present? %>
+        <div class="department">
+          <div class="micro"> <%= faculty.department.name %> </div>
+        </div>          
+       <% end %>
 
       <h4> Contact </h4>
       <div class="contact">

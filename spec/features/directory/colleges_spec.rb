@@ -4,7 +4,7 @@ RSpec.feature "Directory::Colleges", type: :feature do
   # vars for existing
   let(:college) { FactoryBot.create(:college) }
   let(:college_two) { FactoryBot.create(:college) }
-  let(:faculty) { FactoryBot.create(:faculty, colleges: [college]) }
+  let(:faculty) { FactoryBot.create(:faculty, college: college) }
 
   before(:each) do
     # instantiate creations so that each page can see them

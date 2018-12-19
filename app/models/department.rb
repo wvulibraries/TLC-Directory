@@ -8,8 +8,7 @@ class Department < ApplicationRecord
             length: { within: 5..50 },
             uniqueness: { case_sensitive: false }          
 
-  has_many :departmentable, dependent: :nullify
-  has_many :faculties, -> { order(:last_name, :first_name) }, through: :departmentable
+  has_many :faculties, -> { order(:last_name, :first_name) }
 
   # active status
   enum status: %i[enabled disabled]
@@ -28,7 +27,7 @@ class Department < ApplicationRecord
   # @description
   # indexed json, this will help with search rankings.
   #
-  # rake environment elasticsearch:import:model CLASS='Building' SCOPE="visible" FORCE=y
+  # rake environment elasticsearch:import:model CLASS='Department' SCOPE="visible" FORCE=y
     def as_indexed_json(_options)
       as_json(
         only: [:id, :name],

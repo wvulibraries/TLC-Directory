@@ -8,8 +8,7 @@ class College < ApplicationRecord
             length: { within: 4..50 },
             uniqueness: { case_sensitive: false }
             
-  has_many :collegeable, dependent: :nullify
-  has_many :faculties, -> { order(:last_name, :first_name) }, through: :collegeable
+  has_many :faculties, -> { order(:last_name, :first_name) }
 
   # active status
   enum status: %i[enabled disabled]

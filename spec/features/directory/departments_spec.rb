@@ -4,7 +4,7 @@ RSpec.feature "Directory::Departments", type: :feature do
   # vars for existing
   let(:department) { FactoryBot.create(:department) }
   let(:department_two) { FactoryBot.create(:department) }
-  let(:faculty) { FactoryBot.create(:faculty, departments: [department]) }
+  let(:faculty) { FactoryBot.create(:faculty, department: department) }
 
   before(:each) do
     # instantiate creations so that each page can see them

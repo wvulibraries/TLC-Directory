@@ -12,6 +12,8 @@ RSpec.describe Faculty, type: :model do
   end
 
   context 'associations' do
+    it { should belong_to(:college) }   
+    it { should belong_to(:department) }
     it { should have_many(:awards) }
     it { should have_many(:addresses) }
     it { should have_many(:phones) }

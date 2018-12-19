@@ -36,29 +36,11 @@ ActiveRecord::Schema.define(version: 2018_12_17_143053) do
     t.index ["awardable_type", "awardable_id"], name: "index_awards_on_awardable_type_and_awardable_id"
   end
 
-  create_table "collegeables", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "faculty_id"
-    t.bigint "college_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["college_id"], name: "index_collegeables_on_college_id"
-    t.index ["faculty_id"], name: "index_collegeables_on_faculty_id"
-  end
-
   create_table "colleges", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "departmentables", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "faculty_id"
-    t.bigint "department_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["department_id"], name: "index_departmentables_on_department_id"
-    t.index ["faculty_id"], name: "index_departmentables_on_faculty_id"
   end
 
   create_table "departments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -85,8 +67,12 @@ ActiveRecord::Schema.define(version: 2018_12_17_143053) do
     t.string "research_interests"
     t.string "image"
     t.string "resume"
+    t.bigint "college_id"
+    t.bigint "department_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["college_id"], name: "index_faculty_on_college_id"
+    t.index ["department_id"], name: "index_faculty_on_department_id"
   end
 
   create_table "phones", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
