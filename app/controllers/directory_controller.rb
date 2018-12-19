@@ -9,11 +9,13 @@ class DirectoryController < ApplicationController
     else
       clean_term = params[:search].gsub(%r{\{|\}|\[|\]|\\|\/|\^|\~|\:|\!|\"|\'}, '')
       @search_term = Sanitize.fragment clean_term
-      @results = Elasticsearch::Model.search(
-        @search_term,
-        [Faculty],
-        size: 1000
-      ).results
+      @results = Faculty.search( 
+        "query": {
+          "query_string": {
+            "query": @search_term
+          }
+        },
+        size: 1000);
     end  
   end
 

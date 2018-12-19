@@ -6,7 +6,7 @@
 <% @faculties.each do |faculty| %>
   <div class="crud-list faculty-list">
     <div class="image">
-      <img src="<%= faculty.image %>" alt="faculty profile image"/>
+      <img src="<%= faculty.image.small.url %>" alt="faculty profile image"/>
     </div>
 
     <div class="text-attributes">

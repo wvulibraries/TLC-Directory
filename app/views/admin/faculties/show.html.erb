@@ -1,13 +1,13 @@
 <h2> Showing <%= @faculty.display_name %> </h2>
 
 <div class="show-action">
+
     <div class="image">
       <img src="<%= @faculty.image.small %>" alt="faculty profile image"/>
     </div>
         
     <div class="text-attributes">
       <ul>
-
         <li>
           <strong> First Name: </strong>
           <%= @faculty.first_name %>
@@ -43,50 +43,77 @@
           <%= @faculty.status.capitalize %>
         </li>
 
-        <li>
-          <strong> Address(es): </strong>
-          <ul>
-          <% @faculty.addresses.each do |address| %>
-            <li> <%= address.human_readable %> </li>
-          <% end %>
-          </ul>
-        </li>
+        <% if hasaddresses?(@faculty) %>
+          <li>
+            <strong> Address(es): </strong>
+            <ul>
+            <% @faculty.addresses.each do |address| %>
+              <li> <%= address.human_readable %> </li>
+            <% end %>
+            </ul>
+          </li>
+        <% end %>
 
         <li>
           <strong> Award(s): </strong>
           <ul>
           <% @faculty.awards.each do |award| %>
-            <li> <%= award.description %> </li>
+            <li> <%= award.display_award %> </li>
           <% end %>
           </ul>
         </li>
 
-        <li>
-          <strong> Phone(s): </strong>
-          <ul>
-          <% @faculty.phones.each do |phone| %>
-            <li>
-              <a href="tel:<%= phone.number %>">
-                <%= phone.number %>
-              </a>
-            </li>
-          <% end %>
-          </ul>
-        </li>
+        <% if hasphones?(@faculty) %>
+          <li>
+            <strong> Phone(s): </strong>
+            <ul>
+            <% @faculty.phones.each do |phone| %>
+              <li>
+                <a href="tel:<%= phone.number %>">
+                  <%= phone.number %>
+                </a>
+              </li>
+            <% end %>
+            </ul>
+          </li>
+        <% end %>        
 
-        <li>
-          <strong> Website(s): </strong>
-          <ul>
-          <% @faculty.websites.each do |website| %>
-            <li>
-              <a href="<%= website.url %>">
-                <%= website.url %>
-              </a>
-            </li>
-          <% end %>
-          </ul>
-        </li>
+        <% if haspublications?(@faculty) %>
+          <li>
+            <strong> Publication(s): </strong>
+            <ul>
+            <% @faculty.publications.each do |pub| %>
+              <li> <%= pub.description %> </li>
+            <% end %>
+            </ul>
+          </li>
+        <% end %>        
+        
+        <% if @faculty.research_interests.present? %>
+          <li>
+            <strong> Research Interest(s): </strong>
+            <ul>
+              <% @faculty.research_interests.split(/\s*,\s*/).each do |interest| %>
+                <li> <%= interest %> </li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
 
+        <% if haswebsites?(@faculty) %>
+          <li>
+            <strong> Website(s): </strong>
+            <ul>
+            <% @faculty.websites.each do |website| %>
+              <li>
+                <a href="<%= website.url %>">
+                  <%= website.url %>
+                </a>
+              </li>
+            <% end %>
+            </ul>
+          </li>
+        <% end %>
       </ul>
       
       <div class="micro-text">

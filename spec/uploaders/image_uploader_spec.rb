@@ -54,5 +54,4 @@ describe ImageUploader do
     end
   end
   
-  
 end

@@ -47,7 +47,7 @@
   <fieldset> 
     <legend> File Uploads </legend>
     <div class="field full">
-      <%= image_tag faculty.image_url, { class:'preview-image' } if faculty.image? %>
+      <%= image_tag faculty.image.small.url, { class:'preview-image' } if faculty.image? %>
       <%= f.label :image, 'Profile Image' %>
       <%= f.file_field :image %>
       <% if faculty.image? %>
