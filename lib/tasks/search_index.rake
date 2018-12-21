@@ -4,7 +4,7 @@ namespace :search_index do
   task all: :environment do
     Rake::Task['search_index:faculty'].invoke
     Rake::Task['search_index:college'].invoke
-    # Rake::Task['search_index:department'].invoke
+    Rake::Task['search_index:department'].invoke
   end
 
   desc 'Properly Index Faculties'

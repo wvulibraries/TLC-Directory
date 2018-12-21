@@ -54,14 +54,16 @@
           </li>
         <% end %>
 
-        <li>
-          <strong> Award(s): </strong>
-          <ul>
-          <% @faculty.awards.each do |award| %>
-            <li> <%= award.display_award %> </li>
-          <% end %>
-          </ul>
-        </li>
+        <% if hasawards?(@faculty) %>
+          <li>
+            <strong> Award(s): </strong>
+            <ul>
+            <% @faculty.awards.each do |award| %>
+              <li> <%= award.display_award %> </li>
+            <% end %>
+            </ul>
+          </li>
+        <% end %>      
 
         <% if hasphones?(@faculty) %>
           <li>

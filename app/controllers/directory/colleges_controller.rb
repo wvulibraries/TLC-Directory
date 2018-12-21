@@ -1,11 +1,12 @@
 class Directory::CollegesController < ApplicationController
   def list
-    @colleges = College.visible.order(:name)
+    @colleges = College.visible
+                       .order(:name)
   end
 
   def faculties
     @college = College.find(params[:id])
-    @faculties = Faculty.includes(:college, :addresses, :phones)
+    @faculties = Faculty.includes(:college, :department, :addresses, :phones)
                          .where(
                            status: 'enabled',
                            college: params[:id]

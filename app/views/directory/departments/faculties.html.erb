@@ -1,6 +1,4 @@
 <%= content_for :title, "#{@department.name.titlecase} Faculty" %>
 <h2> <%= @department.name.titlecase %> Faculties </h2>
-<%= content_for :title, "#{@department.name.titlecase} Faculty" %>
-<h2> <%= @department.name.titlecase %> Faculties </h2>
 
 <%= render 'shared/faculties', faculties: @faculties %>
