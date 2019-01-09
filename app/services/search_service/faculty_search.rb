@@ -1,14 +1,14 @@
 module SearchService
     class FacultySearch
 
-        def initialize(params)
-            @college_id = params[:college] if params[:college].present?
-            @dept_id = params[:department] if params[:department].present?  
-            @search_term = Sanitize.fragment params[:search].gsub(%r{\{|\}|\[|\]|\\|\/|\^|\~|\:|\!|\"|\'}, '') if params[:search].present? 
+        def initialize(params = {})
+            @college_id = params[:college]
+            @dept_id = params[:department]
+            @search_term = params[:search]
         end
 
         def perform
-            if @search_term.present? || @college_id.present? || @dept_it.present?
+            if @search_term.present? || @college_id.present? || @dept_it.present?  
                 build_query 
                 execute_query
             else
@@ -28,8 +28,9 @@ module SearchService
                 }}
 
                 if @search_term.present?
+                    sanitized_search = Sanitize.fragment @search_term.gsub(%r{\{|\}|\[|\]|\\|\/|\^|\~|\:|\!|\"|\'}, '')
                     query_array = []
-                    query_array.push( {:query_string => {:query => @search_term}} )
+                    query_array.push( {:query_string => {:query => sanitized_search}} )
                     @search_definition[:query][:bool][:should] = query_array
                 end
 
@@ -37,7 +38,7 @@ module SearchService
                 term_array = []
                 term_array.push( {:term => {:college_id => @college_id}} ) if @college_id.present?
                 term_array.push( {:term => {:department_id => @dept_id}} ) if @dept_id.present?
-                @search_definition[:query][:bool][:filter] = term_array
+                @search_definition[:query][:bool][:filter] = term_array if term_array.count > 0
             end
 
             def full_query
