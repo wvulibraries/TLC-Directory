@@ -31,7 +31,36 @@ RSpec.feature "Directory", type: :feature do
     expect(page).to have_content(faculty.display_name)
     # expect(page).to have_content(department.name)
     # expect(page).to have_content(college.name)
-  end  
+  end 
+
+  scenario 'directory refine search college' do
+    visit "/directory"
+    fill_in 'search', with: faculty.first_name
+    select college.name, :from => "college"  
+    click_button "submit"    
+    expect(page).to have_content(faculty.display_name)
+    expect(page).to have_content(college.name)
+  end 
+
+  scenario 'directory refine search department' do
+    visit "/directory"
+    fill_in 'search', with: faculty.first_name
+    select department.name, :from => "department"   
+    click_button "submit"    
+    expect(page).to have_content(faculty.display_name)
+    expect(page).to have_content(department.name)
+  end 
+
+  scenario 'directory refine search college & department' do
+    visit "/directory"
+    fill_in 'search', with: faculty.first_name
+    select college.name, :from => "college"
+    select department.name, :from => "department"   
+    click_button "submit"    
+    expect(page).to have_content(faculty.display_name)
+    expect(page).to have_content(department.name)
+    expect(page).to have_content(college.name)
+  end 
 
   scenario 'directory profile' do
     visit "/directory/faculties/#{faculty.id}"
