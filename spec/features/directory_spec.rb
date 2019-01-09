@@ -17,14 +17,14 @@ RSpec.feature "Directory", type: :feature do
     Faculty.__elasticsearch__.refresh_index!
   end
 
-  scenario 'directory list index' do
+  scenario 'list index' do
     visit '/directory'
     expect(page).to have_content(faculty.display_name)
     # expect(page).to have_content(department.name)
     # expect(page).to have_content(college.name)
   end
   
-  scenario 'directory search' do
+  scenario 'search' do
     visit "/"
     fill_in 'search', with: faculty.first_name
     find('[name=submit]').click    
@@ -33,7 +33,7 @@ RSpec.feature "Directory", type: :feature do
     # expect(page).to have_content(college.name)
   end 
 
-  scenario 'directory refine search college' do
+  scenario 'refine search college' do
     visit "/directory"
     fill_in 'search', with: faculty.first_name
     select college.name, :from => "college"  
@@ -42,7 +42,15 @@ RSpec.feature "Directory", type: :feature do
     expect(page).to have_content(college.name)
   end 
 
-  scenario 'directory refine search department' do
+   scenario 'filter only college' do
+    visit "/directory"
+    select college.name, :from => "college"  
+    click_button "submit"    
+    expect(page).to have_content(faculty.display_name)
+    expect(page).to have_content(college.name)
+  end  
+
+  scenario 'refine search department' do
     visit "/directory"
     fill_in 'search', with: faculty.first_name
     select department.name, :from => "department"   
@@ -51,7 +59,15 @@ RSpec.feature "Directory", type: :feature do
     expect(page).to have_content(department.name)
   end 
 
-  scenario 'directory refine search college & department' do
+  scenario 'filter only deparment' do
+    visit "/directory"
+    select department.name, :from => "department"   
+    click_button "submit"    
+    expect(page).to have_content(faculty.display_name)
+    expect(page).to have_content(department.name)
+  end 
+
+  scenario 'refine search college & department' do
     visit "/directory"
     fill_in 'search', with: faculty.first_name
     select college.name, :from => "college"
@@ -62,7 +78,7 @@ RSpec.feature "Directory", type: :feature do
     expect(page).to have_content(college.name)
   end 
 
-  scenario 'directory profile' do
+  scenario 'show profile' do
     visit "/directory/faculties/#{faculty.id}"
     expect(page).to have_content(faculty.display_name)
     expect(page).to have_content(faculty.title)
