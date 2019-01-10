@@ -8,21 +8,31 @@ module SearchService
         end
 
         def perform
-            if @search_term.present? || @college_id.present? || @dept_id.present?
-                build_query 
-                execute_query
-            else
-                full_query   
-            end   
+            return full_query unless passed_params?
+
+            build_query 
+            execute_query
         end
 
         private
+            def passed_params?
+                @search_term.present? || @college_id.present? || @dept_id.present?
+            end
+
             def setup_full_query
                 @search_definition = {}
                 @search_definition[:query]  = { bool:{
                     should:{
                     },
                     filter:{
+                    }
+                }}
+            end
+
+            def setup_basic_query
+                @search_definition = {}
+                @search_definition[:query]  = { bool:{
+                    should:{
                     }
                 }}
             end
@@ -47,14 +57,21 @@ module SearchService
                 term_array.push( {:term => {:college_id => @college_id}} ) if @college_id.present?
                 term_array.push( {:term => {:department_id => @dept_id}} ) if @dept_id.present?
 
-                if @search_term.present?
-                   setup_full_query
-                   @search_definition[:query][:bool][:should] = query_array
-                   @search_definition[:query][:bool][:filter] = term_array
-                elsif @college_id.present? || @dept_id.present?
-                  setup_filtered_query
-                  @search_definition[:query][:bool][:filter] = term_array
-                end
+                setup_full_query
+                @search_definition[:query][:bool][:should] = query_array
+                @search_definition[:query][:bool][:filter] = term_array 
+                
+                # if query_array.present? && term_array.present?
+                #    setup_full_query
+                #    @search_definition[:query][:bool][:should] = query_array
+                #    @search_definition[:query][:bool][:filter] = term_array
+                # elsif query_array.present?
+                #    setup_basic_query
+                #    @search_definition[:query][:bool][:should] = query_array
+                # elsif term_array.present?
+                #   setup_filtered_query
+                #   @search_definition[:query][:bool][:filter] = term_array
+                # end
             end
 
             def full_query
