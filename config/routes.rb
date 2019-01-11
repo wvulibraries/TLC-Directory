@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'searchstats/searchterms'
+  end
   # home index
   root to: 'application#home'
   get '/home', 

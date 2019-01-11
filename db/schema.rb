@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_17_143053) do
+ActiveRecord::Schema.define(version: 2019_01_10_205818) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "addressable_type"
@@ -92,6 +92,14 @@ ActiveRecord::Schema.define(version: 2018_12_17_143053) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["publishable_type", "publishable_id"], name: "index_publications_on_publishable_type_and_publishable_id"
+  end
+
+  create_table "search_terms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "term"
+    t.string "yearmonth"
+    t.integer "term_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|

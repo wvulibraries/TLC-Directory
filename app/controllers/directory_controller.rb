@@ -5,6 +5,7 @@ class DirectoryController < ApplicationController
   include SearchService
 
   def index
+    SearchService::SearchStats.new(params)
     @results = SearchService::FacultySearch.new(params).perform
   end
 

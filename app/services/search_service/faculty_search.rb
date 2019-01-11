@@ -27,12 +27,13 @@ module SearchService
                     }
                 }
 
+                #  sanitize and add search string to query
                 if @search_term.present?
                     sanitized_search = Sanitize.fragment @search_term.gsub(%r{\{|\}|\[|\]|\\|\/|\^|\~|\:|\!|\"|\'}, '')
                     @search_definition[:query][:bool][:should] = [{:query_string => {:query => sanitized_search}}]
                 end   
                              
-                # add optional filters
+                # add filters to query
                 term_array = []
                 term_array.push( {:term => {:college_id => @college_id}} ) if @college_id.present?
                 term_array.push( {:term => {:department_id => @dept_id}} ) if @dept_id.present?

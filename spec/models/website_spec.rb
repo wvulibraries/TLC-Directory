@@ -19,6 +19,5 @@ RSpec.describe Website, type: :model do
       expect(website).to_not be_valid
     end
   end
-  
-  
+   
 end
