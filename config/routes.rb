@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   # resources generates all routes for crud of libraries, departments, users, etc.
 
   scope '/admin' do
-    resources :colleges, :departments, :faculties, :users,  module: 'admin'
+    resources :colleges, :departments, :faculties, :users, :searchstats, module: 'admin'
   end
 
   # admin namespaces for crud tasks

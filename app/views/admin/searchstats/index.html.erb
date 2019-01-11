@@ -1,0 +1,21 @@
+<% @searchterms.each do |item| %>
+    <div class="">
+      <ul>
+        <li> 
+          <strong> Term: </strong> 
+          <%= item.term %>
+        </li>
+
+        <li>
+          <strong> Count: </strong>
+          <%= item.term_count %>
+        </li>
+
+        <li>
+          <strong> Year Month: </strong>
+          <%= item.yearmonth %>
+        </li>
+
+      </ul>
+    </div>
+<% end %>
