@@ -9,4 +9,12 @@ class SearchTerm < ApplicationRecord
     self.increment!(:term_count)
   end
 
+  def human_readable_month
+    Date::MONTHNAMES[yearmonth.last(2).to_i] 
+  end
+
+  def human_readable_year
+    yearmonth.first(4)
+  end
+
 end

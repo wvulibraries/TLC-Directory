@@ -1,6 +1,16 @@
+<div class="top-action">
+  <h2> Search Terms </h2>
+</div>
+
 <% @searchterms.each do |item| %>
     <div class="">
       <ul>
+        <li>
+          <strong> Time Range: </strong> 
+          <%= item.human_readable_month %>
+          <%= item.human_readable_year %>
+        </li>
+
         <li> 
           <strong> Term: </strong> 
           <%= item.term %>
@@ -9,11 +19,6 @@
         <li>
           <strong> Count: </strong>
           <%= item.term_count %>
-        </li>
-
-        <li>
-          <strong> Year Month: </strong>
-          <%= item.yearmonth %>
         </li>
 
       </ul>

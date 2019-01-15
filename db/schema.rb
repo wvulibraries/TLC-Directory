@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_10_205818) do
+ActiveRecord::Schema.define(version: 2019_01_15_152525) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "addressable_type"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 2019_01_10_205818) do
     t.bigint "department_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "teaching_interests"
     t.index ["college_id"], name: "index_faculty_on_college_id"
     t.index ["department_id"], name: "index_faculty_on_department_id"
   end

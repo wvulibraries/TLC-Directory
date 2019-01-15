@@ -13,7 +13,8 @@ FactoryBot.define do
     title { Faker::Job.title }
     biography { Faker::Lorem.paragraph(rand(1...5)) }
     research_interests { Faker::Lorem.sentence }
-    
+    teaching_interests { Faker::Lorem.sentence }
+
     # factory :non_admin_cas do
     #   wvu_username { 'johntest' }
     #   role { 0 }

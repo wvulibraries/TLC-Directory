@@ -102,6 +102,17 @@
           </li>
         <% end %>
 
+        <% if @faculty.teaching_interests.present? %>
+          <li>
+            <strong> Teaching Interest(s): </strong>
+            <ul>
+              <% @faculty.teaching_interests.split(/\s*,\s*/).each do |interest| %>
+                <li> <%= interest %> </li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>        
+
         <% if haswebsites?(@faculty) %>
           <li>
             <strong> Website(s): </strong>

@@ -83,6 +83,13 @@
         </div>
       <% end %>
 
+      <% if @faculty.teaching_interests.present? %>
+        <div class="teaching_interests">
+        <h4>Teaching Interests</h4>
+        <p> <%= @faculty.teaching_interests %> </p>
+        </div>
+      <% end %>
+
       <% if @faculty.biography.present? %>
         <div class="biography">
         <h4>Biography</h4>
