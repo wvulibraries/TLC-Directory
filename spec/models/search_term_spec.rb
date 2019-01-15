@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe SearchTerm, type: :model do
-  let(:search_term) { FactoryBot.create :search_term }
 
   context 'validations' do
     it { should validate_presence_of(:term) }

@@ -6,8 +6,6 @@ RSpec.describe Award, type: :model do
   it { should belong_to(:awardable) }
 
   context 'validations' do
-    # it { should validate_length_of(:starting_year).is_equal_to(4) }
-    # it { should validate_length_of(:ending_year).is_equal_to(4) }
     it { should validate_length_of(:description).is_at_most(500) }
   end
 
