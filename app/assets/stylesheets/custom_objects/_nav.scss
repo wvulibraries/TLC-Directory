@@ -1,13 +1,13 @@
 .nav__container {
   background-color: $neutral-black;
-}  
+}
 
-.nav__wrapper { 
+.nav__wrapper {
   @include outer-container();
 }
 
-.nav__main  { 
-    font-size: 10px; 
+.nav__main  {
+    font-size: 0.75em;
 
     ul {
         display: table;
@@ -26,17 +26,17 @@
     a:hover {
        background-color: #ddd;
        color: black;
-    } 
-    
+    }
+  
     /* layout when screen is 720px or above */
-    @include mq($bp-small){ 
-      @include omega(); 
+    @include mq($bp-small){
+      @include omega();
 
       ul {
           display :block;
           list-style-type: none;
           overflow: hidden;
-      }      
+      }
 
       li {
           float: left;
@@ -44,7 +44,7 @@
       }
 
       li:nth-last-child(2) {
-          border-right: none;  
+          border-right: none;
       }
 
       li:last-child {
@@ -52,5 +52,5 @@
           float: right;
       }
 
-    }        
+    }
 }
