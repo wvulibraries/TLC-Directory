@@ -22,6 +22,7 @@
     <!-- Main -->
     <main id="main" class="frontend">
       <div class="wvu-container"> 
+      
         <!-- Flash -->
         <%= render "utilities/alerts" %>
         
@@ -30,10 +31,10 @@
           <%= yield %>
         </div>
       </div>
-    </main>
 
-    <!-- Footers -->
-    <%= render(:partial => 'shared/footer') %>
+      <!-- Footers -->
+      <%= render(:partial => 'shared/footer') %>
+    </main>
 
     <!-- JavaScripts -->
     <%= yield :js %>

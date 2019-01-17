@@ -35,6 +35,9 @@ gem 'font-awesome-sass'
 # searching / indexing for speeds / pagination for elegance
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
+
+# managing cron jobs
+gem 'whenever', require: false
   
 # Test Suite
 # =====================================================================================

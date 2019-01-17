@@ -2,7 +2,7 @@ FROM ruby:2.5
 
 # Install capybara-webkit deps
 RUN apt-get update \
-    && apt-get install -y xvfb git qt5-default libqt5webkit5-dev \
+    && apt-get install -y xvfb git cron qt5-default libqt5webkit5-dev \
                           gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x \
                           imagemagick
 
@@ -28,3 +28,7 @@ RUN \
 WORKDIR /home/tlcdirectory
 ADD . /home/tlcdirectory
 RUN bundle install --jobs=4 --retry=3
+
+ADD ./startup.sh /usr/bin/
+RUN chmod -v +x /usr/bin/startup.sh
+ENTRYPOINT ["/usr/bin/startup.sh"]

@@ -2,25 +2,22 @@
   <h2> Search Terms </h2>
 </div>
 
-<% @searchterms.each do |item| %>
-    <div class="">
-      <ul>
-        <li>
-          <strong> Time Range: </strong> 
-          <%= item.human_readable_month %>
-          <%= item.human_readable_year %>
-        </li>
+<div>
+  <table>
+    <tr>
+      <th>Month</th>
+      <th>Year</th>
+      <th>Search Term</th>
+      <th>Count</th>
+    </tr>
 
-        <li> 
-          <strong> Term: </strong> 
-          <%= item.term %>
-        </li>
-
-        <li>
-          <strong> Count: </strong>
-          <%= item.term_count %>
-        </li>
-
-      </ul>
-    </div>
-<% end %>
+    <% @searchterms.each do |item| %>
+      <tr>
+        <td><%= item.human_readable_year %></td>
+        <td><%= item.human_readable_month %></td>
+        <td><%= item.term %></td>
+        <td><%= item.term_count %></td>
+      </tr>
+    <% end %>
+  </table> 
+</div>
