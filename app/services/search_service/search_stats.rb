@@ -14,7 +14,7 @@ module SearchService
                 if search_item.present?
                     search_item.increase_count
                 else
-                    search_item= SearchTerm.new(term: sanitized_search, yearmonth: current, term_count: 1)
+                    search_item = SearchTerm.new(term: sanitized_search, yearmonth: current)
                     search_item.save
                 end
             end
