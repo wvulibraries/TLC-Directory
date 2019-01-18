@@ -8,7 +8,7 @@ service cron start
 whenever --update-crontab
 
 # remove PID and start the server
-file="/home/hydra/tmp/pids/server.pid"
+file="/home/tlcdirectory/tmp/pids/server.pid"
 if [ -f $file ] ; then
     rm $file
 fi

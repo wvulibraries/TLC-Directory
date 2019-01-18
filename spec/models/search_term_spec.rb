@@ -13,7 +13,6 @@ RSpec.describe SearchTerm, type: :model do
     it { should validate_presence_of(:term_count) }
     it { should validate_numericality_of(:term_count) }
     it { should_not allow_value(0).for(:term_count) }
-
   end
 end
 
