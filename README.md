@@ -2,28 +2,23 @@
 
 [![Build Status](https://travis-ci.org/wvulibraries/TLC-Directory.svg?branch=master)](https://travis-ci.org/wvulibraries/TLC-Directory) [![Maintainability](https://api.codeclimate.com/v1/badges/1eec8b064ca2d1e6a761/maintainability)](https://codeclimate.com/github/wvulibraries/TLC-Directory/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/1eec8b064ca2d1e6a761/test_coverage)](https://codeclimate.com/github/wvulibraries/TLC-Directory/test_coverage)
 
+The TLC directory application will replace the current static pdf that is currently is use.
 
-# README
+## Versions
+- Rails 5.2 
+- Ruby  2.5.1 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Testing and Quality Control 
+The test suite includes rspec, capybara, selnium, simplecov, travisCI, and code climate. To run the tests type the following `xvfb-run bundle exec rspec`.  
 
-Things you may want to cover:
+# Elastics Search 
+Elastic search is responsible for the searching and indexing of the Rails data. Using callbacks the data will be adjusted and indexed everytime an action is made on the dataset.  In the event that you have to reindex again, you may want to use the rake tasks written in the lib folder, not the ones from the default library.  If a model is not enabled it will show up in the search using the default rake tasks associated with the Rails Elastic Search Gems.  
 
-* Ruby version
+## Rake Tasks
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+rake search_index:all                              # Re-index all environments
+rake search_index:college                          # Properly Index Buildings
+rake search_index:department                       # Properly Index Departments
+rake search_index:faculty                          # Properly Index Faculty
+```
