@@ -8,19 +8,19 @@ RSpec.feature "Admin::Searchstats", type: :feature do
       faculty
   end
 
-  scenario 'search twice and verify search term exists and count is 2' do
-    visit "/"
-    fill_in 'search', with: faculty[:last_name]
-    find('[name=submit]').click
+  scenario 'search random number of times and verify that stats matches count' do
+    loop_number = rand(1..10)
+    loop_number.times do
+      visit "/"
+      fill_in 'search', with: faculty.first_name
+      find('[name=submit]').click    
+      expect(page).to have_content(faculty.display_name)
+    end
 
-    visit "/"
-    fill_in 'search', with: faculty[:last_name]
-    find('[name=submit]').click
-
-    visit '/admin/searchstats'
-    expect(page).to have_content('Search Terms')
-    expect(page).to have_content(faculty[:last_name])
-    expect(page).to have_content(1)    
+    #verify that searchstats are correct
+    visit "/admin/searchstats"
+    expect(page).to have_content(faculty.first_name)
+    expect(page).to have_content(loop_number)
   end  
 
 end

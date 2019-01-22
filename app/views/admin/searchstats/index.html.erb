@@ -13,8 +13,8 @@
 
     <% @searchterms.each do |item| %>
       <tr>
-        <td><%= item.human_readable_year %></td>
         <td><%= item.human_readable_month %></td>
+        <td><%= item.human_readable_year %></td>
         <td><%= item.term %></td>
         <td><%= item.term_count %></td>
       </tr>
