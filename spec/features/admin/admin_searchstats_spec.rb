@@ -14,7 +14,6 @@ RSpec.feature "Admin::Searchstats", type: :feature do
       visit "/"
       fill_in 'search', with: faculty.first_name
       find('[name=submit]').click    
-      expect(page).to have_content(faculty.display_name)
     end
 
     #verify that searchstats are correct
