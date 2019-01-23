@@ -4,10 +4,6 @@ class SearchTerm < ApplicationRecord
   validates :yearmonth, presence: true, length: { is: 6 }
   validates :term_count, presence: true, numericality: { other_than: 0 }
 
-  after_initialize do
-    self.term_count = 1
-  end
-
   # custom methods
   def increase_count
     self.increment!(:term_count)
