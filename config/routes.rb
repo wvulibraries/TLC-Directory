@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    get 'searchstats/searchterms'
-  end
+#   namespace :admin do
+#     get 'searchstats/searchterms'
+#   end
   # home index
   root to: 'application#home'
   get '/home', 
@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get '/logout', 
       to: 'application#logout', 
       as: 'logout'
+
 
 
   # faculties

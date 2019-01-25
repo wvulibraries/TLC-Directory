@@ -38,3 +38,7 @@ end
 40.times do
    FactoryBot.create(:faculty, department: dept1, college: college1)
 end
+
+100.times do
+   FactoryBot.create(:searchterm)
+end

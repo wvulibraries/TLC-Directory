@@ -3,20 +3,26 @@
 </div>
 
 <div>
+  <!-- Stats Filter -->
+  <%= form_tag(searchstats_path, :method => "get", id: "filter-stats-by-month") do %>
+      <h4>Refine Your Search:</h4>
+
+      <%= select_month(Date.today) %>
+      <button type="submit" id="submit"><span class="fa fa-search"></span></button>        
+  <% end %>      
+</div>
+
+<div>
   <table>
     <tr>
-      <th>Month</th>
-      <th>Year</th>
       <th>Search Term</th>
       <th>Count</th>
     </tr>
 
     <% @searchterms.each do |item| %>
       <tr>
-        <td><%= item.human_readable_month %></td>
-        <td><%= item.human_readable_year %></td>
-        <td><%= item.term %></td>
-        <td><%= item.term_count %></td>
+        <td><%= item['term'] %></td>
+        <td><%= item['term_count'] %></td>
       </tr>
     <% end %>
   </table> 
