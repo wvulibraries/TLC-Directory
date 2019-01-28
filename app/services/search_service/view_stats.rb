@@ -2,26 +2,18 @@ module SearchService
     class ViewStats
         require 'date'
 
-        #validates_inclusion_of :month_id, in: 1..12
+        attr_reader :error
 
         def initialize(params = {})
-
-            if passed_params?(params)
-                @month_id = params[:date][:month] 
-                format_month
-            end
-
-            #if @month_id && @month_id.match(/^((?!(0))[0-9]{9})$/)
-                
-            # elsif @month_id
-            # raise custom error message if not valid
-
-            #end
+            unless params[:date].nil? || params[:date][:month].nil?
+                @month_id = params[:date][:month]
+                @error = 'Error: Value Passed for Month Is Invalid' unless valid_month?
+            end            
         end
 
         def perform
-            return top_terms unless @month_id.present?
-            view_month
+            return valid_month? ? view_month : top_terms unless error
+            []
         end       
 
         private
@@ -30,31 +22,43 @@ module SearchService
             params[:date] && params[:date][:month]
         end
 
-        # adds 0 to the beginning of the month if it is only 1 character
-        def format_month
-            if @month_id.length == 1
-                @month_id = '0' + @month_id.to_s
-            end
-        end
-
         def view_month
+            # get current year and month
             currentyear = Date.today.strftime("%Y")
             currentmonth = Date.today.strftime("%m")
-            searchyear = if currentmonth <= @month_id then currentyear else currentyear-1 end
+            #searchyear = if currentmonth.to_i >= @month_id .to_i then currentyear else (currentyear.to_i-1).to_s end
+            searchyear = (@month_id.to_i <= currentmonth.to_i) ? currentyear : (currentyear.to_i-1).to_s
+            #searchyear = currentyear
+            #puts .inspect
+
+            # puts currentmonth.inspect
+            # puts @month_id.inspect
+
+            # if currentmonth.to_i >= @month_id.to_i
+            #     puts "Current Year"
+            #     searchyear = currentyear
+            # else
+            #     puts "Previous Year"
+            #     searchyear = (currentyear.to_i-1).to_s
+            # end
+            # puts searchyear.inspect
             SearchTerm.by_year(searchyear).by_month(@month_id).order('term_count DESC').limit(50).map(&:attributes)
         end            
 
         def top_terms
-            term_array = SearchTerm.select(:term).map(&:term).uniq
+            terms = SearchTerm.all.group(:term).sum(:term_count)
             results  = []
-            count = 0
-            term_array.each do |term|
-                count = SearchTerm.where(term: term).sum(:term_count)
-                results << {'term' => term, 'term_count' => count.to_s }
-            end
+            terms.each do |item|
+                 results << { 'term' => item[0], 'term_count' => item[1].to_s } 
+            end           
+
             # sort by decending
             sorted = results.sort_by { |h| h['term_count'] }.reverse
             sorted.take(50) # only return the top 50
+        end
+
+        def valid_month?
+            @month_id.present? && (1..12).include?(@month_id.to_i)
         end
     end
 end

@@ -6,10 +6,9 @@ class Admin::SearchstatsController < ApplicationController
   include SearchService
 
   def index
-    @searchterms = SearchService::ViewStats.new(params).perform
+    stats = SearchService::ViewStats.new(params)
+    @searchterms = stats.perform 
+    flash.now[:error] = stats.error if stats.error 
   end
 
-  def show
-
-  end
 end
