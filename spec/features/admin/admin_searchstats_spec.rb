@@ -20,6 +20,13 @@ RSpec.feature "Admin::Searchstats", type: :feature do
     visit "/admin/searchstats"
     expect(page).to have_content(faculty.first_name)
     expect(page).to have_content(loop_number)
+
+    #test refine your search
+    date = Date.today  
+    find('[id=date_month]').find(:option, date.strftime("%B")).select_option
+    find('[id=submit]').click
+    expect(page).to have_content(faculty.first_name)
+    expect(page).to have_content(loop_number)    
   end  
 
 end

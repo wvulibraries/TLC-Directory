@@ -18,30 +18,11 @@ module SearchService
 
         private
 
-        def passed_params?(params)
-            params[:date] && params[:date][:month]
-        end
-
         def view_month
             # get current year and month
             currentyear = Date.today.strftime("%Y")
             currentmonth = Date.today.strftime("%m")
-            #searchyear = if currentmonth.to_i >= @month_id .to_i then currentyear else (currentyear.to_i-1).to_s end
             searchyear = (@month_id.to_i <= currentmonth.to_i) ? currentyear : (currentyear.to_i-1).to_s
-            #searchyear = currentyear
-            #puts .inspect
-
-            # puts currentmonth.inspect
-            # puts @month_id.inspect
-
-            # if currentmonth.to_i >= @month_id.to_i
-            #     puts "Current Year"
-            #     searchyear = currentyear
-            # else
-            #     puts "Previous Year"
-            #     searchyear = (currentyear.to_i-1).to_s
-            # end
-            # puts searchyear.inspect
             SearchTerm.by_year(searchyear).by_month(@month_id).order('term_count DESC').limit(50).map(&:attributes)
         end            
 
