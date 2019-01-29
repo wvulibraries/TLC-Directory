@@ -31,7 +31,7 @@ RSpec.feature 'Admin::Departments', type: :feature do
   scenario 'user clicks the cancel button goes back to the departments list' do
     visit '/admin/departments/new'
     click_link 'Cancel'
-    expect(current_path).to  eq('/admin/departments')
+    expect(current_path).to eq('/admin/departments')
     expect(page).to have_content('Manage Departments')
   end
 

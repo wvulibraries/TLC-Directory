@@ -54,7 +54,7 @@ RSpec.describe Faculty, type: :model do
       it 'should be indexed' do
         name = faculty.first_name
         Faculty.import(force: true, refresh: true)
-        expect(Faculty.search(name).records.length).to eq(1)
+        expect(Faculty.search(name).records.count).to eq(1)
       end
     end
     
@@ -71,7 +71,7 @@ RSpec.describe Faculty, type: :model do
       it 'a new record should be indexed' do
         new_faculty = FactoryBot.create :faculty
         Faculty.__elasticsearch__.refresh_index!      
-        expect(Faculty.search(new_faculty.first_name).records.length).to eq 1                  
+        expect(Faculty.search(new_faculty.first_name).records.count).to eq 1                  
       end   
       
       it 'create multiple records with same last name' do
@@ -80,14 +80,14 @@ RSpec.describe Faculty, type: :model do
         new_faculty2.update(last_name: new_faculty.last_name)
         
         Faculty.__elasticsearch__.refresh_index!      
-        expect(Faculty.search(new_faculty.last_name).records.length).to eq 2                  
+        expect(Faculty.search(new_faculty.last_name).records.count).to eq 2                  
       end          
       
       it 'a new disabled record should not be indexed' do
         new_faculty = FactoryBot.create :disabled_faculty
         
         Faculty.__elasticsearch__.refresh_index!
-        expect(Faculty.search(new_faculty.first_name).records.length).to eq 0        
+        expect(Faculty.search(new_faculty.first_name).records.count).to eq 0        
       end  
       
       it 'should remove faculty after the update because of the status' do
@@ -95,7 +95,7 @@ RSpec.describe Faculty, type: :model do
         new_faculty.update(status: 'disabled')
         
         Faculty.__elasticsearch__.refresh_index!        
-        expect(Faculty.search(new_faculty.first_name).records.length).to eq 0
+        expect(Faculty.search(new_faculty.first_name).records.count).to eq 0
       end      
       
       it 'should keep faculty in index after the update because of status' do
@@ -104,21 +104,21 @@ RSpec.describe Faculty, type: :model do
       
         # refresh the index 
         Faculty.__elasticsearch__.refresh_index!
-        expect(Faculty.search(new_faculty.first_name).records.length).to eq(1)      
+        expect(Faculty.search(new_faculty.first_name).records.count).to eq(1)      
       
         # update your model
         new_faculty.update(status: 'enabled')
       
         # refresh the index 
         Faculty.__elasticsearch__.refresh_index!
-        expect(Faculty.search(new_faculty.first_name).records.length).to eq(1)
+        expect(Faculty.search(new_faculty.first_name).records.count).to eq(1)
       end
 
       it 'should delete the index after destroy' do
         # verify that the employee exists before
-        expect(Faculty.search(faculty.first_name).records.length).to eq(1)
+        expect(Faculty.search(faculty.first_name).records.count).to eq(1)
         faculty.destroy
-        expect(Faculty.search(faculty.first_name).records.length).to eq(0)
+        expect(Faculty.search(faculty.first_name).records.count).to eq(0)
       end    
     
     end
