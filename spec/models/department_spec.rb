@@ -30,7 +30,7 @@ RSpec.describe Department, type: :model do
         dept # instantiate department
         Department.import(force: true, refresh: true)
         query = dept.name.gsub(%r{\{|\}|\[|\]|\\|\/|\^|\~|\:|\!|\"|\'}, '')
-        expect(Department.search(query).records.length).to eq 1
+        expect(Department.search(query).records.count).to eq 1
       end
     end
   end
@@ -47,7 +47,7 @@ RSpec.describe Department, type: :model do
         sleep 2 # let the callbacks work        
         # clean query usually done in controller
         query = new_dept.name.gsub(%r{\{|\}|\[|\]|\\|\/|\^|\~|\:|\!|\"|\'}, '')
-        expect(Department.search(query).records.length).to eq 1
+        expect(Department.search(query).records.count).to eq 1
       end
       
       it 'a new disabled record should not be indexed' do
@@ -56,7 +56,7 @@ RSpec.describe Department, type: :model do
         sleep 2 # let the callbacks work
         # clean query usually done in controller        
         query = new_dept.name.gsub(%r{\{|\}|\[|\]|\\|\/|\^|\~|\:|\!|\"|\'}, '')
-        expect(Department.search(query).records.length).to eq(0)
+        expect(Department.search(query).records.count).to eq(0)
       end      
       
       # it 'updated disabled department to enabled' do
@@ -79,7 +79,7 @@ RSpec.describe Department, type: :model do
         sleep 2 # let the callbacks work
         # clean query usually done in controller        
         query = dept.name.gsub(%r{\{|\}|\[|\]|\\|\/|\^|\~|\:|\!|\"|\'}, '')
-        expect(Department.search(query).records.length).to eq 0
+        expect(Department.search(query).records.count).to eq 0
       end
 
       it 'should keep department in index after the update because of status' do
@@ -88,16 +88,16 @@ RSpec.describe Department, type: :model do
         sleep 2 # let the callbacks work
         # clean query usually done in controller        
         query = dept.name.gsub(%r{\{|\}|\[|\]|\\|\/|\^|\~|\:|\!|\"|\'}, '')
-        expect(Department.search(query).records.length).to eq 1
+        expect(Department.search(query).records.count).to eq 1
       end
 
       it 'should delete the index after destroy' do
         # clean query usually done in controller        
         query = dept.name.gsub(%r{\{|\}|\[|\]|\\|\/|\^|\~|\:|\!|\"|\'}, '')        
         # verify that the department exists before
-        expect(Department.search(query).records.length).to eq 1
+        expect(Department.search(query).records.count).to eq 1
         dept.destroy
-        expect(Department.search(query).records.length).to eq 0
+        expect(Department.search(query).records.count).to eq 0
       end
     end
   end

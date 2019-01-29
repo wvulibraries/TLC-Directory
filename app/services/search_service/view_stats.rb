@@ -13,7 +13,7 @@ module SearchService
 
         def perform
             return valid_month? ? view_month : top_terms unless error
-            []
+            [] # return empty array since the each statement in view errors if nil is returned
         end       
 
         private
