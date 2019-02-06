@@ -72,6 +72,15 @@ RSpec.feature "Admin::Faculty", type: :feature do
     expect(page).to have_content('First name is too short (minimum is 2 characters)')
   end
 
+  # scenario 'add Address' do
+  #   visit "/admin/faculties/#{faculty_existing.id}/edit"
+  #   click_on 'Add Address'
+  #   fill_in 'City', with: 'Morgantown'
+  #   click_button 'Submit'
+  #   expect(page).to have_content('Success! Faculty profile was edited.')   
+  # end
+
+
   scenario 'deletes an existing faculty' do
     # then visit destroy path
     visit '/admin/faculties'

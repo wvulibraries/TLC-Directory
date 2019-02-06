@@ -9,8 +9,6 @@ whenever --update-crontab
 
 # remove PID and start the server
 file="/home/tlcdirectory/tmp/pids/server.pid"
-if [ -f $file ] ; then
-    rm $file
-fi
+[ -f $file ] && rm $file
 
 bin/rails s -p 3000 -b '0.0.0.0'

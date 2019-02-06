@@ -1,19 +1,18 @@
 require 'rails_helper'
 require 'carrierwave/test/matchers'
 
-describe ResumeUploader do
+describe CSVUploader do
   include CarrierWave::Test::Matchers
 
-  let(:faculty) { double('faculty') }
-  let(:uploader) { ResumeUploader.new(faculty, :resume) }
+  let(:uploader) { CSVUploader.new( :csv ) }
 
   before do
-    ResumeUploader.enable_processing = true
-    File.open("#{Rails.root}/spec/support/files/resume_1.pdf") { |f| uploader.store!(f) }
+    CSVUploader.enable_processing = true
+    File.open("#{Rails.root}/spec/support/files/PCI.csv") { |f| uploader.store!(f) }
   end
 
   after do
-    ResumeUploader.enable_processing = false
+    CSVUploader.enable_processing = false
     uploader.remove!
   end
 
@@ -25,15 +24,15 @@ describe ResumeUploader do
 
   context 'coverage report' do
     it 'checks cache folder' do
-      tmp_path = "#{Rails.root}/public/uploads/test/resume/tmp/"
+      tmp_path = "#{Rails.root}/public/uploads/test/csv/tmp/"
       expect(uploader.cache_dir).to eq(tmp_path)
     end 
     it 'checks upload folder' do
-      up_path = "#{Rails.root}/public/uploads/test/resume/r_spec/mocks/double/"
+      up_path = "#{Rails.root}/public/uploads/test/csv/"
       expect(uploader.store_dir).to eq(up_path)
     end
     it 'checks whitelist types' do
-      files =  %w[pdf]
+      files =  %w[csv]
       expect(uploader.extension_whitelist).to eq(files)
     end
     it 'expects a default file' do
