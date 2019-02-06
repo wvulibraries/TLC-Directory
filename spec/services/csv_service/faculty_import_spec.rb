@@ -23,7 +23,5 @@ RSpec.describe CSVService::FacultyImport do
         expect(faculty_import_valid_filename.import_count).to eql(4)     
     end
 
-
-
   end
 end

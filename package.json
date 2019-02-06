@@ -1,5 +1,7 @@
 {
   "name": "TLC-Directory",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "jquery": "^3.3.1"
+  }
 }
