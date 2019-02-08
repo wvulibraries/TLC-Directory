@@ -7,7 +7,7 @@ class Phone < ApplicationRecord
             presence: true,
             length: { within: 10..30 }
   # enums types
-  enum number_types: %i[phone home fax mobile]
+  enum number_types: %i[phone home fax mobile office department]
 
   # associations
   belongs_to :phoneable, polymorphic: true

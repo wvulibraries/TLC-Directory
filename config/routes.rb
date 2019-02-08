@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-#   namespace :admin do
-#     get 'searchstats/searchterms'
-#   end
   # home index
   root to: 'application#home'
   get '/home', 
@@ -16,20 +13,14 @@ Rails.application.routes.draw do
   get '/logout', 
       to: 'application#logout', 
       as: 'logout'
-
-
-
-  # faculties
-#   get 'faculties',
-#       to: 'faculties#list',
-#       as: 'faculties_list'
-
-#   get '/faculty/:id',
-#       to: 'faculties#profile',
-#       as: 'faculties_profile'
   
   # admin
   get '/admin', to: 'admin#index'
+
+  # insure import goes to correct location
+  get '/admin/faculties/import', 
+      to: 'admin/faculties#import', 
+      as: 'admin/faculties_import'
 
   # forces the controllers to use the admin name space
   # this is going to allow for the addition of a function to restrict access
@@ -43,20 +34,13 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :colleges,
               :departments,
-              :faculties,
               :users
+    resources :faculties do
+        collection { post :import }
+    end
   end
 
   get '/directory', to: 'directory#index'
-
-#   scope '/directory' do
-#     resources :colleges, :departments, module: 'directory'
-#   end
-
-#   namespace :directory  do
-#     #resources :colleges, only: [:index]
-#     resources :departments, only: [:list]
-#   end
 
   get 'directory',
       to: 'directory#list',
@@ -92,11 +76,4 @@ Rails.application.routes.draw do
       to: 'directory/departments#faculties',
       as: 'directory/departments_faculties'    
         
-      
-  # search
-#   get '/search',
-#       to: 'search#index',
-#       as: 'search_index'
-
-
 end

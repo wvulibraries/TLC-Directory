@@ -21,10 +21,6 @@ class ImageUploader < CarrierWave::Uploader::Base
   def default_url
     '/default/flying-wv.jpg'
   end
-  
-  # def filename
-  #    @name ||= "#{file.basename}_#{Time.now.to_i}.#{file.extension}" if original_filename.present?
-  # end
 
   # Process files as they are uploaded:
   process resize_to_fit: [800, 800]

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_24_204141) do
+ActiveRecord::Schema.define(version: 2019_02_08_201640) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "addressable_type"
@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(version: 2019_01_24_204141) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "organization"
     t.index ["awardable_type", "awardable_id"], name: "index_awards_on_awardable_type_and_awardable_id"
   end
 
@@ -64,14 +66,14 @@ ActiveRecord::Schema.define(version: 2019_01_24_204141) do
     t.boolean "visible", default: false
     t.string "title"
     t.text "biography"
-    t.string "research_interests"
+    t.text "research_interests"
     t.string "image"
     t.string "resume"
     t.bigint "college_id"
     t.bigint "department_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "teaching_interests"
+    t.text "teaching_interests"
     t.index ["college_id"], name: "index_faculty_on_college_id"
     t.index ["department_id"], name: "index_faculty_on_department_id"
   end

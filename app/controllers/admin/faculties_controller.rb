@@ -2,6 +2,8 @@ class Admin::FacultiesController < ApplicationController
   # tell rails which view layout to use with this controller
   layout 'admin'
 
+  include CSVService
+
   before_action :set_faculty, only: %i[show edit update destroy]
 
   # GET /faculties
@@ -61,6 +63,33 @@ class Admin::FacultiesController < ApplicationController
     end
   end
 
+  def import 
+    @errors = []
+    if upload_params[:csv_files].present?
+      wizard = CSVService::ImportWizard.new({:csv_files => upload_params[:csv_files]})
+      wizard.process_files
+      @errors = wizard.errors
+    end
+
+    #flash.now[:error] = errors if errors.count > 0
+
+    # if upload_params[:csv_files].present?
+    #   upload_params[:csv_files].each do |file|
+    #     import = CSVService::FacultyImport.new({:file => file})
+    #     import.perform   
+    #   end
+    # end
+
+    # uploader.store!(upload_params[:files]) if upload_params[:files].present?
+    # @form = CSVImportForm.new
+    #puts upload_params.inspect
+    # if upload_params[:file].present?
+    #   import = CSVService::FacultyImport.new(upload_params)
+    #   import.perform 
+    # end
+    # flash.now[:error] = stats.error if stats.error 
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -94,10 +123,14 @@ class Admin::FacultiesController < ApplicationController
                   :college_id, 
                   :department_id,     
                   addresses_attributes: %i[id street_address_1 street_address_2 city state zip_code _destroy],
-                  awards_attributes: %i[id starting_year ending_year description _destroy],
+                  awards_attributes: %i[id starting_year ending_year name organization description _destroy],
                   phones_attributes: %i[id number number_types _destroy],
                   publications_attributes: %i[id description _destroy],
-                  websites_attributes: %i[id url _destroy]              
+                  websites_attributes: %i[id url _destroy]           
                 )
-  end
+    end
+
+    def upload_params
+      params.permit({csv_files: []})
+    end
 end

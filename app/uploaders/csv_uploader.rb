@@ -1,10 +1,5 @@
 # Resume based on documentation from carrierwave.
-#
-# @author David J. Davis
-# @uploader
-# @since 0.0.1
 class CSVUploader < CarrierWave::Uploader::Base
-  include CarrierWave::MiniMagick
   storage :file
 
   # directories to use for cache and storage

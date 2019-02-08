@@ -89,4 +89,9 @@ RSpec.feature "Admin::Faculty", type: :feature do
     expect(page).to have_content('Faculty Removed! The faculty profile was removed, for temporary removal you should change the faculty status.')
     expect(page).to_not have_content(faculty_existing.first_name)
   end
+
+  scenario 'import faculty from csv' do
+    visit '/admin/faculties/import'
+    expect(page).to have_content('Import a CSV File')   
+  end
 end

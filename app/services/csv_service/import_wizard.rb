@@ -1,24 +1,47 @@
 module CSVService 
     class ImportWizard
         require 'csv'
-
+        attr_reader :errors
+ 
         def initialize(params = {})
-            # Merge if true we will attempt add new records to database
-            @mearge = params[:merge]
-            @overwrite = parms[:overwrite]
+            @csv_files = params[:csv_files]
+            store_files
         end
 
-        def perform
-            clear_faculty unless @merge == 'true'
+        def process_files
+            files = Dir.glob("#{Rails.root}/public/uploads/#{Rails.env}/csv/*.csv")
+            files.each do |file|
+                #headers = CSV.open(file, 'r', liberal_parsing: true) { |csv| csv.first }
 
+                case File.basename(file)
+                when "AWARDHONOR.csv"
+                    import = CSVService::AwardImport.new({:filename => file})
+                when "PCI.csv"
+                    import = CSVService::FacultyImport.new({:filename => file})
+                else
+                    @errors << "Unknown CSV File"
+                end
+
+                import.perform if import.present?
+                File.delete(file) if File.exist?(file)                
+            end
         end
         
         private
 
-        def clear_faculty
-        end
-
-        def 
+        def store_files
+            @errors = []
+            # working uploader with carrierwave store multiple files
+            if @csv_files.present?
+                uploader = CSVUploader.new
+                @csv_files.each do |file|
+                    begin
+                        uploader.store!(file)
+                    rescue Exception => e
+                        @errors << e.to_s + ' ' + file.original_filename + ' Not Saved'
+                    end
+                end
+            end       
         end
 
     end

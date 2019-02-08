@@ -25,17 +25,17 @@ RSpec.describe Award, type: :model do
   end
 
   it 'Valid Display Award when all fields are valid' do
-    expect(award.display_award).to eql(award.starting_year.to_s + ' - ' + award.ending_year.to_s + ' ' + award.description)
+    expect(award.display_award).to eql(award.starting_year.to_s + ' - ' + award.ending_year.to_s + ' - ' + award.name + ' - ' + award.description)
   end
 
   it 'Without a ending year we should only have starting year and description on display award' do
     award.ending_year = nil
-    expect(award.display_award).to eql(award.starting_year.to_s + ' ' + award.description)
+    expect(award.display_award).to eql(award.starting_year.to_s + ' - ' + award.name + ' - ' + award.description)
   end
 
   it 'Without a Starting Year display award should equal description' do
     award.starting_year = nil
-    expect(award.display_award).to eql(award.description)
+    expect(award.display_award).to eql(award.name + ' - ' + award.description)
   end
 
 end
