@@ -11,10 +11,12 @@ class Award < ApplicationRecord
 
   # display publication
   def display_award
-    return_string = "#{starting_year}" if starting_year.to_s.length == 4
-    return_string += ' - ' + "#{ending_year}" if ending_year.to_s.length == 4
-    return_string += ' - ' + "#{name}" if name.to_s.length > 0
-    return_string += ' - ' + "#{organization}" if organization.to_s.length > 0
-    return_string += ' - ' + "#{description}" if description.to_s.length > 0
+    if starting_year.to_s.length == 4 && ending_year.to_s.length == 4
+      "#{starting_year} - #{ending_year} - #{name} - #{organization} - #{description}"
+    elsif starting_year.to_s.length == 4
+      "#{starting_year} - #{name} - #{organization} - #{description}"
+    else
+      "#{name} - #{organization} - #{description}"
+    end
   end
 end
