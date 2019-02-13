@@ -1,5 +1,7 @@
 module CSVService 
     class ImportWizard
+        include ImportAdapter
+
         require 'csv'
         attr_reader :errors
  
@@ -11,18 +13,19 @@ module CSVService
         def process_files
             files = Dir.glob("#{Rails.root}/public/uploads/#{Rails.env}/csv/*.csv")
             files.each do |file|
-                #headers = CSV.open(file, 'r', liberal_parsing: true) { |csv| csv.first }
-
-                case File.basename(file)
+                case File.basename(file)                                     
                 when "AWARDHONOR.csv"
-                    import = CSVService::AwardImport.new({:filename => file})
+                    adaptor = ImportAdapter::AwardAdapter.new({:filename => file})
                 when "PCI.csv"
-                    import = CSVService::FacultyImport.new({:filename => file})
+                    adaptor = ImportAdapter::FacultyAdapter.new({:filename => file})
+                when "INTELLCONT.csv"
+                    adaptor = ImportAdapter::PublicationAdapter.new({:filename => file})    
                 else
-                    @errors << "Unknown CSV File"
+                    adaptor = ImportAdapter::BaseAdapter.new({:filename => file})  
                 end
 
-                import.perform if import.present?
+                adaptor.import if adaptor.present?
+
                 File.delete(file) if File.exist?(file)                
             end
         end

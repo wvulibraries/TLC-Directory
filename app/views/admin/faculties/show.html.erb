@@ -85,7 +85,13 @@
             <strong> Publication(s): </strong>
             <ul>
             <% @faculty.publications.each do |pub| %>
-              <li> <%= pub.description %> </li>
+              <li>
+                <ul>
+                  <li> <%= pub.display_date %> </li>
+                  <li> <%= pub.title %> </li>
+                  <li> <%= pub.description %> </li>
+                </ul>
+              </li>
             <% end %>
             </ul>
           </li>

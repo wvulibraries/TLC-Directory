@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_08_201640) do
+ActiveRecord::Schema.define(version: 2019_02_12_210435) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "addressable_type"
@@ -94,6 +94,10 @@ ActiveRecord::Schema.define(version: 2019_02_08_201640) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "url"
+    t.text "title"
+    t.integer "starting_year"
+    t.integer "ending_year"
     t.index ["publishable_type", "publishable_id"], name: "index_publications_on_publishable_type_and_publishable_id"
   end
 

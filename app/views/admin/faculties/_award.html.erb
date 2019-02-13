@@ -12,6 +12,16 @@
   </div>
 
   <div class="field full">
+    <%= form.label :name, "Name", class: 'required' %>
+    <%= form.text_field :description, placeholder:'Most Valuable Player' %>
+  </div>
+
+  <div class="field full">
+    <%= form.label :organization, "Organization", class: 'required' %>
+    <%= form.text_field :organization, placeholder:'West Virginia University' %>
+  </div>
+
+  <div class="field full">
     <%= form.label :description, "Description", class: 'required' %>
     <%= form.text_field :description, placeholder:'1st Place in underwater basket weaving' %>
   </div>
