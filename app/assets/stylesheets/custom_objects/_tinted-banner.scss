@@ -1,25 +1,26 @@
 .tinted-banner {
   @include span-columns(12);
-  padding: 40px;
+  padding: 2.5rem;
   overflow: hidden;
-  line-height: 1.1em;
+  //line-height: 1.1em;
   text-align: center;
 
   h1 {
-      text-transform: uppercase;
-      line-height: 30px;
-      font-size: 30px;
-      padding: 15px;
-      margin: 20px;
+      //text-transform: uppercase;
+      line-height: 1.25em;
+      font-size: 2rem;
+      //padding: 15px;
+      //margin: 20px;
       display: inline;
       color: white;
   }
 
   p {
-    word-break: break-all;
-    white-space: normal;
+    //word-break: break-all;
+    //white-space: normal;
     display: inline;
-    font-size: 14px;  
+    line-height: 1.25rem;
+    font-size: 0.75rem;
     color: white;
   }
 
