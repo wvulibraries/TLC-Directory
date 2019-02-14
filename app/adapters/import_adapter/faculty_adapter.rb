@@ -6,18 +6,18 @@ module ImportAdapter
         # placeholder for adding additional fields for the faculty model
         def add_optional_items(row)
             hash = {}
-            hash[:websites] = [Website.find_or_create_by(url: row["WEBSITE"])] unless row["WEBSITE"].nil?            
+            hash[:websites] = [Website.find_or_create_by(url: row[:website])] unless row[:website].nil?            
             hash[:phones] = build_phone_array(row)
             @faculty.attributes = hash
         end
 
         def build_phone_array(row)
             phone_array = []
-            phone = create_phone(row["OPHONE1"], row["OPHONE2"], row["OPHONE3"], row["OPHONE4"], 'office')
+            phone = create_phone(row[:ophone1], row[:ophone2], row[:ophone3], row[:ophone4], 'office')
             phone_array << phone unless phone.nil?
-            phone = create_phone(row["DPHONE1"],row["DPHONE2"], row["DPHONE3"], row["DPHONE4"], 'department')
+            phone = create_phone(row[:dphone1],row[:dphone2], row[:dphone3], row[:dphone4], 'department')
             phone_array << phone unless phone.nil?
-            phone = create_phone(row["FAX1"],row["FAX2"], row["FAX3"], row["FAX4"], 'fax')
+            phone = create_phone(row[:fax1],row[:fax2], row[:fax3], row[:fax4], 'fax')
             phone_array << phone unless phone.nil?
             return phone_array
         end

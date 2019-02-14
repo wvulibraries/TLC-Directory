@@ -8,6 +8,7 @@ module CSVService
         def initialize(params = {})
             @csv_files = params[:csv_files]
             store_files
+            process_files
         end
 
         def process_files

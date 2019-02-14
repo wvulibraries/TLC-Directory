@@ -9,21 +9,15 @@ module ImportAdapter
         end
 
         def import
-            file = File.open(@filename, File::RDWR)
-            strVar = file.readline
-            removed = strVar.slice!(0, 1)
-            file.rewind
-            file.puts(strVar)
-            file.close
-
-            puts removed.inspect
-            puts strVar.inspect
-
-            @import_count = 0        
-            CSV.foreach(@filename, headers: true, encoding: 'windows-1251:utf-8', liberal_parsing: true) do |row|
-                puts row.inspect
+            @import_count = 0
+            CSV.foreach(@filename, headers: true, :header_converters => lambda { |h| h.gsub(/[^0-9A-Za-z_\s]/, '').downcase.gsub(/\s+/, "_").to_sym unless h.nil? }, liberal_parsing: true) do |row|       
+                #puts row.inspect
                 # Find faculty
-                @faculty = Faculty.find_by(wvu_username: row["USERNAME"]) || Faculty.new(get_faculty_fields(row))
+                @faculty = Faculty.where(wvu_username: row[:username]).first_or_initialize
+                hash = get_faculty_fields(row)
+                @faculty.update_attributes(hash)
+
+                #@faculty = Faculty.find_by(wvu_username: row[:username]) || Faculty.new(hash)
                 add_optional_items(row)
                 @faculty.save(validate: false)
                 @import_count += 1
@@ -39,21 +33,29 @@ module ImportAdapter
         end
 
         def get_faculty_fields(row)
-            puts row.inspect
             hash = {}
             # Common Fields in all CSV Files
-            hash[:first_name] = row["First Name"]
-            hash[:middle_name] = row["Middle Name"]
-            hash[:last_name] = row["Last Name"] 
-            hash[:email] = row["Email"]
-            hash[:college] = College.find_or_create_by(name: row["College (Most Recent)"]) unless row["College (Most Recent)"].nil?
-            hash[:department] = Department.find_or_create_by(name: row["Section (Department of Medicine Only) (Most Recent)"]) || Department.find_or_create_by(name: row["Unit (Most Recent)"])
-            hash[:wvu_username] = row["USERNAME"]
+            hash[:first_name] = row[:first_name] unless row[:first_name].nil?
+            hash[:middle_name] = row[:middle_name] unless row[:middle_name].nil?
+            hash[:last_name] = row[:last_name] unless row[:last_name].nil?
+            hash[:email] = row[:email].downcase unless row[:email].nil?
+            hash[:college] = College.find_or_create_by(name: row[:college_most_recent]) unless row[:college_most_recent].nil?
+            hash[:biography] = row[:bio] unless row[:bio].nil?
+            hash[:research_interests] = row[:research_interests] unless row[:research_interests].nil?
+            hash[:teaching_interests] = row[:teaching_interests] unless row[:teaching_interests].nil?
 
-            hash[:preferred_name] = row["PFNAME"]
-            hash[:prefix] = row["PREFIX"]
-            hash[:suffix] = row["SUFFIX"]
-            hash[:title] = row["RANK"] || row["SRANK"]
+            if row[:unit_most_recent].present?
+                hash[:department] = Department.find_or_create_by(name: row[:unit_most_recent])
+            elsif row[:section_department_of_medicine_only_most_recent].present?
+                hash[:department] = Department.find_or_create_by(name: row[:section_department_of_medicine_only_most_recent])
+            end
+             
+            hash[:wvu_username] = row[:username].downcase unless row[:username].nil?
+
+            hash[:preferred_name] = row[:pfname] unless row[:pfname].nil?
+            hash[:prefix] = row[:prefix] unless row[:prefix].nil?
+            hash[:suffix] = row[:suffix] unless row[:suffix].nil?
+            hash[:title] = row[:rank] unless row[:rank].nil? || row[:srank] unless row[:srank].nil?
 
             # default values
             hash[:role] = :user

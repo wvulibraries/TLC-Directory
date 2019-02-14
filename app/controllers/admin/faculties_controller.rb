@@ -67,11 +67,23 @@ class Admin::FacultiesController < ApplicationController
     @errors = []
     if upload_params[:csv_files].present?
       wizard = CSVService::ImportWizard.new({:csv_files => upload_params[:csv_files]})
-      wizard.process_files
-      @errors = wizard.errors
+      if wizard.errors.count > 0
+        @errors << wizard.errors 
+      else
+        flash.now[:notice] = 'CSV File(s) have been imported.'
+      end
     end
 
-    #flash.now[:error] = errors if errors.count > 0
+    if upload_params[:zip_file].present?
+        zip_import = CSVService::ZipImport.new(upload_params)
+        if zip_import.errors.count > 0
+          @errors << zip_import.errors 
+        else
+          flash.now[:notice] = upload_params[:zip_file].original_filename + ' has been queued for import'
+        end
+    end
+
+    flash.now[:error] = @errors if @errors.count > 0
 
     # if upload_params[:csv_files].present?
     #   upload_params[:csv_files].each do |file|
@@ -131,6 +143,6 @@ class Admin::FacultiesController < ApplicationController
     end
 
     def upload_params
-      params.permit({csv_files: []})
+      params.permit({csv_files: []}, :zip_file)
     end
 end

@@ -14,6 +14,6 @@ class ZIPUploader < CarrierWave::Uploader::Base
 
   # extension whitelist
   def extension_whitelist
-    %w[csv]
+    %w[zip]
   end
 end
