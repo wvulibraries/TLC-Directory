@@ -4,7 +4,8 @@
   * {
     box-sizing: border-box;
     margin: auto;
-    width: 80%
+    //width: 80%
+    max-width: 67rem;
   }
 
   /* Style the search field */
@@ -24,7 +25,7 @@
     width: 10%;
     min-width: 40px;
     max-width: 150px;
-    padding: 14px 22px;
+    padding: .77rem 2rem;
     background: $accent-blue2;
     color: white;
     font-size: 14px;
