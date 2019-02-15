@@ -1,5 +1,5 @@
 module CSVService 
-    class ImportWizard
+    class CSVImport
         include ImportAdapter
 
         require 'csv'
@@ -7,7 +7,7 @@ module CSVService
  
         def initialize(params = {})
             @csv_files = params[:csv_files]
-            store_files
+            store_files if @csv_files.present?
             process_files
         end
 

@@ -2,16 +2,25 @@ module CSVService
     class ZipImport
         include ImportAdapter
 
-        require 'csv'
+        require 'zip'
         attr_reader :errors
  
         def initialize(params = {})
             @zip_file = params[:zip_file]
-            store_file
-            queue_job
+            store_file if @zip_file.present?
+            extract_files
+            wizard = CSVService::CSVImport.new
         end
 
-        def queue_job
+        def extract_files
+            files = Dir.glob("#{Rails.root}/public/uploads/#{Rails.env}/zip/*.zip")
+            files.each do |file|
+                Zip::File.open(file) do |zipfile|
+                    zipfile.each do |csvfile|
+                        zipfile.extract(csvfile.name, "#{Rails.root}/public/uploads/#{Rails.env}/csv/" + csvfile.name){ true }
+                    end
+                end                
+            end           
         end
         
         private

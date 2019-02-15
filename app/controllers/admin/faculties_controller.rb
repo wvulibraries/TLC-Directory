@@ -66,7 +66,7 @@ class Admin::FacultiesController < ApplicationController
   def import 
     @errors = []
     if upload_params[:csv_files].present?
-      wizard = CSVService::ImportWizard.new({:csv_files => upload_params[:csv_files]})
+      wizard = CSVService::CSVImport.new({:csv_files => upload_params[:csv_files]})
       if wizard.errors.count > 0
         @errors << wizard.errors 
       else
