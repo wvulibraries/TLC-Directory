@@ -12,6 +12,7 @@ module CSVService
         end
 
         def process_files
+            directory_name = "#{Rails.root}/public/uploads/#{Rails.env}/csv/imported/"
             files = Dir.glob("#{Rails.root}/public/uploads/#{Rails.env}/csv/*.csv")
             files.each do |file|
                 case File.basename(file)                                     
@@ -27,8 +28,12 @@ module CSVService
 
                 adaptor.import if adaptor.present?
 
-                File.delete(file) if File.exist?(file)                
+                # move each file after it has been imported into a separate folder
+                Dir.mkdir(directory_name) unless File.exists?(directory_name)    
+                File.rename file, directory_name + File.basename(file)
             end
+
+            FileUtils.rm_rf(directory_name)
         end
         
         private

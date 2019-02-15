@@ -14,10 +14,7 @@ module ImportAdapter
                 #puts row.inspect
                 # Find faculty
                 @faculty = Faculty.where(wvu_username: row[:username]).first_or_initialize
-                hash = get_faculty_fields(row)
-                @faculty.update_attributes(hash)
-
-                #@faculty = Faculty.find_by(wvu_username: row[:username]) || Faculty.new(hash)
+                set_faculty_fields(row)
                 add_optional_items(row)
                 @faculty.save(validate: false)
                 @import_count += 1
@@ -32,7 +29,7 @@ module ImportAdapter
             false
         end
 
-        def get_faculty_fields(row)
+        def set_faculty_fields(row)
             hash = {}
             # Common Fields in all CSV Files
             hash[:first_name] = row[:first_name] unless row[:first_name].nil?
@@ -40,9 +37,6 @@ module ImportAdapter
             hash[:last_name] = row[:last_name] unless row[:last_name].nil?
             hash[:email] = row[:email].downcase unless row[:email].nil?
             hash[:college] = College.find_or_create_by(name: row[:college_most_recent]) unless row[:college_most_recent].nil?
-            hash[:biography] = row[:bio] unless row[:bio].nil?
-            hash[:research_interests] = row[:research_interests] unless row[:research_interests].nil?
-            hash[:teaching_interests] = row[:teaching_interests] unless row[:teaching_interests].nil?
 
             if row[:unit_most_recent].present?
                 hash[:department] = Department.find_or_create_by(name: row[:unit_most_recent])
@@ -52,6 +46,10 @@ module ImportAdapter
              
             hash[:wvu_username] = row[:username].downcase unless row[:username].nil?
 
+            # These fields are not in all csv files
+            hash[:biography] = row[:bio] unless row[:bio].nil?
+            hash[:research_interests] = row[:research_interests] unless row[:research_interests].nil?
+            hash[:teaching_interests] = row[:teaching_interests] unless row[:teaching_interests].nil?
             hash[:preferred_name] = row[:pfname] unless row[:pfname].nil?
             hash[:prefix] = row[:prefix] unless row[:prefix].nil?
             hash[:suffix] = row[:suffix] unless row[:suffix].nil?
@@ -63,7 +61,7 @@ module ImportAdapter
             hash[:visible] = true
 
             # find or create optional items
-            return hash
+            @faculty.attributes = hash
         end          
     end
 end

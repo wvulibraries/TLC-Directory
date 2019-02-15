@@ -84,22 +84,7 @@ class Admin::FacultiesController < ApplicationController
     end
 
     flash.now[:error] = @errors if @errors.count > 0
-
-    # if upload_params[:csv_files].present?
-    #   upload_params[:csv_files].each do |file|
-    #     import = CSVService::FacultyImport.new({:file => file})
-    #     import.perform   
-    #   end
-    # end
-
-    # uploader.store!(upload_params[:files]) if upload_params[:files].present?
-    # @form = CSVImportForm.new
-    #puts upload_params.inspect
-    # if upload_params[:file].present?
-    #   import = CSVService::FacultyImport.new(upload_params)
-    #   import.perform 
-    # end
-    # flash.now[:error] = stats.error if stats.error 
+    
   end
 
   private
