@@ -9,19 +9,16 @@ module CSVService
             # path for zip files
             @zip_directory = "#{Rails.root}/public/uploads/#{Rails.env}/zip/"
             @zip_file = params[:zip_file]
-            store_file if @zip_file.present?
-            extract_files
-            process_files
+            if @zip_file.present?
+                store_file 
+                extract_files
+                #process_files                
+            end
         end
 
         def process_files
             # process extracted csv files 
             CSVService::CSVImport.new
-
-            completed_directory_name = @zip_directory + 'completed' + '/'
-            # move each file after it has been imported into a separate folder
-            Dir.mkdir(completed_directory_name) unless File.exists?(completed_directory_name)             
-            File.rename @zip_directory + @zip_file.original_filename, completed_directory_name + @zip_file.original_filename
         end
 
         def extract_files
@@ -31,7 +28,11 @@ module CSVService
                     zipfile.glob('*.csv') do |csvfile|
                         zipfile.extract(csvfile.name, "#{Rails.root}/public/uploads/#{Rails.env}/csv/" + csvfile.name){ true }
                     end
-                end                
+                end   
+                # move each file after it has been extracted to the csv folder
+                completed_directory_name = @zip_directory + 'completed' + '/'
+                Dir.mkdir(completed_directory_name) unless File.exists?(completed_directory_name)             
+                File.rename @zip_directory + File.basename(file), completed_directory_name + File.basename(file)
             end           
         end
         

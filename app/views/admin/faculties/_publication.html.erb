@@ -2,13 +2,28 @@
   <legend> Publication </legend>
 
   <div class="field full">
+    <%= form.label :starting_year, "Starting Year", class: 'required' %>
+    <%= form.text_field :starting_year, placeholder:'2019' %>
+  </div>
+
+    <div class="field full">
+    <%= form.label :ending_year, "Ending Year" %>
+    <%= form.text_field :ending_year, placeholder:'2019' %>
+  </div>
+
+  <div class="field full">
+    <%= form.label :title, "Title", class: 'required' %>
+    <%= form.text_area :title, placeholder:'underwater basket weaving', size: "30x10" %>
+  </div>
+
+  <div class="field full">
     <%= form.label :description, "Description", class: 'required' %>
-    <%= form.text_field :description, placeholder:'1st Place in underwater basket weaving' %>
+    <%= form.text_area :description, placeholder:'1st Place in underwater basket weaving', size: "30x10" %>
   </div>
 
   <div class="action">
     <%= form.hidden_field :_destroy %>
-    <%# form.label :_destroy, "Delete Address" %>
-    <%= link_to '<span class="fas fa-trash-alt"></span>'.html_safe , '#', class: "remove-fields delete-award", title: "Delete Award" %>
+    <%# form.label :_destroy, "Delete Publication" %>
+    <%= link_to '<span class="fas fa-trash-alt"></span>'.html_safe , '#', class: "remove-fields delete-publication", title: "Delete Publication" %>
   </div>
 </fieldset>

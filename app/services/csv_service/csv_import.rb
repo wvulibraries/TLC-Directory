@@ -8,13 +8,16 @@ module CSVService
         def initialize(params = {})
             @csv_files = params[:csv_files]
             store_files if @csv_files.present?
-            process_files
+            #process_files
         end
 
         def process_files
+            puts "starting process files"
             directory_name = "#{Rails.root}/public/uploads/#{Rails.env}/csv/imported/"
+            puts directory_name
             files = Dir.glob("#{Rails.root}/public/uploads/#{Rails.env}/csv/*.csv")
             files.each do |file|
+                puts "importing " + File.basename(file)
                 case File.basename(file)                                     
                 when "AWARDHONOR.csv"
                     adaptor = ImportAdapter::AwardAdapter.new({:filename => file})

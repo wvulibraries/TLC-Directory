@@ -101,6 +101,9 @@
         <div class='publications'>
           <h4>Publication(s):</h4>
           <% @faculty.publications.each do |publication| %>
+              <%= publication.starting_year %>
+              <%= publication.ending_year %>
+              <%= publication.title %>
               <%= publication.description %><br><br>
           <% end %>
         </div>
