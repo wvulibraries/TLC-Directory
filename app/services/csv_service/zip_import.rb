@@ -11,14 +11,8 @@ module CSVService
             @zip_file = params[:zip_file]
             if @zip_file.present?
                 store_file 
-                extract_files
-                #process_files                
+                extract_files              
             end
-        end
-
-        def process_files
-            # process extracted csv files 
-            CSVService::CSVImport.new
         end
 
         def extract_files

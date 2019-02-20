@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe CSVService::ImportWizard do
+RSpec.describe CSVService::CSVImport do
   describe 'methods included in module' do
     # let(:faculty_import_valid_filename) { CSVService::FacultyImport.new( {:filename => "#{Rails.root}/spec/support/files/PCI.csv" } )}
 
