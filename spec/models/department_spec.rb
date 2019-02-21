@@ -58,20 +58,7 @@ RSpec.describe Department, type: :model do
         query = new_dept.name.gsub(%r{\{|\}|\[|\]|\\|\/|\^|\~|\:|\!|\"|\'}, '')
         expect(Department.search(query).records.count).to eq(0)
       end      
-      
-      # it 'updated disabled department to enabled' do
-      #   new_dept = FactoryBot.create :disabled_department
-      #   Department.__elasticsearch__.refresh_index! 
-      #   # verify item is not in elasticsearch
-      #   query = new_dept.name.gsub(%r{\{|\}|\[|\]|\\|\/|\^|\~|\:|\!|\"|\'}, '')
-      #   sleep 2        
-      #   expect(Department.search(query).records.length).to eq 0    
-      # 
-      #   new_dept.update(status: 'enabled')
-      #   Department.__elasticsearch__.refresh_index!
-      #   sleep 2
-      #   expect(Department.search(query).records.length).to eq 1     
-      # end        
+         
 
       it 'should remove department after the update because of the status' do
         dept.update(status: 'disabled')        

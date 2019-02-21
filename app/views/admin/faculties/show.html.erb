@@ -74,6 +74,7 @@
                 <a href="tel:<%= phone.number %>">
                   <%= phone.number %>
                 </a>
+                <%= phone.type %>
               </li>
             <% end %>
             </ul>
@@ -103,22 +104,14 @@
         <% if @faculty.research_interests.present? %>
           <li>
             <strong> Research Interest(s): </strong>
-            <ul>
-              <% @faculty.research_interests.split(/\s*,\s*/).each do |interest| %>
-                <li> <%= interest %> </li>
-              <% end %>
-            </ul>
+            <%= @faculty.research_interests %>
           </li>
         <% end %>
 
         <% if @faculty.teaching_interests.present? %>
           <li>
             <strong> Teaching Interest(s): </strong>
-            <ul>
-              <% @faculty.teaching_interests.split(/\s*,\s*/).each do |interest| %>
-                <li> <%= interest %> </li>
-              <% end %>
-            </ul>
+            <%= @faculty.teaching_interests %>
           </li>
         <% end %>        
 

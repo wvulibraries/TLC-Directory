@@ -11,4 +11,8 @@ class Phone < ApplicationRecord
 
   # associations
   belongs_to :phoneable, polymorphic: true
+
+  def type
+    number_types.sub(/\S/, &:upcase)
+  end
 end
