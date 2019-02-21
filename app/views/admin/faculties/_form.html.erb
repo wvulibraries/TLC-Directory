@@ -100,12 +100,12 @@
 
       <div class="field">
         <%= f.label :college_ids, 'Colleges' %>
-        <%= f.collection_select :college_id, College.all.visible.order(:name), :id, :name, { include_hidden: false, include_blank: true }%>
+        <%= f.collection_select :college_id, College.all.visible.order(:name), :id, :name, { include_hidden: false, include_blank: "Select a College" }%>
       </div>
 
       <div class="field">
         <%= f.label :department_ids, 'Departments' %>
-        <%= f.collection_select :department_id, Department.all.visible.order(:name), :id, :name, { include_hidden: false, include_blank: true }%>
+        <%= f.collection_select :department_id, Department.all.visible.order(:name), :id, :name, { include_hidden: false, include_blank: "Select a Department" }%>
       </div>
 
       <div class="field full">

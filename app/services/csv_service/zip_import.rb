@@ -6,8 +6,17 @@ module CSVService
         attr_reader :errors
  
         def initialize(params = {})
+            # path for csv files
+            @csv_path = "#{Rails.root}/public/uploads/#{Rails.env}/csv/"
             # path for zip files
-            @zip_directory = "#{Rails.root}/public/uploads/#{Rails.env}/zip/"
+            @zip_path = "#{Rails.root}/public/uploads/#{Rails.env}/zip/"
+            @completed_zip_path = @zip_path + 'completed' + '/'
+
+            # create folders if missing
+            Dir.mkdir(@csv_path) unless File.exists?(@csv_path) 
+            Dir.mkdir(@zip_path) unless File.exists?(@zip_path) 
+            Dir.mkdir(@completed_zip_path) unless File.exists?(@completed_zip_path)
+
             @zip_file = params[:zip_file]
             if @zip_file.present?
                 store_file 
@@ -16,17 +25,15 @@ module CSVService
         end
 
         def extract_files
-            files = Dir.glob(@zip_directory + "*.zip")
+            files = Dir.glob(@zip_path + "*.zip")
             files.each do |file|
                 Zip::File.open(file) do |zipfile|
                     zipfile.glob('*.csv') do |csvfile|
-                        zipfile.extract(csvfile.name, "#{Rails.root}/public/uploads/#{Rails.env}/csv/" + csvfile.name){ true }
+                        zipfile.extract(csvfile.name, @csv_path + csvfile.name){ true }
                     end
                 end   
                 # move each file after it has been extracted to the csv folder
-                completed_directory_name = @zip_directory + 'completed' + '/'
-                Dir.mkdir(completed_directory_name) unless File.exists?(completed_directory_name)             
-                File.rename @zip_directory + File.basename(file), completed_directory_name + File.basename(file)
+                File.rename @zip_path + File.basename(file), @completed_zip_path + File.basename(file)
             end           
         end
         
