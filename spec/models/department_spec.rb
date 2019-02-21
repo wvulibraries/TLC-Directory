@@ -14,13 +14,13 @@ RSpec.describe Department, type: :model do
     it 'expects name to be too long' do
       dept.name = Faker::String.random(51)
       expect(dept).to_not be_valid
-      expect(dept.errors.messages[:name]).to eq ['is too long (maximum is 50 characters)']
+      expect(dept.errors.messages[:name]).to include('is too long (maximum is 50 characters)')
     end
 
     it 'expects name to be too short' do
       dept.name = Faker::String.random(3)
       expect(dept).to_not be_valid
-      expect(dept.errors.messages[:name]).to eq ['is too short (minimum is 5 characters)']
+      expect(dept.errors.messages[:name]).to include('is too short (minimum is 5 characters)')
     end
   end
 
