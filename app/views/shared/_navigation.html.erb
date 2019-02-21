@@ -1,12 +1,12 @@
 <!-- Public Menu -->
 <div class="nav__container">
   <div class="nav__wrapper">
-    <nav class="nav__main nav">
+    <nav class="nav__main">
       <ul>
-        <li><%= link_to "Home", '/' %></li>
-        <li><%= link_to "Browse the Directory", '/directory' %></li>
-        <li><%= link_to "Open Access Textbooks", 'https://textbooks.lib.wvu.edu/index.html' %></li>
-        <li><%= link_to " Admin Login", '/admin', class: "fa fa-cog" %></li>
+        <li><%= link_to 'Home', '/' %></li>
+        <li><%= link_to 'Browse the Directory', '/directory' %></li>
+        <li><%= link_to 'Open Access Textbooks', 'https://textbooks.lib.wvu.edu/index.html' %></li>
+        <li><%= link_to '<span class="cog_icon"></span> Admin Login'.html_safe, '/admin', { class: 'icon' } %></li>
       </ul>
     </nav>
   </div>

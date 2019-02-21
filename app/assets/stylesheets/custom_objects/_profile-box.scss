@@ -2,46 +2,45 @@
   width: 100%;
   padding: 5px;
   margin-bottom: 20px;
-  background-color:#FAFAFA; 
+  background-color:#FAFAFA;
   border-style: solid;
   border-width: thin;
   border-color: #E0E0E0;
-  
+
   .profile-picture {
     margin: auto;
     width: 150px;
-    
-    position:relative;   
-          
+
+    position:relative;
+
     img {
       border-radius: 50%;
       border-style: solid;
       border-width: medium;
       border-color: $accent-blue2;
       vertical-align: middle;
-      
+
       height: 150px;
       width: 150px;
       object-fit: cover;
       object-position: 75% 25%;
-    }   
+    }
   }
-  
+
   .photo-caption {
     margin: auto;
     width: 200px;
-    
+
     position:relative;
     bottom:20px;
     color: white;
-    background-color:#287EC7;
+    background-color:$accent-blue2;
     padding: 5px;
     border-style: solid;
     border-width: thin;
     border-color: $accent-blue2;  
-    
-    text-align: center;   
-  }     
-  
-}
 
+    text-align: center;
+  }
+
+}

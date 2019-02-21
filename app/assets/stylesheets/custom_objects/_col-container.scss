@@ -1,7 +1,12 @@
 * {
     box-sizing: border-box;
 }
-  
+
+.browse-buttons {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .col-container {
     display: table;
     width: 100%;
@@ -11,29 +16,29 @@
 
 .col-side {
     display: table-cell;
-    
+
     //gutter left
     padding-left: 10px;
     padding-right: 10px;
-    
+
     width: 30%;
     text-align: left;
     vertical-align: top;
-    
+
     h2 {
       color: black;
       font-size: 25px;
       font-weight: bold;
-    }      
+    }
 }
 
 .col-main {
     display: table-cell;
-    
+
     //gutter left
     padding-left: 10px;
     padding-right: 20px;
-    
+
     width: 70%;
     text-align: left;
     vertical-align: top;
@@ -53,25 +58,25 @@
     // .micro {
     //   display: table;
     //   padding: unset;
-    //   letter-spacing: 1px; 
-    //   font-weight: 900; 
-    //   color: #5f5f5f; 
+    //   letter-spacing: 1px;
+    //   font-weight: 900;
+    //   color: #5f5f5f;
     //   font-size: .75em;
     // }
-    
+
     .micro2 {
       display: table;
       padding: unset;
-      letter-spacing: 1px; 
-      font-weight: 400; 
-      color: #5f5f5f; 
-      font-size: .75em; 
+      letter-spacing: 1px;
+      font-weight: 400;
+      color: #5f5f5f;
+      font-size: .75em;
     }
 }
 
 @media only screen and (max-width: 768px) {
-    .col-container, .col-side, .col-main { 
+    .col-container, .col-side, .col-main {
         display: block;
         width: 100%;
-    } 
+    }
 }
