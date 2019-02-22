@@ -19,19 +19,21 @@
 
   <!-- Main Banner -->
   <%= render(:partial => 'shared/admin_banner') %>
-  
+
   <!-- Main -->
   <main id="main" class="backend">
-    <div class="wvu-container"> 
+    <div class="wvu-container">
       <!-- Flash -->
       <%= render "utilities/alerts" %>
 
       <!-- Admin Menu -->
-      <%= render(:partial => 'shared/admin_navigation') %>
+      <%= link_to "Admin Main", '/admin', class: 'admin-main button button--wvu-blue-fill' %>
 
       <!-- Yield -->
       <div class="main-content">
-        <%= yield %>
+        <div class="admin-panel">
+          <%= yield %>
+        </div>
       </div>
     </div>
   </main>

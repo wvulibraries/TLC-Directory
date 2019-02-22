@@ -1,0 +1,31 @@
+.admin-panel-nav  {
+
+    a {
+        text-align: center;
+        display: block;
+        margin: 5px;
+
+    }
+
+    /* layout when screen is 720px or above */
+    @include mq($bp-small){
+      @include omega();
+
+      a {
+          display: inline-block;
+          list-style-type: none;
+          overflow: hidden;
+          float: left;
+      }
+
+      .admin-main {
+          float: right;
+      }
+   }
+}
+
+.admin-main {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
