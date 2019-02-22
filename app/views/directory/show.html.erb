@@ -93,7 +93,7 @@
       <% if @faculty.biography.present? %>
         <div class="biography">
         <h4>Biography</h4>
-        <p> <%= @faculty.biography %> </p>
+        <p> <%= @faculty.biography.squish %> </p>
         </div>
       <% end %>
 
@@ -101,10 +101,10 @@
         <div class='publications'>
           <h4>Publication(s):</h4>
           <% @faculty.publications.each do |publication| %>
-              <%= publication.starting_year %>
-              <%= publication.ending_year %>
+              <%= publication.author %>            
+              <%= publication.display_date %>
               <%= publication.title %>
-              <%= publication.description %><br><br>
+              <%= publication.retrieved_from %><br><br>
           <% end %>
         </div>
       <% end %>

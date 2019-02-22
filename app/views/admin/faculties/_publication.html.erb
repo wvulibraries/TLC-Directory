@@ -6,9 +6,14 @@
     <%= form.text_field :starting_year, placeholder:'2019' %>
   </div>
 
-    <div class="field full">
+  <div class="field full">
     <%= form.label :ending_year, "Ending Year" %>
     <%= form.text_field :ending_year, placeholder:'2019' %>
+  </div>
+
+  <div class="field full">
+    <%= form.label :author, "Ending Year" %>
+    <%= form.text_field :author, placeholder:'Doe, John' %>
   </div>
 
   <div class="field full">
@@ -19,6 +24,11 @@
   <div class="field full">
     <%= form.label :description, "Description", class: 'required' %>
     <%= form.text_area :description, placeholder:'1st Place in underwater basket weaving', size: "30x10" %>
+  </div>
+
+  <div class="field full">
+    <%= form.label :url, "URL" %>
+    <%= form.text_area :url, placeholder:'https://lib.wvu.edu/' %>
   </div>
 
   <div class="action">

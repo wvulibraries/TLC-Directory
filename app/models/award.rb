@@ -11,12 +11,22 @@ class Award < ApplicationRecord
 
   # display publication
   def display_award
+    return_string = display_date || ""
+    if name.present? && organization.present?
+      return_string << "#{name}" 
+      return_string << ", #{organization}" if organization.present?
+    elsif name.present? && organization.nil?
+      return_string << "#{name}" 
+    elsif name.nil? && organization.present? 
+      return_string << "#{organization}" 
+    end
+  end
+
+  def display_date
     if starting_year.to_s.length == 4 && ending_year.to_s.length == 4
-      "#{starting_year} - #{ending_year} - #{name} - #{organization} - #{description}"
+      "#{starting_year} - #{ending_year} "
     elsif starting_year.to_s.length == 4
-      "#{starting_year} - #{name} - #{organization} - #{description}"
-    else
-      "#{name} - #{organization} - #{description}"
+      "#{starting_year} "
     end
   end
 end
