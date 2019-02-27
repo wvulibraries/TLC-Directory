@@ -42,3 +42,10 @@ input[type="submit"], input[type="reset"]{
   @include determine-text-color($action-color);
   margin-top: 20px;
 }
+
+.browse-buttons {
+  a {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

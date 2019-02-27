@@ -23,17 +23,18 @@
   <!-- Main -->
   <main id="main" class="backend">
     <div class="wvu-container">
-      <!-- Flash -->
-      <%= render "utilities/alerts" %>
 
-      <!-- Admin Menu -->
-      <%= link_to "Admin Main", '/admin', class: 'admin-main button button--wvu-blue-fill' %>
+  <!-- Flash -->
+    <%= render "utilities/alerts" %>
 
-      <!-- Yield -->
-      <div class="main-content">
-        <div class="admin-panel">
-          <%= yield %>
-        </div>
+  <!-- Yield -->
+    <div class="main-content">
+
+  <!-- Admin Menu -->
+      <div class="admin-main">
+        <%= link_to "Admin Main", '/admin', class: 'button button--wvu-blue-fill' %>
+      </div>
+        <%= yield %>
       </div>
     </div>
   </main>

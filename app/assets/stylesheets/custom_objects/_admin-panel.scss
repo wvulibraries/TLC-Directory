@@ -1,31 +1,46 @@
-.admin-panel-nav  {
+/* layout when screen is 720px or above */
+@include mq($bp-small){
+  @include omega();
+
+  .admin-panel {
+    max-width: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .admin-panel-left {
+    float: left;
+    width: 50%;
 
     a {
-        text-align: center;
-        display: block;
-        margin: 5px;
-
+      width: 100%;
+      text-align: center;
     }
+  }
 
-    /* layout when screen is 720px or above */
-    @include mq($bp-small){
-      @include omega();
+  .admin-panel-right {
+    margin-left: 51%;
 
-      a {
-          display: inline-block;
-          list-style-type: none;
-          overflow: hidden;
-          float: left;
-      }
+    a {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
 
-      .admin-main {
-          float: right;
-      }
-   }
+.admin-panel {
+  a {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
 }
 
 .admin-main {
-    margin-left: auto;
-    margin-right: auto;
+  a {
+    width: 100%;
+    display: block;
     text-align: center;
+  }
 }

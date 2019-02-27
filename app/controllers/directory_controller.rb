@@ -13,6 +13,6 @@ class DirectoryController < ApplicationController
     @faculty = Faculty.includes(:college, :department)
                       .where(id: params[:id], status: 'enabled')
                         .order(:last_name, :first_name)
-                        .first   
+                        .first
   end
 end

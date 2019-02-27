@@ -2,11 +2,11 @@
   border-style: solid;
   border-width: thin;
   border-color: #E0E0E0;
-  
+
   margin: 10px;
   text-align: center;
   font-size: 12px;
-  
+
   h2 {
     color: black;
     font-weight: bold;
@@ -16,8 +16,11 @@
     list-style-type: none;
     margin: 0;
     margin-bottom:15px;
-    padding: 0;
+    padding: 0px 25px;
   }
 
-  margin-bottom: 7px;
+  li {
+    list-style-type: none;
+    padding-top: 15px;
+  }
 }
