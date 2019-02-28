@@ -1,0 +1,30 @@
+.faculty-profile {
+  background-color: lightgreen;
+
+  .faculty-profile-pic {
+    float: left;
+    margin: 20px;
+
+    img {
+      border-style: solid;
+      border-width: medium;
+      border-color: $accent-blue1;
+      vertical-align: middle;
+
+      height: 150px;
+      width: 150px;
+      object-fit: cover;
+      object-position: 75% 25%;
+      }
+    }
+
+  .faculty-profile-title {
+    position: relative;
+    width: 75%;
+
+    h1 {
+      font-size: 3.5em;
+      padding-top: .25em;
+    }
+  }
+}

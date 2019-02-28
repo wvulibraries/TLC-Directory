@@ -38,9 +38,10 @@
 }
 
 .admin-main {
+  display: table;
+
   a {
     width: 100%;
-    display: block;
     text-align: center;
   }
 }

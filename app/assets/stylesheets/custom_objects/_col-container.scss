@@ -12,11 +12,12 @@
     width: 100%;
     padding: 10px;
     overflow: hidden;
+    background-color: lightblue;
 }
 
 .col-side {
     display: table-cell;
-    //background-color: pink;
+    background-color: pink;
 
     //gutter left
     padding-left: 10px;
@@ -35,7 +36,7 @@
 
 .col-main {
     display: table-cell;
-
+    background-color: green;
     //gutter left
     padding-left: 10px;
     padding-right: 20px;
@@ -46,7 +47,7 @@
 
     a:-webkit-any-link {
       text-decoration: none;
-      color: $accent-blue2;
+      //color: $accent-blue1;
     }
 
     h2 {

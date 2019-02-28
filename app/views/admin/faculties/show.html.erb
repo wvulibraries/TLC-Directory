@@ -5,14 +5,15 @@
     <%= link_to '<span class="fas fa-edit"></span> Edit'.html_safe, edit_admin_faculty_path(@faculty), { class: 'edit-button' } %>
     <%= link_to '<span class="fas fa-trash"></span> Destroy'.html_safe, admin_faculty_path(@faculty), method: :delete, class: 'delete-button', data: { confirm: 'Are you sure?' }, title:'delete' %>
   </div>
-
-  <div class="profile-box">
-    <div class="profile-picture">
+  <div class="faculty-profile">
+    <div class="faculty-profile-pic">
         <img src="<%= @faculty.image.small %>" alt="faculty profile image"/>
     </div>
-    <div class="photo-caption"> <%= @faculty.display_name %></div>
+    <div class="faculty-profile-title">
+    <h1><%= @faculty.display_name %></h1>
     <%= @faculty.role.capitalize %>
     <%= @faculty.status.capitalize %>
+    </div>
   </div>
 
   <div class="col-side">
@@ -135,5 +136,4 @@
   <div class="micro-text">
     Created at <%= @faculty.created_at.strftime("%B %d, %Y at %I:%M%p") %> <br/> Updated at <%= @faculty.updated_at.strftime("%B %d, %Y at %I:%M%p")%>
   </div>
-
 </div>

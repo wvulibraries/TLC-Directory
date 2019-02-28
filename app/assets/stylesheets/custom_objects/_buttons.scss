@@ -44,8 +44,10 @@ input[type="submit"], input[type="reset"]{
 }
 
 .browse-buttons {
+  //background-color: pink;
+  display: table;
+
   a {
-    margin-left: auto;
-    margin-right: auto;
+    margin: 5px;
   }
 }
