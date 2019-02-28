@@ -29,7 +29,6 @@ RSpec.describe ImportAdapter::BaseAdapter do
 
     context "with complete csv file" do
       it 'perform import with valid params' do
-          puts rows.inspect
           adaptor = ImportAdapter::BaseAdapter.new({:filename => file_path})
           adaptor.import
           # verify count

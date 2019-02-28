@@ -19,10 +19,9 @@ module ImportAdapter
                         add_optional_items(row)
                         @faculty.save(validate: false)
                         @import_count += 1
-                    else
-                        puts "failed to find or create faculty"
-                        puts row.inspect 
                     end
+                else
+                    puts "Error: username cannot be nil " + row.inspect
                 end
             end
             return true       
