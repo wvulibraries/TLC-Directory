@@ -59,8 +59,14 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-    # BULLET warn of N+1 and excessive queries
-    config.after_initialize do
+  CarrierWave.configure do |config|
+    config.ignore_integrity_errors = false
+    config.ignore_processing_errors = false
+    config.ignore_download_errors = false
+  end
+
+  # BULLET warn of N+1 and excessive queries
+  config.after_initialize do
     Bullet.enable = true
     Bullet.alert = true
     Bullet.console = true

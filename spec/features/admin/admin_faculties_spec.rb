@@ -94,4 +94,5 @@ RSpec.feature "Admin::Faculty", type: :feature do
     visit '/admin/faculties/import'
     expect(page).to have_content('Import a CSV File')   
   end
+
 end

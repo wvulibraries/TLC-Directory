@@ -22,6 +22,8 @@ module CSVService
                     adaptor = ImportAdapter::FacultyAdapter.new({:filename => file})
                 when "INTELLCONT.csv"
                     adaptor = ImportAdapter::PublicationAdapter.new({:filename => file})    
+                when "SUPPORT_DOC.csv"
+                    adaptor = ImportAdapter::SupportDocAdapter.new({:filename => file}) 
                 else
                     adaptor = ImportAdapter::BaseAdapter.new({:filename => file})  
                 end

@@ -12,15 +12,17 @@ module ImportAdapter
             @import_count = 0
             CSV.foreach(@filename, headers: true, :header_converters => lambda { |h| h.gsub(/[^0-9A-Za-z_\s]/, '').downcase.gsub(/\s+/, "_").to_sym unless h.nil? }, liberal_parsing: true) do |row|       
                 # Find faculty
-                @faculty = Faculty.where(wvu_username: row[:username]).first_or_initialize
-                if @faculty.present?
-                    set_faculty_fields(row)
-                    add_optional_items(row)
-                    @faculty.save(validate: false)
-                    @import_count += 1
-                else
-                    puts "failed to find or create faculty"
-                    puts row.inspect 
+                if row[:username].present?
+                    @faculty = Faculty.where(wvu_username: row[:username]).first_or_initialize 
+                    if @faculty.present?
+                        set_faculty_fields(row)
+                        add_optional_items(row)
+                        @faculty.save(validate: false)
+                        @import_count += 1
+                    else
+                        puts "failed to find or create faculty"
+                        puts row.inspect 
+                    end
                 end
             end
             return true       
