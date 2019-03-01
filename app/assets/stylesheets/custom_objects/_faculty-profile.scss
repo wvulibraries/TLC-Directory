@@ -1,18 +1,20 @@
 .faculty-profile {
-  background-color: lightgreen;
+  //background-color: lightgreen;
+
 
   .faculty-profile-pic {
     float: left;
-    margin: 20px;
+    //margin: 20px;
 
     img {
+
       border-style: solid;
       border-width: medium;
       border-color: $accent-blue1;
       vertical-align: middle;
 
-      height: 150px;
-      width: 150px;
+      height: 200px;
+      width: 200px;
       object-fit: cover;
       object-position: 75% 25%;
       }

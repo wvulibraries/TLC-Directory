@@ -1,11 +1,12 @@
 <div class="show-action">
-
   <div class="actions">
     <%= link_to '<span class="fas fa-users"></span> Users'.html_safe, '/admin/faculties', { class: 'new-button' } %>
     <%= link_to '<span class="fas fa-edit"></span> Edit'.html_safe, edit_admin_faculty_path(@faculty), { class: 'edit-button' } %>
     <%= link_to '<span class="fas fa-trash"></span> Destroy'.html_safe, admin_faculty_path(@faculty), method: :delete, class: 'delete-button', data: { confirm: 'Are you sure?' }, title:'delete' %>
   </div>
-  <div class="faculty-profile">
+</div>
+
+<div class="faculty-profile">
     <div class="faculty-profile-pic">
         <img src="<%= @faculty.image.small %>" alt="faculty profile image"/>
     </div>
@@ -14,8 +15,9 @@
     <%= @faculty.role.capitalize %>
     <%= @faculty.status.capitalize %>
     </div>
-  </div>
+</div>
 
+<div class="col-container">
   <div class="col-side">
     <div class="info-boxes">
         <h3>Contact Information</h3>
@@ -89,10 +91,9 @@
   </div>
 
   <div class="col-main">
-    <div class="info-boxes">
       <% if @faculty.research_interests.present? %>
         <li>
-          <h3>Research Interest(s):</h3>
+          <h2>Research Interest(s):</h2>
           <ul>
             <% @faculty.research_interests.split(/\s*,\s*/).each do |interest| %>
               <li> <%= interest %> </li>
@@ -103,7 +104,7 @@
 
       <% if @faculty.teaching_interests.present? %>
         <li>
-          <h3>Teaching Interest(s):</h3>
+          <h2>Teaching Interest(s):</h2>
           <ul>
             <% @faculty.teaching_interests.split(/\s*,\s*/).each do |interest| %>
               <li> <%= interest %> </li>
@@ -114,7 +115,7 @@
 
       <% if haspublications?(@faculty) %>
         <li>
-          <h3>Publication(s):</h3>
+          <h2>Publication(s):</h2>
           <ul>
           <% @faculty.publications.each do |pub| %>
             <li>
@@ -128,12 +129,9 @@
           </ul>
         </li>
       <% end %>
-
-    </div>
-
   </div>
+</div>
 
-  <div class="micro-text">
+<div class="micro-text">
     Created at <%= @faculty.created_at.strftime("%B %d, %Y at %I:%M%p") %> <br/> Updated at <%= @faculty.updated_at.strftime("%B %d, %Y at %I:%M%p")%>
-  </div>
 </div>
