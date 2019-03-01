@@ -7,12 +7,14 @@ module CSVService
  
         def initialize(params = {})
             # path for csv files
-            @csv_path = "#{Rails.root}/public/uploads/#{Rails.env}/csv/"
+            @path = "#{Rails.root}/public/uploads/#{Rails.env}"
+            @csv_path = @path + "/csv/"
             # path for zip files
-            @zip_path = "#{Rails.root}/public/uploads/#{Rails.env}/zip/"
+            @zip_path = @path + "/zip/"
             @completed_zip_path = @zip_path + 'completed' + '/'
 
             # create folders if missing
+            Dir.mkdir(@path) unless File.exists?(@path)
             Dir.mkdir(@csv_path) unless File.exists?(@csv_path) 
             Dir.mkdir(@zip_path) unless File.exists?(@zip_path) 
             Dir.mkdir(@completed_zip_path) unless File.exists?(@completed_zip_path)

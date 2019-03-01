@@ -70,7 +70,7 @@ class Admin::FacultiesController < ApplicationController
       if wizard.errors.count > 0
         @errors << wizard.errors 
       else
-        flash.now[:notice] = 'CSV File(s) have been imported.'
+        flash.now[:notice] = I18n.t('faculty.csv_import_queued')
       end
     end
 
@@ -79,7 +79,7 @@ class Admin::FacultiesController < ApplicationController
         if zip_import.errors.count > 0
           @errors << zip_import.errors 
         else
-          flash.now[:notice] = upload_params[:zip_file].original_filename + ' has been queued for import'
+          flash.now[:notice] = upload_params[:zip_file].original_filename + I18n.t('faculty.zip_import_queued')
         end
     end
 

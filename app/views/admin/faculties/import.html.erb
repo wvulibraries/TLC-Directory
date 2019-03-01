@@ -14,13 +14,13 @@
     <h3>Import a CSV File(s)</h3>
     <%= form_tag admin_faculties_import_path, multipart: true do %>
         <%= file_field_tag :csv_files, :multiple => true, name: 'csv_files[]', :accept => 'text/csv' %>
-        <%= submit_tag "Import" %>
+        <%= submit_tag "Import CSV File(s)" %>
     <% end %>
 
     <h3>Import a Digital Measures Zip</h3>
     <%= form_tag admin_faculties_import_path, multipart: true do %>
         <%= file_field_tag :zip_file, name: 'zip_file', :accept => 'application/zip' %>
-        <%= submit_tag "Import" %>
+        <%= submit_tag "Import ZIP File" %>
     <% end %>
 
 </div>
