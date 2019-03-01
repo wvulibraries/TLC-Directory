@@ -93,7 +93,7 @@ RSpec.feature "Admin::Faculty", type: :feature do
   scenario 'import faculty from csv' do
     visit '/admin/faculties/import'
     expect(page).to have_content('Import a CSV File')   
-    attach_file('csv_files', '#{Rails.root}/spec/support/files/PCI.csv')
+    attach_file('csv_files', './spec/support/files/PCI.csv')
     click_button 'Import CSV File(s)'
     expect(page).to have_content(I18n.t('faculty.csv_import_queued'))
   end
@@ -101,7 +101,7 @@ RSpec.feature "Admin::Faculty", type: :feature do
   scenario 'import faculty from zip' do
     visit '/admin/faculties/import'
     expect(page).to have_content('Import a Digital Measures Zip')   
-    attach_file('zip_file', '#{Rails.root}/spec/support/files/PCI.zip')
+    attach_file('zip_file', './spec/support/files/PCI.zip')
     click_button 'Import ZIP File'
     expect(page).to have_content(I18n.t('faculty.zip_import_queued'))
   end
