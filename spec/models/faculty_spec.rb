@@ -41,7 +41,7 @@ RSpec.describe Faculty, type: :model do
     it 'should not take any other formats' do
       obj = FactoryBot.build(:faculty, resume: Rack::Test::UploadedFile.new(Rails.root.join('spec/support/files/test_1.jpg'), 'image/jpeg'))
       expect(obj.valid?).to eq false
-      expect(obj.errors[:resume].first).to eq('You are not allowed to upload "jpg" files, allowed types: pdf')
+      expect(obj.errors[:resume].first).to eq('You are not allowed to upload "jpg" files, allowed types: pdf, doc, docx')
     end
   end
 

@@ -36,7 +36,7 @@ RSpec.feature "Admin::Faculty", type: :feature do
     select('user', from: 'User Role')
     select('enabled', from: 'User Status')
     click_button 'Submit'
-    expect(page).to have_content('Success! Faculty profile was created!')
+    expect(page).to have_content(I18n.t('faculty.success'))
   end
 
   scenario 'fails creating a new faculty because of no wvu username' do

@@ -52,4 +52,6 @@ en:
   faculty:
     success: "Success! Faculty profile was created!"
     deleted: "Faculty Removed! The faculty profile was removed, for temporary removal you should change the faculty status."
-    edited: "Success! Faculty profile was edited."    
+    edited: "Success! Faculty profile was edited."  
+    csv_import_queued: "CSV File(s) have been queued for import."
+    zip_import_queued: " has been queued for import"

@@ -33,7 +33,7 @@ describe ResumeUploader do
       expect(uploader.store_dir).to eq(up_path)
     end
     it 'checks whitelist types' do
-      files =  %w[pdf]
+      files =  %w[pdf doc docx]
       expect(uploader.extension_whitelist).to eq(files)
     end
     it 'expects a default file' do

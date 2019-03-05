@@ -14,7 +14,6 @@ module CSVService
             directory_name = "#{Rails.root}/public/uploads/#{Rails.env}/csv/imported/"
             files = Dir.glob("#{Rails.root}/public/uploads/#{Rails.env}/csv/*.csv")
             files.each do |file|
-                puts "importing " + File.basename(file)
                 case File.basename(file)                                     
                 when "AWARDHONOR.csv"
                     adaptor = ImportAdapter::AwardAdapter.new({:filename => file})

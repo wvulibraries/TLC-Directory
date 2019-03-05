@@ -13,6 +13,9 @@ env :BUNDLE_PATH, ENV['BUNDLE_PATH']
 env :RUBY_VERSION, ENV['RUBY_VERSION']
 env :BUNDLER_VERSION, ENV['BUNDLER_VERSION']
 env :ELASTICSEARCH_URL, ENV['ELASTICSEARCH_URL']
+env :DMEASURES_URL, ENV['DMEASURES_URL']
+env :DMEASURES_USER, ENV['DMEASURES_USER']
+env :DMEASURES_PW, ENV['DMEASURES_PW']
 
 # set logs and environment
 set :output, {:standard => "/home/tlcdirectory/log/cron.log", :error => "/home/tlcdirectory/log/cron_error.log"}
