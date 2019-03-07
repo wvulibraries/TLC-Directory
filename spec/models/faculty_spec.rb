@@ -5,11 +5,11 @@ RSpec.describe Faculty, type: :model do
   # let(:faculty_phone) { FactoryBot.create :faculty_with_phone }
   # let(:faculty_address) { FactoryBot.create :faculty_with_address }
 
-  context 'validations' do
-    it { should validate_presence_of(:title) }
-    it { should validate_length_of(:title).is_at_least(2) }
-    it { should validate_length_of(:title).is_at_most(70) }
-  end
+  # context 'validations' do
+  #   it { should validate_presence_of(:title) }
+  #   it { should validate_length_of(:title).is_at_least(2) }
+  #   it { should validate_length_of(:title).is_at_most(70) }
+  # end
 
   context 'associations' do
     it { should belong_to(:college) }   

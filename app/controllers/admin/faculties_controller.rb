@@ -122,7 +122,7 @@ class Admin::FacultiesController < ApplicationController
                   addresses_attributes: %i[id street_address_1 street_address_2 city state zip_code _destroy],
                   awards_attributes: %i[id starting_year ending_year name organization description _destroy],
                   phones_attributes: %i[id number number_types _destroy],
-                  publications_attributes: %i[id starting_year ending_year title url description _destroy],
+                  publications_attributes: %i[id starting_year ending_year title status publisher pagenum issue volume url description _destroy],
                   websites_attributes: %i[id url _destroy]           
                 )
     end

@@ -7,17 +7,16 @@ class Publication < ApplicationRecord
 
   # validations
   validates :starting_year, :ending_year, length: { is: 4 }, allow_blank: true
+  #validates :url, presence: false, url: true 
 
   # display publication
   def display_date
     if starting_year.to_s.length == 4 && ending_year.to_s.length == 4
       return_string = "(" + "#{starting_year}" + " - " + "#{ending_year}" + ")."
-    else
-      return_string = "(" + "#{starting_year}" + ")." if starting_year.to_s.length == 4
+    elsif starting_year.to_s.length == 4
+      return_string = "(" + "#{starting_year}" + ")."
+    elsif ending_year.to_s.length == 4
+      return_string = "(" + "#{ending_year}" + ")."
     end
-  end
-
-  def retrieved_from
-    "Retrieved from " + "#{url}" if url.present?
   end
 end

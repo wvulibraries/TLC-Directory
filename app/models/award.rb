@@ -13,11 +13,10 @@ class Award < ApplicationRecord
   def display_award
     return_string = display_date || ""
     if name.present? && organization.present?
+      return_string << "#{name}, #{organization}" 
+    elsif name.present?
       return_string << "#{name}" 
-      return_string << ", #{organization}" if organization.present?
-    elsif name.present? && organization.nil?
-      return_string << "#{name}" 
-    elsif name.nil? && organization.present? 
+    elsif organization.present? 
       return_string << "#{organization}" 
     end
   end
@@ -27,6 +26,8 @@ class Award < ApplicationRecord
       "#{starting_year} - #{ending_year} "
     elsif starting_year.to_s.length == 4
       "#{starting_year} "
+    elsif ending_year.to_s.length == 4
+      "#{ending_year} "
     end
   end
 end

@@ -20,16 +20,13 @@ module ImportAdapter
                         @faculty.save(validate: false)
                         @import_count += 1
                     end
-                else
-                    puts "Error: username cannot be nil " + row.inspect
                 end
-            end
-            return true       
+            end      
         end
 
         private
 
-        # placeholder for adding additional fields for the faculty model
+        # placeholder for adding additional fields
         def add_optional_items(row)
             false
         end

@@ -29,8 +29,4 @@ RSpec.describe Publication, type: :model do
     expect(pub.display_date).to eql("(" + pub.starting_year.to_s + ").")
   end
 
-  it 'Should return properly formatted url' do
-    expect(pub.retrieved_from).to eql("Retrieved from " + pub.url)
-  end
-
 end

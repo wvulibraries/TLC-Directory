@@ -93,6 +93,11 @@ ActiveRecord::Schema.define(version: 2019_03_04_183940) do
     t.string "publishable_type"
     t.bigint "publishable_id"
     t.text "description"
+    t.string "status"
+    t.string "publisher"
+    t.string "pagenum"
+    t.integer "issue"
+    t.integer "volume"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "url"

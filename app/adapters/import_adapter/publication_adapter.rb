@@ -1,6 +1,7 @@
 module ImportAdapter  
     class PublicationAdapter < BaseAdapter
-
+        require 'uri'
+        
         private
 
         # placeholder for adding additional fields for the faculty model
@@ -13,8 +14,14 @@ module ImportAdapter
 
             hash[:title] = row[:title]
             hash[:url] = row[:web_address]        
-            hash[:description] =  row[:abstract]    
-            
+            hash[:description] = row[:abstract]
+            hash[:status] = row[:status]
+            hash[:publisher] = row[:publisher]
+            hash[:pagenum] = row[:pagenum]
+            hash[:issue] = row[:issue]
+            hash[:volume] = row[:volume]
+            hash[:url] = row[:web_address]
+
             @faculty.publications << [Publication.find_or_create_by(hash)]
         end
 

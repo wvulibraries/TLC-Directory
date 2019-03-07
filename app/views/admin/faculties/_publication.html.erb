@@ -3,32 +3,57 @@
 
   <div class="field full">
     <%= form.label :starting_year, "Starting Year", class: 'required' %>
-    <%= form.text_field :starting_year, placeholder:'2019' %>
+    <%= form.text_field :starting_year, placeholder:'2019', size: "100x1" %>
   </div>
 
   <div class="field full">
     <%= form.label :ending_year, "Ending Year" %>
-    <%= form.text_field :ending_year, placeholder:'2019' %>
+    <%= form.text_field :ending_year, placeholder:'2019', size: "100x1" %>
   </div>
 
   <div class="field full">
-    <%= form.label :author, "Ending Year" %>
-    <%= form.text_field :author, placeholder:'Doe, John' %>
+    <%= form.label :author, "Author(s)" %>
+    <%= form.text_field :author, placeholder:'Doe, John', size: "100x1" %>
   </div>
 
   <div class="field full">
     <%= form.label :title, "Title", class: 'required' %>
-    <%= form.text_area :title, placeholder:'underwater basket weaving', size: "30x10" %>
+    <%= form.text_area :title, placeholder:'underwater basket weaving', size: "100x1" %>
   </div>
 
   <div class="field full">
+    <%= form.label :status, "Status", class: 'required' %>
+    <%= form.text_area :status, placeholder:'Accepted', size: "100x1" %>
+  </div>
+
+  <div class="field full">
+    <%= form.label :publisher, "Publisher", class: 'required' %>
+    <%= form.text_area :publisher, placeholder:'Marvel', size: "100x1" %>
+  </div>
+
+  <div class="field full">
+    <%= form.label :pagenum, "Page Number(s)", class: 'required' %>
+    <%= form.text_area :pagenum, placeholder:'1, 1-10', size: "100x1" %>
+  </div>  
+
+  <div class="field full">
+    <%= form.label :issue, "Issue", class: 'required' %>
+    <%= form.text_area :issue, placeholder:'1', size: "100x1" %>
+  </div> 
+
+  <div class="field full">
+    <%= form.label :volume, "Volume", class: 'required' %>
+    <%= form.text_area :volume, placeholder:'1', size: "100x1" %>
+  </div> 
+
+  <div class="field full">
     <%= form.label :description, "Description", class: 'required' %>
-    <%= form.text_area :description, placeholder:'1st Place in underwater basket weaving', size: "30x10" %>
+    <%= form.text_area :description, placeholder:'1st Place in underwater basket weaving', size: "100x10" %>
   </div>
 
   <div class="field full">
     <%= form.label :url, "URL" %>
-    <%= form.text_area :url, placeholder:'https://lib.wvu.edu/' %>
+    <%= form.text_area :url, placeholder:'https://lib.wvu.edu/', size: "100x1" %>
   </div>
 
   <div class="action">

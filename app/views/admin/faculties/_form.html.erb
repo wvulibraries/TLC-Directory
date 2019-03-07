@@ -62,17 +62,17 @@
     </div>
 
     <div class="field full">
-      <%= link_to 'View Current CV / Resume', faculty.resume.url, target: :_blank if faculty.resume? %>
+      <% if faculty.resume? %>
+        <%= link_to 'View Current CV / Resume', faculty.resume.url, target: :_blank %>
+          <div class="checkbox-wrapper">
+            <div class="checkbox">
+              <%= f.check_box :remove_resume %>
+              <%= f.label :remove_resume, 'Remove Resume' %>
+            </div>
+          </div>
+      <% end %>
       <%= f.label :resume, 'CV / Resume Upload' %>
       <%= f.file_field :resume %>
-      <% if faculty.resume? %>
-        <div class="checkbox-wrapper">
-          <div class="checkbox">
-            <%= f.check_box :remove_resume %>
-            <%= f.label :remove_resume, 'Remove Resume' %>
-          </div>
-        </div>
-      <% end %>
       <%= f.hidden_field :resume_cache %>
     </div>
     
@@ -83,19 +83,19 @@
      <div class="row">
       <div class="field half">
         <%= f.label :wvu_username, class: 'required' %>
-        <%= f.text_field :wvu_username, placeholder: "jqsmith001" %>
+        <%= f.text_field :wvu_username, placeholder: "jqsmith001", size: "100x1"  %>
       </div>
       
       <div class="field half last">
         <%= f.label :email, class: 'required' %>
-        <%= f.text_field :email, placeholder: "jqsmith001@mail.wvu.edu" %>
+        <%= f.text_field :email, placeholder: "jqsmith001@mail.wvu.edu", size: "100x1"  %>
       </div>      
     </div>
     
     <div class="row"> 
       <div class="field half">
         <%= f.label :title, class: 'required' %>
-        <%= f.text_field :title, placeholder: "Accountant EBO" %>
+        <%= f.text_field :title, placeholder: "Accountant EBO", size: "100x1" %>
       </div>
 
       <div class="field">
@@ -110,12 +110,12 @@
 
       <div class="field full">
         <%= f.label :research_interests %>
-        <%= f.text_area :research_interests, placeholder: "Scholarly multimedia, digital publishing, editorial pedagogy, multimodal composition, academic literacies, professionalization" %>
+        <%= f.text_area :research_interests, placeholder: "Scholarly multimedia, digital publishing, editorial pedagogy, multimodal composition, academic literacies, professionalization", size: "100x5" %>
       </div>
 
       <div class="field full">
         <%= f.label :teaching_interests %>
-        <%= f.text_area :teaching_interests, placeholder: "Scholarly multimedia, digital publishing, editorial pedagogy, multimodal composition, academic literacies, professionalization" %>
+        <%= f.text_area :teaching_interests, placeholder: "Scholarly multimedia, digital publishing, editorial pedagogy, multimodal composition, academic literacies, professionalization", size: "100x5" %>
       </div>      
 
       <div class="field half">
@@ -125,7 +125,7 @@
 
       <div class="field full">
         <%= f.label :biography %>
-        <%= f.text_area :biography, placeholder: "Basic biography of faculty in simple terms for the public.", size: "30x10" %>
+        <%= f.text_area :biography, placeholder: "Basic biography of faculty in simple terms for the public.", size: "100x10" %>
       </div>
     </div>
   </fieldset>

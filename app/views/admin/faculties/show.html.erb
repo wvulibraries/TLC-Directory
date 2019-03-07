@@ -79,21 +79,33 @@
             <% end %>
             </ul>
           </li>
+        <% end %>   
+        
+        <% if @faculty.resume.present? %>
+          <li>
+            <strong> Resume/CV: </strong>
+            <%= link_to(File.basename(@faculty.resume.path), @faculty.resume.url) %>
+          </li>
         <% end %>        
 
         <% if haspublications?(@faculty) %>
           <li>
             <strong> Publication(s): </strong>
             <ul>
-            <% @faculty.publications.each do |pub| %>
+            <% @faculty.publications.each do |publication| %>
               <li>
                 <ul>
-                  <li> <%= pub.author %> </li>                
-                  <li> <%= pub.display_date %> </li>
-                  <li> <%= pub.title %> </li>
-                  <li> <%= pub.description %> </li>
-                    <a href="<%= pub.url %>">
-                      <%= pub.url %>
+                  <li> <%= publication.author%> </li>                
+                  <li> <%= publication.display_date %> </li>
+                  <li> <%= publication.status %></li>                  
+                  <li> <%= publication.title %> </li>
+                  <li> <%= publication.publisher %> </li>
+                  <li> <%= publication.volume %> </li>
+                  <li> <%= publication.issue %> </li>  
+                  <li> <%= publication.pagenum %> </li>                                                                                         
+                  <li> <%= publication.description %> </li>
+                    <a href="<%= publication.url %>">
+                      <%= publication.url %>
                     </a>
                 </ul>
               </li>

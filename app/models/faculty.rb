@@ -10,15 +10,15 @@ class Faculty < User
   self.table_name = :faculty
   
   # validations
-  validates :title,
-            presence: true,
-            length: { within: 2..70 }
+  # validates :title,
+  #           presence: true,
+  #           length: { within: 2..70 }
             
-  validates :biography, 
-            presence: true 
+  # validates :biography, 
+  #           presence: true 
                   
-  validates :research_interests, 
-            presence: true
+  # validates :research_interests, 
+  #           presence: true
 
   belongs_to :college
   belongs_to :department

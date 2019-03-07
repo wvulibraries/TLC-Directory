@@ -3,6 +3,5 @@ class Website < ApplicationRecord
   belongs_to :webable, polymorphic: true
 
   # validations
-  validates :url, :presence => true, :url => true
-  
+  validates :url, :presence => true, :url => true 
 end

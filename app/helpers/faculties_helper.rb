@@ -1,4 +1,5 @@
 module FacultiesHelper
+  require 'uri'
 
   def isadmin?(faculty)
     faculty.role == 'admin'
@@ -30,6 +31,13 @@ module FacultiesHelper
   
   def hascv?(faculty)
     faculty.resume != nil
+  end
+
+  def valid_url?(url)
+    uri = URI.parse(url)
+    uri.is_a?(URI::HTTP) && !uri.host.nil?
+    rescue URI::InvalidURIError
+      false
   end
 
 end
