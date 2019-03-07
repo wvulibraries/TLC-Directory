@@ -33,7 +33,7 @@ RSpec.describe Award, type: :model do
     expect(award.display_award).to eql(award.starting_year.to_s + ' ' + award.name + ', ' + award.organization)
   end
 
-  it 'Without a name should just display starting and ending year, name and organizationo from display award' do
+  it 'Without a name should just display starting and ending year and organizationo from display award' do
     award.name = nil
     expect(award.display_award).to eql(award.starting_year.to_s + ' - ' + award.ending_year.to_s + ' ' + award.organization)
   end
@@ -43,9 +43,9 @@ RSpec.describe Award, type: :model do
     expect(award.display_award).to eql(award.starting_year.to_s + ' - ' + award.ending_year.to_s + ' ' + award.name)
   end
 
-  it 'Without a Starting Year should display name and organization' do
+  it 'Without a Starting Year should display ending year, name and organization' do
     award.starting_year = nil
-    expect(award.display_award).to eql(award.name + ', ' + award.organization)
+    expect(award.display_award).to eql(award.ending_year.to_s + ' ' + award.name + ', ' + award.organization)
   end
 
 end

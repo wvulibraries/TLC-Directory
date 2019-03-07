@@ -20,7 +20,6 @@ module ImportAdapter
             hash[:pagenum] = row[:pagenum]
             hash[:issue] = row[:issue]
             hash[:volume] = row[:volume]
-            hash[:url] = row[:web_address]
 
             @faculty.publications << [Publication.find_or_create_by(hash)]
         end
