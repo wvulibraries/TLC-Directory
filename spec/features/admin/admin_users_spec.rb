@@ -63,7 +63,7 @@ RSpec.feature "Admin::User", type: :feature do
     visit '/admin/users'
     click_link 'Delete'
     expect(page).to have_content('Manage User')
-    expect(page).to have_content(I18n.t('user.edited'))
+    expect(page).to have_content(I18n.t('user.deleted'))
     expect(page).to_not have_content(user_existing.first_name)
   end
 end
