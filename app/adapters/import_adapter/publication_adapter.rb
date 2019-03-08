@@ -6,22 +6,24 @@ module ImportAdapter
 
         # placeholder for adding additional fields for the faculty model
         def add_optional_items(row)
-            hash = {}
-            hash[:starting_year] = row[:dty_start]
-            hash[:ending_year] = row[:dty_end]
+            if row[:status] == 'Published'
+                hash = {}
+                hash[:starting_year] = row[:dty_start]
+                hash[:ending_year] = row[:dty_end]
 
-            hash[:author] = build_author_list(row)
+                hash[:author] = build_author_list(row)
 
-            hash[:title] = row[:title]
-            hash[:url] = row[:web_address]        
-            hash[:description] = row[:abstract]
-            hash[:status] = row[:status]
-            hash[:publisher] = row[:publisher]
-            hash[:pagenum] = row[:pagenum]
-            hash[:issue] = row[:issue]
-            hash[:volume] = row[:volume]
+                hash[:title] = row[:title]
+                hash[:url] = row[:web_address]        
+                hash[:description] = row[:abstract]
+                hash[:status] = row[:status]
+                hash[:publisher] = row[:publisher]
+                hash[:pagenum] = row[:pagenum]
+                hash[:issue] = row[:issue]
+                hash[:volume] = row[:volume]
 
-            @faculty.publications << [Publication.find_or_create_by(hash)]
+                @faculty.publications << [Publication.find_or_create_by(hash)]
+            end
         end
 
         def build_author_list(row)

@@ -32,29 +32,31 @@ module ImportAdapter
         end
 
         def set_faculty_fields(row)
-            hash = {}
-            # Common Fields in all CSV Files
-            hash[:first_name] = row[:first_name] unless row[:first_name].nil?
-            hash[:middle_name] = row[:middle_name] unless row[:middle_name].nil?
-            hash[:last_name] = row[:last_name] unless row[:last_name].nil?
+            # Common Fields in all CSV Files that we will get and are not modifiying
+            keys = [:first_name, :middle_name, :last_name, :research_interests, :teaching_interests, :prefix, :suffix]
+            hash = keys.zip(row.to_hash.values_at *keys).to_h
+
+            # downcase the email address we are seeing sometimes they are uppercase
             hash[:email] = row[:email].downcase unless row[:email].nil?
+
+            # find or create college
             hash[:college] = College.find_or_create_by(name: row[:college_most_recent]) unless row[:college_most_recent].nil?
 
+            # find or create department
             if row[:unit_most_recent].present?
                 hash[:department] = Department.find_or_create_by(name: row[:unit_most_recent])
             elsif row[:section_department_of_medicine_only_most_recent].present?
                 hash[:department] = Department.find_or_create_by(name: row[:section_department_of_medicine_only_most_recent])
             end
-             
+
+            # set wvu_username convert to lowercase
             hash[:wvu_username] = row[:username].downcase unless row[:username].nil?
 
             # These fields are not in all csv files
             hash[:biography] = row[:bio] unless row[:bio].nil?
-            hash[:research_interests] = row[:research_interests] unless row[:research_interests].nil?
-            hash[:teaching_interests] = row[:teaching_interests] unless row[:teaching_interests].nil?
+
             hash[:preferred_name] = row[:pfname] unless row[:pfname].nil?
-            hash[:prefix] = row[:prefix] unless row[:prefix].nil?
-            hash[:suffix] = row[:suffix] unless row[:suffix].nil?
+
             hash[:title] = row[:rank] unless row[:rank].nil? || row[:srank] unless row[:srank].nil?
 
             # default values
