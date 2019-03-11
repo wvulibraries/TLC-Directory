@@ -6,35 +6,35 @@ module CSVService
         attr_reader :errors
  
         def initialize(params = {})
+            @path = "#{Rails.root}/public/uploads/#{Rails.env}/csv/"
+            @directory_name = @path + "imported"
             @csv_files = params[:csv_files]
             store_files if @csv_files.present?
         end
 
         def process_files
-            directory_name = "#{Rails.root}/public/uploads/#{Rails.env}/csv/imported/"
-            files = Dir.glob("#{Rails.root}/public/uploads/#{Rails.env}/csv/*.csv")
+            # get all csv files in directory
+            files = Dir.glob(@path + "*.csv")
             files.each do |file|
                 case File.basename(file)                                     
                 when "AWARDHONOR.csv"
-                    adaptor = ImportAdapter::AwardAdapter.new({:filename => file})
+                    ImportAdapter::AwardAdapter.new({:filename => file}).import
                 when "PCI.csv"
-                    adaptor = ImportAdapter::FacultyAdapter.new({:filename => file})
+                    ImportAdapter::FacultyAdapter.new({:filename => file}).import
                 when "INTELLCONT.csv"
-                    adaptor = ImportAdapter::PublicationAdapter.new({:filename => file})    
+                    ImportAdapter::PublicationAdapter.new({:filename => file}).import    
                 when "SUPPORT_DOC.csv"
-                    adaptor = ImportAdapter::SupportDocAdapter.new({:filename => file}) 
+                    ImportAdapter::SupportDocAdapter.new({:filename => file}).import 
                 else
-                    adaptor = ImportAdapter::BaseAdapter.new({:filename => file})  
+                    ImportAdapter::BaseAdapter.new({:filename => file}).import  
                 end
 
-                adaptor.import if adaptor.present?
-
                 # move each file after it has been imported into a separate folder
-                Dir.mkdir(directory_name) unless File.exists?(directory_name)    
-                File.rename file, directory_name + File.basename(file)
+                Dir.mkdir(@directory_name) unless File.exists?(@directory_name)    
+                File.rename file, @directory_name + File.basename(file)
             end
 
-            FileUtils.rm_rf(directory_name)
+            FileUtils.rm_rf(@directory_name)
         end
         
         private

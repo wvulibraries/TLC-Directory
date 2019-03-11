@@ -19,4 +19,8 @@ class Publication < ApplicationRecord
       return_string = "(" + "#{ending_year}" + ")."
     end
   end
+
+  def vol_issue
+    "#{volume}" + "(" + "#{issue}" + ")" if volume.present? && issue.present?
+  end
 end
