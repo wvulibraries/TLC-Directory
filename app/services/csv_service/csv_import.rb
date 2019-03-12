@@ -16,7 +16,11 @@ module CSVService
             # get all csv files in directory
             files = Dir.glob(@path + "*.csv")
             files.each do |file|
-                case File.basename(file)                                     
+                case File.basename(file)
+                when "ADMIN.csv" 
+                    ImportAdapter::AdminAdapter.new({:filename => file}).import 
+                when "ADMIN_PERM"
+                    ImportAdapter::AdminPermAdapter.new({:filename => file}).import                                   
                 when "AWARDHONOR.csv"
                     ImportAdapter::AwardAdapter.new({:filename => file}).import
                 when "PCI.csv"

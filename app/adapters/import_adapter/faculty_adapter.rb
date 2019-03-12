@@ -6,6 +6,8 @@ module ImportAdapter
         # placeholder for adding additional fields for the faculty model
         def add_optional_items(row)
             hash = {}
+            hash[:biography] = row[:bio] unless row[:bio].nil?
+            hash[:perferred_name] = row[:pfname] unless row[:pfname].nil? 
             hash[:websites] = [Website.find_or_create_by(url: row[:website])] unless row[:website].nil?            
             hash[:phones] = build_phone_array(row)
             @faculty.attributes = hash

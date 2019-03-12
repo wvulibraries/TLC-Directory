@@ -1,15 +1,13 @@
 module ImportAdapter  
-    class AdminAdapter < BaseAdapter
-
+    class AdminPermAdapter < BaseAdapter
         private
 
         # placeholder for adding additional fields for the faculty model
         def add_optional_items(row)
             hash = {}
-            hash[:title] = row[:rank] unless row[:rank].nil? 
+            hash[:title] = row[:srank] unless row[:srank].nil? 
 
             @faculty.attributes = hash
         end
-
     end
 end

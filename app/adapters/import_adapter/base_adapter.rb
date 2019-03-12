@@ -32,40 +32,45 @@ module ImportAdapter
         end
 
         def set_faculty_fields(row)
-            # Common Fields in all CSV Files that we will get and are not modifiying
-            keys = [:first_name, :middle_name, :last_name, :research_interests, :teaching_interests, :prefix, :suffix]
-            hash = keys.zip(row.to_hash.values_at *keys).to_h
+            # convert row to hash
+            hash = row.to_hash
 
-            # downcase the email address we are seeing sometimes they are uppercase
-            hash[:email] = row[:email].downcase unless row[:email].nil?
-
-            # find or create college
-            hash[:college] = College.find_or_create_by(name: row[:college_most_recent]) unless row[:college_most_recent].nil?
-
-            # find or create department
-            if row[:unit_most_recent].present?
-                hash[:department] = Department.find_or_create_by(name: row[:unit_most_recent])
-            elsif row[:section_department_of_medicine_only_most_recent].present?
-                hash[:department] = Department.find_or_create_by(name: row[:section_department_of_medicine_only_most_recent])
-            end
-
-            # set wvu_username convert to lowercase
-            hash[:wvu_username] = row[:username].downcase unless row[:username].nil?
-
-            # These fields are not in all csv files
-            hash[:biography] = row[:bio] unless row[:bio].nil?
-
-            hash[:preferred_name] = row[:pfname] unless row[:pfname].nil?
-
-            hash[:title] = row[:rank] unless row[:rank].nil? || row[:srank] unless row[:srank].nil?
-
-            # default values
+            # add default values
             hash[:role] = :user
             hash[:status] = 'enabled'
             hash[:visible] = true
 
+            # downcase fields
+            hash[:email].downcase unless hash[:email].nil?
+            hash[:username].downcase unless hash[:username].nil?
+
+            # rename keys to match what is in our model
+            hash = rename_hash_key(hash, "username", "wvu_username")
+
+            # find or create college
+            hash[:college] = College.find_or_create_by(name: hash[:college_most_recent]) unless hash[:college_most_recent].nil?
+
+            # find or create department
+            hash[:department] = find_or_create_department(hash)
+
             # find or create optional items
-            @faculty.attributes = hash
-        end          
+            @faculty.attributes = filter_hash_keys(hash)
+        end
+
+        def find_or_create_department(hash)
+            Department.find_or_create_by(name: hash[:unit_most_recent]) || Department.find_or_create_by(name: hash[:section_department_of_medicine_only_most_recent])
+        end
+        
+        def rename_hash_key(hash, source, dest)
+            hash[dest] = hash[source]
+            hash.delete(source) 
+            hash
+        end
+
+        def filter_hash_keys(hash)
+            # return hash with only requried keys
+            keys = [:first_name, :middle_name, :last_name, :research_interests, :teaching_interests, :prefix, :suffix, :college, :department, :wvu_username]
+            keys.zip(hash.values_at *keys).to_h           
+        end
     end
 end
