@@ -63,7 +63,7 @@ class Admin::FacultiesController < ApplicationController
     end
   end
 
-  def import 
+  def importcsv
     @errors = []
     if upload_params[:csv_files].present?
       wizard = CSVService::CSVImport.new({:csv_files => upload_params[:csv_files]})
@@ -74,7 +74,11 @@ class Admin::FacultiesController < ApplicationController
         flash.now[:notice] = I18n.t('faculty.csv_import_queued')
       end
     end
+    flash.now[:error] = @errors if @errors.count > 0
+  end
 
+  def importzip
+    @errors = []    
     if upload_params[:zip_file].present?
         zip_import = CSVService::ZipImport.new(upload_params)
         if zip_import.errors.count > 0
@@ -83,9 +87,7 @@ class Admin::FacultiesController < ApplicationController
           flash.now[:notice] = upload_params[:zip_file].original_filename + I18n.t('faculty.zip_import_queued')
         end
     end
-
     flash.now[:error] = @errors if @errors.count > 0
-    
   end
 
   private

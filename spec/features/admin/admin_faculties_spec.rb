@@ -72,15 +72,6 @@ RSpec.feature "Admin::Faculty", type: :feature do
     expect(page).to have_content('First name is too short (minimum is 2 characters)')
   end
 
-  # scenario 'add Address' do
-  #   visit "/admin/faculties/#{faculty_existing.id}/edit"
-  #   click_on 'Add Address'
-  #   fill_in 'City', with: 'Morgantown'
-  #   click_button 'Submit'
-  #   expect(page).to have_content('Success! Faculty profile was edited.')   
-  # end
-
-
   scenario 'deletes an existing faculty' do
     # then visit destroy path
     visit '/admin/faculties'
@@ -91,16 +82,16 @@ RSpec.feature "Admin::Faculty", type: :feature do
   end
 
   scenario 'import faculty from csv' do
-    visit '/admin/faculties/import'
-    expect(page).to have_content('Import a CSV File')   
+    visit '/admin/faculties/importcsv'
+    expect(page).to have_content('Import CSV File(s)')   
     attach_file('csv_files', './spec/support/files/PCI.csv')
     click_button 'Import CSV File(s)'
     expect(page).to have_content(I18n.t('faculty.csv_import_queued'))
   end
 
   scenario 'import faculty from zip' do
-    visit '/admin/faculties/import'
-    expect(page).to have_content('Import a Digital Measures Zip')   
+    visit '/admin/faculties/importzip'
+    expect(page).to have_content('Import Digital Measures Zip')   
     attach_file('zip_file', './spec/support/files/PCI.zip')
     click_button 'Import ZIP File'
     expect(page).to have_content(I18n.t('faculty.zip_import_queued'))

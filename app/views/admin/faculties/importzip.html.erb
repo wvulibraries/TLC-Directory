@@ -1,0 +1,21 @@
+<% if @errors.any? %>
+<div id="error_explanation">
+    <h3><%= pluralize(@errors.count, "Error") %> </h3>
+    <ul>
+    <% @errors.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+    </ul>
+</div>
+<% end %>
+
+<h2> Import Digital Measures Zip</h2>
+<div>
+
+    <%= form_tag admin_faculties_import_zip_path, multipart: true do %>
+        <%= file_field_tag :zip_file, name: 'zip_file', :accept => 'application/zip' %>
+        <%= submit_tag "Import ZIP File" %>
+    <% end %>
+
+</div>
+

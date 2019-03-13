@@ -17,10 +17,13 @@ Rails.application.routes.draw do
   # admin
   get '/admin', to: 'admin#index'
 
-  # insure import goes to correct location
-  get '/admin/faculties/import', 
-      to: 'admin/faculties#import', 
-      as: 'admin/faculties_import'
+  get '/admin/faculties/importzip', 
+      to: 'admin/faculties#importzip', 
+      as: 'admin/faculties_import_zip'
+      
+  get '/admin/faculties/importcsv', 
+      to: 'admin/faculties#importcsv', 
+      as: 'admin/faculties_import_csv'
 
   # forces the controllers to use the admin name space
   # this is going to allow for the addition of a function to restrict access
@@ -36,7 +39,7 @@ Rails.application.routes.draw do
               :departments,
               :users
     resources :faculties do
-        collection { post :import }
+        collection { post :importzip, :importcsv }
     end
   end
 
