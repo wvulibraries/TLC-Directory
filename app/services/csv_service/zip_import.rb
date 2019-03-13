@@ -15,7 +15,7 @@ module CSVService
             @completed_zip_path = @zip_path + 'completed' + '/'
 
             # create folders if missing
-            Dir.mkdir(@uploads) unless File.exists?(@uploads)
+            #Dir.mkdir(@uploads) unless File.exists?(@uploads)
             Dir.mkdir(@path) unless File.exists?(@path)
             Dir.mkdir(@csv_path) unless File.exists?(@csv_path) 
             Dir.mkdir(@zip_path) unless File.exists?(@zip_path) 
