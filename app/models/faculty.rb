@@ -20,6 +20,8 @@ class Faculty < User
   # validates :research_interests, 
   #           presence: true
 
+  validates :wvu_username, presence: true
+
   belongs_to :college
   belongs_to :department
             

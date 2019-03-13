@@ -40,12 +40,12 @@ module ImportAdapter
             hash[:status] = 'enabled'
             hash[:visible] = true
 
-            # downcase fields
-            hash[:email].downcase unless hash[:email].nil?
-            hash[:username].downcase unless hash[:username].nil?
+            # downcase email
+            hash[:email] = hash[:email].downcase unless hash[:email].nil?
 
-            # rename keys to match what is in our model
-            hash = rename_hash_key(hash, "username", "wvu_username")
+            # set wvu_username & downcase
+            hash[:wvu_username] = hash[:username].downcase unless hash[:username].nil?
+            #hash = rename_hash_key(hash, :username, :wvu_username)
 
             # find or create college
             hash[:college] = College.find_or_create_by(name: hash[:college_most_recent]) unless hash[:college_most_recent].nil?
@@ -69,7 +69,7 @@ module ImportAdapter
 
         def filter_hash_keys(hash)
             # return hash with only requried keys
-            keys = [:first_name, :middle_name, :last_name, :research_interests, :teaching_interests, :prefix, :suffix, :college, :department, :wvu_username]
+            keys = [:role, :status, :visible, :first_name, :middle_name, :last_name, :research_interests, :teaching_interests, :prefix, :suffix, :college, :department, :wvu_username, :resume, :email]
             keys.zip(hash.values_at *keys).to_h           
         end
     end

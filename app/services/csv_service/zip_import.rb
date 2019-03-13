@@ -7,7 +7,7 @@ module CSVService
  
         def initialize(params = {})
             # path for csv files
-            @uploads = @path = "#{Rails.root}/public/uploads"
+            @uploads = @path = "#{Rails.root}/public/uploads/"
             @path = @uploads + "#{Rails.env}"
             @csv_path = @path + "/csv/"
             # path for zip files

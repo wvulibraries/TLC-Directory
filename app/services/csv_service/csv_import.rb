@@ -35,7 +35,7 @@ module CSVService
 
                 # move each file after it has been imported into a separate folder
                 Dir.mkdir(@directory_name) unless File.exists?(@directory_name)    
-                File.rename file, @directory_name + File.basename(file)
+                File.rename file, @directory_name + '/' + File.basename(file)
             end
 
             FileUtils.rm_rf(@directory_name)
