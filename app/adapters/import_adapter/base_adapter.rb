@@ -11,15 +11,13 @@ module ImportAdapter
         def import
             @import_count = 0
             CSV.foreach(@filename, headers: true, :header_converters => lambda { |h| h.gsub(/[^0-9A-Za-z_\s]/, '').downcase.gsub(/\s+/, "_").to_sym unless h.nil? }, liberal_parsing: true) do |row|   
-                if row[:username].present?
-                    # Find faculty
-                    @faculty = Faculty.where(wvu_username: row[:username].downcase).first_or_initialize 
-                    if @faculty.present?
-                        set_faculty_fields(row)
-                        add_optional_items(row)
-                        @faculty.save(validate: false)
-                        @import_count += 1
-                    end
+                # Find faculty
+                @faculty = Faculty.where(wvu_username: row[:username]).first_or_initialize 
+                if @faculty.present?
+                    set_faculty_fields(row)
+                    add_optional_items(row)
+                    @faculty.save(validate: false)
+                    @import_count += 1
                 end
             end      
         end
@@ -39,9 +37,8 @@ module ImportAdapter
             Department.find_or_create_by(name: hash[:unit_most_recent]) || Department.find_or_create_by(name: hash[:section_department_of_medicine_only_most_recent])
         end
 
-        def filter_hash_keys(hash)
+        def filter_hash_keys(hash, keys)
             # return hash with only requried keys
-            keys = [:role, :status, :visible, :email, :wvu_username, :first_name, :middle_name, :last_name, :research_interests, :teaching_interests, :prefix, :suffix, :college, :department, :resume]
             keys.zip(hash.values_at *keys).to_h           
         end
 
@@ -53,7 +50,7 @@ module ImportAdapter
             hash[:email] = hash[:email].downcase unless hash[:email].nil?
 
             # set wvu_username & downcase
-            #hash[:wvu_username] = hash[:username].downcase unless hash[:username].nil?
+            hash[:wvu_username] = hash[:username].downcase unless hash[:username].nil?
 
             # find or create college
             hash[:college] = College.find_or_create_by(name: hash[:college_most_recent]) unless hash[:college_most_recent].nil?
@@ -62,7 +59,8 @@ module ImportAdapter
             hash[:department] = find_or_create_department(hash)
 
             # remove unused hash items by filtering the keys
-            @faculty.assign_attributes(filter_hash_keys(hash))
+            keys = [:role, :status, :visible, :email, :wvu_username, :first_name, :middle_name, :last_name, :research_interests, :teaching_interests, :prefix, :suffix, :college, :department, :resume]
+            @faculty.assign_attributes(filter_hash_keys(hash, keys))
         end
         
         def rename_hash_key(hash, source, dest)

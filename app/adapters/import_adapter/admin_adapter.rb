@@ -8,7 +8,7 @@ module ImportAdapter
             hash = {}
             hash[:title] = row[:rank] unless row[:rank].nil? 
 
-            @faculty.attributes = hash
+            @faculty.assign_attributes(hash)
         end
 
     end

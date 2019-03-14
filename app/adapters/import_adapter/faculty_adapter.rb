@@ -10,7 +10,7 @@ module ImportAdapter
             hash[:perferred_name] = row[:pfname] unless row[:pfname].nil? 
             hash[:websites] = [Website.find_or_create_by(url: row[:website])] unless row[:website].nil?            
             hash[:phones] = build_phone_array(row)
-            @faculty.attributes = hash
+            @faculty.assign_attributes(hash)
         end
 
         def build_phone_array(row)

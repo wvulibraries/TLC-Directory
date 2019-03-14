@@ -14,7 +14,6 @@ module ImportAdapter
                 hash[:ending_year] = row[:dty_end]
 
                 hash[:author] = build_author_list(row)
-                puts hash[:author]
 
                 hash[:url] = row[:web_address]        
                 hash[:description] = row[:abstract]
@@ -26,7 +25,7 @@ module ImportAdapter
         def build_author_list(row)
             # Common Fields in all CSV Files that we will get and are not modifiying
             keys = [:intellcont_auth_1_lname, :intellcont_auth_1_fname, :intellcont_auth_2_lname, :intellcont_auth_2_fname, :intellcont_auth_3_lname, :intellcont_auth_3_fname, :intellcont_auth_4_lname, :intellcont_auth_4_fname, :intellcont_auth_5_lname, :intellcont_auth_5_fname, :intellcont_auth_6_lname, :intellcont_auth_6_fname]
-            hash = keys.zip(row.to_hash.values_at *keys).to_h
+            hash = filter_hash_keys(hash, keys)
             authors = []
 
             items = hash.to_a
@@ -36,28 +35,8 @@ module ImportAdapter
                     authors << (items[items_pos][1] + ', ' + items[items_pos+1][1]).strip
                 end                 
             }
-
-            #authors = []
-            # if row[:intellcont_auth_1_lname].present? && row[:intellcont_auth_1_fname].present?
-            #     authors << (row[:intellcont_auth_1_lname] + ', ' + row[:intellcont_auth_1_fname]).strip
-            # end
-            # if row[:intellcont_auth_2_lname].present? && row[:intellcont_auth_2_fname].present?
-            #     authors << (row[:intellcont_auth_2_lname] + ', ' + row[:intellcont_auth_2_fname]).strip
-            # end        
-            # if row[:intellcont_auth_3_lname].present? && row[:intellcont_auth_3_fname].present?
-            #     authors << (row[:intellcont_auth_3_lname] + ', ' + row[:intellcont_auth_3_fname]).strip
-            # end   
-            # if row[:intellcont_auth_4_lname].present? && row[:intellcont_auth_4_fname].present?
-            #     authors << (row[:intellcont_auth_4_lname] + ', ' + row[:intellcont_auth_4_fname]).strip
-            # end 
-            # if row[:intellcont_auth_5_lname].present? && row[:intellcont_auth_5_fname].present?
-            #     authors << (row[:intellcont_auth_5_lname] + ', ' + row[:intellcont_auth_5_fname]).strip
-            # end
-            # if row[:intellcont_auth_6_lname].present? && row[:intellcont_auth_6_fname].present?
-            #     authors << (row[:intellcont_auth_6_lname] + ', ' + row[:intellcont_auth_6_fname]).strip
-            # end                        
+                      
             return_string = authors.to_sentence
-            puts return_string.inspect
             return_string.sub('and', '&')
         end
 
