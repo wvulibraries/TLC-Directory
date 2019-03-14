@@ -99,7 +99,7 @@ class Admin::FacultiesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def name_attrs
-    [ :prefix, :suffix, :first_name, :middle_name, :last_name, :preferred_name]
+    [ :prefix, :suffix, :first_name, :middle_name, :last_name, :preferred_name ]
   end
 
   def image_attrs 
@@ -113,31 +113,26 @@ class Admin::FacultiesController < ApplicationController
   def contact_attrs
     [ 
       addresses_attributes: %i[id street_address_1 street_address_2 city state zip_code _destroy],
-      phones_attributes: %i[id number number_types _destroy], 
+      phones_attributes: %i[id number number_types _destroy]
+    ]
+  end
+
+  def profile_attrs
+    [ :wvu_username, :title, :college_id, :department_id, :email, :status, :role, :visible ]
+  end
+
+  def professional_attrs
+    [  
+      :biography, :research_interests, :teaching_interests,
+      awards_attributes: %i[id starting_year ending_year name organization description _destroy],
+      publications_attributes: %i[id starting_year ending_year author title status publisher pagenum issue volume url description _destroy],
+      websites_attributes: %i[id url _destroy] 
     ]
   end
 
   def faculty_params
     params.require(:faculty)
-          .permit(name_attrs,
-                  image_attrs,
-                  resume_attrs,                   
-                  :wvu_username,
-                  :email,
-                  :title,
-                  :biography,
-                  :status,
-                  :role,
-                  :visible,
-                  :research_interests,
-                  :teaching_interests,
-                  :college_id, 
-                  :department_id,     
-                  contact_attrs,
-                  awards_attributes: %i[id starting_year ending_year name organization description _destroy],
-                  publications_attributes: %i[id starting_year ending_year author title status publisher pagenum issue volume url description _destroy],
-                  websites_attributes: %i[id url _destroy]          
-                )
+          .permit(name_attrs, profile_attrs, image_attrs, resume_attrs, contact_attrs, professional_attrs)
     end
 
     def upload_params

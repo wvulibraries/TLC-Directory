@@ -12,14 +12,12 @@ module ImportAdapter
             @import_count = 0
             CSV.foreach(@filename, headers: true, :header_converters => lambda { |h| h.gsub(/[^0-9A-Za-z_\s]/, '').downcase.gsub(/\s+/, "_").to_sym unless h.nil? }, liberal_parsing: true) do |row|       
                 # Find faculty
-                if row[:username].present?
-                    @faculty = Faculty.where(wvu_username: row[:username]).first_or_initialize 
-                    if @faculty.present?
-                        set_faculty_fields(row)
-                        add_optional_items(row)
-                        @faculty.save(validate: false)
-                        @import_count += 1
-                    end
+                @faculty = Faculty.where(wvu_username: row[:username]).first_or_initialize unless row[:username].nil?
+                if @faculty.present?
+                    set_faculty_fields(row)
+                    add_optional_items(row)
+                    @faculty.save(validate: false)
+                    @import_count += 1
                 end
             end      
         end
@@ -57,7 +55,7 @@ module ImportAdapter
             @faculty.attributes = filter_hash_keys(hash)
         end
 
-        def find_or_create_department(hash)
+        def find_or_create_department(hash)          
             Department.find_or_create_by(name: hash[:unit_most_recent]) || Department.find_or_create_by(name: hash[:section_department_of_medicine_only_most_recent])
         end
         
@@ -69,7 +67,7 @@ module ImportAdapter
 
         def filter_hash_keys(hash)
             # return hash with only requried keys
-            keys = [:role, :status, :visible, :first_name, :middle_name, :last_name, :research_interests, :teaching_interests, :prefix, :suffix, :college, :department, :wvu_username, :resume, :email]
+            keys = [:role, :status, :visible, :email, :wvu_username, :first_name, :middle_name, :last_name, :research_interests, :teaching_interests, :prefix, :suffix, :college, :department, :resume]
             keys.zip(hash.values_at *keys).to_h           
         end
     end
