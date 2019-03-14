@@ -29,14 +29,18 @@ module ImportAdapter
             false
         end
 
+        def set_default_values
+            { role: :user, status: 'enabled', visible: true }
+        end 
+
         def set_faculty_fields(row)
-            # convert row to hash
-            hash = row.to_hash
+            # convert row to hash and set default access values for new faculty
+            hash = row.to_hash.merge!(set_default_values)
 
             # add default values
-            hash[:role] = :user
-            hash[:status] = 'enabled'
-            hash[:visible] = true
+            # hash[:role] = :user
+            # hash[:status] = 'enabled'
+            # hash[:visible] = true
 
             # downcase email
             hash[:email] = hash[:email].downcase unless hash[:email].nil?
