@@ -10,17 +10,10 @@ class Faculty < User
   self.table_name = :faculty
   
   # validations
-  # validates :title,
-  #           presence: true,
-  #           length: { within: 2..70 }
-            
-  # validates :biography, 
-  #           presence: true 
-                  
-  # validates :research_interests, 
-  #           presence: true
-
   validates :wvu_username, presence: true
+   
+  validates_uniqueness_of :wvu_username
+  validates_uniqueness_of :email
 
   belongs_to :college
   belongs_to :department
