@@ -11,13 +11,15 @@ module ImportAdapter
         def import
             @import_count = 0
             CSV.foreach(@filename, headers: true, :header_converters => lambda { |h| h.gsub(/[^0-9A-Za-z_\s]/, '').downcase.gsub(/\s+/, "_").to_sym unless h.nil? }, liberal_parsing: true) do |row|   
-                # Find faculty
-                @faculty = Faculty.where(wvu_username: row[:username]).first_or_initialize 
-                if @faculty.present?
-                    set_faculty_fields(row)
-                    add_optional_items(row)
-                    @faculty.save(validate: false)
-                    @import_count += 1
+                if row[:username].present?
+                    # Find faculty
+                    @faculty = Faculty.where(wvu_username: row[:username]).first_or_initialize
+                    if @faculty.present?
+                        set_faculty_fields(row)
+                        add_optional_items(row)
+                        @faculty.save(validate: false)
+                        @import_count += 1
+                    end
                 end
             end      
         end
@@ -61,12 +63,6 @@ module ImportAdapter
             # remove unused hash items by filtering the keys
             keys = [:role, :status, :visible, :email, :wvu_username, :first_name, :middle_name, :last_name, :research_interests, :teaching_interests, :prefix, :suffix, :college, :department, :resume]
             @faculty.assign_attributes(filter_hash_keys(hash, keys))
-        end
-        
-        def rename_hash_key(hash, source, dest)
-            hash[dest] = hash[source]
-            hash.delete(source) 
-            hash
         end
     end
 end
