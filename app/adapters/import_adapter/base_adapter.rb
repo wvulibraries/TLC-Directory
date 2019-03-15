@@ -14,12 +14,10 @@ module ImportAdapter
                 if row[:username].present?
                     # Find faculty
                     @faculty = Faculty.where(wvu_username: row[:username]).first_or_initialize
-                    if @faculty.present?
-                        set_faculty_fields(row)
-                        add_optional_items(row)
-                        @faculty.save(validate: false)
-                        @import_count += 1
-                    end
+                    set_faculty_fields(row)
+                    add_optional_items(row)
+                    @faculty.save(validate: false)
+                    @import_count += 1
                 end
             end      
         end
@@ -35,24 +33,34 @@ module ImportAdapter
             { role: :user, status: 'enabled', visible: true }
         end 
 
-        def find_or_create_department(hash)          
-            Department.find_or_create_by(name: hash[:unit_most_recent]) || Department.find_or_create_by(name: hash[:section_department_of_medicine_only_most_recent])
+        def find_or_create_department(hash)
+            if hash[:unit_most_recent].present?          
+                Department.find_or_create_by(name: hash[:unit_most_recent]) 
+            else
+                Department.find_or_create_by(name: hash[:section_department_of_medicine_only_most_recent])
+            end
         end
 
-        def filter_hash_keys(hash, keys)
+        def filter_hash_keys(hash)
+            # remove unused hash items by filtering the keys
+            keys = [:role, :status, :visible, :email, :wvu_username, :first_name, :middle_name, :last_name, :research_interests, :teaching_interests, :prefix, :suffix, :college, :department, :resume]
+
             # return hash with only requried keys
             keys.zip(hash.values_at *keys).to_h           
         end
 
-        def set_faculty_fields(row)
-            # convert row to hash and set default access values for new faculty
-            hash = row.to_hash.merge!(default_faculty_values)
-
+        def downcase_hash_fields(hash)
             # downcase email
             hash[:email] = hash[:email].downcase unless hash[:email].nil?
 
             # set wvu_username & downcase
             hash[:wvu_username] = hash[:username].downcase unless hash[:username].nil?
+            hash
+        end
+
+        def set_faculty_fields(row)
+            # build hash values
+            hash = downcase_hash_fields(row.to_hash).merge!(default_faculty_values)
 
             # find or create college
             hash[:college] = College.find_or_create_by(name: hash[:college_most_recent]) unless hash[:college_most_recent].nil?
@@ -60,9 +68,7 @@ module ImportAdapter
             # find or create department
             hash[:department] = find_or_create_department(hash)
 
-            # remove unused hash items by filtering the keys
-            keys = [:role, :status, :visible, :email, :wvu_username, :first_name, :middle_name, :last_name, :research_interests, :teaching_interests, :prefix, :suffix, :college, :department, :resume]
-            @faculty.assign_attributes(filter_hash_keys(hash, keys))
+            @faculty.assign_attributes(filter_hash_keys(hash))
         end
     end
 end

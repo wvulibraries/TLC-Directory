@@ -4,19 +4,27 @@ module CSVService
 
         require 'zip'
         attr_reader :errors
- 
-        def initialize(params = {})
+
+        def set_paths
             # path for csv files
             @path = "#{Rails.root}/public/uploads/#{Rails.env}"
             @csv_path = @path + "/csv/"
             @zip_path = @path + "/zip/"
             @completed_zip_path = @zip_path + 'completed' + '/'
+        end
 
+        def create_folders
             # create folders if missing
             Dir.mkdir(@path) unless File.exists?(@path)
             Dir.mkdir(@csv_path) unless File.exists?(@csv_path) 
             Dir.mkdir(@zip_path) unless File.exists?(@zip_path) 
             Dir.mkdir(@completed_zip_path) unless File.exists?(@completed_zip_path)
+        end
+        
+ 
+        def initialize(params = {})
+            set_paths
+            create_folders
 
             @zip_file = params[:zip_file]
             if @zip_file.present?
