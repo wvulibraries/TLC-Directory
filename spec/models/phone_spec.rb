@@ -18,4 +18,9 @@ RSpec.describe Phone, type: :model do
     end
   end
 
+  it 'Calling type should return string with type capitalized' do
+    phone.number_types = 0 # set number_types to default phone
+    expect(phone.type).to eql('Phone')
+  end
+
 end

@@ -14,7 +14,7 @@ module ImportAdapter
         end
 
         def create_phone(number, type)
-            Phone.find_or_create_by(number: number, number_types: type) if number.present? && type.present?
+            Phone.find_or_create_by(number: number, number_types: type) if number.present?
         end
 
         def create_number(area_code, prefix, line_number, extension)

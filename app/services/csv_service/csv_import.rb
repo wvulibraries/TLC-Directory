@@ -4,17 +4,34 @@ module CSVService
 
         require 'csv'
         attr_reader :errors
+        attr_reader :import_count
+
+        def set_paths
+            # path for csv files
+            @path = "#{Rails.root}/public/uploads/#{Rails.env}"
+            @csv_path = @path + "/csv/"
+            @directory_name = @csv_path + "imported"
+        end
+
+        def create_folders
+            # create folders if missing
+            Dir.mkdir(@path) unless File.exists?(@path)
+            Dir.mkdir(@csv_path) unless File.exists?(@csv_path) 
+            Dir.mkdir(@directory_name) unless File.exists?(@directory_name) 
+        end
+        
  
         def initialize(params = {})
-            @path = "#{Rails.root}/public/uploads/#{Rails.env}/csv/"
-            @directory_name = @path + "imported"
+            set_paths
+            create_folders
             @csv_files = params[:csv_files]
+            @import_count = 0
             store_files if @csv_files.present?
         end
 
         def process_files
             # get all csv files in directory
-            files = Dir.glob(@path + "*.csv")
+            files = Dir.glob(@csv_path + "*.csv")
             files.each do |file|
                 case File.basename(file)
                 when "ADMIN.csv" 
@@ -32,6 +49,9 @@ module CSVService
                 else
                     ImportAdapter::BaseAdapter.new({:filename => file}).import  
                 end
+
+                # increase count
+                @import_count += 1
 
                 # move each file after it has been imported into a separate folder
                 Dir.mkdir(@directory_name) unless File.exists?(@directory_name)    

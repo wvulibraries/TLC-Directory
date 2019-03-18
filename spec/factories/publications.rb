@@ -6,6 +6,8 @@ FactoryBot.define do
     author { Faker::University.name }
     description { Faker::Lorem.words(4) }
     url { Faker::Internet.url }
+    volume { Faker::Number.number(4).to_i }
+    issue { Faker::Number.number(4).to_i }
 
     factory :publication_user_association do
       association :publishable, factory: :user_faker
