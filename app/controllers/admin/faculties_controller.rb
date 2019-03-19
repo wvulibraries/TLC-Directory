@@ -69,7 +69,6 @@ class Admin::FacultiesController < ApplicationController
       wizard = CSVService::CSVImport.new({:csv_files => upload_params[:csv_files]})
       if wizard.errors.count > 0
         @errors << wizard.errors
-         
       else
         flash.now[:notice] = I18n.t('faculty.csv_import_queued')
       end

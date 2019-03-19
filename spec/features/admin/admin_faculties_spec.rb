@@ -89,12 +89,34 @@ RSpec.feature "Admin::Faculty", type: :feature do
     expect(page).to have_content(I18n.t('faculty.csv_import_queued'))
   end
 
+   scenario 'import faculty from csv' do
+    file_path = 'tmp/file.txt'
+    FileUtils.touch(file_path)
+
+    visit '/admin/faculties/importcsv'
+    expect(page).to have_content('Import CSV File(s)')   
+    attach_file('csv_files', file_path)
+    click_button 'Import CSV File(s)'
+    expect(page).to have_content('You are not allowed to upload')
+  end 
+
   scenario 'import faculty from zip' do
     visit '/admin/faculties/importzip'
     expect(page).to have_content('Import Digital Measures Zip')   
     attach_file('zip_file', './spec/support/files/PCI.zip')
     click_button 'Import ZIP File'
     expect(page).to have_content(I18n.t('faculty.zip_import_queued'))
+  end
+
+  scenario 'try to import a txt file in the zip file page' do
+    file_path = 'tmp/file.txt'
+    FileUtils.touch(file_path)
+
+    visit '/admin/faculties/importzip'
+    expect(page).to have_content('Import Digital Measures Zip')   
+    attach_file('zip_file', file_path)
+    click_button 'Import ZIP File'
+    expect(page).to have_content('You are not allowed to upload')
   end
 
 end
