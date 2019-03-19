@@ -25,7 +25,7 @@ module ImportAdapter
         def build_author_list(row)
             # Common Fields in all CSV Files that we will get and are not modifiying
             keys = [:intellcont_auth_1_lname, :intellcont_auth_1_fname, :intellcont_auth_2_lname, :intellcont_auth_2_fname, :intellcont_auth_3_lname, :intellcont_auth_3_fname, :intellcont_auth_4_lname, :intellcont_auth_4_fname, :intellcont_auth_5_lname, :intellcont_auth_5_fname, :intellcont_auth_6_lname, :intellcont_auth_6_fname]
-            hash = filter_hash_keys(hash, keys)
+            hash = keys.zip(row.to_h.values_at *keys).to_h 
             authors = []
 
             items = hash.to_a

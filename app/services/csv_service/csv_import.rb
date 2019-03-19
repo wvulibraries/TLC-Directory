@@ -36,7 +36,7 @@ module CSVService
                 case File.basename(file)
                 when "ADMIN.csv" 
                     ImportAdapter::AdminAdapter.new({:filename => file}).import 
-                when "ADMIN_PERM"
+                when "ADMIN_PERM.csv"
                     ImportAdapter::AdminPermAdapter.new({:filename => file}).import                                   
                 when "AWARDHONOR.csv"
                     ImportAdapter::AwardAdapter.new({:filename => file}).import

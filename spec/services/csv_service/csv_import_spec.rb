@@ -10,6 +10,7 @@ RSpec.describe CSVService::CSVImport do
     let(:faculty) { FactoryBot.attributes_for :faculty }
     let(:college) { FactoryBot.attributes_for :college }
     let(:dept) { FactoryBot.attributes_for :department }
+    let(:pub) { FactoryBot.attributes_for :publication }
 
     let(:header) { "First Name" + ',' + "Middle Name" + ',' +  "Last Name" + ',' + "Email"  + ',' + "College (Most Recent)" + ',' + "Section (Department of Medicine Only) (Most Recent)" + ',' + "Unit (Most Recent)" + ',' + "USERNAME" }
     let(:row2) { faculty[:first_name] + ',' + faculty[:middle_name] + ',' + faculty[:last_name] + ',' + faculty[:email] + ',' + college[:name] + ',,' + dept[:name] + ',' + faculty[:wvu_username]}
@@ -77,15 +78,18 @@ RSpec.describe CSVService::CSVImport do
       end
     end
 
-    # context "with valid INTELLCONT.csv file" do 
-    #   let(:file_path) { "tmp/INTELLCONT.csv" }
-    #   it 'perform import with valid params' do
-    #       csv_service.process_files
+    context "with valid INTELLCONT.csv file" do 
+      let(:header) { "First Name" + ',' + "Middle Name" + ',' +  "Last Name" + ',' + "Email"  + ',' + "College (Most Recent)" + ',' + "Section (Department of Medicine Only) (Most Recent)" + ',' + "Unit (Most Recent)" + ',' + "USERNAME" + ',' + "TITLE" + ',' + "STATUS" + ',' + "PUBLISHER" + ',' + "PAGENUM" + ',' + "ISSUE" + ',' + "VOLUME" + ',' + "DTY_START" + ',' + "DTY_END" + ',' + "WEB_ADDRESS" + ',' + "ABSTRACT" + ',' + "INTELLCONT_AUTH_1_FNAME" + ',' + "INTELLCONT_AUTH_1_LNAME" }
+      let(:row2) { faculty[:first_name] + ',' + faculty[:middle_name] + ',' + faculty[:last_name] + ',' + faculty[:email] + ',' + college[:name] + ',,' + dept[:name] + ',' + faculty[:wvu_username] + ',' + pub[:title] + ',' + pub[:status] + ',' + pub[:publisher] + ',' + pub[:pagenum].to_s + ',' + pub[:issue].to_s + ',' + pub[:volume].to_s + ',' + pub[:starting_year].to_s + ',' + pub[:ending_year].to_s + ',' + pub[:url] + ',' + pub[:description] + ',' + faculty[:first_name] + ',' + faculty[:last_name]}
+    
+      let(:file_path) { "tmp/INTELLCONT.csv" }
+      it 'perform import with valid params' do
+          csv_service.process_files
           
-    #       # verify count
-    #       expect(csv_service.import_count).to eql(1)     
-    #   end
-    # end
+          # verify count
+          expect(csv_service.import_count).to eql(1)     
+      end
+    end
 
     # context "with valid SUPPORT_DOC.csv file" do 
     #   let(:file_path) { "tmp/SUPPORT_DOC.csv" }
