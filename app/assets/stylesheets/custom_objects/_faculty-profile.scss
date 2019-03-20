@@ -7,7 +7,6 @@
     //margin: 20px;
 
     img {
-
       border-style: solid;
       border-width: medium;
       border-color: $accent-blue1;
@@ -27,6 +26,7 @@
     h1 {
       font-size: 3.5em;
       padding-top: .25em;
+      float: right;
     }
   }
 }

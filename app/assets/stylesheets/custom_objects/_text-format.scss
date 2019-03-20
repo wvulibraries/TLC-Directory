@@ -1,0 +1,28 @@
+.add-period {
+
+  :after {
+    content: ".";
+  }
+}
+
+.add-parentheses {
+
+  :before {
+    content: "(";
+  }
+
+  :after {
+    content: ")";
+  }
+}
+
+.add-semicolon {
+
+  :after {
+    content: ";";
+  }
+}
+
+.add-italic {
+  font-style: italic;
+}

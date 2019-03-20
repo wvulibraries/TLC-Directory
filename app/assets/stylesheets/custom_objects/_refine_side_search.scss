@@ -4,20 +4,20 @@
   }
 
   form {
+    @include column-span(4 of 12);
     font-size: .8rem;
   }
   /* Style the search field */
   form input[type=text] {
     border: 1px solid grey;
-    float: left;
-    width: 82%;
     background-color: white;
     padding: 14px 22px;
+    width: 87%;
   }
 
   /* Style the submit button */
   form button {
-    float: left;
+    position: absolute;
     padding: .75rem 1rem;
     background: $accent-blue2;
     color: white;

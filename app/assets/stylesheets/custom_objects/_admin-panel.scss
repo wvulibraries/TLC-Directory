@@ -1,47 +1,14 @@
-/* layout when screen is 720px or above */
-@include mq($bp-small){
-  @include omega();
-
-  .admin-panel {
-    max-width: 50%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .admin-panel-left {
-    float: left;
-    width: 50%;
-
-    a {
-      width: 100%;
-      text-align: center;
-    }
-  }
-
-  .admin-panel-right {
-    margin-left: 51%;
-
-    a {
-      width: 100%;
-      text-align: center;
-    }
-  }
-}
-
 .admin-panel {
-  a {
-    width: 100%;
-    display: block;
-    text-align: center;
-  }
-}
-
-.admin-main {
-  display: table;
-
-  a {
-    width: 100%;
-    text-align: center;
-  }
+    a {
+      //for screen sizes 720px or larger
+      @include mq($bp-medium){
+        @include span-columns(3);
+        margin-top: .5em;
+        margin-left: 0;
+      }
+      //for screen sizes smaller than 720px
+      @include span-columns(12);
+      text-align: center;
+      padding: 1.2em;
+    }
 }

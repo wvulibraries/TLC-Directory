@@ -9,7 +9,6 @@
   .banner__text {
     @include span-columns(9);
     padding: 20px;
-
     font-size: .75em;
     font-family: $helvetica-neue-light;
 
@@ -18,5 +17,6 @@
       text-transform: uppercase;
       color: #fff;
       text-align: left;
+      line-height: 1.3em;
     }
   }

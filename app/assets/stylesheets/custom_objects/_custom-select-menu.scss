@@ -2,14 +2,15 @@
 .custom-select-menu {
     position: relative;
 
+
     select {
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
 
-        display: block;
+        //display: block;
         width: 100%;
-        max-width: 320px;
+        //max-width: 320px;
         height: 40px;
 
         margin: 5px 0px;
@@ -22,6 +23,7 @@
 
         background-color: #fff;
         background-image: none;
+        border-radius: 0;
         border: 1px solid $accent-blue2;
         -ms-word-break: normal;
         word-break: normal;
