@@ -28,10 +28,9 @@ module CSVService
       create_folders
 
       @zip_file = params[:zip_file]
-      if @zip_file.present?
-        store_file
-        extract_files
-      end
+      return unless @zip_file.present?
+      store_file
+      extract_files
     end
 
     def extract_files
@@ -52,13 +51,12 @@ module CSVService
     def store_file
       @errors = []
       # working uploader with carrierwave store multiple files
-      if @zip_file.present?
-        uploader = ZIPUploader.new
-        begin
-          uploader.store!(@zip_file)
-        rescue Exception => e
-          @errors << e.to_s + ' ' + @zip_file.original_filename + ' Not Saved'
-        end
+      return unless @zip_file.present?
+      uploader = ZIPUploader.new
+      begin
+        uploader.store!(@zip_file)
+      rescue Exception => e
+        @errors << e.to_s + ' ' + @zip_file.original_filename + ' Not Saved'
       end
     end
   end
