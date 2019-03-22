@@ -1,13 +1,15 @@
-module ImportAdapter  
-    class AdminPermAdapter < BaseAdapter
-        private
+# frozen_string_literal: true
 
-        # placeholder for adding additional fields for the faculty model
-        def add_optional_items(row)
-            hash = {}
-            hash[:title] = row[:srank] unless row[:srank].nil? 
+module ImportAdapter
+  class AdminPermAdapter < BaseAdapter
+    private
 
-            @faculty.assign_attributes(hash)
-        end
-    end
+      # placeholder for adding additional fields for the faculty model
+      def add_optional_items(row)
+        hash = {}
+        hash[:title] = row[:srank] unless row[:srank].nil?
+
+        @faculty.assign_attributes(hash)
+      end
+  end
 end

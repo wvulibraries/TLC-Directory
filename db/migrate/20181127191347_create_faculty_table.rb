@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateFacultyTable < ActiveRecord::Migration[5.2]
   def change
     create_table :faculty do |t|
@@ -8,7 +10,7 @@ class CreateFacultyTable < ActiveRecord::Migration[5.2]
       t.string :middle_name
       t.string :suffix
       t.string :email
-      t.string :wvu_username, limit: 30      
+      t.string :wvu_username, limit: 30
       t.integer :role, default: :user
       t.integer :status, default: :disabled
       t.boolean :visible, default: false
@@ -19,7 +21,7 @@ class CreateFacultyTable < ActiveRecord::Migration[5.2]
       t.string :resume
       t.belongs_to :college, index: true
       t.belongs_to :department, index: true
-          
+
       t.timestamps
     end
   end

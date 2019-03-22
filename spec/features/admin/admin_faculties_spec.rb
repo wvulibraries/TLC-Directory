@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.feature "Admin::Faculty", type: :feature do
-  # vars for existing 
+RSpec.feature 'Admin::Faculty', type: :feature do
+  # vars for existing
   let(:college) { FactoryBot.create(:college) }
   let(:department) { FactoryBot.create(:department) }
   let(:faculty_existing) { FactoryBot.create(:faculty) }
-  # vars for creating 
+  # vars for creating
   # let(:address) { FactoryBot.attributes_for(:address) }
   # let(:phone) { FactoryBot.attributes_for(:phone) }
   let(:faculty) { FactoryBot.attributes_for(:faculty) }
@@ -19,7 +21,7 @@ RSpec.feature "Admin::Faculty", type: :feature do
   scenario 'testing the index page for faculties and returning proper information' do
     visit '/admin/faculties'
     expect(page).to have_content('Manage Faculty')
-  end 
+  end
 
   scenario 'creates a new faculty' do
     visit '/admin/faculties/new'
@@ -32,7 +34,7 @@ RSpec.feature "Admin::Faculty", type: :feature do
     fill_in 'Email', with: faculty[:email]
     fill_in 'Title', with: faculty[:title]
     fill_in 'Biography', with: faculty[:biography]
-    fill_in 'Research interests', with: faculty[:research_interests]    
+    fill_in 'Research interests', with: faculty[:research_interests]
     select('user', from: 'User Role')
     select('enabled', from: 'User Status')
     click_button 'Submit'
@@ -83,26 +85,26 @@ RSpec.feature "Admin::Faculty", type: :feature do
 
   scenario 'import faculty from csv' do
     visit '/admin/faculties/importcsv'
-    expect(page).to have_content('Import CSV File(s)')   
+    expect(page).to have_content('Import CSV File(s)')
     attach_file('csv_files', './spec/support/files/PCI.csv')
     click_button 'Import CSV File(s)'
     expect(page).to have_content(I18n.t('faculty.csv_import_queued'))
   end
 
-   scenario 'import faculty from csv' do
+  scenario 'import faculty from csv' do
     file_path = 'tmp/file.txt'
     FileUtils.touch(file_path)
 
     visit '/admin/faculties/importcsv'
-    expect(page).to have_content('Import CSV File(s)')   
+    expect(page).to have_content('Import CSV File(s)')
     attach_file('csv_files', file_path)
     click_button 'Import CSV File(s)'
     expect(page).to have_content('You are not allowed to upload')
-  end 
+  end
 
   scenario 'import faculty from zip' do
     visit '/admin/faculties/importzip'
-    expect(page).to have_content('Import Digital Measures Zip')   
+    expect(page).to have_content('Import Digital Measures Zip')
     attach_file('zip_file', './spec/support/files/PCI.zip')
     click_button 'Import ZIP File'
     expect(page).to have_content(I18n.t('faculty.zip_import_queued'))
@@ -113,10 +115,9 @@ RSpec.feature "Admin::Faculty", type: :feature do
     FileUtils.touch(file_path)
 
     visit '/admin/faculties/importzip'
-    expect(page).to have_content('Import Digital Measures Zip')   
+    expect(page).to have_content('Import Digital Measures Zip')
     attach_file('zip_file', file_path)
     click_button 'Import ZIP File'
     expect(page).to have_content('You are not allowed to upload')
   end
-
 end

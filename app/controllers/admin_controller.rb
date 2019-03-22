@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # admin controller
 class AdminController < ApplicationController
   layout 'admin'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rake'
 namespace :search_index do
   desc 'Re-index all environments'
@@ -9,7 +11,7 @@ namespace :search_index do
 
   desc 'Properly Index Faculties'
   task faculty: :environment do
-    puts "Indexing Faculties"
+    puts 'Indexing Faculties'
     Faculty.import force: true
     disabled = Faculty.where(status: 'disabled')
     disabled.each { |e| e.__elasticsearch__.delete_document }
@@ -17,7 +19,7 @@ namespace :search_index do
 
   desc 'Properly Index Colleges'
   task college: :environment do
-    puts "Indexing Colleges"
+    puts 'Indexing Colleges'
     College.import force: true
     disabled = College.where(status: 'disabled')
     disabled.each { |e| e.__elasticsearch__.delete_document }
@@ -25,7 +27,7 @@ namespace :search_index do
 
   desc 'Properly Index Departments'
   task department: :environment do
-    puts "Indexing Departments"
+    puts 'Indexing Departments'
     Department.import force: true
     disabled = Department.where(status: 'disabled')
     disabled.each { |e| e.__elasticsearch__.delete_document }

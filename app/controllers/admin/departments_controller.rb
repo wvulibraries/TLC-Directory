@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 # Departments Controller
 # @author David J. Davis
 # Sets data for views, sets redirects, sets errors
 class Admin::DepartmentsController < AdminController
-    # tell rails which view layout to use with this controller
+  # tell rails which view layout to use with this controller
   layout 'admin'
 
   # before_actions
@@ -71,6 +73,6 @@ class Admin::DepartmentsController < AdminController
   # Never trust parameters from the scary internet, only allow the white list through.
   def department_params
     params.require(:department)
-    .permit( :name, :status )
+          .permit(:name, :status)
   end
 end

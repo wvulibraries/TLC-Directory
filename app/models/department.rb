@@ -6,7 +6,7 @@ class Department < ApplicationRecord
   validates :name,
             presence: true,
             length: { within: 5..50 },
-            uniqueness: { case_sensitive: false }          
+            uniqueness: { case_sensitive: false }
 
   has_many :faculties, -> { order(:last_name, :first_name) }
 
@@ -28,12 +28,12 @@ class Department < ApplicationRecord
   # indexed json, this will help with search rankings.
   #
   # rake environment elasticsearch:import:model CLASS='Department' SCOPE="visible" FORCE=y
-    def as_indexed_json(_options)
-      as_json(
-        only: [:id, :name],
-        include: {
-          faculties: { only: :name }
-        }
-      )
-    end  
+  def as_indexed_json(_options)
+    as_json(
+      only: %i[id name],
+      include: {
+        faculties: { only: :name }
+      }
+    )
+  end
 end

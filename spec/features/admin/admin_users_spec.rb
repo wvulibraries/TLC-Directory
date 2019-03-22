@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.feature "Admin::User", type: :feature do
+RSpec.feature 'Admin::User', type: :feature do
   let(:user_existing) { FactoryBot.create(:user) }
   let(:user) { FactoryBot.attributes_for(:user) }
 
@@ -11,7 +13,7 @@ RSpec.feature "Admin::User", type: :feature do
   scenario 'testing the index page for users and returning proper information' do
     visit '/admin/users'
     expect(page).to have_content('Manage User(s)')
-  end 
+  end
 
   scenario 'creates a new user' do
     visit '/admin/users/new'

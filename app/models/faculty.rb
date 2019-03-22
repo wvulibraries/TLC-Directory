@@ -8,16 +8,16 @@
 # @since 0.0.1
 class Faculty < User
   self.table_name = :faculty
-  
+
   # validations
   validates :wvu_username, presence: true
-   
+
   validates_uniqueness_of :wvu_username
   validates_uniqueness_of :email
 
   belongs_to :college
   belongs_to :department
-            
+
   # associations
   has_many :addresses, as: :addressable, dependent: :destroy
   has_many :awards, as: :awardable, dependent: :destroy
@@ -27,7 +27,7 @@ class Faculty < User
 
   # form logic
   accepts_nested_attributes_for :addresses, allow_destroy: true
-  accepts_nested_attributes_for :awards, allow_destroy: true  
+  accepts_nested_attributes_for :awards, allow_destroy: true
   accepts_nested_attributes_for :phones, allow_destroy: true
   accepts_nested_attributes_for :publications, allow_destroy: true
   accepts_nested_attributes_for :websites, allow_destroy: true
@@ -63,10 +63,10 @@ class Faculty < User
   def as_indexed_json(_options)
     as_json(
       methods: [:display_name],
-      only: [:id, :first_name, :last_name, :preferred_name, :display_name, :title, :research_interests, :biography, :image, :college_id, :department_id],
+      only: %i[id first_name last_name preferred_name display_name title research_interests biography image college_id department_id],
       include: {
         college: { only: %i[id name] },
-        department: { only: %i[id name] },
+        department: { only: %i[id name] }
       }
     )
   end

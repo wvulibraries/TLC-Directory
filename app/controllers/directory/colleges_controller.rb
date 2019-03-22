@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Directory::CollegesController < ApplicationController
   def list
     @colleges = College.visible
@@ -7,11 +9,11 @@ class Directory::CollegesController < ApplicationController
   def faculties
     @college = College.find(params[:id])
     @faculties = Faculty.includes(:college, :department, :addresses, :phones)
-                         .where(
-                           status: 'enabled',
-                           college: params[:id]
-                         )
-                         .order(:last_name, :first_name)
+                        .where(
+                          status: 'enabled',
+                          college: params[:id]
+                        )
+                        .order(:last_name, :first_name)
   end
 
   def details

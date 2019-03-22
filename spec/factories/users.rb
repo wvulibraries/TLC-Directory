@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :user do
     prefix { Faker::Name.prefix }
@@ -6,7 +8,7 @@ FactoryBot.define do
     last_name { Faker::Name.last_name }
     suffix { Faker::Name.suffix }
     email { "#{Faker::Internet.user_name(7..36)}@mail.wvu.edu" }
-    wvu_username { Faker::Internet.user_name(7..36) }    
+    wvu_username { Faker::Internet.user_name(7..36) }
     role { :user }
     status { :disabled }
     visible { false }

@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe SearchTerm, type: :model do
-
-  let(:search_term) {FactoryBot.create :search_term}
+  let(:search_term) { FactoryBot.create :search_term }
 
   context 'validations' do
     it { should validate_presence_of(:term) }
@@ -21,13 +22,11 @@ RSpec.describe SearchTerm, type: :model do
   end
 
   context 'testing update' do
-    it 'test counter update' do 
+    it 'test counter update' do
       count = search_term.term_count + 1
       search_term.increase_count
       expect(search_term.term_count).to equal count
       expect(search_term).to be_valid
     end
   end
-
 end
-

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Resume based on documentation from carrierwave.
 #
 # @author David J. Davis

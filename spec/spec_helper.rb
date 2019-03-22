@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'simplecov'
 require 'simplecov-console'
 ENV['RAILS_ENV'] ||= 'test'
@@ -5,9 +7,7 @@ ENV['RAILS_ENV'] ||= 'test'
 RSpec.configure do |config|
   # clear uploads after tests are complete
   config.after(:each) do
-    if Rails.env.test?
-      FileUtils.rm_rf(Dir["#{Rails.root}/public/uploads/test"])
-    end
+    FileUtils.rm_rf(Dir["#{Rails.root}/public/uploads/test"]) if Rails.env.test?
   end
 
   config.expect_with :rspec do |expectations|

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :award do
     starting_year { Time.current.year - rand(25) }

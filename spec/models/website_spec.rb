@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Website, type: :model do
@@ -13,11 +15,10 @@ RSpec.describe Website, type: :model do
     it 'expects website to be valid' do
       expect(website).to be_valid
     end
-    
+
     it 'expect website to be invalid' do
       website.url = 'notvalid'
       expect(website).to_not be_valid
     end
   end
-   
 end

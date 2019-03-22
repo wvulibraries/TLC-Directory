@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Searchable
 #
 # @author David J. Davis
@@ -21,8 +23,8 @@ module Searchable
 
     # update
     after_commit on: [:update] do
-        __elasticsearch__.index_document
-        __elasticsearch__.delete_document unless status == 'enabled'
+      __elasticsearch__.index_document
+      __elasticsearch__.delete_document unless status == 'enabled'
     end
 
     # delete

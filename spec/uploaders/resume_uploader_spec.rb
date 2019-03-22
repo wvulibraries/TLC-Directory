@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'carrierwave/test/matchers'
 
@@ -27,7 +29,7 @@ describe ResumeUploader do
     it 'checks cache folder' do
       tmp_path = "#{Rails.root}/public/uploads/test/resume/tmp/"
       expect(uploader.cache_dir).to eq(tmp_path)
-    end 
+    end
     it 'checks upload folder' do
       up_path = "#{Rails.root}/public/uploads/test/resume/r_spec/mocks/double/"
       expect(uploader.store_dir).to eq(up_path)

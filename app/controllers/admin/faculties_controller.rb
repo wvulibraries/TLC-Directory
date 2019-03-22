@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::FacultiesController < ApplicationController
   # tell rails which view layout to use with this controller
   layout 'admin'
@@ -27,7 +29,7 @@ class Admin::FacultiesController < ApplicationController
   # POST /faculties
   # POST /faculties.json
   def create
-    @faculty = Faculty.new faculty_params  
+    @faculty = Faculty.new faculty_params
     respond_to do |format|
       if @faculty.save
         format.html { redirect_to @faculty, success: I18n.t('faculty.success') }
@@ -66,7 +68,7 @@ class Admin::FacultiesController < ApplicationController
   def importcsv
     @errors = []
     if upload_params[:csv_files].present?
-      wizard = CSVService::CSVImport.new({:csv_files => upload_params[:csv_files]})
+      wizard = CSVService::CSVImport.new(csv_files: upload_params[:csv_files])
       if wizard.errors.count > 0
         @errors << wizard.errors
       else
@@ -77,14 +79,14 @@ class Admin::FacultiesController < ApplicationController
   end
 
   def importzip
-    @errors = []    
+    @errors = []
     if upload_params[:zip_file].present?
-        zip_import = CSVService::ZipImport.new(upload_params)
-        if zip_import.errors.count > 0
-          @errors << zip_import.errors 
-        else
-          flash.now[:notice] = upload_params[:zip_file].original_filename + I18n.t('faculty.zip_import_queued')
-        end
+      zip_import = CSVService::ZipImport.new(upload_params)
+      if zip_import.errors.count > 0
+        @errors << zip_import.errors
+      else
+        flash.now[:notice] = upload_params[:zip_file].original_filename + I18n.t('faculty.zip_import_queued')
+      end
     end
     flash.now[:error] = @errors if @errors.count > 0
   end
@@ -98,34 +100,34 @@ class Admin::FacultiesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def name_attrs
-    [ :prefix, :suffix, :first_name, :middle_name, :last_name, :preferred_name ]
+    %i[prefix suffix first_name middle_name last_name preferred_name]
   end
 
-  def image_attrs 
-    [ :image, :image_cache, :remove_image ]
+  def image_attrs
+    %i[image image_cache remove_image]
   end
 
   def resume_attrs
-    [ :resume, :resume_cache, :remove_resume ]
+    %i[resume resume_cache remove_resume]
   end
 
   def contact_attrs
-    [ 
+    [
       addresses_attributes: %i[id street_address_1 street_address_2 city state zip_code _destroy],
       phones_attributes: %i[id number number_types _destroy]
     ]
   end
 
   def profile_attrs
-    [ :wvu_username, :title, :college_id, :department_id, :email, :status, :role, :visible ]
+    %i[wvu_username title college_id department_id email status role visible]
   end
 
   def professional_attrs
-    [  
+    [
       :biography, :research_interests, :teaching_interests,
       awards_attributes: %i[id starting_year ending_year name organization description _destroy],
       publications_attributes: %i[id starting_year ending_year author title status publisher pagenum issue volume url description _destroy],
-      websites_attributes: %i[id url _destroy] 
+      websites_attributes: %i[id url _destroy]
     ]
   end
 
@@ -134,7 +136,7 @@ class Admin::FacultiesController < ApplicationController
           .permit(name_attrs, profile_attrs, image_attrs, resume_attrs, contact_attrs, professional_attrs)
     end
 
-    def upload_params
-      params.permit({csv_files: []}, :zip_file)
-    end
+  def upload_params
+    params.permit({ csv_files: [] }, :zip_file)
+  end
 end

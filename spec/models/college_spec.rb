@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe College, type: :model do
@@ -41,51 +43,50 @@ RSpec.describe College, type: :model do
 
   describe 'conditional elasticsearch indexing' do
     context 'conditional indexes' do
-      
       before do
         College.import(force: true, refresh: true)
       end
-      
+
       it 'a new record should be indexed' do
         enabled_college
-        College.__elasticsearch__.refresh_index!     
+        College.__elasticsearch__.refresh_index!
         expect(College.search(enabled_college.name).records.count).to eq 1
       end
-      
+
       it 'a new disabled record should not be indexed' do
         disabled_college
-        College.__elasticsearch__.refresh_index!     
-        expect(College.search(disabled_college.name).records.count).to eq 0  
-      end         
-      
+        College.__elasticsearch__.refresh_index!
+        expect(College.search(disabled_college.name).records.count).to eq 0
+      end
+
       it 'updated disabled college to enabled' do
         disabled_college
         College.__elasticsearch__.refresh_index!
-        expect(College.search(disabled_college.name).records.count).to eq 0     
-      
+        expect(College.search(disabled_college.name).records.count).to eq 0
+
         disabled_college.update(status: 'enabled')
         College.__elasticsearch__.refresh_index!
-        expect(College.search(disabled_college.name).records.count).to eq 1   
-      end    
-      
+        expect(College.search(disabled_college.name).records.count).to eq 1
+      end
+
       it 'should remove college after the update because of the status' do
-        college # instantiate college        
-        college.update(status: 'disabled')        
+        college # instantiate college
+        college.update(status: 'disabled')
         College.__elasticsearch__.refresh_index!
         expect(College.search(college.name).records.count).to eq 0
       end
-      
+
       it 'should keep college in index after the update because of status' do
-        college # instantiate college        
-        college.update(status: 'enabled')        
+        college # instantiate college
+        college.update(status: 'enabled')
         College.__elasticsearch__.refresh_index!
         expect(College.search(college.name).records.count).to eq 1
       end
-      
+
       it 'should delete the index after destroy' do
-        college # instantiate college  
+        college # instantiate college
         College.__elasticsearch__.refresh_index!
-                     
+
         # verify that the college exists before
         expect(College.search(college.name).records.count).to eq 1
         college.destroy

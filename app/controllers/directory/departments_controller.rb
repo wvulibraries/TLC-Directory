@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Directory::DepartmentsController < ApplicationController
   def list
     @departments = Department.visible
@@ -8,8 +10,8 @@ class Directory::DepartmentsController < ApplicationController
     @department = Department.find(params[:id])
     @faculties = Faculty.includes(:college, :department, :addresses, :phones)
                         .where(
-                           status: 'enabled',
-                           department: params[:id]
+                          status: 'enabled',
+                          department: params[:id]
                         )
                         .order(:last_name, :first_name)
   end

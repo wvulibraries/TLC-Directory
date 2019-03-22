@@ -7,19 +7,19 @@ class College < ApplicationRecord
             presence: true,
             length: { within: 4..50 },
             uniqueness: { case_sensitive: false }
-            
+
   has_many :faculties, -> { order(:last_name, :first_name) }
 
   # active status
   enum status: %i[enabled disabled]
-  
+
   # search
   include Searchable
-  
+
   # scopes
   scope :visible, -> { where(status: 'enabled') }
-  scope :order_name, -> { order(:name) }  
-  
+  scope :order_name, -> { order(:name) }
+
   # Elastic Search Settings
   #
   # @author Tracy A. McCormick
@@ -30,10 +30,10 @@ class College < ApplicationRecord
   # rake environment elasticsearch:import:model CLASS='College' SCOPE="visible" FORCE=y
   def as_indexed_json(_options)
     as_json(
-      only: [:id, :name],
+      only: %i[id name],
       include: {
         faculties: { only: :name }
       }
     )
-  end  
+  end
 end

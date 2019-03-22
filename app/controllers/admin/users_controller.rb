@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::UsersController < ApplicationController
   # tell rails which view layout to use with this controller
   layout 'admin'

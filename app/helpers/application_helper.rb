@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
-  
   def page_title(title)
-    title += " | " if title.present?
-    title += "TLC Directory"
+    title += ' | ' if title.present?
+    title += 'TLC Directory'
   end
 
   # pass prefixes to views
@@ -40,7 +41,7 @@ module ApplicationHelper
     fields = form.fields_for(association, new_object, child_index: id) do |builder|
       render(association.to_s.singularize, form: builder)
     end
-    link_to(name, '#', class: 'add-fields', data: { id: id, fields: fields.gsub("\n", "") })
+    link_to(name, '#', class: 'add-fields', data: { id: id, fields: fields.delete("\n") })
   end
 
   # phone logic helper

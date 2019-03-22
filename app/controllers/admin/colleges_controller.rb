@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 # Colleges Controller
 # @author Tracy A. McCormick
 # Sets data for views, sets redirects, sets errors
 class Admin::CollegesController < AdminController
-    # tell rails which view layout to use with this controller
+  # tell rails which view layout to use with this controller
   layout 'admin'
-  
+
   # before_actions
   before_action :set_college, only: %i[show edit update destroy]
 
@@ -71,6 +73,6 @@ class Admin::CollegesController < AdminController
   # Never trust parameters from the scary internet, only allow the white list through.
   def college_params
     params.require(:college)
-    .permit( :name, :status )
+          .permit(:name, :status)
   end
 end

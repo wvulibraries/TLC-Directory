@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.feature "Directory::Departments", type: :feature do
+RSpec.feature 'Directory::Departments', type: :feature do
   # vars for existing
   let(:department) { FactoryBot.create(:department) }
   let(:department_two) { FactoryBot.create(:department) }

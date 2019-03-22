@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FacultiesHelper
   require 'uri'
 
@@ -28,7 +30,7 @@ module FacultiesHelper
   def haswebsites?(faculty)
     faculty.websites.all.count != 0
   end
-  
+
   def hascv?(faculty)
     faculty.resume != nil
   end
@@ -36,8 +38,7 @@ module FacultiesHelper
   def valid_url?(url)
     uri = URI.parse(url)
     uri.is_a?(URI::HTTP) && !uri.host.nil?
-    rescue URI::InvalidURIError
-      false
+  rescue URI::InvalidURIError
+    false
   end
-
 end

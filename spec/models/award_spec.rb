@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Award, type: :model do
@@ -47,5 +49,4 @@ RSpec.describe Award, type: :model do
     award.starting_year = nil
     expect(award.display_award).to eql(award.ending_year.to_s + ' ' + award.name + ', ' + award.organization)
   end
-
 end

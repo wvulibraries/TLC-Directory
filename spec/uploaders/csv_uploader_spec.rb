@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'carrierwave/test/matchers'
 
 describe CSVUploader do
   include CarrierWave::Test::Matchers
 
-  let(:uploader) { CSVUploader.new( :csv ) }
+  let(:uploader) { CSVUploader.new(:csv) }
 
   before do
     CSVUploader.enable_processing = true
@@ -26,7 +28,7 @@ describe CSVUploader do
     it 'checks cache folder' do
       tmp_path = "#{Rails.root}/public/uploads/test/csv/tmp/"
       expect(uploader.cache_dir).to eq(tmp_path)
-    end 
+    end
     it 'checks upload folder' do
       up_path = "#{Rails.root}/public/uploads/test/csv/"
       expect(uploader.store_dir).to eq(up_path)

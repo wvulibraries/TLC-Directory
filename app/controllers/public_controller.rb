@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PublicController < ApplicationController
   layout 'public'
 
@@ -8,5 +10,4 @@ class PublicController < ApplicationController
     session.delete('cas')
     redirect_to root_path, notice: 'Logged Out!'
   end
-
 end
