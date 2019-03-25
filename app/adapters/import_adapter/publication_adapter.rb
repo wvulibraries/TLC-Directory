@@ -1,14 +1,14 @@
-# frozen_string_literal: true
+# frozen_string_literal: false
 
 module ImportAdapter
   class PublicationAdapter < BaseAdapter
-    require 'uri'
 
     private
 
     # placeholder for adding additional fields for the faculty model
     def add_optional_items(row)
       return unless row[:status] == 'Published'
+
       keys = %i[title status publisher pagenum issue volume]
       hash = keys.zip(row.to_hash.values_at(*keys)).to_h
 

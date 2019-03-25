@@ -8,15 +8,18 @@ module ImportAdapter
 
     def initialize(params = {})
       @filename = params[:filename]
+      @import_count = 0
     end
 
     def import
-      @import_count = 0
       CSV.foreach(@filename, headers: true, header_converters: ->(h) { h.gsub(/[^0-9A-Za-z_\s]/, '').downcase.gsub(/\s+/, '_').to_sym unless h.nil? }, liberal_parsing: true) do |row|
         if row[:username].present?
           # Find faculty
           @faculty = Faculty.where(wvu_username: row[:username]).first_or_initialize
-          set_faculty_fields(row)
+
+          # get values from row that are common to all csv files
+          # assign these to faculty
+          add_faculty_fields(row)
           add_optional_items(row)
           @faculty.save(validate: false)
           @import_count += 1
@@ -45,7 +48,21 @@ module ImportAdapter
 
     def filter_hash_keys(hash)
       # remove unused hash items by filtering the keys
-      keys = %i[role status visible email wvu_username first_name middle_name last_name research_interests teaching_interests prefix suffix college department resume]
+      keys = %i[role
+                status
+                visible
+                email
+                wvu_username
+                first_name
+                middle_name
+                last_name
+                research_interests
+                teaching_interests
+                prefix
+                suffix
+                college
+                department
+                resume ]
 
       # return hash with only requried keys
       keys.zip(hash.values_at(*keys)).to_h
@@ -60,7 +77,7 @@ module ImportAdapter
       hash
     end
 
-    def set_faculty_fields(row)
+    def add_faculty_fields(row)
       # build hash values
       hash = downcase_hash_fields(row.to_hash).merge!(default_faculty_values)
 

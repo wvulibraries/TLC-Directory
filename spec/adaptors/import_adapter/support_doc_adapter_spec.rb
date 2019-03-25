@@ -24,18 +24,27 @@ RSpec.describe ImportAdapter::SupportDocAdapter do
 
     after(:each) { File.delete(file_path) }
 
-    # context 'testing external file download' do
-    #   it 'queries response' do
-    #     ENV['DMEASURES_URL'] = 'http://remotesite.com/'
-    #     ENV['DMEASURES_USER'] = 'username'
-    #     ENV['DMEASURES_PW'] = 'password'
+    context 'testing external file download' do
+      it 'tries to perform import without remote enviromental settings present' do
+        adaptor = ImportAdapter::SupportDocAdapter.new(filename: file_path)
+        adaptor.import
+        # count should still be one even if we were unable to retrieve 
+        # remote file
+        expect(adaptor.import_count).to eql(0)
+      end
 
-    #     adaptor = ImportAdapter::SupportDocAdapter.new(filename: file_path)
-    #     adaptor.import
-    #     # verify count
-    #     expect(adaptor.import_count).to eql(1)
-    #   end
-    # end
+      it 'tries to perform import with invalid remote server settings present' do
+        ENV['DMEASURES_URL'] = 'http://remotesite.com/'
+        ENV['DMEASURES_USER'] = 'username'
+        ENV['DMEASURES_PW'] = 'password'
+
+        adaptor = ImportAdapter::SupportDocAdapter.new(filename: file_path)
+        adaptor.import
+        # count should still be one even if we were unable to retrieve 
+        # remote file
+        expect(adaptor.import_count).to eql(1)
+      end
+    end
 
     # context "with complete csv file" do
     #   it 'perform import with valid params' do
