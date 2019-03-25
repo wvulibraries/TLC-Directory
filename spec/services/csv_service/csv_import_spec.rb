@@ -92,15 +92,15 @@ RSpec.describe CSVService::CSVImport do
       end
     end
 
-    # context "with valid SUPPORT_DOC.csv file" do
-    #   let(:file_path) { "tmp/SUPPORT_DOC.csv" }
-    #   it 'perform import with valid params' do
-    #       csv_service.process_files
+    context 'with valid SUPPORT_DOC.csv file' do
+      let(:file_path) { 'tmp/SUPPORT_DOC.csv' }
+      it 'perform import with valid params' do
+        csv_service.process_files
 
-    #       # verify count
-    #       expect(csv_service.import_count).to eql(1)
-    #   end
-    # end
+        # verify count
+        expect(csv_service.import_count).to eql(1)
+      end
+    end
 
     context 'with valid Random.csv file' do
       let(:file_path) { 'tmp/Random.csv' }

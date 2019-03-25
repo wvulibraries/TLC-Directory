@@ -65,17 +65,15 @@ module CSVService
     private
 
     def store_files
+      return unless @csv_files.present?
+
       @errors = []
       # working uploader with carrierwave store multiple files
-      if @csv_files.present?
-        uploader = CSVUploader.new
-        @csv_files.each do |file|
-          begin
-            uploader.store!(file)
-          rescue Exception => e
-            @errors << e.to_s + ' ' + file.original_filename + ' Not Saved'
-          end
-        end
+      uploader = CSVUploader.new
+      @csv_files.each do |file|
+        uploader.store!(file)
+      rescue StandardError => error
+        @errors << error.to_s + ' ' + file.original_filename + ' Not Saved'
       end
     end
   end
