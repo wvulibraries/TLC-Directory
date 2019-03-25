@@ -30,7 +30,7 @@ RSpec.describe ImportAdapter::SupportDocAdapter do
         adaptor.import
         # count should still be one even if we were unable to retrieve 
         # remote file
-        expect(adaptor.import_count).to eql(0)
+        expect(adaptor.import_count).to eql(1)
       end
 
       it 'tries to perform import with invalid remote server settings present' do
