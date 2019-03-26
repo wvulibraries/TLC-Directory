@@ -1,10 +1,9 @@
 .faculty-profile {
-  //background-color: lightgreen;
-
+  @include span-columns(12);
+  margin-bottom: 2em;
 
   .faculty-profile-pic {
-    float: left;
-    //margin: 20px;
+    @include span-columns(3);
 
     img {
       border-style: solid;
@@ -12,21 +11,26 @@
       border-color: $accent-blue1;
       vertical-align: middle;
 
-      height: 200px;
-      width: 200px;
+      height: 13em;
+      width: 13em;
       object-fit: cover;
       object-position: 75% 25%;
       }
     }
 
   .faculty-profile-title {
-    position: relative;
-    width: 75%;
+    @include span-columns(9);
 
     h1 {
       font-size: 3.5em;
-      padding-top: .25em;
-      float: right;
+      padding-top: 2em;
+      white-space: nowrap;
     }
+  }
+}
+
+@include mq($bp-mini) {
+  .faculty-profile-pic {
+    @include span-columns(12);
   }
 }

@@ -1,4 +1,5 @@
 <div class="wvu-container">
+    <!-- Edit, New, and Delete buttons display above the profile page -->
     <div class="show-action">
         <div class="actions">
             <%= link_to '<span class="fas fa-users"></span> Users'.html_safe, '/admin/faculties', { class: 'new-button' } %>
@@ -6,132 +7,112 @@
             <%= link_to '<span class="fas fa-trash"></span> Destroy'.html_safe, admin_faculty_path(@faculty), method: :delete, class: 'delete-button', data: { confirm: 'Are you sure?' }, title:'delete' %>
         </div>
     </div>
-    <div class="faculty-profile">
-        <div class="faculty-profile-title">
-            <h1><%= @faculty.display_name %></h1>
-            <!-- <%= @faculty.role.capitalize %> -->
-            <!-- <%= @faculty.status.capitalize %> -->
-        </div>
-        <div class="faculty-profile-pic">
-            <img src="<%= @faculty.image.small %>" alt="faculty profile image"/>
-        </div>
-    </div>
-<div class="col-container">
-    <div class="col-side">
-        <div class="info-boxes">
-            <h3>Contact Information</h3>
-                <ul>
-                  <li>
-                      <strong>WVU Userame:</strong>
-                      <%= @faculty.wvu_username %>
-                  </li>
 
-                  <li>
-                      <strong>Email Address:</strong>
-                      <%= @faculty.email %>
-                  </li>
+    <div class="col-container">
+        <div class="faculty-profile">
 
-            <% if hasaddresses?(@faculty) %>
-                  <li>
-                      <strong> Address(es): </strong>
-                  <ul>
-                      <% @faculty.addresses.each do |address| %>
-                  <li> <%= address.human_readable %> </li>
+          <div class="faculty-profile-pic">
+              <img src="<%= @faculty.image.small %>" alt="faculty profile image"/>
+          </div>
+
+            <div class="faculty-profile-title">
+                <h1> <%= @faculty.display_name %> </h1>
+                <!-- <%= @faculty.role.capitalize %> -->
+                <!-- <%= @faculty.status.capitalize %> -->
+            </div>
+        </div>
+
+        <div class="col-side">
+            <div class="info-boxes">
+                <h3>Contact Information</h3>
+                    <ul>
+                        <li> <strong>WVU Userame:</strong> <%= @faculty.wvu_username %> </li>
+                        <li> <strong>Email Address:</strong> <%= @faculty.email %> </li>
+
+                    <% if hasaddresses?(@faculty) %>
+                        <li> <strong> Address(es): </strong>
+                            <ul> <% @faculty.addresses.each do |address| %>
+                              <li> <%= address.human_readable %> </li>
+                            <% end %>
+                            </ul>
+                        </li>
+                    <% end %>
+
+                    <% if hasphones?(@faculty) %>
+                        <li> <strong>Phone(s): </strong>
+                            <ul> <% @faculty.phones.each do |phone| %>
+                              <li> <a href="tel:<%= phone.number %>"> <%= phone.number %> </a> </li>
+                              <% end %>
+                            </ul>
+                        </li>
+                    <% end %>
+
+                    <% if haswebsites?(@faculty) %>
+                        <li> <strong>Website(s): </strong>
+                            <ul> <% @faculty.websites.each do |website| %>
+                              <li> <a href="<%= website.url %>"> <%= website.url %> </a> </li>
+                              <% end %>
+                            </ul>
+                        </li>
+                    <% end %>
+
+                    </ul>
+            </div>
+
+            <div class="info-boxes">
+                  <% if hasawards?(@faculty) %>
+                        <li>
+                            <h3> Award(s): </h3>
+                            <ul> <% @faculty.awards.each do |award| %>
+                                <li> <%= award.display_award %> </li>
+                                <% end %>
+                            </ul>
+                        </li>
                   <% end %>
-                  </ul>
-                  </li>
-            <% end %>
-
-            <% if hasphones?(@faculty) %>
-            <li>
-            <strong>Phone(s):</strong>
-            <ul>
-            <% @faculty.phones.each do |phone| %>
-            <li>
-            <a href="tel:<%= phone.number %>">
-            <%= phone.number %>
-            </a>
-            </li>
-            <% end %>
-            </ul>
-            </li>
-            <% end %>
-
-            <% if haswebsites?(@faculty) %>
-            <li>
-            <strong>Website(s):</strong>
-            <ul>
-            <% @faculty.websites.each do |website| %>
-            <li>
-            <a href="<%= website.url %>">
-            <%= website.url %>
-            </a>
-            </li>
-            <% end %>
-            </ul>
-            </li>
-            <% end %>
-
-            </ul>
+            </div>
         </div>
 
-    <div class="info-boxes">
-    <% if hasawards?(@faculty) %>
-    <li>
-    <h3>Award(s):</h3>
-    <ul>
-    <% @faculty.awards.each do |award| %>
-    <li> <%= award.display_award %> </li>
-    <% end %>
-    </ul>
-    </li>
-    <% end %>
+        <div class="col-main">
+            <% if @faculty.research_interests.present? %>
+                <li>
+                    <h2> Research Interest(s): </h2>
+                    <ul> <% @faculty.research_interests.split(/\s*,\s*/).each do |interest| %>
+                        <li> <%= interest %> </li>
+                        <% end %>
+                    </ul>
+                </li>
+            <% end %>
+
+            <% if @faculty.teaching_interests.present? %>
+                <li>
+                    <h2> Teaching Interest(s): </h2>
+                    <ul> <% @faculty.teaching_interests.split(/\s*,\s*/).each do |interest| %>
+                        <li> <%= interest %> </li>
+                        <% end %>
+                    </ul>
+                </li>
+            <% end %>
+
+            <% if haspublications?(@faculty) %>
+                <li>
+                  <h2> Publication(s): </h2>
+                  <ul> <% @faculty.publications.each do |pub| %>
+                    <li>
+                       <ul>
+                          <li> <%= pub.display_date %> </li>
+                          <li> <%= pub.title %> </li>
+                          <li> <%= pub.description %> </li>
+                       </ul>
+                    </li>
+                       <% end %>
+                  </ul>
+                </li>
+            <% end %>
+        </div>
     </div>
+
+    <div class="micro-text">
+        Created at <%= @faculty.created_at.strftime("%B %d, %Y at %I:%M%p") %> <br/>
+        Updated at <%= @faculty.updated_at.strftime("%B %d, %Y at %I:%M%p")%>
     </div>
-
-    <div class="col-main">
-    <% if @faculty.research_interests.present? %>
-    <li>
-    <h2>Research Interest(s):</h2>
-    <ul>
-    <% @faculty.research_interests.split(/\s*,\s*/).each do |interest| %>
-    <li> <%= interest %> </li>
-    <% end %>
-    </ul>
-    </li>
-    <% end %>
-
-    <% if @faculty.teaching_interests.present? %>
-    <li>
-    <h2>Teaching Interest(s):</h2>
-    <ul>
-    <% @faculty.teaching_interests.split(/\s*,\s*/).each do |interest| %>
-    <li> <%= interest %> </li>
-    <% end %>
-    </ul>
-    </li>
-    <% end %>
-
-    <% if haspublications?(@faculty) %>
-    <li>
-    <h2>Publication(s):</h2>
-    <ul>
-    <% @faculty.publications.each do |pub| %>
-    <li>
-    <ul>
-    <li> <%= pub.display_date %> </li>
-    <li> <%= pub.title %> </li>
-    <li> <%= pub.description %> </li>
-    </ul>
-    </li>
-    <% end %>
-    </ul>
-    </li>
-    <% end %>
-    </div>
-</div>
-
-<div class="micro-text">
-    Created at <%= @faculty.created_at.strftime("%B %d, %Y at %I:%M%p") %> <br/> Updated at <%= @faculty.updated_at.strftime("%B %d, %Y at %I:%M%p")%>
-</div>
 </div>
