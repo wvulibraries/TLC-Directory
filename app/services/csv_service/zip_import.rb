@@ -17,10 +17,8 @@ module CSVService
 
     def create_folders
       # create folders if missing
-      Dir.mkdir(@path) unless File.exist?(@path)
+      FileUtils.mkdir_p(@completed_zip_path) unless File.exist?(@completed_zip_path)
       Dir.mkdir(@csv_path) unless File.exist?(@csv_path)
-      Dir.mkdir(@zip_path) unless File.exist?(@zip_path)
-      Dir.mkdir(@completed_zip_path) unless File.exist?(@completed_zip_path)
     end
 
     def initialize(params = {})
