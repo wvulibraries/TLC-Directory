@@ -16,11 +16,8 @@ module ImportAdapter
         if row[:username].present?
           # Find faculty
           @faculty = Faculty.where(wvu_username: row[:username]).first_or_initialize
+          process(row)
 
-          # get values from row that are common to all csv files
-          # assign these to faculty
-          add_faculty_fields(row)
-          add_optional_items(row)
           @faculty.save(validate: false)
           @import_count += 1
         end
@@ -28,6 +25,13 @@ module ImportAdapter
     end
 
     private
+
+    def process(row)
+      # get values from row that are common to all csv files
+      # assign these to faculty
+      add_faculty_fields(row)
+      add_optional_items(row)
+    end
 
     # placeholder for adding additional fields
     def add_optional_items(_row)
