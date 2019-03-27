@@ -69,26 +69,26 @@ class Admin::FacultiesController < ApplicationController
     @errors = []
     if upload_params[:csv_files].present?
       wizard = CSVService::CSVImport.new(csv_files: upload_params[:csv_files])
-      if wizard.errors.count > 0
+      if wizard.errors.count.positive?
         @errors << wizard.errors
       else
         flash.now[:notice] = I18n.t('faculty.csv_import_queued')
       end
     end
-    flash.now[:error] = @errors if @errors.count > 0
+    flash.now[:error] = @errors if @errors.count.positive?
   end
 
   def importzip
     @errors = []
     if upload_params[:zip_file].present?
       zip_import = CSVService::ZipImport.new(upload_params)
-      if zip_import.errors.count > 0
+      if zip_import.errors.count.positive?
         @errors << zip_import.errors
       else
         flash.now[:notice] = upload_params[:zip_file].original_filename + I18n.t('faculty.zip_import_queued')
       end
     end
-    flash.now[:error] = @errors if @errors.count > 0
+    flash.now[:error] = @errors if @errors.count.positive?
   end
 
   private
@@ -134,7 +134,7 @@ class Admin::FacultiesController < ApplicationController
   def faculty_params
     params.require(:faculty)
           .permit(name_attrs, profile_attrs, image_attrs, resume_attrs, contact_attrs, professional_attrs)
-    end
+  end
 
   def upload_params
     params.permit({ csv_files: [] }, :zip_file)

@@ -77,6 +77,5 @@ Rails.application.routes.draw do
 
   get '/directory/departments/:id/faculties',
       to: 'directory/departments#faculties',
-      as: 'directory/departments_faculties'    
-        
+      as: 'directory/departments_faculties'
 end

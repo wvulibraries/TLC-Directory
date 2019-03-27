@@ -5,6 +5,15 @@ module ImportAdapter
     require 'net/http'
     require 'openssl'
 
+    def initialize(params = {})
+      # create tmp folder needed for testing seems to be missing
+      @temp_folder = "#{Rails.root}/public/uploads/#{Rails.env}/resume/tmp/"
+      Dir.mkdir(@temp_folder) unless File.exist?(@temp_folder)
+
+       # calling inherited init
+      super
+    end
+
     def import
       # guard clasue added to the import to insure that valid envirmoental variables are set
       return unless valid_enviromental_vars?
@@ -19,27 +28,28 @@ module ImportAdapter
     def add_optional_items(row)
       return unless row[:upload_cv].present? && @faculty.resume_year.to_i < row[:yr_year].to_i
 
-      file_url = ENV['DMEASURES_URL'] + row[:upload_cv].gsub(' ', '%20')
-      temp_file = "#{Rails.root}/public/uploads/#{Rails.env}/resume/tmp/" + File.basename(row[:upload_cv])
+      response = download_file(row[:upload_cv].gsub(' ', '%20'))
 
-      return unless download_file(URI(file_url), temp_file)
+      return unless response
 
+      temp_file = @temp_folder + File.basename(row[:upload_cv])
+      write_file(temp_file, response)
       @faculty.resume_year = row[:yr_year]
       @faculty.resume = File.open(temp_file)
       @faculty.save
       FileUtils.rm temp_file, force: true
     end
 
-    def download_file(uri, temp_file)
-      return unless uri.present? && temp_file.present?
+    def download_file(file)
+      return unless file.present?
 
+      uri = URI(ENV['DMEASURES_URL'] + file)
       Net::HTTP.start(uri.host, uri.port,
                       use_ssl: uri.scheme == 'https',
                       verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|
         request = Net::HTTP::Get.new uri.request_uri
         request.basic_auth ENV['DMEASURES_USER'], ENV['DMEASURES_PW']
-        response = http.request request # Net::HTTPResponse object
-        return write_file(temp_file, response)
+        return http.request request # Net::HTTPResponse object
       end
       false
     end
@@ -51,7 +61,6 @@ module ImportAdapter
         File.open(filename, 'wb') do |file|
           file.write(response.body)
           file.close
-          true
         end
       rescue Errno::ENOENT
         false

@@ -3,7 +3,7 @@
 module ApplicationHelper
   def page_title(title)
     title += ' | ' if title.present?
-    title += 'TLC Directory'
+    title + 'TLC Directory'
   end
 
   # pass prefixes to views

@@ -3,6 +3,13 @@
 require 'csv'
 require 'rails_helper'
 
+class FakeResponse
+  attr :body
+  def initialize(body)
+    @body = body
+  end
+end
+
 RSpec.describe ImportAdapter::SupportDocAdapter do
   describe 'methods included in module' do
     let(:faculty) { FactoryBot.attributes_for :faculty }
@@ -21,53 +28,43 @@ RSpec.describe ImportAdapter::SupportDocAdapter do
         end
       end
     end
-
     after(:each) { File.delete(file_path) }
 
-    context 'testing external file download' do
-    #   it 'tries to perform import without remote enviromental settings present' do
-    #     adaptor = ImportAdapter::SupportDocAdapter.new(filename: file_path)
-    #     adaptor.import
-    #     # count should still be one even if we were unable to retrieve 
-    #     # remote file
-    #     expect(adaptor.import_count).to eql(1)
-    #   end
+    let(:temp_path) { "#{Rails.root}/public/uploads/#{Rails.env}/resume/tmp/" }
 
-      it 'tries to perform import with invalid remote server settings present' do
+    before(:each) {
+      FileUtils.mkdir_p(temp_path)
+      FileUtils.cp("#{Rails.root}/spec/support/files/resume_1.pdf", temp_path)
+    }
+
+    let(:resume_path) { temp_path + 'resume_1.pdf' }
+    let(:resume) { File.read(resume_path) }
+    let(:response) { FakeResponse.new(resume) }
+
+    context 'successful resume download' do
+      it 'returns the requested file' do
         ENV['DMEASURES_URL'] = 'http://remotesite.com/'
         ENV['DMEASURES_USER'] = 'username'
         ENV['DMEASURES_PW'] = 'password'
 
+        # Setup: Instantiate, mock
+        adaptor = ImportAdapter::SupportDocAdapter.new(filename: file_path)
+        allow(adaptor).to receive(:download_file).and_return(response)
+
+        # Perform
+        adaptor.import
+
+        # Verify
+        expect(adaptor.import_count).to eql(1)
+      end
+
+      it 'tries to perform import without remote enviromental settings present' do
         adaptor = ImportAdapter::SupportDocAdapter.new(filename: file_path)
         adaptor.import
-        # count should still be one even if we were unable to retrieve 
+        # count should still be one even if we were unable to retrieve
         # remote file
         expect(adaptor.import_count).to eql(1)
       end
     end
-
-    # context "with complete csv file" do
-    #   it 'perform import with valid params' do
-    #     ENV["DMEASURES_URL"] = "http://localhost:3000/"
-    #     # ENV["DMEASURES_USER"] =
-    #     # ENV["DMEASURES_PW"] =
-
-    #     adaptor = ImportAdapter::SupportDocAdapter.new({:filename => file_path})
-    #     adaptor.import
-    #     # verify count
-    #     expect(adaptor.import_count).to eql(1)
-    #   end
-    # end
-
-    # context "test file download" do
-
-    #   it "downloads a file from remote server"
-    #     temp_file = "#{Rails.root}/spec/support/files/resume_1.pdf"
-    #     uri = URI(ENV["DMEASURES_URL"] + 'resume_1.pdf')
-    #     adaptor = ImportAdapter::SupportDocAdapter.new
-    #     expect(adaptor.download_file(uri, temp_file)).to eq(false)
-    #   end
-
-    # end
   end
 end

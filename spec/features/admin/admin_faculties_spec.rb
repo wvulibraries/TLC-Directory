@@ -7,9 +7,6 @@ RSpec.feature 'Admin::Faculty', type: :feature do
   let(:college) { FactoryBot.create(:college) }
   let(:department) { FactoryBot.create(:department) }
   let(:faculty_existing) { FactoryBot.create(:faculty) }
-  # vars for creating
-  # let(:address) { FactoryBot.attributes_for(:address) }
-  # let(:phone) { FactoryBot.attributes_for(:phone) }
   let(:faculty) { FactoryBot.attributes_for(:faculty) }
 
   before(:each) do

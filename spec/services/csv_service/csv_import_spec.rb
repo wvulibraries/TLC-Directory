@@ -25,6 +25,8 @@ RSpec.describe CSVService::CSVImport do
       end
     end
 
+    let(:temp_path) { "#{Rails.root}/public/uploads/#{Rails.env}/resume/tmp/" }
+
     after(:each) { File.delete(file_path) }
 
     before do
@@ -32,6 +34,7 @@ RSpec.describe CSVService::CSVImport do
       File.open(file_path) do |f|
         uploader.store!(f)
       end
+      FileUtils.mkdir_p(temp_path)
     end
 
     after do
