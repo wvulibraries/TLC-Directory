@@ -5,6 +5,10 @@ require 'simplecov-console'
 ENV['RAILS_ENV'] ||= 'test'
 
 RSpec.configure do |config|
+  config.before(:each) do 
+    FileUtils.mkdir_p("#{Rails.root}/public/uploads/#{Rails.env}/resume/tmp/")
+  end
+
   # clear uploads after tests are complete
   config.after(:each) do
     FileUtils.rm_rf(Dir["#{Rails.root}/public/uploads/test"]) if Rails.env.test?

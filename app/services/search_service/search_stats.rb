@@ -13,7 +13,9 @@ module SearchService
       current_year = Date.today.strftime('%Y')
       sanitized_search = Sanitize.fragment search_string.gsub(%r{\{|\}|\[|\]|\\|\/|\^|\~|\:|\!|\"|\'}, '')
 
-      search_item = SearchTerm.by_year(current_year).by_month(current_month).find_by(term: sanitized_search)
+      search_item = SearchTerm.by_year(current_year)
+                              .by_month(current_month)
+                              .find_by(term: sanitized_search)
       if search_item.present?
         search_item.increase_count
       else

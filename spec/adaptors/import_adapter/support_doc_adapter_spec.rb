@@ -33,7 +33,6 @@ RSpec.describe ImportAdapter::SupportDocAdapter do
     let(:temp_path) { "#{Rails.root}/public/uploads/#{Rails.env}/resume/tmp/" }
 
     before(:each) {
-      FileUtils.mkdir_p(temp_path)
       FileUtils.cp("#{Rails.root}/spec/support/files/resume_1.pdf", temp_path)
     }
 

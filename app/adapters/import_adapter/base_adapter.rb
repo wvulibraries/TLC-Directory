@@ -13,11 +13,11 @@ module ImportAdapter
 
     def import
       CSV.foreach(@filename, headers: true, header_converters: ->(h) { h.gsub(/[^0-9A-Za-z_\s]/, '').downcase.gsub(/\s+/, '_').to_sym unless h.nil? }, liberal_parsing: true) do |row|
-        if row[:username].present?
-          # Find faculty
-          @faculty = Faculty.where(wvu_username: row[:username]).first_or_initialize
-          process(row)
+        @faculty = find_or_create_faculty(row[:username])
 
+        if @faculty.present?
+          # extract fields from row save them to the faculty
+          process(row)
           @faculty.save(validate: false)
           @import_count += 1
         end
@@ -25,6 +25,12 @@ module ImportAdapter
     end
 
     private
+
+    def find_or_create_faculty(username)
+      return unless username.present?
+
+      Faculty.where(wvu_username: username).first_or_initialize
+    end
 
     def process(row)
       # get values from row that are common to all csv files
