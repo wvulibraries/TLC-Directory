@@ -27,6 +27,12 @@ RSpec.describe Faculty, type: :model do
     it_behaves_like 'imageable'
   end
 
+  context 'testing the factory valid' do
+    it 'expects faculty to be valid' do
+      expect(faculty).to be_valid
+    end
+  end
+
   context 'resume uploader' do
     it 'resume? should be true' do
       obj = FactoryBot.create(:faculty, resume: Rack::Test::UploadedFile.new(Rails.root.join('spec/support/files/resume_1.pdf'), 'image/pdf'))

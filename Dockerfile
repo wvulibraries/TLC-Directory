@@ -21,10 +21,7 @@ RUN \
     gem install bundler \
     && gem install rails \
     && mkdir -p /home/tlcdirectory
-
-#ENV RAILS_ENV development
-#ENV RACK_ENV development
-
+    
 WORKDIR /home/tlcdirectory
 ADD . /home/tlcdirectory
 RUN bundle install --jobs=4 --retry=3

@@ -17,15 +17,15 @@ FactoryBot.define do
     research_interests { Faker::Lorem.sentence }
     teaching_interests { Faker::Lorem.sentence }
 
-    # factory :non_admin_cas do
-    #   wvu_username { 'johntest' }
-    #   role { 0 }
-    # end
-    #
-    # factory :admin_cas do
-    #   wvu_username { 'johntest' }
-    #   role { 1 }
-    # end
+    factory :non_admin_cas do
+      wvu_username { 'johntest' }
+      role { 0 }
+    end
+    
+    factory :admin_cas do
+      wvu_username { 'johntest' }
+      role { 1 }
+    end
 
     factory :disabled_faculty do
       status { 'disabled' }

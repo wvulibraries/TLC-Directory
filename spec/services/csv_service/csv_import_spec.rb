@@ -34,7 +34,6 @@ RSpec.describe CSVService::CSVImport do
       File.open(file_path) do |f|
         uploader.store!(f)
       end
-      FileUtils.mkdir_p(temp_path)
     end
 
     after do

@@ -30,8 +30,13 @@ module ApplicationHelper
 
   # get current user for views
   def current_user
-    User.where(wvu_username: session['cas']['user']) if logged_in?
+    User.where(wvu_username: session['cas']['user']).first if logged_in? && user_exists? 
   end
+
+  # does the user exist? 
+  def user_exists? 
+    User.where(wvu_username: session['cas']['user']).exists?
+  end  
 
   # dynamically add fieldsets
   # setup from rails casts

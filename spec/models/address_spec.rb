@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Address, type: :model do
   let(:address) { FactoryBot.create :address_user_association }
 
-  context 'validations' do
+  context 'validates .' do
     it { should validate_length_of(:street_address_1).is_at_most(50) }
     it { should validate_length_of(:street_address_2).is_at_most(50) }
     it { should validate_length_of(:city).is_at_most(60) }
@@ -17,8 +17,10 @@ RSpec.describe Address, type: :model do
     it { should belong_to(:addressable) }
   end
 
-  it 'expects address to be valid' do
-    expect(address).to be_valid
+  context 'testing the factory valid' do
+    it 'expects address to be valid' do
+      expect(address).to be_valid
+    end
   end
 
   describe '#human_readable' do
