@@ -20,29 +20,47 @@ module ImportAdapter
       Phone.find_or_create_by(number: number, number_types: type)
     end
 
-    def create_number(area_code, prefix, line_number, extension)
-      return unless area_code.present? && prefix.present? && line_number.present?
+    def create_number(hash)
+      return unless hash[:area_code].present? && hash[:prefix].present? && hash[:line_number].present?
 
-      number = area_code + '.' + prefix + '.' + line_number
-      return number unless extension.present?
+      number = hash[:area_code] + '.' + hash[:prefix] + '.' + hash[:line_number]
+      return number unless hash[:extension].present?
 
       # add extension and return
-      number + 'Ext. ' + extension
+      number + 'Ext. ' + hash[:extension]
     end
 
     def create_office_phone(row)
-      number = create_number(row[:ophone1], row[:ophone2], row[:ophone3], row[:ophone4])
+      hash = {}
+      hash[:area_code] = row[:ophone1]
+      hash[:prefix] = row[:ophone2]
+      hash[:line_number] = row[:ophone3]
+      hash[:extension] = row[:ophone4]
+
+      number = create_number(hash)
       create_phone(number, 'office')
     end
 
     def create_department_phone(row)
-      number = create_number(row[:dphone1], row[:dphone2], row[:dphone3], row[:dphone4])
+      hash = {}
+      hash[:area_code] = row[:dphone1]
+      hash[:prefix] = row[:dphone2]
+      hash[:line_number] = row[:dphone3]
+      hash[:extension] = row[:dphone4]
+
+      number = create_number(hash)
       create_phone(number, 'department')
     end
 
     def create_fax_phone(row)
-      number = create_number(row[:fax1], row[:fax2], row[:fax3], row[:fax4])
-      create_phone(number, 'department')
+      hash = {}
+      hash[:area_code] = row[:fax1]
+      hash[:prefix] = row[:fax2]
+      hash[:line_number] = row[:fax3]
+      hash[:extension] = row[:fax4]
+
+      number = create_number(hash)
+      create_phone(number, 'fax')
     end
 
     def build_phone_array(row)

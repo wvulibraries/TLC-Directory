@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+
+ruby '~> 2.6'
 
 # Rails, MySQL, Puma
 gem 'mysql2', '>= 0.4.4', '< 0.6.0'
@@ -8,18 +11,17 @@ gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.0'
 
 # Rails Dependencies
-gem 'coffee-rails', '~> 4.2'
-gem 'jbuilder', '~> 2.5'
 gem 'sassc-rails'
-gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
+gem 'coffee-rails', '~> 4.2'
+gem 'turbolinks', '~> 5'
+gem 'jbuilder', '~> 2.5'
 
 # loads rails apps faster
 gem 'bootsnap', '>= 1.1.0', require: false
 
 # Application Specific
 # =====================================================================================
-
 gem 'sanitize'
 
 # interface items
@@ -44,6 +46,8 @@ gem 'whenever', require: false
 group :test do
   # RSpec & testing gems!
   gem 'rspec-rails', '~> 3.7'
+  gem 'shoulda'
+  gem 'shoulda-matchers', '~> 3.1'
 
   # simplecov
   gem 'simplecov'
@@ -65,7 +69,7 @@ end
 # Developoment / Test Items (Primarily debugging)
 # =====================================================================================
 group :development, :test do
-  gem 'shoulda-matchers', '~> 3.1'
+
 
   # For test data generation
   gem 'factory_bot_rails', '~> 4.0'
