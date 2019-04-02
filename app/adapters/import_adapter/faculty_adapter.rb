@@ -9,9 +9,15 @@ module ImportAdapter
       hash = {}
       hash[:biography] = row[:bio] unless row[:bio].nil?
       hash[:perferred_name] = row[:pfname] unless row[:pfname].nil?
-      hash[:websites] = [Website.find_or_create_by(url: row[:website])] unless row[:website].nil?
+      hash[:websites] = create_website(row[:website])
       hash[:phones] = build_phone_array(row)
       @faculty.attributes = hash
+    end
+
+    def create_website(url)
+      return [] unless url.present?
+
+      [Website.find_or_create_by(url: url)]
     end
 
     def create_phone(number, type)
@@ -21,13 +27,17 @@ module ImportAdapter
     end
 
     def create_number(hash)
-      return unless hash[:area_code].present? && hash[:prefix].present? && hash[:line_number].present?
+      return unless valid_number_hash?(hash)
 
       number = hash[:area_code] + '.' + hash[:prefix] + '.' + hash[:line_number]
       return number unless hash[:extension].present?
 
       # add extension and return
       number + 'Ext. ' + hash[:extension]
+    end
+
+    def valid_number_hash?(hash)
+      hash[:area_code].present? && hash[:prefix].present? && hash[:line_number].present?
     end
 
     def create_office_phone(row)
