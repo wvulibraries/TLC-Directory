@@ -9,8 +9,8 @@ RSpec.describe ImportAdapter::FacultyAdapter do
     let(:college) { FactoryBot.attributes_for :college }
     let(:dept) { FactoryBot.attributes_for :department }
 
-    let(:header) { 'First Name' + ',' + 'Middle Name' + ',' + 'Last Name' + ',' + 'Email' + ',' + 'College (Most Recent)' + ',' + 'Section (Department of Medicine Only) (Most Recent)' + ',' + 'Unit (Most Recent)' + ',' + 'USERNAME' + ',' + 'ophone1' + ',' + 'ophone2' + ',' + 'ophone3' + ',' + 'ophone4' }
-    let(:row2) { faculty[:first_name] + ',' + faculty[:middle_name] + ',' + faculty[:last_name] + ',' + faculty[:email] + ',' + college[:name] + ',,' + dept[:name] + ',' + faculty[:wvu_username] + ',' + '999' + ',' + '999' + ',' + '9999' + ',' + '999' }
+    let(:header) { 'First Name' + ',' + 'Middle Name' + ',' + 'Last Name' + ',' + 'Email' + ',' + 'College (Most Recent)' + ',' + 'Section (Department of Medicine Only) (Most Recent)' + ',' + 'Unit (Most Recent)' + ',' + 'USERNAME' + ',' + 'ophone1' + ',' + 'ophone2' + ',' + 'ophone3' + ',' + 'ophone4' + ',' + 'website' }
+    let(:row2) { faculty[:first_name] + ',' + faculty[:middle_name] + ',' + faculty[:last_name] + ',' + faculty[:email] + ',' + college[:name] + ',,' + dept[:name] + ',' + faculty[:wvu_username] + ',' + '999' + ',' + '999' + ',' + '9999' + ',' + '999' + ',' + 'http://www.google.com'  }
     let(:rows) { [header, row2] }
 
     let(:file_path) { 'tmp/PCI.csv' }
