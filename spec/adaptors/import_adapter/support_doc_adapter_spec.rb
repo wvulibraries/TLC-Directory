@@ -41,12 +41,7 @@ RSpec.describe ImportAdapter::SupportDocAdapter do
     let(:response) { FakeResponse.new(resume) }
 
     context 'successful resume download' do
-      it 'tries to perform import without remote enviromental settings present' do
-        # ENV['DMEASURES_URL'] = nil
-        # ENV['DMEASURES_USER'] = nil
-        # ENV['DMEASURES_PW'] = nil
-
-        adaptor = ImportAdapter::SupportDocAdapter.new(filename: file_path)
+      it 'tries to perform import without remote enviromental settings present' do        adaptor = ImportAdapter::SupportDocAdapter.new(filename: file_path)
         adaptor.import
         # count should still be one even if we were unable to retrieve
         # remote file
@@ -69,6 +64,17 @@ RSpec.describe ImportAdapter::SupportDocAdapter do
         expect(adaptor.import_count).to eql(1)
       end
 
+    end
+
+    context 'with missing row data' do
+      let(:row2) { faculty[:first_name] + ',' + faculty[:middle_name] + ',' + faculty[:last_name] + ',' + faculty[:email] + ',' + college[:name] + ',,' + dept[:name] + ',' + faculty[:wvu_username] + ',,' + '2019' }
+
+      it 'perform import with missing filename data on row 3' do
+        adaptor = ImportAdapter::FacultyAdapter.new(filename: file_path)
+        adaptor.import
+        # verify count
+        expect(adaptor.import_count).to eql(1)
+      end
     end
   end
 end

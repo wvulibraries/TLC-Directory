@@ -32,5 +32,17 @@ RSpec.describe ImportAdapter::FacultyAdapter do
         expect(adaptor.import_count).to eql(1)
       end
     end
+
+
+    context 'with missing row data' do
+      let(:row2) { faculty[:first_name] + ',' + faculty[:middle_name] + ',' + faculty[:last_name] + ',' + faculty[:email] + ',' + college[:name] + ',,' + dept[:name] + ',' + faculty[:wvu_username] + ',,,' + '999' + ',' + '9999' + ',' + '999' + ',' + 'http://www.google.com'  }
+
+      it 'perform import with missing phone data on row 3' do
+        adaptor = ImportAdapter::FacultyAdapter.new(filename: file_path)
+        adaptor.import
+        # verify count
+        expect(adaptor.import_count).to eql(1)
+      end
+    end
   end
 end
