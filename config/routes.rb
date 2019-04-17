@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       as: 'home'
 
   # auth
-  get '/login', 
+  get '/login',
       to: 'application#login',
       as: 'login'
 
@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       as: 'logout'
 
   # admin
-  get '/admin', 
+  get '/admin',
       to: 'admin#index'
 
   get '/admin/faculties/importzip', 

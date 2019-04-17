@@ -42,38 +42,14 @@ RSpec.describe ImportAdapter::SupportDocAdapter do
 
     context 'successful resume download' do
       it 'tries to perform import without remote enviromental settings present' do
+        ENV['DMEASURES_URL'] = nil
+        ENV['DMEASURES_USER'] = nil
+        ENV['DMEASURES_PW'] = nil
         adaptor = ImportAdapter::SupportDocAdapter.new(filename: file_path)
         adaptor.import
         # count should still be one even if we were unable to retrieve
         # remote file
-        expect(adaptor.import_count).to eql(1)
-      end
-
-      # it 'fails do import due to missing enviromental settings' do
-      #   ENV['DMEASURES_URL'] = nil
-      #   ENV['DMEASURES_USER'] = nil
-      #   ENV['DMEASURES_PW'] = nil
-      #   adaptor = ImportAdapter::SupportDocAdapter.new(filename: file_path)
-      #   adaptor.import
-      #   # count should still be one even if we were unable to retrieve
-      #   # remote file
-      #   expect(adaptor.import_count).to eql(0)
-      # end
-
-      it 'fails on write file' do
-        ENV['DMEASURES_URL'] = 'http://remotesite.com/'
-        ENV['DMEASURES_USER'] = 'username'
-        ENV['DMEASURES_PW'] = 'password'
-                
-        # Setup: Instantiate, mock
-        adaptor = ImportAdapter::SupportDocAdapter.new(filename: file_path)
-        allow(adaptor).to receive(:download_file).and_return(nil)
-
-        # Perform
-        adaptor.import
-
-        # Verify
-        expect(adaptor.import_count).to eql(1)
+        expect(adaptor.import_count).to eql(0)
       end
 
       it 'returns the requested file' do
@@ -91,7 +67,6 @@ RSpec.describe ImportAdapter::SupportDocAdapter do
         # Verify
         expect(adaptor.import_count).to eql(1)
       end
-
     end
 
     context 'with missing row data' do
@@ -103,6 +78,22 @@ RSpec.describe ImportAdapter::SupportDocAdapter do
         # verify count
         expect(adaptor.import_count).to eql(1)
       end
+
+      # it 'returns the requested file' do
+      #   ENV['DMEASURES_URL'] = 'http://remotesite.com/'
+      #   ENV['DMEASURES_USER'] = 'username'
+      #   ENV['DMEASURES_PW'] = 'password'
+
+      #   # Setup: Instantiate, mock
+      #   adaptor = ImportAdapter::SupportDocAdapter.new(filename: file_path)
+      #   allow(adaptor).to receive(:download_file).and_return(nil)
+
+      #   # Perform
+      #   adaptor.import
+
+      #   # Verify
+      #   expect(adaptor.import_count).to eql(1)
+      # end
     end
   end
 end
