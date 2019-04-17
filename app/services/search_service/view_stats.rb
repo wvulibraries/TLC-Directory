@@ -7,10 +7,14 @@ module SearchService
     attr_reader :error
 
     def initialize(params = {})
-      unless params[:date].nil? || params[:date][:month].nil?
-        @month_id = params[:date][:month]
-        @error = 'Error: Value Passed for Month Is Invalid' unless valid_month?
-      end
+      return unless valid_params?(params)
+
+      @month_id = params[:date][:month]
+      @error = 'Error: Value Passed for Month Is Invalid' unless valid_month?
+    end
+
+    def valid_params?(params)
+      params[:date].present? && params[:date][:month].present?
     end
 
     def perform
