@@ -33,10 +33,10 @@ module ApplicationHelper
     User.where(wvu_username: session['cas']['user']).first if logged_in? && user_exists? 
   end
 
-  # does the user exist? 
-  def user_exists? 
+  # does the user exist?
+  def user_exists?
     User.where(wvu_username: session['cas']['user']).exists?
-  end  
+  end
 
   # dynamically add fieldsets
   # setup from rails casts

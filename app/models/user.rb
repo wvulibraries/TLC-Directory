@@ -64,7 +64,7 @@ class User < ApplicationRecord
 
   # custom validations
   def valid_email
-    email_regex = !!(email =~ /^[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.edu/i)
+    email_regex = !(email =~ /^[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.edu/i).nil?
     errors.add :email, 'must be a valid WVU email.' unless email_regex
   end
 end

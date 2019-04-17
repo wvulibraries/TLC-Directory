@@ -24,6 +24,6 @@ module TLCDirectory
 
     # session store
     config.session_store :cookie_store, expire_after: nil, secure: true if Rails.env.production?
-    config.session_store :cookie_store, key: 'cas', expire_after: 12.hours, secure: true if Rails.env.production?    
+    config.session_store :cookie_store, key: 'cas', expire_after: 12.hours, secure: true if Rails.env.production?
   end
 end

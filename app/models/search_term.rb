@@ -1,3 +1,6 @@
+# @author Tracy A. McCormick
+# @data_model
+# @since 0.0.1
 class SearchTerm < ApplicationRecord
   # validation
   validates :term, presence: true, length: { within: 2..255 }

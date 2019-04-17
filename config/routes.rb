@@ -2,25 +2,26 @@ Rails.application.routes.draw do
   # home index
   root to: 'application#home'
   get '/home', 
-      to: 'application#home', 
+      to: 'application#home',
       as: 'home'
 
   # auth
   get '/login', 
-      to: 'application#login', 
+      to: 'application#login',
       as: 'login'
-      
-  get '/logout', 
-      to: 'application#logout', 
+
+  get '/logout',
+      to: 'application#logout',
       as: 'logout'
-  
+
   # admin
-  get '/admin', to: 'admin#index'
+  get '/admin', 
+      to: 'admin#index'
 
   get '/admin/faculties/importzip', 
       to: 'admin/faculties#importzip', 
       as: 'admin/faculties_import_zip'
-      
+
   get '/admin/faculties/importcsv', 
       to: 'admin/faculties#importcsv', 
       as: 'admin/faculties_import_csv'

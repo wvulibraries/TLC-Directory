@@ -6,9 +6,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '~> 2.6'
 
 # Rails, MySQL, Puma
+gem 'rails', '~> 5.2.0'
 gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 gem 'puma', '~> 3.11'
-gem 'rails', '~> 5.2.0'
 
 # Rails Dependencies
 gem 'sassc-rails'
@@ -27,6 +27,7 @@ gem 'sanitize'
 # interface items
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
+gem 'multi-select-rails'
 
 # cas client
 gem 'rack-cas', '~> 0.16.0'
@@ -69,22 +70,19 @@ end
 # Developoment / Test Items (Primarily debugging)
 # =====================================================================================
 group :development, :test do
-
-
-  # For test data generation
-  gem 'factory_bot_rails', '~> 4.0'
-
   gem 'faker', git: 'https://github.com/stympy/faker.git', branch: 'master'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw] # from rails new
   gem 'pry'
   gem 'pry-rails'
+  # For test data generation
+  gem 'factory_bot_rails', '~> 4.0'
 end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'web-console', '>= 3.3.0'
+  gem 'listen', '>= 3.0.5', '< 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'

@@ -4,6 +4,12 @@ module ImportAdapter
   class AwardAdapter < BaseAdapter
     private
 
+    def purge
+      # clear current awards list for faculty
+      # will be reloaded from csv import
+      @faculty.awards.each(&:destroy)
+    end
+
     # placeholder for adding additional fields for the faculty model
     def add_optional_items(row)
       hash = {}

@@ -13,23 +13,27 @@ module ImportAdapter
 
     def import
       CSV.foreach(@filename, headers: true, header_converters: ->(h) { h.gsub(/[^0-9A-Za-z_\s]/, '').downcase.gsub(/\s+/, '_').to_sym unless h.nil? }, liberal_parsing: true) do |row|
-        @faculty = find_or_create_faculty(row[:username])
-
-        if @faculty.present?
+        if row[:username].present? 
+          find_or_create_faculty(row[:username])
           # extract fields from row save them to the faculty
           process(row)
-          @faculty.save(validate: false)
-          @import_count += 1
         end
       end
     end
 
     private
 
-    def find_or_create_faculty(username)
-      return unless username.present?
+    def purge
+      false
+    end
 
-      Faculty.where(wvu_username: username).first_or_initialize
+    def find_or_create_faculty(username)
+      # return if @faculty is set with correct faculty
+      return unless @faculty.nil? || @faculty.wvu_username != username
+
+      @faculty = Faculty.where(wvu_username: username).first_or_initialize
+      # destroy saved polymorphic accociation for specified adaptor
+      purge
     end
 
     def process(row)
@@ -37,6 +41,8 @@ module ImportAdapter
       # assign these to faculty
       add_faculty_fields(row)
       add_optional_items(row)
+      @faculty.save(validate: false)
+      @import_count += 1
     end
 
     # placeholder for adding additional fields
@@ -44,6 +50,10 @@ module ImportAdapter
       false
     end
 
+    # returns hash of the default values for role status
+    # and visible for a new faculty
+    # @author Tracy A. McCormick
+    # @return hash
     def default_faculty_values
       { role: :user, status: 'enabled', visible: true }
     end

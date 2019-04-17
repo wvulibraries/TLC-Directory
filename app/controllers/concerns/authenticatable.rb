@@ -1,6 +1,4 @@
-# frozen_string_literal: true
-
-# app/controllers/concerns/authenticatable.rb
+# app/controllers/concerns/authenticatable.rb 
 module Authenticatable
   extend ActiveSupport::Concern
 
@@ -32,7 +30,6 @@ module Authenticatable
   # return true if admin
   def admin?
     return false if current_user.nil?
-
     current_user.admin?
   end
 
@@ -45,9 +42,15 @@ module Authenticatable
     end
   end
 
+  # signout
+  def signout
+    reset_session
+    redirect_to logout_path
+  end
+
   # logout
   def logout
-    session.delete('cas')
+    reset_session
     redirect_to root_path, success: I18n.t('auth.log_out')
   end
 end

@@ -10,12 +10,13 @@ module ImportAdapter
       @temp_folder = "#{Rails.root}/public/uploads/#{Rails.env}/resume/tmp/"
       Dir.mkdir(@temp_folder) unless File.exist?(@temp_folder)
 
-       # calling inherited init
+      # calling inherited init
       super
     end
 
     def import
-      # guard clasue added to the import to insure that valid envirmoental variables are set
+      # guard clasue added to the import to insure that valid 
+      # envirmoental variables are set
       return unless valid_enviromental_vars?
 
       # calling inherited import
@@ -51,19 +52,14 @@ module ImportAdapter
         request.basic_auth ENV['DMEASURES_USER'], ENV['DMEASURES_PW']
         return http.request request # Net::HTTPResponse object
       end
-      false
     end
 
     def write_file(filename, response)
-      return unless filename.present? && response.present?
+      return unless filename.present? && response.body.present?
 
-      begin
-        File.open(filename, 'wb') do |file|
-          file.write(response.body)
-          file.close
-        end
-      rescue Errno::ENOENT
-        false
+      File.open(filename, 'wb') do |file|
+        file.write(response.body)
+        file.close
       end
     end
 

@@ -9,8 +9,17 @@ module ImportAdapter
       hash = {}
       hash[:biography] = row[:bio] unless row[:bio].blank?
       hash[:perferred_name] = row[:pfname] unless row[:pfname].blank?
-      hash[:websites] = create_website(row[:website]) unless row[:website].blank?
-      hash[:phones] = build_phone_array(row)
+
+      hash[:websites] = create_website(row[:website])
+      phone_array = build_phone_array(row)
+
+      if @faculty.phones != phone_array
+        purge_array = @faculty.phones - phone_array
+        purge_array.each(&:destroy)
+
+        hash[:phones] = phone_array
+      end
+
       @faculty.attributes = hash
     end
 
@@ -33,7 +42,6 @@ module ImportAdapter
 
       number = [area_code, prefix, line_number].join('.')
       number << 'Ext. {extension}' unless extension.blank?
-
 
       create_phone(number, type)
     end

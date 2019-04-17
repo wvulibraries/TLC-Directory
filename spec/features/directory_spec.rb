@@ -21,8 +21,8 @@ RSpec.feature 'Directory', type: :feature do
   scenario 'list index' do
     visit '/directory'
     expect(page).to have_content(faculty.display_name)
-    # expect(page).to have_content(department.name)
-    # expect(page).to have_content(college.name)
+    expect(page).to have_content(department.name)
+    expect(page).to have_content(college.name)
   end
 
   scenario 'search' do
@@ -30,8 +30,8 @@ RSpec.feature 'Directory', type: :feature do
     fill_in 'search', with: faculty.first_name
     find('[name=submit]').click
     expect(page).to have_content(faculty.display_name)
-    # expect(page).to have_content(department.name)
-    # expect(page).to have_content(college.name)
+    expect(page).to have_content(department.name)
+    expect(page).to have_content(college.name)
   end
 
   scenario 'refine search college' do
@@ -84,7 +84,7 @@ RSpec.feature 'Directory', type: :feature do
     expect(page).to have_content(faculty.display_name)
     expect(page).to have_content(faculty.title)
     expect(page).to have_content(faculty.email)
-    # expect(page).to have_content(department.name)
-    # expect(page).to have_content(college.name)
+    expect(page).to have_content(department.name)
+    expect(page).to have_content(college.name)
   end
 end

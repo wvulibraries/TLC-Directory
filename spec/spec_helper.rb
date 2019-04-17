@@ -2,6 +2,7 @@
 
 require 'simplecov'
 require 'simplecov-console'
+
 ENV['RAILS_ENV'] ||= 'test'
 
 RSpec.configure do |config|
