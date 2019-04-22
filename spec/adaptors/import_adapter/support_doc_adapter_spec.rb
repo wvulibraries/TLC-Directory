@@ -69,7 +69,7 @@ RSpec.describe ImportAdapter::SupportDocAdapter do
       end
 
       it 'testing remote connection' do
-        ENV['DMEASURES_URL'] = 'http://localhost:3000/'
+        ENV['DMEASURES_URL'] = 'http://localhost/'
         ENV['DMEASURES_USER'] = 'username'
         ENV['DMEASURES_PW'] = 'password'
 
