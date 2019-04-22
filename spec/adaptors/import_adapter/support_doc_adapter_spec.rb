@@ -41,15 +41,15 @@ RSpec.describe ImportAdapter::SupportDocAdapter do
     let(:response) { FakeResponse.new(resume) }
 
     context 'successful resume download' do
-      it 'import fails with invalid dmeasure enviromentals' do
-        # ENV['DMEASURES_URL'] = nil
-        # ENV['DMEASURES_USER'] = nil
-        # ENV['DMEASURES_PW'] = nil
+      it 'import fails with invalid dmeasure environmental variables' do
+        ENV['DMEASURES_URL'] = nil
+        ENV['DMEASURES_USER'] = nil
+        ENV['DMEASURES_PW'] = nil
         adaptor = ImportAdapter::SupportDocAdapter.new(filename: file_path)
         adaptor.import
         # count should still be one even if we were unable to retrieve
         # remote file
-        expect(adaptor.import_count).to eql(1)
+        expect(adaptor.import_count).to eql(0)
       end
 
       it 'returns the requested file' do
@@ -73,14 +73,10 @@ RSpec.describe ImportAdapter::SupportDocAdapter do
         ENV['DMEASURES_USER'] = 'username'
         ENV['DMEASURES_PW'] = 'password'
 
-        # Setup: Instantiate, mock
         adaptor = ImportAdapter::SupportDocAdapter.new(filename: file_path)
-        allow(adaptor).to receive(:download_file).and_return(response)
-
-        # Perform
         adaptor.import
-
-        # Verify
+        # count should still be one even if we were unable to retrieve
+        # remote file
         expect(adaptor.import_count).to eql(1)
       end
 
