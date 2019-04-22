@@ -77,6 +77,7 @@ group :development, :test do
   gem 'pry-rails'
   # For test data generation
   gem 'factory_bot_rails', '~> 4.0'
+  gem 'webmock'
 end
 
 group :development do
