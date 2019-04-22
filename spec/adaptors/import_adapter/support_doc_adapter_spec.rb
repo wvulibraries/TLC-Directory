@@ -45,6 +45,7 @@ RSpec.describe ImportAdapter::SupportDocAdapter do
         ENV['DMEASURES_URL'] = nil
         ENV['DMEASURES_USER'] = nil
         ENV['DMEASURES_PW'] = nil
+
         adaptor = ImportAdapter::SupportDocAdapter.new(filename: file_path)
         adaptor.import
         # count should still be one even if we were unable to retrieve
@@ -56,6 +57,8 @@ RSpec.describe ImportAdapter::SupportDocAdapter do
         ENV['DMEASURES_URL'] = 'http://remotesite.com/'
         ENV['DMEASURES_USER'] = 'username'
         ENV['DMEASURES_PW'] = 'password'
+
+        stub_request(:post, "remotesite.com").with { |request| request.body == resume }
 
         # Setup: Instantiate, mock
         adaptor = ImportAdapter::SupportDocAdapter.new(filename: file_path)
@@ -69,7 +72,7 @@ RSpec.describe ImportAdapter::SupportDocAdapter do
       end
 
       it 'testing remote connection' do
-        ENV['DMEASURES_URL'] = 'http://localhost/'
+        ENV['DMEASURES_URL'] = 'http://remotesite.com/'
         ENV['DMEASURES_USER'] = 'username'
         ENV['DMEASURES_PW'] = 'password'
 
