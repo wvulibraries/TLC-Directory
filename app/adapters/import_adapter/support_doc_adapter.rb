@@ -42,8 +42,6 @@ module ImportAdapter
     end
 
     def download_file(file)
-      return unless file.present?
-
       uri = URI(ENV['DMEASURES_URL'] + file)
       Net::HTTP.start(uri.host, uri.port,
                       use_ssl: uri.scheme == 'https',
