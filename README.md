@@ -18,7 +18,7 @@ Elastic search is responsible for the searching and indexing of the Rails data. 
 
 ```
 rake search_index:all                              # Re-index all environments
-rake search_index:college                          # Properly Index Buildings
+rake search_index:college                          # Properly Index College
 rake search_index:department                       # Properly Index Departments
 rake search_index:faculty                          # Properly Index Faculty
 ```
