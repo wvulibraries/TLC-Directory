@@ -11,20 +11,24 @@
       border-color: $accent-blue1;
       vertical-align: middle;
 
-      height: 13em;
-      width: 13em;
+      max-width: 100%;
+      display: block;
+      height: auto;
       object-fit: cover;
       object-position: 75% 25%;
-      }
     }
+  }
 
   .faculty-profile-title {
     @include span-columns(9);
 
-    h1 {
-      font-size: 3.5em;
-      padding-top: 2em;
-      white-space: nowrap;
+    @include mq($bp-mini) {
+
+      h1 {
+        font-size: 6vmin;
+        padding-top: 1em;
+        //white-space: nowrap;
+      }
     }
   }
 }

@@ -5,25 +5,21 @@
     box-sizing: border-box;
     margin: auto;
     //width: 80%
-    max-width: 67rem;
+    @include span-columns(12);
   }
 
   /* Style the search field */
   form input[type=text] {
     //font-size: 14px;
     border: 1px solid grey;
-    float: left;
-    width: 85%;
+    @include span-columns(10 of 12);
     background-color: white;
     padding: 14px 22px;
   }
 
   /* Style the submit button */
   form button {
-    float: left;
-    width: 10%;
-    min-width: 40px;
-    max-width: 150px;
+    @include span-columns(2 of 12);
     padding: .77rem 2rem;
     background: $accent-blue2;
     color: white;
@@ -43,4 +39,11 @@
     clear: both;
     display: table;
   }
+}
+
+@include mq($bp-medium, false, max) {
+    .col-container, .col-side, .col-main {
+        @include span-columns(12);
+        margin: 15px auto 0 auto;
+    }
 }

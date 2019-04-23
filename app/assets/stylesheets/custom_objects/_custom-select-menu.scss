@@ -1,19 +1,16 @@
-/*Style the custom select menus*/
+/*  Style the custom select menus on the Directory Search page  */
 .custom-select-menu {
     position: relative;
-
 
     select {
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
 
-        //display: block;
         width: 100%;
-        //max-width: 320px;
         height: 40px;
 
-        margin: 5px 0px;
+        margin: 5px 0;
         padding: 0px 30px;
 
         font-size: .8rem;
