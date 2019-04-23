@@ -1,69 +1,76 @@
-<h2> Showing <%= @faculty.display_name %> </h2>
-
-<div class="show-action">
-
-    <div class="image">
-      <img src="<%= @faculty.image.small %>" alt="faculty profile image"/>
+<div class="wvu-container">
+    <!-- Edit, New, and Delete buttons display above the profile page -->
+    <div class="show-action">
+        <div class="actions">
+            <%= link_to '<span class="fas fa-users"></span> Users'.html_safe, '/admin/faculties', { class: 'new-button' } %>
+            <%= link_to '<span class="fas fa-edit"></span> Edit'.html_safe, edit_admin_faculty_path(@faculty), { class: 'edit-button' } %>
+            <%= link_to '<span class="fas fa-trash"></span> Destroy'.html_safe, admin_faculty_path(@faculty), method: :delete, class: 'delete-button', data: { confirm: 'Are you sure?' }, title:'delete' %>
+        </div>
     </div>
-        
-    <div class="text-attributes">
-      <ul>
-        <li>
-          <strong> First Name: </strong>
-          <%= @faculty.first_name %>
-        </li>
 
-        <li>
-          <strong> Middle Name: </strong>
-          <%= @faculty.middle_name %>
-        </li>
+    <div class="col-container">
+        <div class="faculty-profile">
 
-        <li>
-          <strong> Last Name: </strong>
-          <%= @faculty.last_name %>
-        </li>
+          <div class="faculty-profile-pic">
+              <img src="<%= @faculty.image.small %>" alt="faculty profile image"/>
+          </div>
 
-        <li>
-          <strong> WVU Username: </strong>
-          <%= @faculty.wvu_username %>
-        </li>
-        
-        <li>
-          <strong> Email Address: </strong>
-          <%= @faculty.email %>
-        </li>
+            <div class="faculty-profile-title">
+                <h1> <%= @faculty.display_name %> </h1>
+                <!-- <%= @faculty.role.capitalize %> -->
+                <!-- <%= @faculty.status.capitalize %> -->
+            </div>
+        </div>
 
-        <li>
-          <strong> Role: </strong>
-          <%= @faculty.role.capitalize %>
-        </li>
+        <div class="col-side">
+            <div class="info-boxes">
+                <h3>Contact Information</h3>
+                    <ul>
+                        <li> <strong>WVU Userame:</strong> <%= @faculty.wvu_username %> </li>
+                        <li> <strong>Email Address:</strong> <%= @faculty.email %> </li>
 
-        <li>
-          <strong> Status: </strong>
-          <%= @faculty.status.capitalize %>
-        </li>
+                    <% if hasaddresses?(@faculty) %>
+                        <li> <strong> Address(es): </strong>
+                            <ul> <% @faculty.addresses.each do |address| %>
+                              <li> <%= address.human_readable %> </li>
+                            <% end %>
+                            </ul>
+                        </li>
+                    <% end %>
 
-        <% if hasaddresses?(@faculty) %>
-          <li>
-            <strong> Address(es): </strong>
-            <ul>
-            <% @faculty.addresses.each do |address| %>
-              <li> <%= address.human_readable %> </li>
-            <% end %>
-            </ul>
-          </li>
-        <% end %>
+                    <% if hasphones?(@faculty) %>
+                        <li> <strong>Phone(s): </strong>
+                            <ul> <% @faculty.phones.each do |phone| %>
+                              <li> <a href="tel:<%= phone.number %>"> <%= phone.number %> </a> </li>
+                              <% end %>
+                            </ul>
+                        </li>
+                    <% end %>
 
-        <% if hasawards?(@faculty) %>
-          <li>
-            <strong> Award(s): </strong>
-            <ul>
-            <% @faculty.awards.each do |award| %>
-              <li> <%= award.display_award %> </li>
-            <% end %>
-            </ul>
-          </li>
-        <% end %>      
+                    <% if haswebsites?(@faculty) %>
+                        <li> <strong>Website(s): </strong>
+                            <ul> <% @faculty.websites.each do |website| %>
+                              <li> <a href="<%= website.url %>"> <%= website.url %> </a> </li>
+                              <% end %>
+                            </ul>
+                        </li>
+                    <% end %>
+
+                    </ul>
+            </div>
+
+            <div class="info-boxes">
+                  <% if hasawards?(@faculty) %>
+                        <li>
+                            <h3> Award(s): </h3>
+                            <ul> <% @faculty.awards.each do |award| %>
+                                <li> <%= award.display_award %> </li>
+                                <% end %>
+                            </ul>
+                        </li>
+                  <% end %>
+            </div>
+        </div>
 
         <% if hasphones?(@faculty) %>
           <li>
@@ -139,19 +146,11 @@
                 </a>
               </li>
             <% end %>
-            </ul>
-          </li>
-        <% end %>
-      </ul>
-      
-      <div class="micro-text">
-        Created at <%= @faculty.created_at.strftime("%B %d, %Y at %I:%M%p") %> <br/> Updated at <%= @faculty.updated_at.strftime("%B %d, %Y at %I:%M%p")%>
-      </div>
+        </div>
     </div>
 
-    <div class="actions">
-      <%= link_to '<span class="fas fa-faculty"></span> Users'.html_safe, '/admin/facultys', { class: 'new-button' } %>
-      <%= link_to '<span class="fas fa-edit"></span> Edit'.html_safe, edit_admin_faculty_path(@faculty), { class: 'edit-button' } %>
-      <%= link_to '<span class="fas fa-trash"></span> Destroy'.html_safe, admin_faculty_path(@faculty), method: :delete, class: 'delete-button', data: { confirm: 'Are you sure?' }, title:'delete' %>
+    <div class="micro-text">
+        Created at <%= @faculty.created_at.strftime("%B %d, %Y at %I:%M%p") %> <br/>
+        Updated at <%= @faculty.updated_at.strftime("%B %d, %Y at %I:%M%p")%>
     </div>
 </div>

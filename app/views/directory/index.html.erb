@@ -1,5 +1,5 @@
 <div class="col-side">
-  
+
   <div class="refine-side-search">
     <!-- Directory Search -->
     <%= form_tag(directory_path, :method => "get", id: "search-form") do %>
@@ -8,67 +8,70 @@
 
         <h4>Refine Your Search:</h4>
 
-        <%= select_tag "college", options_from_collection_for_select(College.all.visible.order(:name), "id", "name"), prompt: "College" %>
-        <%= select_tag "department", options_from_collection_for_select(Department.all.visible.order(:name), "id", "name"), prompt: "Department"%>
-        
-    <% end %>      
+        <div class="custom-select-menu icon chevron_icon">
+          <%= select_tag "college", options_from_collection_for_select(College.all.visible.order(:name), "id", "name"), prompt: "College" %>
+        </div>
+        <div class="custom-select-menu icon chevron_icon">
+          <%= select_tag "department", options_from_collection_for_select(Department.all.visible.order(:name), "id", "name"), prompt: "Department"%>
+        </div>
+
+    <% end %>
   </div>
 
-  <a class="" href="/directory/colleges">Colleges</a>
-  <a class="" href="/directory/departments">Departments</a> 
-  <a class="" href="/directory/research_interests">Research Interests</a>
+  <!-- <a class="" href="/directory/colleges">Colleges</a> -->
+  <!-- <a class="" href="/directory/departments">Departments</a> -->
+  <!-- <a class="" href="/directory/research_interests">Research Interests</a> -->
 
 </div>
 
 <div class="col-main">
   <% @results.each do |faculty_profile| %>
     <div class="profile-box">
-         <!-- Show Profile picture with caption-->     
-         <div class="col-container">         
+         <!-- Show Profile picture with caption-->
+         <div class="col-container">
             <div class="col-side">
                 <div class="profile-picture">
                    <%= image_tag(faculty_profile.image.small.url, alt: "Faculty Profile Picture", title: "Faculty Profile Picture") %>
                 </div>
-                
+
                 <div class="photo-caption">
                   <%= faculty_profile.first_name %>'s Profile
-                </div> 
+                </div>
             </div>
-           
+
             <div class="col-main">
                <h2><%= link_to faculty_profile.display_name, directory_show_path(faculty_profile.id) %></h2>
 
                <% unless faculty_profile.title.nil? || faculty_profile.title.empty? %>
-                <div class="micro"> 
+                <div class="micro">
                   <strong><%= faculty_profile.title %></strong>
                 </div>
                <% end %>
 
                <% if faculty_profile.college.present? %>
-                <div class="micro"> 
+                <div class="micro">
                   <strong><%= faculty_profile.college.name %></strong>
                 </div>
                <% end %>
 
                <% if faculty_profile.department.present? %>
-                <div class="micro"> 
+                <div class="micro">
                   <strong><%= faculty_profile.department.name %></strong>
                 </div>
                <% end %>
-     
+
                <% unless faculty_profile.research_interests.nil? || faculty_profile.research_interests.empty? %>
                 <br>
-                <div class="micro"> 
+                <div class="micro">
                   <strong>Research Interests:</strong>
                 </div>
-                <div class="micro2"> 
-                  <%= faculty_profile.research_interests %> 
-                </div>                    
-               <% end %>                                     
+                <div class="micro2">
+                  <%= faculty_profile.research_interests %>
+                </div>
+               <% end %>
             </div>
-            
+
          </div>
-    </div>        
+    </div>
   <% end %>
 </div>
-

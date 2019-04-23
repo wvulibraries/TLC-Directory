@@ -1,0 +1,14 @@
+.admin-panel {
+    a {
+      //for screen sizes 720px or larger
+      @include mq($bp-medium){
+        @include span-columns(3);
+        margin-top: .5em;
+        margin-left: 0;
+      }
+      //for screen sizes smaller than 720px
+      @include span-columns(12);
+      text-align: center;
+      padding: 1.2em;
+    }
+}

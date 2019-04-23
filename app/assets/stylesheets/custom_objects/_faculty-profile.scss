@@ -1,0 +1,40 @@
+.faculty-profile {
+  @include span-columns(12);
+  margin-bottom: 2em;
+
+  .faculty-profile-pic {
+    @include span-columns(3);
+
+    img {
+      border-style: solid;
+      border-width: medium;
+      border-color: $accent-blue1;
+      vertical-align: middle;
+
+      max-width: 100%;
+      display: block;
+      height: auto;
+      object-fit: cover;
+      object-position: 75% 25%;
+    }
+  }
+
+  .faculty-profile-title {
+    @include span-columns(9);
+
+    @include mq($bp-mini) {
+
+      h1 {
+        font-size: 6vmin;
+        padding-top: 1em;
+        //white-space: nowrap;
+      }
+    }
+  }
+}
+
+@include mq($bp-mini) {
+  .faculty-profile-pic {
+    @include span-columns(12);
+  }
+}

@@ -1,13 +1,13 @@
 <h2 class="visually-hidden"> <%= content_for :title, "#{@faculty.display_name.titlecase}" %> </h2>
 
 <% faculty_keywords = [
-  @faculty.first_name, 
-  @faculty.last_name, 
-  @faculty.middle_name, 
+  @faculty.first_name,
+  @faculty.last_name,
+  @faculty.middle_name,
   @faculty.name,
-  @faculty.display_name, 
-  @faculty.email, 
-  @faculty.title, 
+  @faculty.display_name,
+  @faculty.email,
+  @faculty.title,
 ] %>
 
 <div class="faculty-card">
@@ -17,9 +17,9 @@
     </div>
 
     <div class="profile-text">
-      <div class="name-title wvu-h4" id="profile_name"> 
+      <div class="name-title wvu-h4" id="profile_name">
         <a href="faculties/<%= @faculty.id %>">
-          <%= @faculty.display_name %> 
+          <%= @faculty.display_name %>
         </a>
       </div>
 
@@ -38,7 +38,7 @@
       <h4> Contact </h4>
       <div class="contact">
         <% if @faculty.addresses.present? %>
-        <div class="addresses">  
+        <div class="addresses">
           <% @faculty.addresses.each do |addrress| %>
             <div class="address-item">
               <span class="fas fa-address-card"></span>
@@ -49,7 +49,7 @@
         <% end %>
 
         <% if @faculty.phones.present? %>
-        <div class="phones">  
+        <div class="phones">
           <% @faculty.phones.each do |phone| %>
             <div class="phone-item">
               <span class="<%= phone_icon_class(phone) %>"></span>

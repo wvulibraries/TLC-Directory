@@ -1,25 +1,37 @@
 .refine-side-search {
-  display: inline;
-  margin-left: auto;
-  text-align: left;
-}
+  * {
+    box-sizing: border-box;
+  }
 
-.custom-select {
-  appearance: none; 
-  -webkit-appearance: none; 
-  -moz-appearance: none;
-    
-  
-  // display: block; 
-  // padding: 10px 13px 10px 70px !important; 
-  // max-width: 100%; 
-  // height: auto !important; 
-  // border: 1px solid #e3e3e3; 
-  // border-radius: 3px; 
-  // background: url("http://i62.tinypic.com/15xvbd5.png") left center no-repeat; 
-  // background-color: #fff; 
-  // color: #444444; 
-  // font-size: 12px; 
-  // line-height: 16px !important; 
-}
+  form {
+    @include column-span(4 of 12);
+    font-size: .8rem;
+  }
+  /* Style the search field */
+  form input[type=text] {
+    border: 1px solid grey;
+    background-color: white;
+    padding: 14px 22px;
+    width: 87%;
+  }
 
+  /* Style the submit button */
+  form button {
+    position: absolute;
+    padding: .75rem 1rem;
+    background: $accent-blue2;
+    color: white;
+    border: 1px solid grey;
+    border-left: none; /* Prevent double borders */
+    cursor: pointer;
+  }
+
+  form button:hover {
+    background: $accent-blue1;
+  }
+
+  h4 {
+    padding-top: 50px;
+    font-size: 1.75rem;
+  }
+}

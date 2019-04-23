@@ -1,0 +1,32 @@
+/*  Style the custom select menus on the Directory Search page  */
+.custom-select-menu {
+    position: relative;
+
+    select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+
+        width: 100%;
+        height: 40px;
+
+        margin: 5px 0;
+        padding: 0px 30px;
+
+        font-size: .8rem;
+        font-weight: bold;
+        line-height: 1.75;
+        color: $accent-blue2;
+
+        background-color: #fff;
+        background-image: none;
+        border-radius: 0;
+        border: 1px solid $accent-blue2;
+        -ms-word-break: normal;
+        word-break: normal;
+
+        ::-ms-expand {
+          display: none;
+        }
+    }
+}

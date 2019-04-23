@@ -1,21 +1,22 @@
   .banner__container {
-    background-color: $gold;
-  }  
-  
-  .banner__wrapper { 
-    @include outer-container(); 
+    background-color: $primary-orange;
+  }
+
+  .banner__wrapper {
+    @include outer-container();
   }
 
   .banner__text {
     @include span-columns(9);
     padding: 20px;
-    
-    font-size: 10px;
+    font-size: .75em;
+    font-family: $helvetica-neue-light;
 
-    h2 { 
-      text-shadow: 2px 2px $neutral-black;
+    h2 {
+      text-shadow: 2px 2px 6px $neutral-wgray1;
       text-transform: uppercase;
-      color: white; 
-      text-align: left; 
+      color: #fff;
+      text-align: left;
+      line-height: 1.3em;
     }
-  }   
+  }

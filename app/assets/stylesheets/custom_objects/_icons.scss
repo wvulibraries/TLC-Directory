@@ -1,0 +1,29 @@
+.icon::before ::after {
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+//Cog (gear) symbol icon from Font Awesome
+.cog_icon::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f013";
+    padding-right: 1px;
+}
+
+.chevron_icon::after {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f078";
+    color: $accent-blue2;
+
+    top: 15px;
+    left: 11px;
+    padding: 0px 9px 0px 0px;
+
+    position: absolute;
+    pointer-events: none;
+}

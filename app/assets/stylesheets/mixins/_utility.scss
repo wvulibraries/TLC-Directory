@@ -24,11 +24,11 @@ $easeInOutExpo:cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */
 @mixin rotate ($deg) {
   @include transform(rotate(#{$deg}deg));
 }
- 
+
 // scale
 @mixin scale($scale) {
    @include transform(scale($scale));
-} 
+}
 // translate
 @mixin translate ($x, $y) {
    @include transform(translate($x, $y));

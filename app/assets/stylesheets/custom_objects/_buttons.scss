@@ -17,22 +17,22 @@
   @include button_maker($success, 'solid');
   text-decoration: underline;
   @include determine-text-color($success);
-  &:hover,&:active, &:visited { 
+  &:hover,&:active, &:visited {
     @include determine-text-color($success);
   }
 }
 
 input[type="submit"], input[type="reset"]{
-  position:relative; 
-  height:44px; 
-  top:-1px; 
+  position:relative;
+  height:44px;
+  top:-1px;
   @extend .submit-button;
 }
 
 .cancel-button {
   @include button_maker(darken($default,20%), 'solid');
   @include determine-text-color(darken($default,20%));
-  &:hover,&:active, &:visited { 
+  &:hover,&:active, &:visited {
     @include determine-text-color(darken($default,20%));
   }
 }
@@ -40,4 +40,14 @@ input[type="submit"], input[type="reset"]{
 .new-button {
   @include button_maker($action-color, 'solid');
   @include determine-text-color($action-color);
+  margin-top: 20px;
+}
+
+.browse-buttons {
+  //background-color: pink;
+  display: table;
+
+  a {
+    margin: 5px;
+  }
 }

@@ -1,0 +1,17 @@
+.show-action{
+
+  box-sizing: border-box;
+
+  .actions {
+  //background-color: blue;
+    position: relative;
+  //width: 20%;
+  //margin-left: 10px;
+    margin: 10px 0 20px 0;
+
+    a {
+      display: inline;
+      text-align: center;
+    }
+  }
+}
