@@ -11,12 +11,22 @@ class Award < ApplicationRecord
 
   # display publication
   def display_award
+    if name.present? && organization.present?
+      display_date + "#{name}, #{organization}"
+    elsif name.present?
+      display_date + name.to_s
+    elsif organization.present?
+      display_date + organization.to_s
+    end
+  end
+
+  def display_date
     if starting_year.to_s.length == 4 && ending_year.to_s.length == 4
-      "#{starting_year} - #{ending_year} - #{name} - #{organization} - #{description}"
+      "#{starting_year} - #{ending_year} "
     elsif starting_year.to_s.length == 4
-      "#{starting_year} - #{name} - #{organization} - #{description}"
-    else
-      "#{name} - #{organization} - #{description}"
+      "#{starting_year} "
+    elsif ending_year.to_s.length == 4
+      "#{ending_year} "
     end
   end
 end

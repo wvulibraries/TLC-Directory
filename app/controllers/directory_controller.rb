@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DirectoryController < ApplicationController
   layout 'directory'
 
@@ -12,7 +14,7 @@ class DirectoryController < ApplicationController
   def show
     @faculty = Faculty.includes(:college, :department)
                       .where(id: params[:id], status: 'enabled')
-                        .order(:last_name, :first_name)
-                        .first
+                      .order(:last_name, :first_name)
+                      .first
   end
 end

@@ -62,15 +62,24 @@
               <%= @faculty.email %>
             </a>
           </div>
-        <% end %>          
+        <% end %>   
+        
+        <% if @faculty.resume.present? %>
+          <div>
+            <h4>Resume/CV:</h4>
+            <%= link_to(File.basename(@faculty.resume.path), @faculty.resume.url) %>
+          </div>
+        <% end %>  
 
         <% if haswebsites?(@faculty) %>
           <div class='websites'>
             <h4>Website(s):</h4>
             <% @faculty.websites.each do |website| %>
-                <a href="<%= website.url %>">
-                  <%= website.url %>
-                </a>
+                <% if valid_url?(website.url) %>
+                  <a href="<%= website.url %>">
+                    <%= website.url %>
+                  </a>
+                <% end %>
             <% end %>
           </div>
         <% end %>
@@ -93,7 +102,7 @@
       <% if @faculty.biography.present? %>
         <div class="biography">
         <h4>Biography</h4>
-        <p> <%= @faculty.biography %> </p>
+        <p> <%= @faculty.biography.squish %> </p>
         </div>
       <% end %>
 
@@ -101,7 +110,21 @@
         <div class='publications'>
           <h4>Publication(s):</h4>
           <% @faculty.publications.each do |publication| %>
-              <%= publication.description %><br><br>
+              <%= publication.author %>            
+              <%= publication.display_date %>
+              <%= publication.status %>
+              <%= publication.title %>
+              <%= publication.publisher %>
+              <%= publication.vol_issue %>
+              <%= publication.pagenum %>
+              <% if valid_url?(publication.url) %>
+                <a href="<%= publication.url %>">
+                  <%= publication.url %>
+                </a>
+              <% elsif publication.url %>
+                <%= publication.url %>
+              <% end %>
+              <br><br>
           <% end %>
         </div>
       <% end %>

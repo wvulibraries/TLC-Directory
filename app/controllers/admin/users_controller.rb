@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::UsersController < ApplicationController
   # tell rails which view layout to use with this controller
   layout 'admin'
@@ -28,7 +30,7 @@ class Admin::UsersController < ApplicationController
     @user = User.new user_params
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'Success! User profile was created!' }
+        format.html { redirect_to @user, notice: I18n.t('user.success') }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -42,7 +44,7 @@ class Admin::UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update user_params
-        format.html { redirect_to @user, notice: 'Success! User profile was edited.' }
+        format.html { redirect_to @user, notice: I18n.t('user.edited') }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -56,8 +58,7 @@ class Admin::UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      success_str = 'User Removed! The user profile was removed, for temporary removal you should change the user status.'
-      format.html { redirect_to users_url, success: success_str }
+      format.html { redirect_to users_url, success: I18n.t('user.deleted') }
       format.json { head :no_content }
     end
   end

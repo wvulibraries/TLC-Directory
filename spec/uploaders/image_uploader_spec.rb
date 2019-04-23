@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'carrierwave/test/matchers'
 
@@ -19,8 +21,8 @@ describe ImageUploader do
 
   context 'it resizes the image' do
     it 'scales down larger images to 800 by 800 pixels' do
-      expect(uploader).to be_no_larger_than(800,800)
-    end 
+      expect(uploader).to be_no_larger_than(800, 800)
+    end
     it 'scales down a landscape image to fit within 300 by 300 pixels' do
       expect(uploader.small).to be_no_larger_than(300, 300)
     end
@@ -40,7 +42,7 @@ describe ImageUploader do
     it 'checks cache folder' do
       tmp_path = "#{Rails.root}/public/uploads/test/tmp/"
       expect(uploader.cache_dir).to eq(tmp_path)
-    end 
+    end
     it 'checks upload folder' do
       up_path = "#{Rails.root}/public/uploads/test/r_spec/mocks/double/#{faculty.id}/"
       expect(uploader.store_dir).to eq(up_path)
@@ -53,5 +55,4 @@ describe ImageUploader do
       expect(uploader.default_url).to eq('/default/flying-wv.jpg')
     end
   end
-  
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.feature 'Admin::Colleges', type: :feature do
@@ -12,7 +14,7 @@ RSpec.feature 'Admin::Colleges', type: :feature do
   scenario 'creates a new college' do
     visit '/admin/colleges/new'
     fill_in 'Name', with: new_college[:name]
-    select('enabled', from: 'College Status')   
+    select('enabled', from: 'College Status')
     click_button 'Submit'
     expect(page).to have_content('Success! New College was created!')
   end
@@ -20,12 +22,12 @@ RSpec.feature 'Admin::Colleges', type: :feature do
   scenario 'errors on creating a new college' do
     visit '/admin/colleges/new'
     fill_in 'Name', with: 'tes' # must be 4 chars
-    select('enabled', from: 'College Status')     
+    select('enabled', from: 'College Status')
     click_button 'Submit'
     expect(page).to have_content('Name is too short (minimum is 4 characters)')
   end
 
-    scenario 'user clicks the cancel button goes back to the colleges list' do
+  scenario 'user clicks the cancel button goes back to the colleges list' do
     visit '/admin/colleges/new'
     click_link 'Cancel'
     expect(current_path).to  eq('/admin/colleges')

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe AdminController, type: :routing do
   context '#get' do
     it 'routes to admin #index' do

@@ -1,0 +1,70 @@
+version: 2
+jobs:
+  build:
+    parallelism: 2  # however many CPUs you need/pay for
+    
+    #############################################
+    # Container Setup
+    #############################################
+    docker:
+      - image: circleci/ruby:2.6.2
+        environment:
+          - RAILS_ENV=test
+      - image: circleci/mysql:5.7
+        environment:
+          - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - image: elasticsearch:6.6.1
+        environment:
+          - discovery.type=single-node      
+    
+    #############################################
+    # Build Steps
+    #############################################
+    steps:
+      - checkout
+      - run:
+          name: Configure secrets.yml
+          command: mv config/secrets.ci.yml config/secrets.yml
+      - run:
+          name: Configure database.yml
+          command: mv config/database.ci.yml config/database.yml
+
+      ###########################################
+      # Bundler w/ caching
+      ###########################################
+      - restore_cache:
+          keys:
+            - rails-bundle-{{ checksum "Gemfile.lock" }}
+            - rails-bundle-
+      - run:
+          name: Bundle Gems
+          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle
+      - save_cache:
+          key: rails-bundle-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
+      ###########################################
+      # Database
+      ###########################################
+      - run:
+          name: Wait for MySQL
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 1m
+      - run:
+          name: Load DB schema
+          command: bin/rails db:schema:load --trace
+
+      ###########################################
+      # Run rspec in parallel
+      ###########################################
+      - run:
+          name: Run rspec in parallel
+          command: |
+            bundle exec rspec --profile 10 \
+                              --format RspecJunitFormatter \
+                              --out test_results/rspec.xml \
+                              --format progress \
+                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+      # Save test results for timing analysis
+      - store_test_results:
+        path: test_results

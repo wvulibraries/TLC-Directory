@@ -72,41 +72,79 @@
             </div>
         </div>
 
-        <div class="col-main">
-            <% if @faculty.research_interests.present? %>
-                <li>
-                    <h2> Research Interest(s): </h2>
-                    <ul> <% @faculty.research_interests.split(/\s*,\s*/).each do |interest| %>
-                        <li> <%= interest %> </li>
-                        <% end %>
-                    </ul>
-                </li>
+        <% if hasphones?(@faculty) %>
+          <li>
+            <strong> Phone(s): </strong>
+            <ul>
+            <% @faculty.phones.each do |phone| %>
+              <li>
+                <a href="tel:<%= phone.number %>">
+                  <%= phone.number %>
+                </a>
+                <%= phone.type %>
+              </li>
             <% end %>
+            </ul>
+          </li>
+        <% end %>   
+        
+        <% if @faculty.resume.present? %>
+          <li>
+            <strong> Resume/CV: </strong>
+            <%= link_to(File.basename(@faculty.resume.path), @faculty.resume.url) %>
+          </li>
+        <% end %>        
 
-            <% if @faculty.teaching_interests.present? %>
-                <li>
-                    <h2> Teaching Interest(s): </h2>
-                    <ul> <% @faculty.teaching_interests.split(/\s*,\s*/).each do |interest| %>
-                        <li> <%= interest %> </li>
-                        <% end %>
-                    </ul>
-                </li>
+        <% if haspublications?(@faculty) %>
+          <li>
+            <strong> Publication(s): </strong>
+            <ul>
+            <% @faculty.publications.each do |publication| %>
+              <li>
+                <ul>
+                  <li> <%= publication.author%> </li>                
+                  <li> <%= publication.display_date %> </li>
+                  <li> <%= publication.status %></li>                  
+                  <li> <%= publication.title %> </li>
+                  <li> <%= publication.publisher %> </li>
+                  <li> <%= publication.volume %> </li>
+                  <li> <%= publication.issue %> </li>  
+                  <li> <%= publication.pagenum %> </li>                                                                                         
+                  <li> <%= publication.description %> </li>
+                    <a href="<%= publication.url %>">
+                      <%= publication.url %>
+                    </a>
+                </ul>
+              </li>
             <% end %>
+            </ul>
+          </li>
+        <% end %>        
+        
+        <% if @faculty.research_interests.present? %>
+          <li>
+            <strong> Research Interest(s): </strong>
+            <%= @faculty.research_interests %>
+          </li>
+        <% end %>
 
-            <% if haspublications?(@faculty) %>
-                <li>
-                  <h2> Publication(s): </h2>
-                  <ul> <% @faculty.publications.each do |pub| %>
-                    <li>
-                       <ul>
-                          <li> <%= pub.display_date %> </li>
-                          <li> <%= pub.title %> </li>
-                          <li> <%= pub.description %> </li>
-                       </ul>
-                    </li>
-                       <% end %>
-                  </ul>
-                </li>
+        <% if @faculty.teaching_interests.present? %>
+          <li>
+            <strong> Teaching Interest(s): </strong>
+            <%= @faculty.teaching_interests %>
+          </li>
+        <% end %>        
+
+        <% if haswebsites?(@faculty) %>
+          <li>
+            <strong> Website(s): </strong>
+            <ul>
+            <% @faculty.websites.each do |website| %>
+              <li>
+                <a href="<%= website.url %>">
+                  <%= website.url %>
+                </a>
+              </li>
             <% end %>
         </div>
     </div>

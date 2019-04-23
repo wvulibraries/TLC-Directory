@@ -5,6 +5,7 @@ module Authenticatable
   # detrmine if the user can access the admin panel
   def access_permissions
     return true if authenticated? && admin?
+
     error_string = ''
     error_string += I18n.t('auth.invalid_access') unless authenticated?
     error_string += I18n.t('auth.invalid_permissions') unless admin?
@@ -36,15 +37,21 @@ module Authenticatable
   # login methods
   def login
     if authenticated?
-      redirect_to root_path, success: I18n.t('auth.success')
+      redirect_to '/admin', success: I18n.t('auth.success')
     else
       render(plain: 'Unauthorized!', status: :unauthorized)
     end
   end
 
+  # signout
+  def signout
+    reset_session
+    redirect_to logout_path
+  end
+
   # logout
   def logout
-    session.delete('cas')
+    reset_session
     redirect_to root_path, success: I18n.t('auth.log_out')
   end
 end

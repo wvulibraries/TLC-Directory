@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Address Active Record Object for storing addresses
 #
 # @author David J. Davis

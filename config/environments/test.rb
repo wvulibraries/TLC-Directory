@@ -41,6 +41,10 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
+  # fake cas 
+  config.rack_cas.fake = true
+  config.rack_cas.fake_attributes = { 'cas' => {"user"=>"johntest", "ticket"=>"test", "extra_attributes"=>{"telephoneNumber"=>"304-555-5555", "mail"=>"test@mail.wvu.edu", "displayName"=>"John Test", "busoff"=>"Libraries", "uid"=>"jdoe", "isFormerStudent"=>"FALSE", "wvuid"=>"000000000", "isHospital"=>"FALSE", "authenticationDate"=>"2018-08-02T09:05:46.413-04:00[America/New_York]", "hrunit"=>"Main Library"}} }
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end

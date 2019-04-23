@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
-  
   def page_title(title)
-    title += " | " if title.present?
-    title += "TLC Directory"
+    title += ' | ' if title.present?
+    title + 'TLC Directory'
   end
 
   # pass prefixes to views
@@ -29,7 +30,12 @@ module ApplicationHelper
 
   # get current user for views
   def current_user
-    User.where(wvu_username: session['cas']['user']) if logged_in?
+    User.where(wvu_username: session['cas']['user']).first if logged_in? && user_exists? 
+  end
+
+  # does the user exist?
+  def user_exists?
+    User.where(wvu_username: session['cas']['user']).exists?
   end
 
   # dynamically add fieldsets
@@ -40,7 +46,7 @@ module ApplicationHelper
     fields = form.fields_for(association, new_object, child_index: id) do |builder|
       render(association.to_s.singularize, form: builder)
     end
-    link_to(name, '#', class: 'add-fields', data: { id: id, fields: fields.gsub("\n", "") })
+    link_to(name, '#', class: 'add-fields', data: { id: id, fields: fields.delete("\n") })
   end
 
   # phone logic helper

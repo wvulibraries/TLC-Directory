@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateAwards < ActiveRecord::Migration[5.2]
   def change
     create_table :awards do |t|
@@ -5,7 +7,7 @@ class CreateAwards < ActiveRecord::Migration[5.2]
       t.integer :starting_year
       t.integer :ending_year
       t.string :description
-      
+
       t.timestamps
     end
   end

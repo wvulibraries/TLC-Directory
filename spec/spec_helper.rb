@@ -1,13 +1,20 @@
+# frozen_string_literal: true
+
 require 'simplecov'
 require 'simplecov-console'
+require 'webmock/rspec'
+WebMock.allow_net_connect!
+
 ENV['RAILS_ENV'] ||= 'test'
 
 RSpec.configure do |config|
+  config.before(:each) do 
+    FileUtils.mkdir_p("#{Rails.root}/public/uploads/#{Rails.env}/resume/tmp/")
+  end
+
   # clear uploads after tests are complete
   config.after(:each) do
-    if Rails.env.test?
-      FileUtils.rm_rf(Dir["#{Rails.root}/public/uploads/test"])
-    end
+    FileUtils.rm_rf(Dir["#{Rails.root}/public/uploads/test"]) if Rails.env.test?
   end
 
   config.expect_with :rspec do |expectations|

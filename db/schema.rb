@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_12_210435) do
+ActiveRecord::Schema.define(version: 2019_03_04_183940) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "addressable_type"
@@ -40,14 +40,14 @@ ActiveRecord::Schema.define(version: 2019_02_12_210435) do
 
   create_table "colleges", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
-    t.integer "status"
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "departments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
-    t.integer "status"
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 2019_02_12_210435) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "teaching_interests"
+    t.string "resume_year"
     t.index ["college_id"], name: "index_faculty_on_college_id"
     t.index ["department_id"], name: "index_faculty_on_department_id"
   end
@@ -92,12 +93,18 @@ ActiveRecord::Schema.define(version: 2019_02_12_210435) do
     t.string "publishable_type"
     t.bigint "publishable_id"
     t.text "description"
+    t.string "status"
+    t.string "publisher"
+    t.string "pagenum"
+    t.integer "issue"
+    t.integer "volume"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "url"
     t.text "title"
     t.integer "starting_year"
     t.integer "ending_year"
+    t.text "author"
     t.index ["publishable_type", "publishable_id"], name: "index_publications_on_publishable_type_and_publishable_id"
   end
 

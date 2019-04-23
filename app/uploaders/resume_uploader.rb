@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Resume based on documentation from carrierwave.
 #
 # @author David J. Davis
@@ -19,6 +21,6 @@ class ResumeUploader < CarrierWave::Uploader::Base
 
   # extension whitelist
   def extension_whitelist
-    %w[pdf]
+    %w[pdf doc docx]
   end
 end

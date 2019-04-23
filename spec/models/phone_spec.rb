@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Phone, type: :model do
@@ -18,4 +20,10 @@ RSpec.describe Phone, type: :model do
     end
   end
 
+  context '.number_types' do
+    it 'Calling type should return string with type capitalized' do
+      phone.number_types = 0 # set number_types to default phone
+      expect(phone.type).to eql('Phone')
+    end
+  end
 end

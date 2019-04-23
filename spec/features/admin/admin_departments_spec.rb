@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.feature 'Admin::Departments', type: :feature do
@@ -7,7 +9,7 @@ RSpec.feature 'Admin::Departments', type: :feature do
   before(:each) do
     department
   end
- 
+
   scenario 'department index page and it works properly' do
     visit '/admin/departments'
     expect(page).to have_content('Manage Departments')
@@ -23,7 +25,7 @@ RSpec.feature 'Admin::Departments', type: :feature do
   scenario 'errors on creating a new department' do
     visit '/admin/departments/new'
     fill_in 'Name', with: 'tes' # must be 5 chars
-    select('enabled', from: 'Department Status')     
+    select('enabled', from: 'Department Status')
     click_button 'Submit'
     expect(page).to have_content('Name is too short (minimum is 5 characters)')
   end

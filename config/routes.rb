@@ -2,25 +2,29 @@ Rails.application.routes.draw do
   # home index
   root to: 'application#home'
   get '/home', 
-      to: 'application#home', 
+      to: 'application#home',
       as: 'home'
 
   # auth
-  get '/login', 
-      to: 'application#login', 
+  get '/login',
+      to: 'application#login',
       as: 'login'
-      
-  get '/logout', 
-      to: 'application#logout', 
-      as: 'logout'
-  
-  # admin
-  get '/admin', to: 'admin#index'
 
-  # insure import goes to correct location
-  get '/admin/faculties/import', 
-      to: 'admin/faculties#import', 
-      as: 'admin/faculties_import'
+  get '/logout',
+      to: 'application#logout',
+      as: 'logout'
+
+  # admin
+  get '/admin',
+      to: 'admin#index'
+
+  get '/admin/faculties/importzip', 
+      to: 'admin/faculties#importzip', 
+      as: 'admin/faculties_import_zip'
+
+  get '/admin/faculties/importcsv', 
+      to: 'admin/faculties#importcsv', 
+      as: 'admin/faculties_import_csv'
 
   # forces the controllers to use the admin name space
   # this is going to allow for the addition of a function to restrict access
@@ -36,7 +40,7 @@ Rails.application.routes.draw do
               :departments,
               :users
     resources :faculties do
-        collection { post :import }
+        collection { post :importzip, :importcsv }
     end
   end
 
@@ -74,6 +78,5 @@ Rails.application.routes.draw do
 
   get '/directory/departments/:id/faculties',
       to: 'directory/departments#faculties',
-      as: 'directory/departments_faculties'    
-        
+      as: 'directory/departments_faculties'
 end

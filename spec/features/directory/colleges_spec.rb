@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.feature "Directory::Colleges", type: :feature do
+RSpec.feature 'Directory::Colleges', type: :feature do
   # vars for existing
   let(:college) { FactoryBot.create(:college) }
   let(:college_two) { FactoryBot.create(:college) }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
@@ -18,11 +20,11 @@ RSpec.describe User, type: :model do
     it { should validate_length_of(:wvu_username).is_at_least(4) }
     it { should validate_length_of(:wvu_username).is_at_most(70) }
   end
-  
+
   context 'custom validation .valid_email' do
     it 'expects a valid email response' do
       expect(user).to be_valid
-    end 
+    end
 
     it 'expects email to be invalid as anything, but .edu at the end' do
       user.email = Faker::Internet.email
@@ -41,7 +43,7 @@ RSpec.describe User, type: :model do
       name = [user.first_name, user.middle_name, user.last_name].join(' ')
       expect(user.display_name).to eq(name)
     end
-  
+
     it 'expects display name to user preferred name instead of first name' do
       user.preferred_name = 'Jo Jo'
       name = [user.preferred_name, user.middle_name, user.last_name].join(' ')
@@ -111,7 +113,7 @@ RSpec.describe User, type: :model do
       expect(user.status?).to eq false
     end
   end
-  
+
   context '.visible?' do
     it 'should return true user is visible' do
       user.visible = true
@@ -121,25 +123,25 @@ RSpec.describe User, type: :model do
 
     it 'should return false user is not visible' do
       user.visible = false
-      user.status = 'enabled'      
+      user.status = 'enabled'
       expect(user.visible?).to eq false
     end
-    
+
     it 'should return true user is enabled' do
       user.visible = true
-      user.status = 'enabled'     
+      user.status = 'enabled'
       expect(user.visible?).to eq true
-    end    
-    
+    end
+
     it 'should return false user is disabled' do
       user.visible = true
-      user.status = 'disabled'      
+      user.status = 'disabled'
       expect(user.visible?).to eq false
-    end    
+    end
 
     it 'should return a boolean even if the visible is not valid' do
       user.visible = nil
       expect(user.visible?).to eq false
     end
-  end  
+  end
 end

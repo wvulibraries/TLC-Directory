@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # ImageUploader based on documentation from carrierwave.
 #
 # @author David J. Davis

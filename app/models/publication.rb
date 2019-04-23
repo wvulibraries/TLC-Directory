@@ -5,13 +5,22 @@ class Publication < ApplicationRecord
   # association
   belongs_to :publishable, polymorphic: true
 
-    # display publication
+  # validations
+  validates :starting_year, :ending_year, length: { is: 4 }, allow_blank: true
+  # validates :url, presence: false, url: true
+
+  # display publication
   def display_date
     if starting_year.to_s.length == 4 && ending_year.to_s.length == 4
-      return_string = "#{starting_year}" + ' - ' + "#{ending_year}"
-    else
-      return_string = "#{starting_year}" if starting_year.to_s.length == 4
+      '(' + starting_year.to_s + ' - ' + ending_year.to_s + ').'
+    elsif starting_year.to_s.length == 4
+      '(' + starting_year.to_s + ').'
+    elsif ending_year.to_s.length == 4
+      '(' + ending_year.to_s + ').'
     end
-      return_string
+  end
+
+  def vol_issue
+    volume.to_s + '(' + issue.to_s + ')' if volume.present? && issue.present?
   end
 end

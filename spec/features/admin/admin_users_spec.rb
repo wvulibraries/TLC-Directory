@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.feature "Admin::User", type: :feature do
+RSpec.feature 'Admin::User', type: :feature do
   let(:user_existing) { FactoryBot.create(:user) }
   let(:user) { FactoryBot.attributes_for(:user) }
 
@@ -11,7 +13,7 @@ RSpec.feature "Admin::User", type: :feature do
   scenario 'testing the index page for users and returning proper information' do
     visit '/admin/users'
     expect(page).to have_content('Manage User(s)')
-  end 
+  end
 
   scenario 'creates a new user' do
     visit '/admin/users/new'
@@ -25,7 +27,7 @@ RSpec.feature "Admin::User", type: :feature do
     select('user', from: 'User Role')
     select('enabled', from: 'User Status')
     click_button 'Submit'
-    expect(page).to have_content('Success! User profile was created!')
+    expect(page).to have_content(I18n.t('user.success'))
   end
 
   scenario 'fails creating a new user because of no wvu username' do
@@ -48,7 +50,7 @@ RSpec.feature "Admin::User", type: :feature do
     visit "/admin/users/#{user_existing.id}/edit"
     fill_in 'First name', with: 'Gimli'
     click_button 'Submit'
-    expect(page).to have_content('Success! User profile was edited.')
+    expect(page).to have_content(I18n.t('user.edited'))
   end
 
   scenario 'fails updating an existing user' do
@@ -63,7 +65,7 @@ RSpec.feature "Admin::User", type: :feature do
     visit '/admin/users'
     click_link 'Delete'
     expect(page).to have_content('Manage User')
-    expect(page).to have_content('User Removed! The user profile was removed, for temporary removal you should change the user status.')
+    expect(page).to have_content(I18n.t('user.deleted'))
     expect(page).to_not have_content(user_existing.first_name)
   end
 end

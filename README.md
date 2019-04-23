@@ -1,6 +1,6 @@
 # TLC Directory
 
-[![Build Status](https://travis-ci.org/wvulibraries/TLC-Directory.svg?branch=master)](https://travis-ci.org/wvulibraries/TLC-Directory) [![Maintainability](https://api.codeclimate.com/v1/badges/1eec8b064ca2d1e6a761/maintainability)](https://codeclimate.com/github/wvulibraries/TLC-Directory/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/1eec8b064ca2d1e6a761/test_coverage)](https://codeclimate.com/github/wvulibraries/TLC-Directory/test_coverage)
+[![Build Status](https://travis-ci.org/wvulibraries/TLC-Directory.svg?branch=master)](https://travis-ci.org/wvulibraries/TLC-Directory) [![Maintainability](https://api.codeclimate.com/v1/badges/1eec8b064ca2d1e6a761/maintainability)](https://codeclimate.com/github/wvulibraries/TLC-Directory/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/1eec8b064ca2d1e6a761/test_coverage)](https://codeclimate.com/github/wvulibraries/TLC-Directory/test_coverage)[![CircleCI](https://circleci.com/gh/wvulibraries/TLC-Directory.svg?style=svg)](https://circleci.com/gh/wvulibraries/TLC-Directory)
 
 The TLC directory application will replace the current static pdf that is currently is use.
 
@@ -18,7 +18,7 @@ Elastic search is responsible for the searching and indexing of the Rails data. 
 
 ```
 rake search_index:all                              # Re-index all environments
-rake search_index:college                          # Properly Index Buildings
+rake search_index:college                          # Properly Index College
 rake search_index:department                       # Properly Index Departments
 rake search_index:faculty                          # Properly Index Faculty
 ```

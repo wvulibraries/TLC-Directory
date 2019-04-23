@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Imageable
 #
 # @author David J. Davis

@@ -16,6 +16,8 @@
 /log
 /search_data
 /spec/search_data
+/vendor
+.vscode
 
 # Used by dotenv library to load environment variables.
 # .env
