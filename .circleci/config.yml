@@ -10,6 +10,8 @@ jobs:
       - image: circleci/ruby:2.6-node-browsers
         environment:
           - RAILS_ENV=test
+          - CC_TEST_REPORTER_ID=168bb7cbd2eea60f133f998d851a10822f44eeb06a04bc2b71cec411ba2bb3ba
+          - COVERAGE=true          
       - image: circleci/mysql:5.7
         environment:
           - MYSQL_ROOT_HOST=%
@@ -44,6 +46,14 @@ jobs:
           key: rails-bundle-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
+      ###########################################
+      # Code Climate
+      ###########################################
+      - run:
+          name: Install Code Climate Test Reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter            
 
       ###########################################
       # Database
@@ -62,11 +72,23 @@ jobs:
           name: Run rspec in parallel
           command: |
             mkdir -p test_results
+            ./cc-test-reporter before-build
             bundle exec rspec --profile 10 \
                               --format RspecJunitFormatter \
                               --out test_results/rspec.xml \
                               --format progress \
                               $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+      - run:
+          name: Code Climate Test Coverage
+          command: |
+            ./cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.$CIRCLE_NODE_INDEX.json"    
+
       # Save test results for timing analysis
       - store_test_results:
           path: test_results
+      - store_artifacts:
+          path: test-results
+          destination: test-results
+      - deploy:
+          command: |
+            ./cc-test-reporter sum-coverage --output - --parts $CIRCLE_NODE_TOTAL coverage/codeclimate.*.json | ./cc-test-reporter upload-coverage --debug --input -          
