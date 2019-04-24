@@ -65,6 +65,8 @@ group :test do
   gem 'elasticsearch-extensions'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
+
+  gem 'rspec_junit_formatter'
 end
 
 # Developoment / Test Items (Primarily debugging)
