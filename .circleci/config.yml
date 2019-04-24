@@ -1,12 +1,13 @@
 version: 2
 jobs:
   build:
+    parallelism: 2  # however many CPUs you need/pay for
     
     #############################################
     # Container Setup
     #############################################
     docker:
-      - image: circleci/ruby:2.6.2-node
+      - image: circleci/ruby:2.6.2
         environment:
           - RAILS_ENV=test
       - image: circleci/mysql:5.7
