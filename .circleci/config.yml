@@ -11,7 +11,9 @@ jobs:
           - RAILS_ENV=test
       - image: circleci/mysql:5.7
         environment:
-          - MYSQL_ALLOW_EMPTY_PASSWORD=true
+        environment:
+          - MYSQL_ROOT_HOST=%
+          - MYSQL_ROOT_PASSWORD=circleci
       - image: elasticsearch:6.6.1
         environment:
           - discovery.type=single-node      
