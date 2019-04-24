@@ -1,7 +1,6 @@
 version: 2
 jobs:
   build:
-    parallelism: 2  # however many CPUs you need/pay for
     
     #############################################
     # Container Setup
