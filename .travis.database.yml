@@ -1,5 +1,0 @@
-test:
-  adapter: mysql2
-  username: travis
-  database: tlcdirectory_test
-  encoding: utf8mb4
