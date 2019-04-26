@@ -18,7 +18,11 @@ jobs:
           - MYSQL_ROOT_PASSWORD=circleci
       - image: elasticsearch:6.6.2
         environment:
-          - discovery.type=single-node      
+          - discovery.type=single-node
+      - image: selenium/standalone-chrome-debug
+        name: selenium
+        ports: 
+          - "4444:4444"                
     
     #############################################
     # Build Steps

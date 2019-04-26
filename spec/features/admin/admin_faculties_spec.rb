@@ -7,6 +7,9 @@ RSpec.feature 'Admin::Faculty', type: :feature do
   let(:college) { FactoryBot.create(:college) }
   let(:department) { FactoryBot.create(:department) }
   let(:faculty_existing) { FactoryBot.create(:faculty) }
+  # vars for creating 
+  let(:address) { FactoryBot.attributes_for(:address) }
+  let(:phone) { FactoryBot.attributes_for(:phone) }  
   let(:faculty) { FactoryBot.attributes_for(:faculty) }
 
   before(:each) do
@@ -116,5 +119,49 @@ RSpec.feature 'Admin::Faculty', type: :feature do
     attach_file('zip_file', file_path)
     click_button 'Import ZIP File'
     expect(page).to have_content('You are not allowed to upload')
+  end
+
+  scenario 'accepts nested attributes for address', js: true do
+    visit '/admin/faculties/new'
+    select('Mr', from: 'Prefix')
+    fill_in 'First name', with: faculty[:first_name]
+    fill_in 'Middle name', with: faculty[:middle_name]
+    fill_in 'Last name', with: faculty[:last_name]
+    select('I', from: 'Suffix')
+    fill_in 'Wvu username', with: faculty[:wvu_username]
+    fill_in 'Email', with: faculty[:email]
+    fill_in 'Title', with: faculty[:title]
+    fill_in 'Biography', with: faculty[:biography]
+    fill_in 'Research interests', with: faculty[:research_interests]
+    select('user', from: 'User Role')
+    select('enabled', from: 'User Status')
+    click_link 'Add Address'
+    fill_in 'Street Address', with: address[:line_1]
+    fill_in 'City', with: address[:city]
+    select('OH', from: 'State')
+    fill_in 'Zip', with: address[:zip]
+    click_button 'Submit'
+    expect(page).to have_content(I18n.t('faculty.success'))
+  end
+
+  scenario 'accepts nested attributes for phones', js: true do
+    visit '/admin/faculties/new'
+    select('Mr', from: 'Prefix')
+    fill_in 'First name', with: faculty[:first_name]
+    fill_in 'Middle name', with: faculty[:middle_name]
+    fill_in 'Last name', with: faculty[:last_name]
+    select('I', from: 'Suffix')
+    fill_in 'Wvu username', with: faculty[:wvu_username]
+    fill_in 'Email', with: faculty[:email]
+    fill_in 'Title', with: faculty[:title]
+    fill_in 'Biography', with: faculty[:biography]
+    fill_in 'Research interests', with: faculty[:research_interests]
+    select('user', from: 'User Role')
+    select('enabled', from: 'User Status')
+    click_link 'Add Phones'
+    select('phone', from: 'Number types')
+    fill_in 'Number', with: phone[:number]
+    click_button 'Submit'
+    expect(page).to have_content(I18n.t('faculty.success'))
   end
 end
