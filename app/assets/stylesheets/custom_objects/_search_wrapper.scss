@@ -1,29 +1,35 @@
 .search-wrapper {
-  padding: 40px;
+  padding: 3rem;
+  display: flex;
+  justify-content: center;
+
+  //at screen sizes 720px or larger
+  @include mq($bp-medium) {
+    max-width: 50vw;
+    margin-left: 25vw;
+  }
 
   * {
     box-sizing: border-box;
-    margin: auto;
-    //width: 80%
     @include span-columns(12);
   }
 
   /* Style the search field */
   form input[type=text] {
-    //font-size: 14px;
+    @include span-columns(10);
+    margin-right: 0;
     border: 1px solid grey;
-    @include span-columns(10 of 12);
     background-color: white;
-    padding: 14px 22px;
+    padding: 1rem 1.5rem;
   }
 
   /* Style the submit button */
   form button {
-    @include span-columns(2 of 12);
-    padding: .77rem 2rem;
+    @include span-columns(2);
+    padding: 1.05rem 0;
     background: $accent-blue2;
     color: white;
-    font-size: 14px;
+    font-size: 1rem;
     border: 1px solid grey;
     border-left: none; /* Prevent double borders */
     cursor: pointer;
