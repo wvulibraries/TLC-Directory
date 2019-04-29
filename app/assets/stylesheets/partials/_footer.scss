@@ -1,11 +1,18 @@
 footer{
   @include span-columns(12);
+
   background: $wvu-blue;
   padding: 10px;
   border-top: $border;
   font-size:10px;
   height:35px;
   margin-top:35px;
+
+  //for screen sizes 1080px or larger
+  @include mq($bp-large){
+      max-width: 50vw;
+      margin-left: 25vw;
+  }
 
   .builtBy {
     color: $gray-text;
