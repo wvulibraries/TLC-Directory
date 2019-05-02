@@ -16,6 +16,7 @@ env :ELASTICSEARCH_URL, ENV['ELASTICSEARCH_URL']
 env :DMEASURES_URL, ENV['DMEASURES_URL']
 env :DMEASURES_USER, ENV['DMEASURES_USER']
 env :DMEASURES_PW, ENV['DMEASURES_PW']
+env :DATABASE_PASSWORD, ENV['DATABASE_PASSWORD']
 
 # set logs and environment
 set :output, {:standard => "/home/tlcdirectory/log/cron.log", :error => "/home/tlcdirectory/log/cron_error.log"}

@@ -3,6 +3,8 @@
 require 'simplecov'
 require 'simplecov-console'
 require 'webmock/rspec'
+require "shoulda/matchers"
+
 WebMock.allow_net_connect!
 
 ENV['RAILS_ENV'] ||= 'test'

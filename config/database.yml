@@ -56,5 +56,3 @@ test:
 production:
   <<: *default
   database: tlcdirectory_production
-  username: tlcdirectory
-  password: <%= ENV['EXAMPLE-RAILS-APP_DATABASE_PASSWORD'] %>
