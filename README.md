@@ -6,10 +6,10 @@ The TLC directory application will replace the current static pdf that is curren
 
 ## Versions
 - Rails 5.2 
-- Ruby  2.5.1 
+- Ruby  2.6.2
 
 ## Testing and Quality Control 
-The test suite includes rspec, capybara, selnium, simplecov, travisCI, and code climate. To run the tests type the following `xvfb-run bundle exec rspec`.  
+The test suite includes rspec, capybara, selnium, simplecov, CircleCI, and code climate. Javascript is difficult to test by iteself. To run tests locally uncomment the selenium docker container and adjust capybara setups. RAILS_ENV=test bundle exec rspec this helps to ensure that all gems are loaded appropriately and you do not get the shoulda error.
 
 # Elastics Search 
 Elastic search is responsible for the searching and indexing of the Rails data. Using callbacks the data will be adjusted and indexed everytime an action is made on the dataset.  In the event that you have to reindex again, you may want to use the rake tasks written in the lib folder, not the ones from the default library.  If a model is not enabled it will show up in the search using the default rake tasks associated with the Rails Elastic Search Gems.  
