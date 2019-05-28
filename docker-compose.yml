@@ -21,7 +21,7 @@ services:
     ports:
       - "3306:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD=2677PFs8DWWNEn9M
+      - MYSQL_ROOT_PASSWORD=docker
     volumes:
       - ./mysql:/var/lib/mysql
       
@@ -36,10 +36,10 @@ services:
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     environment:
       - SECRET_KEY_BASE=e9f0887b29e854a81e8dbdb3090b9a1b54ba2201c41b52966df6100ce672a70ed6c4c1a029ccb28cfc162a52ae2e68543b675eb5d4b703ecee903ebd8d66a6bb     
-      - DATABASE_PASSWORD=2677PFs8DWWNEn9M
+      - DATABASE_PASSWORD=docker
       - ELASTICSEARCH_URL=http://elasticsearch:9200
       - TERM=xterm
-      - RAILS_ENV=production # replace with your current environment development or production
+      - RAILS_ENV=development # replace with your current environment development or production
     volumes:
       - .:/home/tlcdirectory
     ports:

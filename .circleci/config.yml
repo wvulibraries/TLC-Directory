@@ -50,6 +50,7 @@ jobs:
           key: rails-bundle-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
+            
       ###########################################
       # Code Climate
       ###########################################
