@@ -10,7 +10,6 @@
   </head>
 
   <body>
-
     <!-- Header -->
     <%= render(:partial => 'shared/header') %>
 
@@ -22,19 +21,23 @@
 
     <!-- Main -->
     <main id="main" class="frontend">
-      <div class="wvu-container">
+      <div class="wvu-container"> 
+      
         <!-- Flash -->
         <%= render "utilities/alerts" %>
-
+        
         <!-- Yield -->
         <div class="app-main-content">
           <%= yield %>
         </div>
+
+        <!-- Footers -->
+        <%= render(:partial => 'shared/footer') %>
       </div>
+
     </main>
 
-    <!-- Footer -->
-    <%= render(:partial => 'shared/footer') %>
+    <!-- JavaScripts -->
+    <%= yield :js %>
   </body>
-
 </html>
