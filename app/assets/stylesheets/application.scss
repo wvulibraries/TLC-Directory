@@ -16,12 +16,16 @@
  @import "font-awesome-sprockets";
  @import "font-awesome";
 
+ // Core items
+ @import "core/variables";
+
  // import mixins so that all partials can use them.
  @import "mixins/*";
 
  // application wide
  @import "admin/*";
  @import "partials/*";
+ @import "elements/*";
 
 
  // it is important that the order gets imported in a certain way so that variables are able to be used in other scss files

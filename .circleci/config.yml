@@ -35,6 +35,9 @@ jobs:
       - run:
           name: Configure database.yml
           command: mv config/database.ci.yml config/database.yml
+      - run:
+          name: Remove capybara.rb
+          command: rm spec/support/capybara.rb
 
       ###########################################
       # Bundler w/ caching

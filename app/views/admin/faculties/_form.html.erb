@@ -14,7 +14,7 @@
   <fieldset>
     <legend> Profile Information </legend>
     <div class="row">
-      <div class="field one-fourth">
+      <div class="field full">
         <%= f.label :prefix, class:'select-label' %>
         <div class="select-style">
           <%= f.select :prefix, options_for_select(name_prefixes, selected: faculty.prefix ), include_blank: "Select a Prefix" %>
