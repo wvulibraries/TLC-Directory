@@ -42,17 +42,17 @@ jobs:
       ###########################################
       # Bundler w/ caching
       ###########################################
-      - restore_cache:
-          keys:
-            - rails-bundle-{{ checksum "Gemfile.lock" }}
-            - rails-bundle-
+      # - restore_cache:
+      #     keys:
+      #       - rails-bundle-{{ checksum "Gemfile.lock" }}
+      #       - rails-bundle-
       - run:
           name: Bundle Gems
           command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle
-      - save_cache:
-          key: rails-bundle-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
+      # - save_cache:
+      #     key: rails-bundle-{{ checksum "Gemfile.lock" }}
+      #     paths:
+      #       - vendor/bundle
             
       ###########################################
       # Code Climate
