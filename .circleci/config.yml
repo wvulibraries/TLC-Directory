@@ -7,16 +7,16 @@ jobs:
     # Container Setup
     #############################################
     docker:
-      - image: circleci/ruby:2.6-node-browsers
+      - image: circleci/ruby:2.6.3-stretch-node-browsers
         environment:
           - RAILS_ENV=test
           - CC_TEST_REPORTER_ID=168bb7cbd2eea60f133f998d851a10822f44eeb06a04bc2b71cec411ba2bb3ba
           - COVERAGE=true          
-      - image: circleci/mysql:5.7
+      - image: circleci/mysql:5.7.27
         environment:
           - MYSQL_ROOT_HOST=%
           - MYSQL_ROOT_PASSWORD=circleci
-      - image: elasticsearch:6.6.2
+      - image: docker.elastic.co/elasticsearch/elasticsearch:6.8.1
         environment:
           - discovery.type=single-node
       - image: selenium/standalone-chrome-debug
