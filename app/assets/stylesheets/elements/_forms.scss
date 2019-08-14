@@ -1,89 +1,173 @@
-form {
+$font-color:#666; 
+$input-bg: #eee; 
+$input-border: #666;
+$label-color:$font-color; 
+$fieldset:#666; 
+$borders: 1px solid $input-border; 
 
-  .field { 
-    @include clearfix;
+h2 { 
+  margin-top:0;
+}
+
+form{
+  @include span-columns(12);
+  position:relative;
+  z-index:55;
+  * { margin: 0; padding: 0px; }
+
+  fieldset { 
+    padding:1em; 
+    border: $borders; 
+    text-align: left;
+    position: relative; 
+    margin-top:1em; 
+
+    > legend { 
+      padding: 0 1em;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: $font-color;
+    }
   }
-
-  .full { 
-    text-align:left;
-    display:block; 
-    width:100%;
-    margin-bottom:1em;
+  .add-fields { 
+    @include button_maker($action-color, 'solid');
+    @include determine-text-color($action-color);
+    margin: .5em 0; 
+    text-decoration: none !important;
+    &:before { 
+      font-family: "Font Awesome 5 Free"; 
+      font-weight: 900; 
+      content: "\f067";
+      padding-right: .5em; 
+    }
+  }
+  .remove-fields { 
+    display: block;
+    font-size:1.2em;
+    position: absolute;
+    top: .6em;
+    right: 0;
+    margin:0; 
+    padding: .25em .75em;
+    color: #fff;
+    text-align: center;
+    background: $error; 
+    &:hover,&:focus { background: darken($error, 20%); }
+  }
+  // Firefox POSITIONING 
+  @-moz-document url-prefix() { 
+    .remove-fields { 
+      position:absolute;
+      right:0;
+      top:-.6em;
+    }
   }
 
   label, .heading { 
-      text-align:left;
+    text-align:left;
+    display:block; 
+    width:100%;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color:$font-color;
+    position: relative;
+    
+    &.required { 
+      &:after { 
+        content: "*";
+        color: $error;
+        font-size:2.2em;
+        position: absolute; 
+        top:-7px; 
+        padding-left:5px;
+        font-weight:100;
+      }
+    }
+  }
+
+  .legend { 
+      width:100%; 
       display:block; 
-      width:100%;
+      float:left; 
+      border: $borders; 
+      padding:5px 5px 5px 40px; 
+      margin:20px 0;
+      font-size:12px; 
+      position:relative; 
+      text-align:left; 
+
+      span.required { 
+        color: $error;
+          font-size:4em;
+          position:absolute; 
+          top:37%; 
+          left:10px; 
+      }
+  }
+
+  .heading { 
+      text-align: left;
+      display: block;
+      width: 100%;
       text-transform: uppercase;
       letter-spacing: 1px;
       color:$font-color;
-      position: relative;
-      
-      &.required { 
-        &:after { 
-          content: "*";
-          color: $error;
-          font-size:2.2em;
-          position: absolute; 
-          top:-7px; 
-          padding-left:5px;
-          font-weight:100;
-        }
+  }
+
+  .checkbox-wrapper { 
+    @include span-columns(12);
+
+      .checkbox { 
+        @include span-columns(12);
+        background:$input-bg;
+        padding:5px; 
+        width:100%; 
+        display:block;
+      }
+
+      .heading { 
+        text-align: left;
+        display: block;
+        width: 100%;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color:$font-color;
+      }
+
+      label {
+        float:left;
+        display:inline-block; 
+        width:calc(100% - 40px);
+        margin:0;  
+        text-transform:none; 
+        font-size:12px;
+      } 
+
+      input[type='hidden'] { 
+        display:none; 
+      }
+
+      input[type='checkbox'], input[type='radio'] { 
+        float:left; 
+        display:inline-block; 
+        width:20px;
+        text-align:left;
+        margin:0 5px 0 0; 
+        height:unset;
       }
   }
 
-  textarea {
-      width:100%;
-      max-width:100%;
-      border:none;
-      font-size:1em; 
-      line-height:1.5; 
-      font-weight:500;
-      letter-spacing: 1px;
-      background:$default;
-      padding:1.25em;
-      margin-top:.5em;
-      @include transition(
-        color 0.6s $easeOutExpo, 
-        border 0.6s $easeOutExpo, 
-        background 0.6s $easeOutExpo
-      );
-      border: 2px solid darken($default,10%);
-
-      &:focus, &:hover { 
-        border: 2px solid $link-color;
-        background: lighten($default,2%);
-      }
-
-      &::placeholder { 
-      color:darken($default,20%);
-      }
+  .field{
+    margin-top:1em;
   }
-
-  select {
-      font-size:1em; 
-      padding: 0;
-      margin: 0;
-      border: none;
-      border-radius: 0;
-      overflow: hidden;
-      background: #eee;
-      position:relative;
-      font-weight:500;
-      letter-spacing: 1px;
-      border: 2px solid darken($default,10%);
-  }
-
 
   input:not([type='submit']){
       width:100%;
       height:60px;
       padding:1.25em; 
       border:none;
-      background:$default;
+      background:$input-bg;
       font-weight:500;
-      font-size:1em; 
       letter-spacing: 1px;
       @include transition(
         color 0.6s $easeOutExpo, 
@@ -91,45 +175,209 @@ form {
         background 0.6s $easeOutExpo
       );
 
-      border: 2px solid darken($default,10%);
+      border: 2px solid darken($input-bg,10%);
       &:focus, &:hover { 
-        cursor: pointer;
         border: 2px solid $link-color;
-        background: lighten($default,2%);
+        background: lighten($input-bg,2%);
       }
 
       &::placeholder { 
-        color:darken($default,20%);
-      }
-
-      &.disabled { 
-        border: 2px solid $disabled-color;
-        opacity: 0.4;
-        filter: alpha(opacity=40); /* For IE8 and earlier */
-
-        &:hover, &:focus { 
-          cursor: not-allowed; 
-          border: 2px solid $disabled-color;
-        }
+        color:darken($input-bg,20%);
       }
   }
 
-  #error_explanation { 
-    text-align:left;
-    display:block; 
+  input[type='file']{
+    height:unset;
+  }
+
+  textarea{
     width:100%;
-    padding:1em; 
-    color:$error; 
-    background: rgba($error, .1); 
-    border: 2px solid $error; 
-    margin-bottom:2em; 
-    h3 { color:$error; }
-    ul { 
-      text-align:left;
-      display:block; 
-      width:100%;
-      padding:1em;
-      padding-left:2.5em; 
+    max-width:100%;
+    border:none;
+    font-size:1em; 
+    line-height:1.5; 
+    font-weight:500;
+    letter-spacing: 1px;
+    background:$input-bg;
+    padding:1.25em;
+    margin-top:.5em;
+    @include transition(
+      color 0.6s $easeOutExpo, 
+      border 0.6s $easeOutExpo, 
+      background 0.6s $easeOutExpo
+    );
+    border: 2px solid darken($input-bg,10%);
+
+    &:focus, &:hover { 
+      border: 2px solid $link-color;
+      background: lighten($input-bg,2%);
+    }
+
+    &::placeholder { 
+      color:darken($input-bg,20%);
     }
   }
+
+  .select-style {
+    font-size:1em; 
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    overflow: hidden;
+    background: #eee;
+    position:relative;
+    font-weight:500;
+    letter-spacing: 1px;
+    border: 2px solid darken($input-bg,10%);
+    
+    @include transition(
+      color 0.6s $easeOutExpo, 
+      border 0.6s $easeOutExpo, 
+      background 0.6s $easeOutExpo
+    );
+
+    &:focus, &:hover { 
+      border: 2px solid $link-color;
+      background: lighten($input-bg,2%);
+    }
+
+    &:before {
+      content: "\f078";
+      color:rgba( #000, .3);
+      font-size: 1.2em; 
+      text-align: center;
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      display:block; 
+      position:absolute;
+      width:2em; 
+      right:10px;
+      top:calc(50% - .7em); 
+      z-index:0; 
+    }
+    select {
+      padding:1em; 
+      width: 100%;
+      height:55px;
+      font-size:1em;
+      border: none;
+      box-shadow: none;
+      background-color: transparent;
+      background-image: none;
+      -webkit-appearance: none;
+         -moz-appearance: none;
+              appearance: none;
+      position:relative;
+      z-index:2;
+      color:#000;
+    }
+  }
+
+  // ERRORS 
+  .field_with_errors { 
+    input, textarea, .select-style { 
+      border: 2px solid $error;
+      background: lighten($error,40%);
+    }
+    label { color:$error; }
+  }
+}
+
+.image-preview { 
+  max-width:320px; 
+  margin-bottom:.5em; 
+}
+
+#error_explanation { 
+  @include span-columns(12);
+  padding:1em; 
+  color:$error; 
+  background: rgba($error, .1); 
+  border: 2px solid $error; 
+  margin-bottom:2em; 
+  h3 { color:$error; }
+  ul { 
+    @include span-columns(12); 
+    padding:1em;
+    padding-left:2.5em; 
+  }
+}
+
+.actions { 
+  @include span-columns(12); 
+  padding:1em 0;
+  margin-top:1em; 
+  position:relative; 
+  input { position: relative; top:-2px; }
+}
+
+.full, .row { 
+  @include span-columns(12); 
+}
+
+.two-third {
+  @include span-columns(12); 
+  @include media(720px){ 
+    @include span-columns(8);
+  }
+}
+
+.one-third { 
+  @include span-columns(12); 
+  @include media(720px){ 
+    @include span-columns(4);
+  }
+}
+
+.third { 
+  @include span-columns(12); 
+  @include media(720px){ 
+    @include span-columns(4);
+    &:nth-child(3n){ 
+      @include omega(); 
+    }
+  }
+}
+
+.one-fourth { 
+  @include span-columns(12); 
+  @include media(720px){ 
+    @include span-columns(3);
+  }
+}
+
+.two-fourth, .half { 
+  @include span-columns(12); 
+  @include media(720px){ 
+    @include span-columns(6);
+  }
+}
+
+.three-fourth { 
+  @include span-columns(12); 
+  @include media(720px){ 
+    @include span-columns(9);
+  }
+}
+
+.last { 
+  @include omega();
+}
+
+.micro-text { 
+  @include span-columns(12);
+  padding:1em .5em; 
+  letter-spacing:1px; 
+  font-weight:400; 
+  color:#5f5f5f; 
+  font-size:.75em; 
+}
+
+.preview-image { 
+  display : block;
+  margin : auto;
+  max-width:300px; 
+  border:$border;
+  padding: 1em;
 }
