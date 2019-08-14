@@ -54,8 +54,21 @@
     }
 }
 
+.col-main-center {
+  @include span-columns(8);
+  @include shift(2);
+  
+  h2 {
+      color: black;
+      font-size: 1em;
+      line-height: 1.5;
+      text-transform: uppercase;
+  }
+
+}
+
 @include mq($bp-medium, false, max) {
-    .col-container, .col-side, .col-main {
+    .col-container, .col-side, .col-main, .col-main-center {
         @include span-columns(12);
         margin: 15px auto 0 auto;
     }

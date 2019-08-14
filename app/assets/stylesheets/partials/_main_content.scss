@@ -5,6 +5,7 @@
 // Admin Content
 .main-content {
   @include span-columns(12);
+  text-align: center;
 
   @include media(720px){
     @include span-columns(9);
@@ -13,6 +14,6 @@
 }
 
 //  Frontend Content
-.app-content {
-  @include span-columns(12);
+.app-main-content {
+  @include outer-container;
 }
