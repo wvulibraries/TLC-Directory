@@ -7,6 +7,8 @@ The TLC directory application will replace the current static pdf that is curren
 ## Versions
 - Rails 5.2 
 - Ruby  2.6.2
+- ElasticSearch 6.8.1
+- MySQL 5.7.27
 
 ## Testing and Quality Control 
 The test suite includes rspec, capybara, selnium, simplecov, CircleCI, and code climate. Javascript is difficult to test by iteself. To run tests locally uncomment the selenium docker container and adjust capybara setups. RAILS_ENV=test bundle exec rspec this helps to ensure that all gems are loaded appropriately and you do not get the shoulda error.
