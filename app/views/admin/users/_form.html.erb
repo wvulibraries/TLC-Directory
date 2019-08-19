@@ -21,12 +21,12 @@
         </div>
       </div>
 
-      <div class="field three-fourth last">
+      <div class="field two-fourth">
         <%= f.label :first_name, class: 'required' %>
         <%= f.text_field :first_name, placeholder: "Joanna" %>
       </div>
 
-      <div class="field two-fourth last">
+      <div class="field one-fourth last">
         <%= f.label :middle_name, class: 'required' %>
         <%= f.text_field :middle_name, placeholder: "Q. (Quinn)" %>
       </div>
@@ -42,19 +42,7 @@
           <%= f.select :suffix, options_for_select(name_suffixes, selected: user.suffix ), include_blank: "Select a Suffix" %>
         </div>
       </div>
-      
-      <div class="field one-fourth last">
-        <%= f.label :email, class:'select-label' %>
-        <div class="select-style">
-          <%= f.text_field :email, placeholder: "username@mail.wvu.edu" %>
-        </div>
-      </div>      
-      
-      <div class="field">
-        <%= f.label :visible, 'Show User Profile', class:'required' %>
-        <%= f.check_box :visible %>
-      </div>
-
+     
     </div>
 
   </fieldset>
@@ -66,6 +54,11 @@
         <%= f.label :wvu_username, class: 'required' %>
         <%= f.text_field :wvu_username, placeholder: "jqsmith001" %>
       </div>
+
+      <div class="field half last">
+        <%= f.label :email, class: 'required' %>
+        <%= f.text_field :email, placeholder: "jqsmith001@mail.wvu.edu", size: "100x1"  %>
+      </div>     
     </div>
 
   </fieldset>

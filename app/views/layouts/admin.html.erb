@@ -10,35 +10,53 @@
   <%= yield :head %>
 </head>
 
-<body>
-  <!-- Header -->
-  <%= render(:partial => 'shared/admin_header') %>
+  <body>
+    <!-- Header -->
+    <%= render(:partial => 'shared/admin_header') %>
 
-  <!-- Navigation -->
-  <%= render(:partial => 'shared/navigation') %>
+    <!-- Navigation -->
+    <%= render(:partial => 'shared/navigation') %>
 
-  <!-- Main Banner -->
-  <%= render(:partial => 'shared/admin_banner') %>
+    <!-- Main Banner -->
+    <%= render(:partial => 'shared/admin_banner') %>
 
-  <!-- Main -->
-  <main id="main" class="backend">
-    <div class="wvu-container">
+    <!-- Main -->
+    <main id="main" class="backend">
+      <div class="wvu-container">
+        <!-- Flash -->
+        <%= render "utilities/alerts" %>
 
-  <!-- Flash -->
-    <%= render "utilities/alerts" %>
+        <!-- Admin Menu -->
+        <menu id="menu">
+          <ul>
+            <li> <h2> Application Access </h2> </li>
+            <li><a href="/admin/users"> Users </a></li>          
 
-  <!-- Yield -->
+            <li> <h2> Import </h2> </li>
+            <li><a href="/admin/faculties/importcsv"> From CSV file </a></li>
+            <li><a href="/admin/faculties/importzip"> From Digital Measures ZIP </a></li>
 
-  <!-- Admin Menu -->
-        <%= link_to "Admin Main", '/admin', class: 'button button--wvu-blue-fill' %>
-        <%= yield %>
+            <li> <h2> Manage / Edit </h2> </li>
+            <li><a href="/admin/colleges"> Colleges </a></li>
+            <li><a href="/admin/departments"> Departments </a></li>
+            <li><a href="/admin/faculties"> Faculty </a></li>
+
+            <li> <h2> Reporting </h2> </li>
+            <li><a href="/admin/searchstats"> Search Statistics </a></li>
+          </ul>
+        </Menu>      
+
+        <!-- Yield -->
+        <div class="main-content">
+          <%= yield %>
+        </div>
       </div>
-  </main>
+    </main>
 
-  <!-- Footers -->
-  <%= render(:partial => 'shared/builtby_footer') %>
+    <!-- Footers -->
+    <%= render(:partial => 'shared/builtby_footer') %>
 
-  <!-- JavaScripts -->
-  <%= yield :js %>
-</body>
+    <!-- JavaScripts -->
+    <%= yield :js %>
+  </body>
 </html>

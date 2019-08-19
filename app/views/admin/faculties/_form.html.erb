@@ -21,12 +21,12 @@
         </div>
       </div>
 
-      <div class="field three-fourth last">
+      <div class="field half">
         <%= f.label :first_name, class: 'required' %>
         <%= f.text_field :first_name, placeholder: "Joanna" %>
       </div>
 
-      <div class="field two-fourth last">
+      <div class="field half last">
         <%= f.label :middle_name, class: 'required' %>
         <%= f.text_field :middle_name, placeholder: "Q. (Quinn)" %>
       </div>
@@ -90,22 +90,24 @@
         <%= f.label :email, class: 'required' %>
         <%= f.text_field :email, placeholder: "jqsmith001@mail.wvu.edu", size: "100x1"  %>
       </div>      
-    </div>
-    
-    <div class="row"> 
-      <div class="field half">
+
+      <div class="field full">
         <%= f.label :title, class: 'required' %>
         <%= f.text_field :title, placeholder: "Accountant EBO", size: "100x1" %>
       </div>
 
-      <div class="field">
-        <%= f.label :college_ids, 'Colleges' %>
-        <%= f.collection_select :college_id, College.all.visible.order(:name), :id, :name, { include_hidden: false, include_blank: "Select a College" }%>
+      <div class="field half">
+        <%= f.label :college_ids, 'College', class:'select-label' %>
+        <div class="select-style">
+          <%= f.collection_select :college_id, College.all.visible.order(:name), :id, :name, { include_hidden: false, include_blank: "Select a College" }%>
+        </div>
       </div>
 
-      <div class="field">
-        <%= f.label :department_ids, 'Departments' %>
-        <%= f.collection_select :department_id, Department.all.visible.order(:name), :id, :name, { include_hidden: false, include_blank: "Select a Department" }%>
+      <div class="field half last">
+        <%= f.label :department_ids, 'Department', class:'select-label' %>
+        <div class="select-style">
+          <%= f.collection_select :department_id, Department.all.visible.order(:name), :id, :name, { include_hidden: false, include_blank: "Select a Department" }%>
+        </div>
       </div>
 
       <div class="field full">
@@ -119,8 +121,12 @@
       </div>      
 
       <div class="field half">
-        <%= f.label :visible%>
-        <%= f.check_box :visible %>
+          <div class="checkbox-wrapper">
+            <div class="checkbox">
+              <%= f.check_box :visible %>
+              <%= f.label :visible, 'Profile Visible' %>
+            </div>
+          </div>
       </div>
 
       <div class="field full">
