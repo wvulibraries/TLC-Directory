@@ -1,17 +1,19 @@
 <!-- Admin Menu -->
 <menu id="menu">
   <ul>
-    <li><%= link_to "Admin Main", '/admin' %></li>
-    <li><%= link_to "Browse the Colleges", '/admin/colleges' %></li>   
-    <li><%= link_to "Browse the Departments", '/admin/departments' %></li>       
-    <li><%= link_to "Browse the Faculty", '/admin/faculties' %></li> 
-    <li><%= link_to "Import CSV File(s)", '/admin/faculties/importcsv' %></li>  
-    <li><%= link_to "Import Digital Measures Zip", '/admin/faculties/importzip' %></li>          
-    <li><%= link_to "Browse the Users", '/admin/users' %></li>    
-    <li><%= link_to 'New College', new_admin_college_path %></li>    
-    <li><%= link_to 'New Department', new_admin_department_path %></li>   
-    <li><%= link_to 'New Faculty', new_admin_faculty_path %></li>  
-    <li><%= link_to 'New User', new_admin_user_path %></li>  
-    <li><%= link_to 'Search Stats', '/admin/searchstats' %></li>
+    <li> <h2> Application Access </h2> </li>
+    <li><a href="/admin/users"> Users </a></li>          
+
+    <li> <h2> Import </h2> </li>
+    <li><a href="/admin/faculties/importcsv"> From CSV file </a></li>
+    <li><a href="/admin/faculties/importzip"> From Digital Measures ZIP </a></li>
+
+    <li> <h2> Manage / Edit </h2> </li>
+    <li><a href="/admin/colleges"> Colleges </a></li>
+    <li><a href="/admin/departments"> Departments </a></li>
+    <li><a href="/admin/faculties"> Faculty </a></li>
+
+    <li> <h2> Reporting </h2> </li>
+    <li><a href="/admin/searchstats"> Search Statistics </a></li>
   </ul>
-</Menu>
+</Menu>   
