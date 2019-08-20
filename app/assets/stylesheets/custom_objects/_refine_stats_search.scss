@@ -1,0 +1,16 @@
+.refine-stats-search {
+  /* Style the submit button */
+  form button {
+    position: absolute;
+    padding: 1.25rem;
+    background: $accent-blue2;
+    color: white;
+    border: 1px solid grey;
+    border-left: none; /* Prevent double borders */
+    cursor: pointer;
+  }
+
+  form button:hover {
+    background: $accent-blue1;
+  }
+}

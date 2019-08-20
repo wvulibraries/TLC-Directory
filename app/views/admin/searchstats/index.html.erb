@@ -2,13 +2,24 @@
   <h2> Search Terms </h2>
 </div>
 
-<div>
+<div class="refine-stats-search">
   <!-- Stats Filter -->
   <%= form_tag(searchstats_path, :method => "get", id: "filter-stats-by-month") do %>
-      <h4>Refine Your Search:</h4>
+      <label for="date_month" class="visually-hidden"> 
+        Filter By Month
+      </label>
 
-      <%= select_month(Date.today) %>
-      <button type="submit" id="submit"><span class="fa fa-search"></span></button>        
+      <h2>Refine Your Search:</h2>
+
+      <div class="row">
+        <div class="select-style field half">
+            <%= selected_month() %>
+        </div>
+        <button class="search-button button">
+          <span class="fa fa-search"></span> 
+          <span class="visually-hidden"> Search </span>
+        </button> 
+      </div>
   <% end %>      
 </div>
 
