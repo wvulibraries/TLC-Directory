@@ -20,10 +20,10 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -\
 RUN \
     gem install bundler \
     && gem install rails \
-    && mkdir -p /home/tlcdirectory
+    && mkdir -p /home/sotldirectory
     
-WORKDIR /home/tlcdirectory
-ADD . /home/tlcdirectory
+WORKDIR /home/sotldirectory
+ADD . /home/sotldirectory
 RUN bundle install --jobs=4 --retry=3
 
 ADD ./startup.sh /usr/bin/

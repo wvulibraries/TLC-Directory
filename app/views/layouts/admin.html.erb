@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title> <%= yield :title %> :: TLC Directory :: Admin Panel :: WVU </title>
+  <title> <%= yield :title %> :: SOTL Directory :: Admin Panel :: WVU </title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -26,25 +26,7 @@
         <!-- Flash -->
         <%= render "utilities/alerts" %>
 
-        <!-- Admin Menu -->
-        <menu id="menu">
-          <ul>
-            <li> <h2> Application Access </h2> </li>
-            <li><a href="/admin/users"> Users </a></li>          
-
-            <li> <h2> Import </h2> </li>
-            <li><a href="/admin/faculties/importcsv"> From CSV file </a></li>
-            <li><a href="/admin/faculties/importzip"> From Digital Measures ZIP </a></li>
-
-            <li> <h2> Manage / Edit </h2> </li>
-            <li><a href="/admin/colleges"> Colleges </a></li>
-            <li><a href="/admin/departments"> Departments </a></li>
-            <li><a href="/admin/faculties"> Faculty </a></li>
-
-            <li> <h2> Reporting </h2> </li>
-            <li><a href="/admin/searchstats"> Search Statistics </a></li>
-          </ul>
-        </Menu>      
+        <%= render(:partial => 'shared/admin_navigation') %>      
 
         <!-- Yield -->
         <div class="main-content">
