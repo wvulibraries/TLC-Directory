@@ -63,7 +63,7 @@ class Faculty < User
   def as_indexed_json(_options)
     as_json(
       methods: [:display_name],
-      only: %i[id first_name last_name preferred_name display_name title research_interests biography image college_id department_id],
+      only: %i[id first_name last_name preferred_name display_name title tags research_interests biography image college_id department_id],
       include: {
         college: { only: %i[id name] },
         department: { only: %i[id name] }
