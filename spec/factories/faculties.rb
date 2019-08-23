@@ -16,6 +16,7 @@ FactoryBot.define do
     biography { Faker::Lorem.paragraph(rand(1...5)) }
     research_interests { Faker::Lorem.sentence }
     teaching_interests { Faker::Lorem.sentence }
+    tags { Faker::Lorem.words(3) }
 
     factory :non_admin_cas do
       wvu_username { 'johntest' }

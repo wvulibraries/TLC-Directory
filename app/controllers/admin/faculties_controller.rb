@@ -131,9 +131,13 @@ class Admin::FacultiesController < ApplicationController
     ]
   end
 
+  def search_attrs
+    [ :tags ]
+  end
+
   def faculty_params
     params.require(:faculty)
-          .permit(name_attrs, profile_attrs, image_attrs, resume_attrs, contact_attrs, professional_attrs)
+          .permit(name_attrs, profile_attrs, image_attrs, resume_attrs, contact_attrs, professional_attrs, search_attrs)
   end
 
   def upload_params

@@ -6,6 +6,6 @@ RSpec.feature 'Admin', type: :feature do
 
   scenario 'list index' do
     visit '/admin'
-    expect(page).to have_content('TLC Directory :: Admin Panel')
+    expect(page).to have_content('SOTL Directory :: Admin Panel')
   end
 end
