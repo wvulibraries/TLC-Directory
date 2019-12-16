@@ -9,7 +9,7 @@ ruby '2.6.2'
 # Rails, MySQL, Puma
 gem 'rails', '~> 5.2.0'
 gem 'mysql2', '>= 0.4.4', '< 0.6.0'
-gem 'puma', '~> 3.12'
+gem 'puma', '~> 4.3'
 
 # Rails Dependencies
 gem 'sassc-rails'
