@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :award do
     starting_year { Time.current.year - rand(25) }
     ending_year { Time.current.year }
-    name { Faker::Lorem.words(3) }
+    name { Faker::Lorem.words(number: 3) }
     organization { Faker::University.name }
     description { Faker::Lorem.sentence }
 

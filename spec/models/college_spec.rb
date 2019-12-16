@@ -17,13 +17,13 @@ RSpec.describe College, type: :model do
 
   context 'invalid options' do
     it 'expects name to be too long' do
-      college.name = Faker::String.random(51)
+      college.name = Faker::String.random(length: 51)
       expect(college).to_not be_valid
       expect(college.errors.messages[:name]).to eq ['is too long (maximum is 50 characters)']
     end
 
     it 'expects name to be too short' do
-      college.name = Faker::String.random(3)
+      college.name = Faker::String.random(length: 3)
       expect(college).to_not be_valid
       expect(college.errors.messages[:name]).to eq ['is too short (minimum is 4 characters)']
     end
