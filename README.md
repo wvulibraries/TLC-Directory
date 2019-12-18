@@ -5,9 +5,9 @@
 The TLC directory application will replace the current static pdf that is currently is use.
 
 ## Versions
-- Rails 5.2 
+- Rails 5.2.4
 - Ruby  2.6.2
-- ElasticSearch 6.8.1
+- ElasticSearch 7.5.0
 - MySQL 5.7.27
 
 ## Testing and Quality Control 
