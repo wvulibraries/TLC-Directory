@@ -20,13 +20,18 @@ class Department < ApplicationRecord
   scope :visible, -> { where(status: 'enabled') }
   scope :order_name, -> { order(:name) }
 
+  # Elastic Search Index settings.
+  # These are set in the model to index only specific information.   
+  settings index: { number_of_shards: 1 } do
+    mappings dynamic: 'false' do
+      indexes :name, type: :text
+    end
+  end
+
   # Elastic Search Settings
-  #
   # @author Tracy A. McCormick
-  #
   # @description
   # indexed json, this will help with search rankings.
-  #
   # rake environment elasticsearch:import:model CLASS='Department' SCOPE="visible" FORCE=y
   def as_indexed_json(_options)
     as_json(

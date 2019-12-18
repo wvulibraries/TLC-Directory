@@ -45,8 +45,8 @@ gem "non-stupid-digest-assets" # generates assets without fingerprint for 404 an
 
 # searching / indexing for speeds / pagination for elegance
 # gem 'kaminari'
-gem 'elasticsearch-model', '< 7.0'
-gem 'elasticsearch-rails', '< 7.0'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 
 # PDF Stuff
 gem 'prawn-rails'
@@ -61,10 +61,10 @@ group :test do
   gem 'simplecov'
   gem 'simplecov-console'
   gem 'capybara', '>= 2.15', '< 4.0'
-  gem 'selenium-webdriver', '~> 3.14'  
+  gem 'selenium-webdriver', '~> 3.14'
   gem 'elasticsearch-extensions'
   gem 'executables'
-  gem 'rspec_junit_formatter'    
+  gem 'rspec_junit_formatter'
 end
 
 # Developoment / Test Items (Primarily debugging)

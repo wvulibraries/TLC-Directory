@@ -20,6 +20,14 @@ class College < ApplicationRecord
   scope :visible, -> { where(status: 'enabled') }
   scope :order_name, -> { order(:name) }
 
+  # Elastic Search Index settings.
+  # These are set in the model to index only specific information.   
+  settings index: { number_of_shards: 1 } do
+    mappings dynamic: 'false' do
+      indexes :name
+    end
+  end
+
   # Elastic Search Settings
   #
   # @author Tracy A. McCormick

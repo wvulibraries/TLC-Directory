@@ -57,6 +57,30 @@ class Faculty < User
 
   # Elastic Search Settings
   # -----------------------------------------------------
+
+  # Elastic Search Index settings.
+  # These are set in the model to index only specific information.
+  settings index: { number_of_shards: 1 } do
+    mappings dynamic: 'false' do
+      indexes :display_name
+      indexes :first_name
+      indexes :last_name
+      indexes :preferred_name
+      indexes :title
+      indexes :tags
+      indexes :research_interests
+      indexes :biography
+      indexes :departments, type: :object do
+        indexes :name
+      end
+      indexes :phones, type: :object do
+        indexes :number
+      end
+    end
+  end
+
+  # Elastic Search Settings
+  # -----------------------------------------------------
   # @author David J. Davis, Tracy A. McCormick
   # @description indexed json, this will help with search rankings.
   # rake environment elasticsearch:import:model CLASS='Faculty' SCOPE="visible" FORCE=y

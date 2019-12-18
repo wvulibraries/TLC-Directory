@@ -31,8 +31,7 @@ RSpec.describe Department, type: :model do
       it 'should be indexed' do
         dept # instantiate department
         Department.import(force: true, refresh: true)
-        query = dept.name.gsub(%r{\{|\}|\[|\]|\\|\/|\^|\~|\:|\!|\"|\'}, '')
-        expect(Department.search(query).records.count).to eq 1
+        expect(Department.search(dept.name).records.length).to eq(1)
       end
     end
   end

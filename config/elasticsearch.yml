@@ -1,0 +1,10 @@
+# config/elasticsearch.yml
+development: &default
+  host: <%= ENV['ELASTICSEARCH_URL'] %>
+  port: '9200'
+test:
+  <<: *default
+staging:
+  <<: *default
+production:
+  <<: *default
