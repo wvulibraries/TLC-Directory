@@ -22,7 +22,7 @@ FactoryBot.define do
       wvu_username { 'johntest' }
       role { 0 }
     end
-    
+
     factory :admin_cas do
       wvu_username { 'johntest' }
       role { 1 }

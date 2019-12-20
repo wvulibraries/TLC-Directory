@@ -20,18 +20,18 @@ default: &default
 
 development:
   <<: *default
-  database: tlcdirectory_development
+  database: sotldirectory_development
 
 test:
   <<: *default
-  database: tlcdirectory_test
+  database: sotldirectory_test
 
 # test:
 #   adapter: mysql2
 #   username: travis
 #   encoding: utf8
-#   database: tlcdirectory_test
+#   database: sotldirectory_test
 
 production:
   <<: *default
-  database: tlcdirectory_production
+  database: sotldirectory_production

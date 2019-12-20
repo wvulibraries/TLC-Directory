@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module TLCDirectory
+module SOTLDirectory
   class Application < Rails::Application
     # Time Zone
     config.time_zone = 'Eastern Time (US & Canada)'

@@ -38,6 +38,9 @@ gem 'multi-select-rails'
 # cas client
 gem 'rack-cas', '~> 0.16.0'
 
+# managing cron jobs
+gem 'whenever', require: false
+
 # frontend
 gem 'normalize-scss'
 gem 'font-awesome-sass'
@@ -47,9 +50,6 @@ gem "non-stupid-digest-assets" # generates assets without fingerprint for 404 an
 # gem 'kaminari'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
-
-# PDF Stuff
-gem 'prawn-rails'
 
 # Test Suite
 # =====================================================================================

@@ -19,23 +19,23 @@ env :DMEASURES_PW, ENV['DMEASURES_PW']
 env :DATABASE_PASSWORD, ENV['DATABASE_PASSWORD']
 
 # set logs and environment
-set :output, {:standard => "/home/tlcdirectory/log/cron.log", :error => "/home/tlcdirectory/log/cron_error.log"}
+set :output, {:standard => "/home/sotldirectory/log/cron.log", :error => "/home/sotldirectory/log/cron_error.log"}
 set :environment, 'production'
 
 # run cleanup 1st day of every month
 every '0 2 1 * *' do
-  command 'cd /home/tlcdirectory && rake cleanup_searchterm' 
+  command 'cd /home/sotldirectory && rake cleanup_searchterm' 
 end
 
 # change to the base directory of the application
 # run the file with the rails runner task 
 every 1.minute do
-   command 'cd /home/tlcdirectory && bin/rails r import/cron_import.rb'
-   #command 'cd /home/tlcdirectory && rake import_faculty'
+   command 'cd /home/sotldirectory && bin/rails r import/cron_import.rb'
+   #command 'cd /home/sotldirectory && rake import_faculty'
 end
 
 # clobber the tmp folder daily and logs to keep files small 
 every 1.day do
-  command 'cd /home/tlcdirectory && rake log:clear'
-  command 'cd /home/tlcdirectory && bin/rails tmp:clear'
+  command 'cd /home/sotldirectory && rake log:clear'
+  command 'cd /home/sotldirectory && bin/rails tmp:clear'
 end
