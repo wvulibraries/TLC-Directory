@@ -32,6 +32,7 @@ module CSVService
       # get all csv files in directory
       files = Dir.glob(@csv_path + '*.csv')
       files.each do |file|
+        puts "Processing #{File.basename(file)}" 
         case File.basename(file)
         when 'ADMIN.csv'
           ImportAdapter::AdminAdapter.new(filename: file).import
@@ -43,8 +44,8 @@ module CSVService
           ImportAdapter::FacultyAdapter.new(filename: file).import
         when 'INTELLCONT.csv'
           ImportAdapter::PublicationAdapter.new(filename: file).import
-        when 'SUPPORT_DOC.csv'
-          ImportAdapter::SupportDocAdapter.new(filename: file).import
+        # when 'SUPPORT_DOC.csv'
+        #   ImportAdapter::SupportDocAdapter.new(filename: file).import
         else
           ImportAdapter::BaseAdapter.new(filename: file).import
         end
