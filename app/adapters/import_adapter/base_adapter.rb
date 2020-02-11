@@ -12,8 +12,9 @@ module ImportAdapter
     end
 
     def import
+      puts 'starting import'
       CSV.foreach(@filename, headers: true, header_converters: ->(h) { h.gsub(/[^0-9A-Za-z_\s]/, '').downcase.gsub(/\s+/, '_').to_sym unless h.nil? }, liberal_parsing: true) do |row|
-        if row[:username].present? 
+        if row[:username].present?
           find_or_create_faculty(row[:username])
           # extract fields from row save them to the faculty
           process(row)
@@ -32,7 +33,7 @@ module ImportAdapter
       return unless @faculty.nil? || @faculty.wvu_username != username
 
       @faculty = Faculty.where(wvu_username: username).first_or_initialize
-      # destroy saved polymorphic accociation for specified adaptor
+      # destroy saved polymorphic association for specified adaptor
       purge
     end
 
@@ -55,7 +56,7 @@ module ImportAdapter
     # @author Tracy A. McCormick
     # @return hash
     def default_faculty_values
-      { role: :user, status: 'enabled', visible: true }
+      { role: :user, status: 'disabled', visible: true }
     end
 
     def find_or_create_department(hash)

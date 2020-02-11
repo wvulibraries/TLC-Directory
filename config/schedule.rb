@@ -1,4 +1,3 @@
-
 # config/schedule.rb
 # -----------------------------------------------------------
 
@@ -12,6 +11,7 @@ env :BUNDLE_BIN, ENV['BUNDLE_BIN']
 env :BUNDLE_PATH, ENV['BUNDLE_PATH']
 env :RUBY_VERSION, ENV['RUBY_VERSION']
 env :BUNDLER_VERSION, ENV['BUNDLER_VERSION']
+env :RAILS_ENV, ENV['RAILS_ENV']
 env :ELASTICSEARCH_URL, ENV['ELASTICSEARCH_URL']
 env :DMEASURES_URL, ENV['DMEASURES_URL']
 env :DMEASURES_USER, ENV['DMEASURES_USER']
@@ -20,7 +20,6 @@ env :DATABASE_PASSWORD, ENV['DATABASE_PASSWORD']
 
 # set logs and environment
 set :output, {:standard => "/home/sotldirectory/log/cron.log", :error => "/home/sotldirectory/log/cron_error.log"}
-set :environment, 'production'
 
 # run cleanup 1st day of every month
 every '0 2 1 * *' do
@@ -30,8 +29,7 @@ end
 # change to the base directory of the application
 # run the file with the rails runner task 
 every 1.minute do
-   command 'cd /home/sotldirectory && bin/rails r import/cron_import.rb'
-   #command 'cd /home/sotldirectory && rake import_faculty'
+  command 'cd /home/sotldirectory && bin/rails r import/cron_import.rb'
 end
 
 # clobber the tmp folder daily and logs to keep files small 

@@ -15,8 +15,8 @@ module ImportAdapter
     end
 
     def import
-      # guard clasue added to the import to insure that valid 
-      # envirmoental variables are set
+      # guard clause added to the import to insure that valid 
+      # enviromental variables are set
       return unless valid_enviromental_vars?
 
       # calling inherited import

@@ -11,6 +11,7 @@ module ImportAdapter
       hash[:perferred_name] = row[:pfname] unless row[:pfname].blank?
 
       hash[:websites] = create_website(row[:website])
+
       phone_array = build_phone_array(row)
 
       if @faculty.phones != phone_array
@@ -25,14 +26,19 @@ module ImportAdapter
 
     def create_website(url)
       return [] unless url.present?
+      current_website = Website.find_or_initialize_by(url: url)
+      current_website.save(validate: false)
 
-      [Website.find_or_create_by(url: url)]
+      [current_website]
     end
 
     def create_phone(number, type)
       return unless number.present? && type.present?
 
-      Phone.find_or_create_by(number: number, number_types: type)
+      current_phone = Phone.find_or_initialize_by(number: number, number_types: type)
+      current_phone.save(validate: false)
+
+      current_phone
     end
 
     def create_number(*args)
