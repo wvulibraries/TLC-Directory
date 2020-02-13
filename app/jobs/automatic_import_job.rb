@@ -6,7 +6,7 @@ class AutomaticImportJob < ApplicationJob
   def perform(*_args)
     puts 'Starting the job.'
     import = CSVService::CSVImport.new
-    import.process_files
+    import.start_import
   rescue => e
     # format body of the email
     body = "This is the error thrown: #{e}. \n\n StackTrace: #{e.backtrace.join("\n")}"

@@ -5,7 +5,7 @@ require 'rails_helper'
 
 RSpec.describe CSVService::CSVImport do
   describe 'methods included in module' do
-    let(:uploader) { CSVUploader.new(:csv) }
+    let(:uploader) { CSVUploader.new }
     let(:csv_service) { CSVService::CSVImport.new }
 
     let(:faculty) { FactoryBot.attributes_for :faculty }
@@ -44,7 +44,7 @@ RSpec.describe CSVService::CSVImport do
     context 'with ADMIN.csv file' do
       let(:file_path) { 'tmp/ADMIN.csv' }
       it 'perform import with valid params' do
-        csv_service.process_files
+        csv_service.start_import
 
         # verify count
         expect(csv_service.import_count).to eql(1)
@@ -54,7 +54,7 @@ RSpec.describe CSVService::CSVImport do
     context 'with valid ADMIN_PERM.csv file' do
       let(:file_path) { 'tmp/ADMIN_PERM.csv' }
       it 'perform import with valid params' do
-        csv_service.process_files
+        csv_service.start_import
 
         # verify count
         expect(csv_service.import_count).to eql(1)
@@ -64,7 +64,7 @@ RSpec.describe CSVService::CSVImport do
     context 'with valid AWARDHONOR.csv file' do
       let(:file_path) { 'tmp/AWARDHONOR.csv' }
       it 'perform import with valid params' do
-        csv_service.process_files
+        csv_service.start_import
 
         # verify count
         expect(csv_service.import_count).to eql(1)
@@ -74,7 +74,7 @@ RSpec.describe CSVService::CSVImport do
     context 'with valid PCI.csv file' do
       let(:file_path) { 'tmp/PCI.csv' }
       it 'perform import with valid params' do
-        csv_service.process_files
+        csv_service.start_import
 
         # verify count
         expect(csv_service.import_count).to eql(1)
@@ -87,7 +87,7 @@ RSpec.describe CSVService::CSVImport do
 
       let(:file_path) { 'tmp/INTELLCONT.csv' }
       it 'perform import with valid params' do
-        csv_service.process_files
+        csv_service.start_import
 
         # verify count
         expect(csv_service.import_count).to eql(1)
@@ -97,7 +97,7 @@ RSpec.describe CSVService::CSVImport do
     context 'with valid SUPPORT_DOC.csv file' do
       let(:file_path) { 'tmp/SUPPORT_DOC.csv' }
       it 'perform import with valid params' do
-        csv_service.process_files
+        csv_service.start_import
 
         # verify count
         expect(csv_service.import_count).to eql(1)
@@ -107,7 +107,7 @@ RSpec.describe CSVService::CSVImport do
     context 'with valid Random.csv file' do
       let(:file_path) { 'tmp/Random.csv' }
       it 'perform import with valid params' do
-        csv_service.process_files
+        csv_service.start_import
 
         # verify count
         expect(csv_service.import_count).to eql(1)

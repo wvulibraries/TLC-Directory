@@ -26,7 +26,7 @@ module ImportAdapter
 
     def create_website(url)
       return [] unless url.present?
-      current_website = Website.find_or_initialize_by(url: url)
+      current_website = Website.find_or_initialize_by(url: url, webable: @faculty)
       current_website.save(validate: false)
 
       [current_website]
@@ -35,7 +35,7 @@ module ImportAdapter
     def create_phone(number, type)
       return unless number.present? && type.present?
 
-      current_phone = Phone.find_or_initialize_by(number: number, number_types: type)
+      current_phone = Phone.find_or_initialize_by(number: number, number_types: type, phoneable: @faculty)
       current_phone.save(validate: false)
 
       current_phone

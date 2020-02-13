@@ -12,25 +12,32 @@ module CSVService
       # path for csv files
       @path = "#{Rails.root}/public/uploads/#{Rails.env}"
       @csv_path = @path + '/csv/'
-      @directory_name = @csv_path + 'imported'
-    end
-
-    def create_folders
-      # create folders if missing
-      FileUtils.mkdir_p(@directory_name) unless File.exist?(@directory_name)
     end
 
     def initialize(params = {})
       set_paths
-      create_folders
       @csv_files = params[:csv_files]
       @import_count = 0
       store_files if @csv_files.present?
     end
 
-    def process_files
+    def start_import
+      # get list of folders to process
+      folders = Dir.glob(@csv_path + '*')
+      # loop over each folder found
+      folders.each do |folder|
+        # import csv files in each folder
+        process_folder(folder.to_s)
+      end
+    end
+
+    def process_folder(path)
+      directory_name = path + '/imported'
+      # make sure imported folder exists to move completed file to
+      Dir.mkdir(directory_name) unless File.exist?(directory_name)
+
       # get all csv files in directory
-      files = Dir.glob(@csv_path + '*.csv')
+      files = Dir.glob(path + '/*.csv')
       files.each do |file|
         puts "Processing #{File.basename(file)}" 
         case File.basename(file)
@@ -54,11 +61,11 @@ module CSVService
         @import_count += 1
 
         # move each file after it has been imported into a separate folder
-        Dir.mkdir(@directory_name) unless File.exist?(@directory_name)
-        File.rename file, @directory_name + '/' + File.basename(file)
+        File.rename file, directory_name + '/' + File.basename(file)
       end
 
-      FileUtils.rm_rf(@directory_name)
+      # removed folder after import has completed
+      FileUtils.rm_rf(path)
     end
 
     private
@@ -73,7 +80,8 @@ module CSVService
         uploader.store!(file)
       rescue StandardError => error
         @errors << error.to_s + ' ' + file.original_filename + ' Not Saved'
-      end
+      end  
     end
+
   end
 end

@@ -56,7 +56,7 @@ module ImportAdapter
     # @author Tracy A. McCormick
     # @return hash
     def default_faculty_values
-      { role: :user, status: 'disabled', visible: true }
+      { role: :user, status: 'disabled', visible: false }
     end
 
     def find_or_create_department(hash)

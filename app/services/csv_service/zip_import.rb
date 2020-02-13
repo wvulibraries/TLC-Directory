@@ -10,15 +10,17 @@ module CSVService
     def set_paths
       # path for csv files
       @path = "#{Rails.root}/public/uploads/#{Rails.env}"
-      @csv_path = @path + '/csv/'
+      current_datetime = DateTime.now
+      @subfolder = current_datetime.to_time.to_i
+      @csv_path = @path + '/csv/' + @subfolder.to_s + '/'
       @zip_path = @path + '/zip/'
       @completed_zip_path = @zip_path + 'completed' + '/'
     end
 
     def create_folders
       # create folders if missing
+      FileUtils.mkdir_p(@csv_path) unless File.exist?(@csv_path)
       FileUtils.mkdir_p(@completed_zip_path) unless File.exist?(@completed_zip_path)
-      Dir.mkdir(@csv_path) unless File.exist?(@csv_path)
     end
 
     def initialize(params = {})

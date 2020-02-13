@@ -31,8 +31,8 @@ RSpec.describe ImportAdapter::FacultyAdapter do
         # verify count
         expect(adaptor.import_count).to eql(1)
       end
-    end
 
+    end
 
     context 'with missing row data' do
       let(:row2) { faculty[:first_name] + ',' + faculty[:middle_name] + ',' + faculty[:last_name] + ',' + faculty[:email] + ',' + college[:name] + ',,' + dept[:name] + ',' + faculty[:wvu_username] + ',,,' + '999' + ',' + '9999' + ',' + '999' + ',' + 'http://www.google.com'  }
