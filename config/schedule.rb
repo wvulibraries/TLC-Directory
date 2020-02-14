@@ -28,7 +28,7 @@ end
 
 # change to the base directory of the application
 # run the file with the rails runner task 
-every 1.minute do
+every 5.minutes do
   command 'cd /home/sotldirectory && bin/rails r import/cron_import.rb'
 end
 
