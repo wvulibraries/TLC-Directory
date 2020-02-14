@@ -7,8 +7,8 @@ RUN apt-get update \
                           imagemagick
 
 # Use JEMALLOC instead
-RUN apt-get install -y libjemalloc2 libjemalloc-dev
-ENV LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so
+RUN apt-get update && apt-get install libjemalloc1 && rm -rf /var/lib/apt/lists/*
+ENV LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so.1
 
 # Node.js
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
