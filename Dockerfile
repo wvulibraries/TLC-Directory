@@ -1,4 +1,4 @@
-FROM ruby:2.6.3
+FROM ruby:2.6
 
 # Install capybara-webkit deps
 RUN apt-get update \
@@ -11,7 +11,7 @@ RUN apt-get install -y libjemalloc2 libjemalloc-dev
 ENV LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so
 
 # Node.js
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
+RUN curl -sL https://deb.nodesource.com/setup_13.x | bash - \
     && apt-get install -y nodejs
 
 # yarn
@@ -29,6 +29,9 @@ RUN \
 WORKDIR /home/sotldirectory
 ADD . /home/sotldirectory
 RUN bundle install --jobs=4 --retry=3
+
+# Copy openssl config to correct folder
+RUN cp -R openssl.cnf /etc/ssl 
 
 ADD ./startup.sh /usr/bin/
 RUN chmod -v +x /usr/bin/startup.sh
