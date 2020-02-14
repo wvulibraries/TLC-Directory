@@ -44,15 +44,19 @@ jobs:
       ###########################################
       - restore_cache:
           keys:
-            # when lock file changes, use increasingly general patterns to restore cache
-            - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-            - v1-gem-cache-{{ arch }}-{{ .Branch }}-
-            - v1-gem-cache-{{ arch }}-
-      - run: bundle install && bundle clean
+            - rails-bundle-{{ checksum "Gemfile.lock" }}
+            - rails-bundle-
+
+      - run:
+          name: Bundle Gems
+          # command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle
+          command: |
+            bundle update --bundler
+
       - save_cache:
+          key: rails-bundle-{{ checksum "Gemfile.lock" }}
           paths:
-            - ~/.bundle
-          key: v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - vendor/bundle
             
       ###########################################
       # Code Climate
