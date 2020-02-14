@@ -46,13 +46,9 @@ jobs:
           keys:
             - rails-bundle-{{ checksum "Gemfile.lock" }}
             - rails-bundle-
-
       - run:
           name: Bundle Gems
-          command: |
-              gem install bundler:2.1.4
-              bundle check --path=vendor/bundle || bundle install --path=vendor/bundle
-
+          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle
       - save_cache:
           key: rails-bundle-{{ checksum "Gemfile.lock" }}
           paths:
