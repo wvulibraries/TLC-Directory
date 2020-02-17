@@ -58,7 +58,7 @@ group :test do
   gem 'shoulda'
   gem 'shoulda-matchers'
   gem 'database_cleaner'
-  gem 'simplecov'
+  gem 'simplecov', '~> 0.10', '< 0.18'
   gem 'simplecov-console'
   gem 'capybara', '>= 2.15', '< 4.0'
   gem 'selenium-webdriver', '~> 3.14'
