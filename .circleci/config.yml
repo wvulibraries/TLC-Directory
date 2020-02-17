@@ -42,9 +42,6 @@ jobs:
       ###########################################
       # Bundler w/ caching
       ###########################################
-      - update_bundler:
-          name: update Bundler
-          command: bundle update --bundler    
       - restore_cache:
           keys:
             - rails-bundle-{{ checksum "Gemfile.lock" }}
