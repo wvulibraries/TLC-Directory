@@ -12,14 +12,7 @@ module ImportAdapter
 
       hash[:websites] = create_website(row[:website])
 
-      phone_array = build_phone_array(row)
-
-      if @faculty.phones != phone_array
-        purge_array = @faculty.phones - phone_array
-        purge_array.each(&:destroy)
-
-        hash[:phones] = phone_array
-      end
+      hash[:phones] = create_phones(row)
 
       @faculty.attributes = hash
     end
@@ -52,7 +45,7 @@ module ImportAdapter
       create_phone(number, type)
     end
 
-    def build_phone_array(row)
+    def create_phones(row)
       phone_array = []
       phone = create_number(row[:ophone1], row[:ophone2], row[:ophone3], row[:ophone4], 'office')
       phone_array << phone unless phone.nil?

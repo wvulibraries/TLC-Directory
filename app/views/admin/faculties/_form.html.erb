@@ -12,6 +12,35 @@
   <% end %>
 
   <fieldset>
+    <legend> Application Access Information </legend>
+    <div class="row">
+
+      <div class="field one-third">
+        <%= f.label :visible, 'Show Profile', class:'required' %>
+        <div class="select-style">
+            <%= f.select :visible, options_for_select([["Yes", true], ["No", false]], selected: f.object.visible) %>
+        </div>
+      </div>      
+
+      <div class="field one-third">
+        <%= f.label :role, 'User Role', class:'required' %>
+        <div class="select-style">
+            <%= f.select :role, options_for_select(Faculty.roles.keys.to_a, selected: f.object.role), include_blank: "Select a Role" %>
+        </div>
+      </div>
+
+      <div class="field one-third last">
+       <%= f.label :status, 'User Status', class:'required' %>
+        <div class="select-style">
+            <%= f.select :status, options_for_select(Faculty.statuses.keys.to_a, selected: f.object.status), include_blank: "Select a Status" %>
+        </div>
+      </div>
+
+    </div>
+  </fieldset>   
+
+   <fieldset>
+
     <legend> Profile Information </legend>
     <div class="row">
       <div class="field full">
@@ -120,15 +149,6 @@
         <%= f.text_area :teaching_interests, placeholder: "Scholarly multimedia, digital publishing, editorial pedagogy, multimodal composition, academic literacies, professionalization", size: "100x5" %>
       </div>      
 
-      <div class="field half">
-          <div class="checkbox-wrapper">
-            <div class="checkbox">
-              <%= f.check_box :visible %>
-              <%= f.label :visible, 'Profile Visible' %>
-            </div>
-          </div>
-      </div>
-
       <div class="field full">
         <%= f.label :biography %>
         <%= f.text_area :biography, placeholder: "Basic biography of faculty in simple terms for the public.", size: "100x10" %>
@@ -139,25 +159,6 @@
     <div class="field full">
       <%= f.label :tags %>
       <%= f.text_area :tags, placeholder: "Scholarly multimedia, digital publishing, editorial pedagogy, multimodal composition, academic literacies, professionalization", size: "100x1" %>
-    </div>
-  </fieldset>
-
-  <fieldset>
-    <legend> Application Access Information </legend>
-    <div class="row">
-      <div class="field half">
-        <%= f.label :role, 'User Role', class:'required' %>
-        <div class="select-style">
-            <%= f.select :role, options_for_select(Faculty.roles.keys.to_a, selected: f.object.role), include_blank: "Select a Role" %>
-        </div>
-      </div>
-
-      <div class="field half last">
-       <%= f.label :status, 'User Status', class:'required' %>
-        <div class="select-style">
-            <%= f.select :status, options_for_select(Faculty.statuses.keys.to_a, selected: f.object.status), include_blank: "Select a Status" %>
-        </div>
-      </div>
     </div>
   </fieldset>
 
