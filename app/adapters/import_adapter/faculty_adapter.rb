@@ -17,14 +17,30 @@ module ImportAdapter
       @faculty.attributes = hash
     end
 
-    def create_website(url)
-      return [] unless url.present?
-      current_website = Website.find_or_initialize_by(url: url, webable: @faculty)
-      current_website.save(validate: false)
 
-      [current_website]
+    # returns website array
+    #
+    # find or create new website object Digital Measures exports
+    # only contain a single website for the user. In the web interface
+    # we can add multiple sites for a user.
+    # returns and array that contains the website in the csv file
+    # @author Tracy A. McCormick
+    # @return array 
+    def create_website(url)
+      website_array = []
+
+      if url.present?
+        current_website = Website.find_or_initialize_by(url: url, webable: @faculty)
+        current_website.save(validate: false)
+        website_array << current_website
+      end
+
+      website_array
     end
 
+    # returns phone object
+    # @author Tracy A. McCormick
+    # @return object   
     def create_phone(number, type)
       return unless number.present? && type.present?
 
@@ -34,17 +50,26 @@ module ImportAdapter
       current_phone
     end
 
+    # returns phone object
+    # @author Tracy A. McCormick
+    # @return object
     def create_number(*args)
+      # set incoming *args to required fields
       area_code, prefix, line_number, extension, type = *args
-
+      # verify expeceted fields are not black
       return if area_code.blank? || prefix.blank? || line_number.blank? || type.blank?
 
+      # take args and join them into a correctly formatted string
       number = [area_code, prefix, line_number].join('.')
       number << 'Ext. {extension}' unless extension.blank?
 
+      # pass newly created string and phone type to create_phone to finish
       create_phone(number, type)
     end
 
+    # returns array of phone numbers
+    # @author Tracy A. McCormick
+    # @return array
     def create_phones(row)
       phone_array = []
       phone = create_number(row[:ophone1], row[:ophone2], row[:ophone3], row[:ophone4], 'office')
