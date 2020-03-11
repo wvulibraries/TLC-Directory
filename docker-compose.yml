@@ -53,20 +53,20 @@ services:
     links:
       - elasticsearch      
       - db
-      - selenium # development only
+  #     - selenium # development only
   
-  selenium:
-    image: selenium/standalone-chrome-debug
-    container_name: selenium
-    privileged: true
-    ports:
-      - '4444:4444'
-      - '5900:5900'
-    environment:
-      - SCREEN_WIDTH=1440
-      - SCREEN_HEIGHT=900
-      - VNC_NO_PASSWORD=true
-    logging:
-      driver: none
+  # selenium:
+  #   image: selenium/standalone-chrome-debug
+  #   container_name: selenium
+  #   privileged: true
+  #   ports:
+  #     - '4444:4444'
+  #     - '5900:5900'
+  #   environment:
+  #     - SCREEN_WIDTH=1440
+  #     - SCREEN_HEIGHT=900
+  #     - VNC_NO_PASSWORD=true
+  #   logging:
+  #     driver: none
 
 
