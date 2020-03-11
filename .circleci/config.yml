@@ -7,7 +7,7 @@ jobs:
     # Container Setup
     #############################################
     docker:
-      - image: circleci/ruby:2.6.0-stretch-node-browsers
+      - image: circleci/ruby:2.6.4-stretch-node-browsers
         environment:
           - RAILS_ENV=test
           - CC_TEST_REPORTER_ID=168bb7cbd2eea60f133f998d851a10822f44eeb06a04bc2b71cec411ba2bb3ba
