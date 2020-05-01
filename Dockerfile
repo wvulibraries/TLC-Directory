@@ -21,8 +21,8 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -\
     && apt-get install -y yarn
 
 # Install our dependencies and rails
-# RUN gem update --system --force
-# RUN gem install bundler
+RUN gem update --system --force
+RUN gem install bundler
 RUN gem install rails
 RUN mkdir -p /home/sotldirectory
 
@@ -34,7 +34,11 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 WORKDIR /home/sotldirectory
 ADD . /home/sotldirectory
+# RUN bundle update --bundler
 RUN bundle install --jobs=4 --retry=3
+
+# Run bundle clean to get rid of duplicate gems
+# RUN bundle clean --force
 RUN yarn install
 
 # Copy openssl config to correct folder
