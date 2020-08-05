@@ -16,7 +16,7 @@ jobs:
         environment:
           - MYSQL_ROOT_HOST=%
           - MYSQL_ROOT_PASSWORD=circleci
-      - image: docker.elastic.co/elasticsearch/elasticsearch:7.5.0
+      - image: docker.elastic.co/elasticsearch/elasticsearch:7.8.0
         environment:
           - discovery.type=single-node
       - image: selenium/standalone-chrome-debug

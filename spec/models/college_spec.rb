@@ -12,7 +12,7 @@ RSpec.describe College, type: :model do
     it { should validate_uniqueness_of(:name).case_insensitive }
     it { should validate_length_of(:name).is_at_least(4) }
     it { should validate_length_of(:name).is_at_most(50) }
-    it { should define_enum_for(:status).with(%i[enabled disabled]) }
+    it { should define_enum_for(:status).with_values(%i[enabled disabled]) }
   end
 
   context 'invalid options' do
